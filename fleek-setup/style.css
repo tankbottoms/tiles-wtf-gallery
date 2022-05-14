@@ -1,0 +1,66 @@
+body {
+  background: #34495e;
+}
+
+.tiles {
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+}
+
+.tile {
+  position: absolute;
+  background: #000;
+}
+
+.tile:nth-child(1n) {
+  background: #1abc9c;
+}
+.tile:nth-child(2n) {
+  background: #2ecc71;
+}
+.tile:nth-child(3n) {
+  background: #3498db;
+}
+.tile:nth-child(4n) {
+  background: #9b59b6;
+}
+.tile:nth-child(5n) {
+  background: #16a085;
+}
+.tile:nth-child(6n) {
+  background: #27ae60;
+}
+.tile:nth-child(7n) {
+  background: #2980b9;
+}
+.tile:nth-child(8n) {
+  background: #8e44ad;
+}
+.tile:nth-child(9n) {
+  background: #f1c40f;
+}
+.tile:nth-child(10n) {
+  background: #e67e22;
+}
+.tile:nth-child(11n) {
+  background: #e74c3c;
+}
+.tile:nth-child(12n) {
+  background: #ecf0f1;
+}
+.tile:nth-child(13n) {
+  background: #f39c12;
+}
+.tile:nth-child(14n) {
+  background: #d35400;
+}
+.tile:nth-child(15n) {
+  background: #c0392b;
+}
+.tile:nth-child(16n) {
+  background: #bdc3c7;
+}
