@@ -1,14 +1,52 @@
-body {
-  background: #34495e;
+html {
+  font-family: monospace;
 }
 
+body {
+  background: #34495e;
+  color: whitesmoke;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+  height: 100vh;
+  align-items: center;
+  justify-items: center;
+  max-width: 1000px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+p {
+  font-size: 16px;
+  margin: 35px 10px;
+}
+
+.group {
+  height: 80px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.group a {
+  font-weight: 300;
+}
+a {
+  font-size: 14px;
+  color: whitesmoke;
+  text-decoration: none;
+  position: relative;
+  border-bottom: 3px solid gold;
+  font-weight: 600;
+}
+
+a:hover {
+  border-bottom: 3px solid black;
+}
+
+
 .tiles {
-  position: absolute;
-  left: 0;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  margin: auto;
+  position: relative;
 }
 
 .tile {
