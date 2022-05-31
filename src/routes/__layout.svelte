@@ -6,7 +6,7 @@
 <slot />
 
 <style>
-    :global(body) {
+    :global(body, button) {
         font-family: monospace;
     }
 </style>

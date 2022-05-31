@@ -4,6 +4,10 @@
 	let count = 0;
 	let price = 0.04;
 
+    function connect() {
+        console.log('🛠 TODO connect')
+    }
+
 	onMount(() => {
 		console.log('🛠 TODO read contract, number of minted tiles and current price');
 	});
@@ -12,6 +16,7 @@
 <header>
 	<img src="/favicon.svg" alt="Logo" />
 	{count} minted // current price: {price} ETH
+    <button on:click={connect}>connect</button>
 </header>
 
 <style>
@@ -24,4 +29,17 @@
 	img {
 		width: 25px;
 	}
+
+    button {
+        margin-left: auto;
+        border: none;
+        background: none;
+        cursor: pointer;
+        border-bottom: 3px solid gold;
+        padding: 0px 0px 8px;
+    }
+
+    button:hover {
+        border-bottom: 3px solid black;
+    }
 </style>
