@@ -23,8 +23,8 @@
 			connectedAccount = connectedAccountStore.get();
 			// TODO find out why the provider doesn't have lookup
 			const ens = $provider.lookupAddress(connectedAccount);
-			if(ens) {
-				console.log(ens)
+			if (ens) {
+				console.log(ens);
 			}
 		});
 	});
@@ -32,7 +32,9 @@
 
 <header>
 	<div class="left">
-		<img src="/favicon.svg" alt="Logo" />
+		<a href="/">
+			<img src="/favicon.svg" alt="Logo" />
+		</a>
 		{count} minted // current price: {price} ETH
 	</div>
 
