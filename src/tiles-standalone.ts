@@ -51,9 +51,9 @@ function ringVariantsFrom(r) {
     i = r.sizes,
     o = r.layers,
     t = r.solid;
-  return e.flatMap(function (r) {
-    return i.flatMap(function (e) {
-      return o.map(function (i) {
+  return e.flatMap(function(r) {
+    return i.flatMap(function(e) {
+      return o.map(function(i) {
         return {
           positionIndex: r,
           positionKind: s,
@@ -77,7 +77,22 @@ const ringVariants = __spreadArray(
               ringVariantsFrom({
                 positionKind: "intersection",
                 positions: [
-                  0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15,
+                  0,
+                  1,
+                  2,
+                  3,
+                  4,
+                  5,
+                  6,
+                  7,
+                  8,
+                  9,
+                  10,
+                  11,
+                  12,
+                  13,
+                  14,
+                  15,
                 ],
                 sizes: [1, 2, 3],
                 layers: [2],
@@ -132,7 +147,7 @@ const ringVariants = __spreadArray(
 
 const getAddressSegments = (r) => {
   var e = [];
-  return r.split("").reduce(function (r, s) {
+  return r.split("").reduce(function(r, s) {
     if ((e.push(s), 4 === e.length)) {
       var i = e;
       return (e = []), __spreadArray(__spreadArray([], r), [i]);
@@ -179,7 +194,7 @@ const sectorColorsFromInt16 = (r) => {
 };
 
 const generateTileSectors = (r) => {
-  return r.map(function (r) {
+  return r.map(function(r) {
     var e = sectorColorsFromInt16(Number(`0x${r[0]}`));
     return [
       { svg: svgs[Number(`0x${r[1]}`)], color: e.layer0 },
@@ -205,9 +220,8 @@ for (let r = 0; r < 3; r++) {
     let tile = "";
     if (svg.startsWith("<path")) {
       tile = `
-      <g transform="matrix(1,0,0,1,${(i % 3) * 100},${
-        Math.floor((i % 9) / 3) * 100
-      })">
+      <g transform="matrix(1,0,0,1,${(i % 3) * 100},${Math.floor((i % 9) / 3) *
+        100})">
         ${svg
           .replace(/fill="#000"/g, `fill="${color}"`)
           .replace("/>", ` style="opacity: 0.88;" />`)}
@@ -218,9 +232,8 @@ for (let r = 0; r < 3; r++) {
       const cy = Number(svg.match(/cy="(\d+)"/)?.[1] || 50);
       const r = Number(svg.match(/r="(\d+)"/)?.[1] || 50);
       tile = `
-      <g transform="matrix(1,0,0,1,${(i % 3) * 100},${
-        Math.floor((i % 9) / 3) * 100
-      })">
+      <g transform="matrix(1,0,0,1,${(i % 3) * 100},${Math.floor((i % 9) / 3) *
+        100})">
         ${svg
           .replace(/fill="#000"/g, `fill="${color}"`)
           .replace(/cx="(\d+)"/g, `cx="${r}"`)
