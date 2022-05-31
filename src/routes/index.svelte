@@ -18,6 +18,7 @@
 	});
 </script>
 
+<main>
 <div class="tiles-container">
 	<div id="tiles">
 		{@html tile}
@@ -25,8 +26,9 @@
 	</div>
 	<p id="address" />
 </div>
+<section>
 
-<main>
+
 	<h1>Tiles</h1>
 	<p>Infinite artwork</p>
 	<p>Generated from any ETH address</p>
@@ -43,13 +45,12 @@
 			<a href="#/">Dreamland</a>
 		</div>
 	</div>
+</section>
 </main>
 
 <style>
-	:global(body) {
+	main {
 		background: white;
-		font-family: monospace;
-		/* color: whitesmoke; */
 		display: grid;
 		grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
 		height: 100vh;
@@ -62,21 +63,6 @@
 	h1 {
 		font-size: 20px;
 	}
-
-	/* #tiles {
-        width: 70vh;
-        height: 70vh;
-        max-width: 100vw;
-        max-height: 100vw;
-        min-width: 360px;
-        min-height: 360px;
-    } */
-	/* 
-	:global(#tiles svg) {
-		background: rgb(250, 243, 232);
-        width: 100%;
-        height: 100%;
-	} */
 
 	a {
 		font-size: 14px;
@@ -105,4 +91,19 @@
 		margin-bottom: 20px;
 		font-weight: 600;
 	}
+
+	/* Attempt to fix size of tile */
+	/* #tiles {
+        width: 70vh;
+        height: 70vh;
+        max-width: 100vw;
+        max-height: 100vw;
+        min-width: 360px;
+        min-height: 360px;
+    } */
+	/* 
+	:global(#tiles svg) {
+        width: 100%;
+        height: 100%;
+	} */
 </style>

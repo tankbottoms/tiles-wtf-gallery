@@ -1,5 +1,6 @@
 import adapter from '@sveltejs/adapter-static';
 import preprocess from 'svelte-preprocess';
+import path from 'path';
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
@@ -11,8 +12,17 @@ const config = {
 		adapter: adapter(),
 		prerender: {
 			default: true
-		}
+		},
 		// trailingSlash: 'always',
+		vite: {
+			resolve: {
+				alias: {
+					$utils: path.resolve('./src/utils'),
+					$components: path.resolve('./src/components'),
+					$constants: path.resolve('./src/constants')
+				}
+			}
+		}
 	}
 };
 
