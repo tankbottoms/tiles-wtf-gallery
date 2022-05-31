@@ -7,9 +7,5 @@
     "outDir": "./fleek-setup",
     "moduleResolution": "node"
   },
-  "baseUrl": "./",
-  "paths": {
-    "ethers": ["./fleek-setup/ethers.js"]
-  },
   "exclude": ["src/constants/*", "src/encoders/*", "src/utils/*"]
 }

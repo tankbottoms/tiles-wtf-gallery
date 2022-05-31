@@ -1,5 +1,5 @@
 // NOTE: ugly temporary fix, we need a bundler to use modules properly
-import { utils, Wallet } from "../fleek-setup/ethers.js";
+import { utils, Wallet } from "ethers";
 
 function generateRandomAddressess() {
   const wallet = Wallet.createRandom();
