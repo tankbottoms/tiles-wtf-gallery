@@ -6,6 +6,9 @@
 <slot />
 
 <style>
+    :global(body) {
+        cursor: crosshair;
+    }
     :global(body, button) {
         font-family: monospace;
     }
