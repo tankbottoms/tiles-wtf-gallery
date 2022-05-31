@@ -39,7 +39,7 @@
 	<a href="#/">FAQ</a>
 	<div class="group">
 		<div>
-			<a href="#/">Mint a Tile</a>
+			<a href="/mint">Mint a Tile</a>
 		</div>
 		<div>
 			<a href="#/">Dreamland</a>
