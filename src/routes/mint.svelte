@@ -1,32 +1,58 @@
 <script lang="ts">
 	import Icon from '$components/Icon.svelte';
-	import { constants } from 'ethers';
+	import { constants, utils } from 'ethers';
 	import { onMount } from 'svelte';
 	import { generateTile, generateRandomAddresses } from '../tiles-standalone';
 
 	const { AddressZero } = constants;
 
-	let randomTiles: any[] = [];
+	let input: string | undefined;
 	let grid = false;
+	let randomTiles: any[] = [];
+	let tile = '';
+	let showInvalidAddress = false;
 
 	onMount(() => {
 		const randomAddresses = generateRandomAddresses(51);
 		randomTiles = randomAddresses.map((address) => ({ address, tile: generateTile(address) }));
 	});
+
+	$: {
+		if (utils.isAddress(input || '')) {
+			console.log(input);
+			tile = generateTile(input || '');
+			showInvalidAddress = false;
+		} else if (input !== '' && input !== undefined) {
+			tile = '';
+			showInvalidAddress = true;
+		} else {
+			tile = '';
+			showInvalidAddress = false;
+		}
+	}
 </script>
 
 <section>
 	<h1>Mint a Tile</h1>
 	<p>Enter an 0x address to find its matching Tile, or browse the randomly generated list below.</p>
-	<input placeholder={AddressZero} />
+	<input placeholder={AddressZero} bind:value={input} />
 </section>
 <section class:grid>
-	{#each randomTiles as item}
+	{#if tile}
 		<div class="tileContainer">
-			{@html item.tile}
-			<span>{item.address}</span>
+			{@html tile}
+			<span>{input}</span>
 		</div>
-	{/each}
+	{:else if showInvalidAddress}
+		<p>Not a valid address</p>
+	{:else}
+		{#each randomTiles as item}
+			<div class="tileContainer">
+				{@html item.tile}
+				<span>{item.address}</span>
+			</div>
+		{/each}
+	{/if}
 </section>
 <div class="menu">
 	<div
@@ -96,6 +122,10 @@
 
 	a {
 		cursor: pointer;
+	}
+
+	p {
+		text-align: center;
 	}
 
 	.socialIcons {
