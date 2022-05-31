@@ -1,11 +1,13 @@
 {
-  "compilerOptions": {
-    "lib": ["es6", "es2015.promise", "DOM"],
-    "target": "ESNext",
-    "module": "esnext",
-    "sourceMap": true,
-    "outDir": "./fleek-setup",
-    "moduleResolution": "node"
-  },
-  "exclude": ["src/constants/*", "src/encoders/*", "src/utils/*"]
+	"extends": "./.svelte-kit/tsconfig.json",
+	"compilerOptions": {
+		"allowJs": true,
+		"checkJs": true,
+		"esModuleInterop": true,
+		"forceConsistentCasingInFileNames": true,
+		"resolveJsonModule": true,
+		"skipLibCheck": true,
+		"sourceMap": true,
+		"strict": true
+	}
 }
