@@ -161,7 +161,7 @@ const toNum = (r) => {
 };
 
 const address =
-  process.argv.find((arg) => arg.startsWith("0x")) ||
+  // process.argv.find((arg) => arg.startsWith("0x")) ||
   "0x458e5eBAe41DaEEd84A19893e71892F491515f83";
 
 const red = "#FE4465",
@@ -297,10 +297,14 @@ for (let r = 0; r < 3; r++) {
 }
 
 str += foot;
-require("fs").writeFileSync(
-  process.argv.find((arg) => arg.startsWith("-o"))?.replace("-o", "") ||
-    "./tiles-alone/output.svg",
-  str
-);
 
-console.log(address);
+document.getElementById("tiles").innerHTML = str;
+
+// NOTE: when running from command line and wanting SVG saved to directory
+// require("fs").writeFileSync(
+//   process.argv.find((arg) => arg.startsWith("-o"))?.replace("-o", "") ||
+//     "./tiles-alone/output.svg",
+//   str
+// );
+
+// console.log(address);
