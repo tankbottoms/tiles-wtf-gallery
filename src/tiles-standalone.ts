@@ -21,6 +21,7 @@ const svgs = [
 
 const canvasColor = `#faf3e8`;
 
+// TODO - how do I make the size dynamic?!
 const head = `<svg
 xmlns="http://www.w3.org/2000/svg"
 xmlns:xlink="http://www.w3.org/1999/xlink"

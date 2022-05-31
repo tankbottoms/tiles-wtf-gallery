@@ -2,27 +2,27 @@
 	import { generateTile, generateRandomAddresses } from '../tiles-standalone';
 	import { onMount } from 'svelte';
 
-    let tile = "";
-    let address = "";
+	let tile = '';
+	let address = '';
 	onMount(() => {
-        const randomAddresses = generateRandomAddresses(10);
-        address = randomAddresses[0]
-        tile = generateTile(address);
+		const randomAddresses = generateRandomAddresses(10);
+		address = randomAddresses[0];
+		tile = generateTile(address);
 
-        let current = 1;
-        setInterval(() => {
-            address = randomAddresses[current % 10];
-            tile = generateTile(address)
-            current++;
-        }, 1500)
-    });
+		let current = 1;
+		setInterval(() => {
+			address = randomAddresses[current % 10];
+			tile = generateTile(address);
+			current++;
+		}, 1500);
+	});
 </script>
 
 <div class="tiles-container">
 	<div id="tiles">
-        {@html tile}
-        {address}
-    </div>
+		{@html tile}
+		{address}
+	</div>
 	<p id="address" />
 </div>
 
@@ -50,7 +50,7 @@
 <style>
 	:global(body) {
 		background: #34495e;
-        font-family: monospace;
+		font-family: monospace;
 		color: whitesmoke;
 		display: grid;
 		grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
@@ -61,6 +61,21 @@
 		margin: 0 auto;
 		text-align: center;
 	}
+
+    /* #tiles {
+        width: 70vh;
+        height: 70vh;
+        max-width: 100vw;
+        max-height: 100vw;
+        min-width: 360px;
+        min-height: 360px;
+    } */
+/* 
+	:global(#tiles svg) {
+		background: rgb(250, 243, 232);
+        width: 100%;
+        height: 100%;
+	} */
 
 	a {
 		font-size: 14px;
