@@ -1,3 +1,18 @@
+// NOTE: ugly temporary fix, we need a bundler to use modules properly
+import { utils, Wallet } from "../fleek-setup/ethers.js";
+
+function generateRandomAddressess() {
+  const wallet = Wallet.createRandom();
+  const mnemonic = wallet.mnemonic.phrase;
+  const hdNode = utils.HDNode.fromMnemonic(mnemonic);
+  const addresses = [];
+  for (let i = 0; i < 10; i++) {
+    const address = hdNode.derivePath(`m/44'/60'/0'/0/${i}`).address;
+    addresses.push(address);
+  }
+  return addresses;
+}
+
 const svgs = [
   '<path d="M100 100L100 0H0C0 55.2285 44.7715 100 100 100Z" fill="#000"/>',
   '<path d="M0 100L0 0H100C100 55.2285 55.2285 100 0 100Z" fill="#000"/>',
@@ -38,7 +53,6 @@ const foot = `
 </g>
 </svg>`;
 
-let str = head;
 let sectorSize = 100;
 
 function __spreadArray(r, e) {
@@ -146,6 +160,20 @@ const ringVariants = __spreadArray(
 );
 
 const getAddressSegments = (r) => {
+  /* Return this: [
+  [ '0', 'x', '4', '5' ],
+  [ '8', 'e', '5', 'e' ],
+  [ 'B', 'A', 'e', '4' ],
+  [ '1', 'D', 'a', 'E' ],
+  [ 'E', 'd', '8', '4' ],
+  [ 'A', '1', '9', '8' ],
+  [ '9', '3', 'e', '7' ],
+  [ '1', '8', '9', '2' ],
+  [ 'F', '4', '9', '1' ],
+  [ '5', '1', '5', 'f' ]
+]
+  From this input: 
+"0x458e5eBAe41DaEEd84A19893e71892F491515f83" */
   var e = [];
   return r.split("").reduce(function(r, s) {
     if ((e.push(s), 4 === e.length)) {
@@ -160,9 +188,9 @@ const toNum = (r) => {
   return Number(`0x${r.join("")}`);
 };
 
-const address =
-  // process.argv.find((arg) => arg.startsWith("0x")) ||
-  "0x458e5eBAe41DaEEd84A19893e71892F491515f83";
+//const address =
+// process.argv.find((arg) => arg.startsWith("0x")) ||
+//  "0x458e5eBAe41DaEEd84A19893e71892F491515f83";
 
 const red = "#FE4465",
   black = "#222",
@@ -204,36 +232,39 @@ const generateTileSectors = (r) => {
   });
 };
 
-const addr = address.slice(2);
-const addressSegments = getAddressSegments(addr);
-const t = addressSegments.slice(1);
+function generateTile(address: string) {
+  let str = head;
 
-const rings = [
-  ringVariants[toNum([addressSegments[0][0], addressSegments[0][1]])],
-  ringVariants[toNum([addressSegments[0][2], addressSegments[0][3]])],
-].filter(Boolean);
+  const addr = address.slice(2);
+  const addressSegments = getAddressSegments(addr);
+  const t = addressSegments.slice(1);
 
-for (let r = 0; r < 3; r++) {
-  for (let i = 0; i < 9; i++) {
-    const tileSectors = generateTileSectors(t);
-    const { svg, color } = tileSectors[i][r];
-    let tile = "";
-    if (svg.startsWith("<path")) {
-      tile = `
+  const rings = [
+    ringVariants[toNum([addressSegments[0][0], addressSegments[0][1]])],
+    ringVariants[toNum([addressSegments[0][2], addressSegments[0][3]])],
+  ].filter(Boolean);
+
+  for (let r = 0; r < 3; r++) {
+    for (let i = 0; i < 9; i++) {
+      const tileSectors = generateTileSectors(t);
+      const { svg, color } = tileSectors[i][r];
+      let tile = "";
+      if (svg.startsWith("<path")) {
+        tile = `
       <g transform="matrix(1,0,0,1,${(i % 3) * 100},${Math.floor((i % 9) / 3) *
-        100})">
+          100})">
         ${svg
           .replace(/fill="#000"/g, `fill="${color}"`)
           .replace("/>", ` style="opacity: 0.88;" />`)}
       </g>
     `;
-    } else if (svg.startsWith("<circle")) {
-      const cx = Number(svg.match(/cx="(\d+)"/)?.[1] || 50);
-      const cy = Number(svg.match(/cy="(\d+)"/)?.[1] || 50);
-      const r = Number(svg.match(/r="(\d+)"/)?.[1] || 50);
-      tile = `
+      } else if (svg.startsWith("<circle")) {
+        const cx = Number(svg.match(/cx="(\d+)"/)?.[1] || 50);
+        const cy = Number(svg.match(/cy="(\d+)"/)?.[1] || 50);
+        const r = Number(svg.match(/r="(\d+)"/)?.[1] || 50);
+        tile = `
       <g transform="matrix(1,0,0,1,${(i % 3) * 100},${Math.floor((i % 9) / 3) *
-        100})">
+          100})">
         ${svg
           .replace(/fill="#000"/g, `fill="${color}"`)
           .replace(/cx="(\d+)"/g, `cx="${r}"`)
@@ -245,60 +276,84 @@ for (let r = 0; r < 3; r++) {
           .replace("/>", ` style="opacity: 0.88;" />`)}
       </g>
     `;
+      }
+      str += tile;
     }
-    str += tile;
-  }
-  for (const ring of rings.filter((ring) => ring.layer === r)) {
-    let i,
-      diameter = 0,
-      posX = 0,
-      posY = 0;
-    switch (ring.size) {
-      case 0:
-        diameter = sectorSize - 90;
-        break;
-      case 1:
-        diameter = sectorSize - 50 - 1.2;
-        break;
-      case 2:
-        diameter = sectorSize - 10;
-        break;
-      case 3:
-        diameter = 2 * sectorSize - 10;
-    }
-    if (
-      (2 === ring.layer && (diameter += 0.5)) ||
-      "intersection" === ring.positionKind
-    ) {
-      posX = sectorSize * ((i = ring.positionIndex) % 4);
-      posY =
-        i > 11
-          ? 3 * sectorSize
-          : i > 7
-          ? 2 * sectorSize
-          : i > 3
-          ? sectorSize
-          : 0;
-    }
-    if ("sector" === ring.positionKind) {
-      posX = sectorSize * ((i = ring.positionIndex) % 3);
-      posY = i > 5 ? 2 * sectorSize : i > 2 ? sectorSize : 0;
-      posX += 0.5 * sectorSize;
-      posY += 0.5 * sectorSize;
-    }
-    str += `
+    for (const ring of rings.filter((ring) => ring.layer === r)) {
+      let i,
+        diameter = 0,
+        posX = 0,
+        posY = 0;
+      switch (ring.size) {
+        case 0:
+          diameter = sectorSize - 90;
+          break;
+        case 1:
+          diameter = sectorSize - 50 - 1.2;
+          break;
+        case 2:
+          diameter = sectorSize - 10;
+          break;
+        case 3:
+          diameter = 2 * sectorSize - 10;
+      }
+      if (
+        (2 === ring.layer && (diameter += 0.5)) ||
+        "intersection" === ring.positionKind
+      ) {
+        posX = sectorSize * ((i = ring.positionIndex) % 4);
+        posY =
+          i > 11
+            ? 3 * sectorSize
+            : i > 7
+            ? 2 * sectorSize
+            : i > 3
+            ? sectorSize
+            : 0;
+      }
+      if ("sector" === ring.positionKind) {
+        posX = sectorSize * ((i = ring.positionIndex) % 3);
+        posY = i > 5 ? 2 * sectorSize : i > 2 ? sectorSize : 0;
+        posX += 0.5 * sectorSize;
+        posY += 0.5 * sectorSize;
+      }
+      str += `
     <g transform="matrix(1,0,0,1,${posX},${posY})">
       <circle r="${diameter / 2}" fill="${
-      ring.solid ? canvasColor : "none"
-    }" stroke-width="${10}" stroke="${canvasColor}" />
+        ring.solid ? canvasColor : "none"
+      }" stroke-width="${10}" stroke="${canvasColor}" />
     </g>
   `;
+    }
   }
+
+  str += foot;
+
+  return str;
 }
 
-str += foot;
+function setDocumentElementToTile(tile: string, address: string) {
+  document.getElementById("tiles").innerHTML = tile;
+  document.getElementById("address").innerHTML = address;
+}
 
-document.getElementById("tiles").innerHTML = str;
+// When the script loads, create 10 addressess and loop through them to generate tiles
+// and populate the div element with them every 3 seconds
+
+const randomAddressess = generateRandomAddressess();
+const tile = generateTile(randomAddressess[0]);
+setDocumentElementToTile(tile, randomAddressess[0]);
+
+let current = 1;
+
+setInterval(() => {
+  current++;
+  if (current >= randomAddressess.length) {
+    current = 0;
+  }
+  const tile = generateTile(randomAddressess[current]);
+  setDocumentElementToTile(tile, randomAddressess[current]);
+}, 3000);
 
 // NOTE: when running from command line and wanting SVG saved to directory
 // require("fs").writeFileSync(

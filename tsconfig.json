@@ -1,9 +1,15 @@
 {
-    "compilerOptions": {
-      "target": "es5",
-      "module": "commonjs",
-      "sourceMap": true,
-      "outDir": "./fleek-setup",
-    },
-    "exclude": ["src/constants/*", "src/encoders/*", "src/utils/*"]
-  }
+  "compilerOptions": {
+    "lib": ["es6", "es2015.promise", "DOM"],
+    "target": "ESNext",
+    "module": "esnext",
+    "sourceMap": true,
+    "outDir": "./fleek-setup",
+    "moduleResolution": "node"
+  },
+  "baseUrl": "./",
+  "paths": {
+    "ethers": ["./fleek-setup/ethers.js"]
+  },
+  "exclude": ["src/constants/*", "src/encoders/*", "src/utils/*"]
+}

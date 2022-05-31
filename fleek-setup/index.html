@@ -11,7 +11,11 @@
   </head>
   <body>
     <!-- partial:index.partial.html -->
-    <div id="tiles"></div>
+    <div class="tiles-container">
+
+      <div id="tiles"></div>
+      <p id="address"></p>
+    </div>
     <main>
       <h1>Tiles</h1>
       <p>Infinite artwork</p>
@@ -34,6 +38,6 @@
     </main>
     <!-- partial -->
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-    <script src="./tiles-standalone.js"></script>
+    <script type="module" src="./tiles-standalone.js"></script>
   </body>
 </html>
