@@ -1,4 +1,5 @@
 <script lang="ts">
+	import Icon from '$components/Icon.svelte';
 	import { constants } from 'ethers';
 	import { onMount } from 'svelte';
 	import { generateTile, generateRandomAddresses } from '../tiles-standalone';
@@ -56,6 +57,18 @@
 		-
 	</div>
 </div>
+<!-- TODO the social links -->
+<div class="socialIcons">
+	<a href="/#">
+		<Icon name="twitter" />
+	</a>
+	<a href="/#">
+		<Icon name="discord" />
+	</a>
+	<a href="/#">
+		<Icon name="github" />
+	</a>
+</div>
 
 <style>
 	section {
@@ -79,6 +92,21 @@
 		padding: 5px;
 		width: 100%;
 		box-sizing: border-box;
+	}
+
+	a {
+		cursor: pointer;
+	}
+
+	.socialIcons {
+		position: fixed;
+		bottom: 0px;
+		left: 0px;
+		padding: 10px;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 10px;
 	}
 
 	.menu {
