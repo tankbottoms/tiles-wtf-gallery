@@ -5,6 +5,7 @@
 	let price = 0.04;
 
 	let connectedAccount: string;
+	let provider: any;
 	let connect: () => void;
 	let disconnect: () => void;
 
@@ -14,10 +15,17 @@
 		const web3 = await import('$stores/web3');
 		connect = web3.walletConnect;
 		disconnect = web3.disconnectWallet;
+		provider = web3.provider;
+		console.log(provider);
 		const connectedAccountStore = web3.connectedAccount;
 
 		connectedAccountStore.subscribe(() => {
 			connectedAccount = connectedAccountStore.get();
+			// TODO find out why the provider doesn't have lookup
+			const ens = $provider.lookupAddress(connectedAccount);
+			if(ens) {
+				console.log(ens)
+			}
 		});
 	});
 </script>
