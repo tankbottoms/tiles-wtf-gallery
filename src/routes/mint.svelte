@@ -8,7 +8,7 @@
 	let randomTiles: any[] = [];
 
 	onMount(() => {
-		const randomAddresses = generateRandomAddresses(50);
+		const randomAddresses = generateRandomAddresses(51);
 		randomTiles = randomAddresses.map((address) => ({ address, tile: generateTile(address) }));
 	});
 </script>
@@ -18,7 +18,7 @@
 	<p>Enter an 0x address to find its matching Tile, or browse the randomly generated list below.</p>
 	<input placeholder={AddressZero} />
 </section>
-<section>
+<section class:grid={true}>
 	{#each randomTiles as item}
 		<div class="tileContainer">
 			{@html item.tile}
@@ -32,6 +32,13 @@
 		margin: 0 auto;
 		max-width: 360px;
 		margin-top: 2.5rem;
+	}
+
+	section.grid {
+		margin-top: 3.5rem;
+		max-width: 1200px;
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
 	}
 
 	input {
