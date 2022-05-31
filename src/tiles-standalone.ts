@@ -1,17 +1,4 @@
-// NOTE: ugly temporary fix, we need a bundler to use modules properly
 import { utils, Wallet } from "ethers";
-
-function generateRandomAddressess() {
-  const wallet = Wallet.createRandom();
-  const mnemonic = wallet.mnemonic.phrase;
-  const hdNode = utils.HDNode.fromMnemonic(mnemonic);
-  const addresses = [];
-  for (let i = 0; i < 10; i++) {
-    const address = hdNode.derivePath(`m/44'/60'/0'/0/${i}`).address;
-    addresses.push(address);
-  }
-  return addresses;
-}
 
 const svgs = [
   '<path d="M100 100L100 0H0C0 55.2285 44.7715 100 100 100Z" fill="#000"/>',
@@ -53,14 +40,14 @@ const foot = `
 </g>
 </svg>`;
 
-let sectorSize = 100;
+const sectorSize = 100;
 
 function __spreadArray(r, e) {
-  for (var s = 0, i = e.length, o = r.length; s < i; s++, o++) r[o] = e[s];
+  for (let s = 0, i = e.length, o = r.length; s < i; s++, o++) r[o] = e[s];
   return r;
 }
 function ringVariantsFrom(r) {
-  var e = r.positions,
+  const e = r.positions,
     s = r.positionKind,
     i = r.sizes,
     o = r.layers,
@@ -174,10 +161,10 @@ const getAddressSegments = (r) => {
 ]
   From this input: 
 "0x458e5eBAe41DaEEd84A19893e71892F491515f83" */
-  var e = [];
+  let e = [];
   return r.split("").reduce(function(r, s) {
     if ((e.push(s), 4 === e.length)) {
-      var i = e;
+      let i = e;
       return (e = []), __spreadArray(__spreadArray([], r), [i]);
     }
     return r;
@@ -217,13 +204,13 @@ const sectorColorVariants = {
 };
 
 const sectorColorsFromInt16 = (r) => {
-  var e = sectorColorVariants[r];
+  const e = sectorColorVariants[r];
   return { layer0: e[0], layer1: e[1], layer2: e[2] };
 };
 
 const generateTileSectors = (r) => {
   return r.map(function(r) {
-    var e = sectorColorsFromInt16(Number(`0x${r[0]}`));
+    const e = sectorColorsFromInt16(Number(`0x${r[0]}`));
     return [
       { svg: svgs[Number(`0x${r[1]}`)], color: e.layer0 },
       { svg: svgs[Number(`0x${r[2]}`)], color: e.layer1 },
@@ -232,7 +219,19 @@ const generateTileSectors = (r) => {
   });
 };
 
-function generateTile(address: string) {
+export function generateRandomAddresses(count = 10) {
+  const wallet = Wallet.createRandom();
+  const mnemonic = wallet.mnemonic.phrase;
+  const hdNode = utils.HDNode.fromMnemonic(mnemonic);
+  const addresses = [];
+  for (let i = 0; i < count; i++) {
+    const address = hdNode.derivePath(`m/44'/60'/0'/0/${i}`).address;
+    addresses.push(address);
+  }
+  return addresses;
+}
+
+export function generateTile(address: string) {
   let str = head;
 
   const addr = address.slice(2);
@@ -332,28 +331,28 @@ function generateTile(address: string) {
   return str;
 }
 
-function setDocumentElementToTile(tile: string, address: string) {
-  document.getElementById("tiles").innerHTML = tile;
-  document.getElementById("address").innerHTML = address;
-}
+// function setDocumentElementToTile(tile: string, address: string) {
+//   document.getElementById("tiles").innerHTML = tile;
+//   document.getElementById("address").innerHTML = address;
+// }
 
 // When the script loads, create 10 addressess and loop through them to generate tiles
 // and populate the div element with them every 3 seconds
 
-const randomAddressess = generateRandomAddressess();
-const tile = generateTile(randomAddressess[0]);
-setDocumentElementToTile(tile, randomAddressess[0]);
+// const randomAddresses = generateRandomAddresses();
+// const tile = generateTile(randomAddresses[0]);
+// setDocumentElementToTile(tile, randomAddresses[0]);
 
-let current = 1;
+// let current = 1;
 
-setInterval(() => {
-  current++;
-  if (current >= randomAddressess.length) {
-    current = 0;
-  }
-  const tile = generateTile(randomAddressess[current]);
-  setDocumentElementToTile(tile, randomAddressess[current]);
-}, 3000);
+// setInterval(() => {
+//   current++;
+//   if (current >= randomAddresses.length) {
+//     current = 0;
+//   }
+//   const tile = generateTile(randomAddresses[current]);
+//   setDocumentElementToTile(tile, randomAddresses[current]);
+// }, 3000);
 
 // NOTE: when running from command line and wanting SVG saved to directory
 // require("fs").writeFileSync(
