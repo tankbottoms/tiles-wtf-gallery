@@ -19,7 +19,7 @@
 	<p>Enter an 0x address to find its matching Tile, or browse the randomly generated list below.</p>
 	<input placeholder={AddressZero} />
 </section>
-<section class:grid={grid}>
+<section class:grid>
 	{#each randomTiles as item}
 		<div class="tileContainer">
 			{@html item.tile}
@@ -27,30 +27,31 @@
 		</div>
 	{/each}
 </section>
-<div
-	style="position: fixed; bottom: 0px; right: 0px; padding: 10px; font-weight: bold; font-size: 1rem;"
->
+<div class="menu">
 	<div
+		class="menuItem"
 		on:click={() => {
 			window.scrollTo(0, 0);
 		}}
-		style="cursor: pointer; background: rgb(34, 34, 34); color: white; padding: 5px; margin-bottom: 10px;"
+		style={'margin-bottom: 10px'}
 	>
 		^
 	</div>
 	<div
+		class="menuItem"
+		class:menuActive={grid}
 		on:click={() => {
 			grid = true;
 		}}
-		style="cursor: pointer; background: rgb(34, 34, 34); color: white; padding: 5px; opacity: 1;"
 	>
 		+
 	</div>
 	<div
+		class="menuItem"
+		class:menuActive={!grid}
 		on:click={() => {
 			grid = false;
 		}}
-		style="cursor: default; background: rgb(34, 34, 34); color: white; padding: 5px; opacity: 0.4;"
 	>
 		-
 	</div>
@@ -78,6 +79,27 @@
 		padding: 5px;
 		width: 100%;
 		box-sizing: border-box;
+	}
+
+	.menu {
+		position: fixed;
+		bottom: 0px;
+		right: 0px;
+		padding: 10px;
+		font-weight: bold;
+		font-size: 1rem;
+	}
+
+	.menuActive {
+		cursor: default;
+		opacity: 0.4;
+	}
+
+	.menuItem {
+		cursor: pointer;
+		background: rgb(34, 34, 34);
+		color: white;
+		padding: 5px;
 	}
 
 	.tileContainer {
