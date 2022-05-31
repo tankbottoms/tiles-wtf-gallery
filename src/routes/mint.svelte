@@ -6,6 +6,7 @@
 	const { AddressZero } = constants;
 
 	let randomTiles: any[] = [];
+	let grid = false;
 
 	onMount(() => {
 		const randomAddresses = generateRandomAddresses(51);
@@ -18,7 +19,7 @@
 	<p>Enter an 0x address to find its matching Tile, or browse the randomly generated list below.</p>
 	<input placeholder={AddressZero} />
 </section>
-<section class:grid={true}>
+<section class:grid={grid}>
 	{#each randomTiles as item}
 		<div class="tileContainer">
 			{@html item.tile}
@@ -26,6 +27,34 @@
 		</div>
 	{/each}
 </section>
+<div
+	style="position: fixed; bottom: 0px; right: 0px; padding: 10px; font-weight: bold; font-size: 1rem;"
+>
+	<div
+		on:click={() => {
+			window.scrollTo(0, 0);
+		}}
+		style="cursor: pointer; background: rgb(34, 34, 34); color: white; padding: 5px; margin-bottom: 10px;"
+	>
+		^
+	</div>
+	<div
+		on:click={() => {
+			grid = true;
+		}}
+		style="cursor: pointer; background: rgb(34, 34, 34); color: white; padding: 5px; opacity: 1;"
+	>
+		+
+	</div>
+	<div
+		on:click={() => {
+			grid = false;
+		}}
+		style="cursor: default; background: rgb(34, 34, 34); color: white; padding: 5px; opacity: 0.4;"
+	>
+		-
+	</div>
+</div>
 
 <style>
 	section {
