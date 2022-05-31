@@ -30,28 +30,26 @@
 	<h1>Tiles</h1>
 	<p>Infinite artwork</p>
 	<p>Generated from any ETH address</p>
-	<p>Each is unique and subjectively rare</p>
+	<p>Each is unique & subjectively rare</p>
 	<p>Value is for you to decide</p>
+	<a href="#/">Manifesto</a>
+	<a href="#/">DAO</a>
+	<a href="#/">FAQ</a>
 	<div class="group">
 		<div>
-			<a href="#/">Manifesto</a>
+			<a href="#/">Mint a Tile</a>
 		</div>
 		<div>
-			<a href="#/">DAO</a>
-		</div>
-		<div>
-			<a href="#/">FAQ</a>
+			<a href="#/">Dreamland</a>
 		</div>
 	</div>
-	<a href="#/">Mint a tile</a>
-	<a href="#/">Dreamland</a>
 </main>
 
 <style>
 	:global(body) {
-		background: #34495e;
+		background: white;
 		font-family: monospace;
-		color: whitesmoke;
+		/* color: whitesmoke; */
 		display: grid;
 		grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
 		height: 100vh;
@@ -61,8 +59,11 @@
 		margin: 0 auto;
 		text-align: center;
 	}
+	h1 {
+		font-size: 20px;
+	}
 
-    /* #tiles {
+	/* #tiles {
         width: 70vh;
         height: 70vh;
         max-width: 100vw;
@@ -70,7 +71,7 @@
         min-width: 360px;
         min-height: 360px;
     } */
-/* 
+	/* 
 	:global(#tiles svg) {
 		background: rgb(250, 243, 232);
         width: 100%;
@@ -79,26 +80,29 @@
 
 	a {
 		font-size: 14px;
-		color: whitesmoke;
+		color: black;
 		text-decoration: none;
 		position: relative;
 		border-bottom: 3px solid gold;
-		font-weight: 600;
+		margin: 0px 5px;
 	}
-
+	
 	a:hover {
 		border-bottom: 3px solid black;
 	}
 
+	p {
+		font-size: 16px;
+		margin: 30px;
+	}
+	
 	.group {
-		height: 80px;
+		margin-top: 30px;
+		height: 60px;
 		display: flex;
 		flex-direction: column;
 		justify-content: space-between;
 		margin-bottom: 20px;
-	}
-
-	.group a {
-		font-weight: 300;
+		font-weight: 600;
 	}
 </style>
