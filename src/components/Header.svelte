@@ -16,15 +16,14 @@
 		connect = web3.walletConnect;
 		disconnect = web3.disconnectWallet;
 		provider = web3.provider;
-		console.log(provider);
 		const connectedAccountStore = web3.connectedAccount;
 
-		connectedAccountStore.subscribe(() => {
+		connectedAccountStore.subscribe(async () => {
 			connectedAccount = connectedAccountStore.get();
 			// TODO find out why the provider doesn't have lookup
-			const ens = $provider.lookupAddress(connectedAccount);
+			const ens = $provider && await $provider.lookupAddress(connectedAccount);
 			if (ens) {
-				console.log(ens);
+				connectedAccount = ens;
 			}
 		});
 	});
