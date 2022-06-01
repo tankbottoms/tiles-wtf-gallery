@@ -3,6 +3,7 @@
 	import { constants, utils } from 'ethers';
 	import { onMount } from 'svelte';
 	import { generateTile, generateRandomAddresses } from '$utils/tilesStandalone';
+	import { goto } from '$app/navigation';
 
 	const { AddressZero } = constants;
 
@@ -39,7 +40,7 @@
 </section>
 <section class:grid>
 	{#if tile}
-		<div class="tileContainer">
+		<div class="tileContainer" on:click={() => goto(`mint/${input}`)}>
 			{@html tile}
 			<span>{input}</span>
 		</div>
@@ -47,7 +48,7 @@
 		<p>Not a valid address</p>
 	{:else}
 		{#each randomTiles as item}
-			<div class="tileContainer">
+			<div class="tileContainer" on:click={() => goto(`mint/${item.address}`)}>
 				{@html item.tile}
 				<span>{item.address}</span>
 			</div>

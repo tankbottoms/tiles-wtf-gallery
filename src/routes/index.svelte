@@ -1,6 +1,7 @@
 <script>
 	import { generateTile, generateRandomAddresses } from '$utils/tilesStandalone';
 	import { onMount } from 'svelte';
+	import { goto } from '$app/navigation';
 
 	let tile = '';
 	let address = '';
@@ -19,30 +20,28 @@
 </script>
 
 <main>
-<div class="tiles-container">
-	<div id="tiles">
-		{@html tile}
-		{address}
-	</div>
-	<p id="address" />
-</div>
-<section>
-
-
-	<h1>Tiles</h1>
-	<p>Infinite artwork</p>
-	<p>Generated from any ETH address</p>
-	<p>Each is unique & subjectively rare</p>
-	<p>Value is for you to decide</p>
-	<a href="/about">About</a>
-	<a href="/dao">DAO</a>
-	<a href="/faq">FAQ</a>
-	<div class="group">
-		<div>
-			<a href="/mint">Mint a Tile</a>
+	<div class="tiles-container" on:click={() => goto(`mint/${address}`)}>
+		<div id="tiles">
+			{@html tile}
+			{address}
 		</div>
+		<p id="address" />
 	</div>
-</section>
+	<section>
+		<h1>Tiles</h1>
+		<p>Infinite artwork</p>
+		<p>Generated from any ETH address</p>
+		<p>Each is unique & subjectively rare</p>
+		<p>Value is for you to decide</p>
+		<a href="/about">About</a>
+		<a href="/dao">DAO</a>
+		<a href="/faq">FAQ</a>
+		<div class="group">
+			<div>
+				<a href="/mint">Mint a Tile</a>
+			</div>
+		</div>
+	</section>
 </main>
 
 <style>
@@ -69,7 +68,7 @@
 		border-bottom: 3px solid gold;
 		margin: 0px 5px;
 	}
-	
+
 	a:hover {
 		border-bottom: 3px solid black;
 	}
@@ -78,7 +77,7 @@
 		font-size: 16px;
 		margin: 30px;
 	}
-	
+
 	.group {
 		margin-top: 30px;
 		height: 60px;
