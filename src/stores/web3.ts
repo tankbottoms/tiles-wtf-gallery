@@ -29,8 +29,8 @@ function isMobile() {
     // if(!window) {
     //     return false;
     // }
-
-	return  ('ontouchstart' in window.document.documentElement)
+	return false;
+	// return  ('ontouchstart' in window.document.documentElement)
 }
 
 function setWalletName() {

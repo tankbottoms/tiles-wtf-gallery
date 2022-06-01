@@ -10,14 +10,24 @@
 		"sourceMap": true,
 		"strict": true,
 		"paths": {
-			"$utils": ["src/utils"],
-			"$utils/*": ["src/utils/*"],
+			"$data": ["src/dao/data"],
+			"$data/*": ["src/dao/data/*"],
+			"$dao": ["src/dao"],
+			"$dao/*": ["src/dao/*"],
+			"$deployments": ["src/deployments"],
+			"$deployments/*": ["src/deployments/*"],
 			"$components": ["src/components"],
 			"$components/*": ["src/components/*"],
-			"$constants": ["src/constants"],
-			"$constants/*": ["src/constants/*"],
+			"$constants": ["src/dao/constants"],
+			"$constants/*": ["src/dao/constants/*"],
+			"$models": ["src/dao/models"],
+			"$models/*": ["src/dao/models/*"],
+			"$utils": ["src/dao/utils"],
+			"$utils/*": ["src/dao/utils/*"],
 			"$stores": ["src/stores"],
 			"$stores/*": ["src/stores/*"],
+			"$tiles": ["src/tiles"],
+			"$tiles/*": ["src/tiles/*"],
 		}
 	}
 }

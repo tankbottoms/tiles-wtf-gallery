@@ -2,7 +2,7 @@
 	import Icon from '$components/Icon.svelte';
 	import { constants, utils } from 'ethers';
 	import { onMount } from 'svelte';
-	import { generateTile, generateRandomAddresses } from '$utils/tilesStandalone';
+	import { generateTile, generateRandomAddresses } from '$tiles/tilesStandalone';
 	import { goto } from '$app/navigation';
 
 	const { AddressZero } = constants;

@@ -17,10 +17,15 @@ const config = {
 		vite: {
 			resolve: {
 				alias: {
-					$utils: path.resolve('./src/utils'),
+					$dao: path.resolve('./src/dao'),
+					$data: path.resolve('./src/dao/data'),
+					$deployments: path.resolve('./src/deployments'),
 					$components: path.resolve('./src/components'),
-					$constants: path.resolve('./src/constants'),
+					$constants: path.resolve('./src/dao/constants'),
+					$models: path.resolve('./src/dao/models'),
 					$stores: path.resolve('./src/stores'),
+					$tiles: path.resolve('./src/tiles'),
+					$utils: path.resolve('./src/dao/utils')
 				}
 			}
 		}

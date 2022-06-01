@@ -1,5 +1,5 @@
 <script>
-	import { generateTile, generateRandomAddresses } from '$utils/tilesStandalone';
+	import { generateTile, generateRandomAddresses } from '$tiles/tilesStandalone';
 	import { onMount } from 'svelte';
 	import { goto } from '$app/navigation';
 

@@ -2,7 +2,7 @@
 	import { onMount } from 'svelte';
 	import { page } from '$app/stores';
 	import { utils } from 'ethers';
-	import { generateTile } from '$utils/tilesStandalone';
+	import { generateTile } from '$tiles/tilesStandalone';
 	import { connectedAccount, provider } from '$stores/web3';
 
 	let price = 0.04;
