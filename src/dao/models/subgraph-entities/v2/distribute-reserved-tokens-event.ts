@@ -1,4 +1,4 @@
-import { BigNumber } from '@ethersproject/bignumber';
+import { BigNumber } from 'ethers';
 import { parseDistributeToReservedTokenSplitEventJson } from '$models/subgraph-entities/v2/distribute-to-reserved-token-split-event';
 
 import {

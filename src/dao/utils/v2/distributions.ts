@@ -1,4 +1,4 @@
-import { BigNumber } from '@ethersproject/bignumber';
+import { BigNumber } from 'ethers';
 import type { Split } from '$models/v2/splits';
 import { DistributionLimitType } from '$constants';
 import { MAX_DISTRIBUTION_LIMIT } from '$utils/v2/math';

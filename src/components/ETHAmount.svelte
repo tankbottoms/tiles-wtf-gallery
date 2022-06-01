@@ -1,7 +1,7 @@
 <script lang="ts">
 	// import { Tooltip } from 'antd'
 
-	import { BigNumber } from '@ethersproject/bignumber';
+	import { BigNumber } from 'ethers';
 	import { formatWad, parseWad } from '$utils/formatNumber';
 	import { betweenZeroAndOne } from '$utils/bigNumbers';
 

@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import * as constants from '@ethersproject/constants';
+	import { constants } from 'ethers';
 	import { formatDate } from '$utils/formatDate';
 	import type { ProjectMetadataV4 } from '$models/project-metadata';
 	import type { Project } from '$models/subgraph-entities/vX/project';

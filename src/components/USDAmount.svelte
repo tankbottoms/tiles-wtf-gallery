@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { BigNumber } from '@ethersproject/bignumber';
+	import { BigNumber } from 'ethers';
 	import { fromWad, formatWad, parseWad } from '$utils/formatNumber';
 	import { betweenZeroAndOne } from '$utils/bigNumbers';
 	import { getCurrencyConverter } from '$data/currency';

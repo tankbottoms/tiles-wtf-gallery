@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { BigNumber } from '@ethersproject/bignumber';
+	import { BigNumber } from 'ethers';
 	import Icon from '$components/Icon.svelte';
 	import { formatHistoricalDate } from '$utils/formatDate';
 	import { formatWad } from '$utils/formatNumber';

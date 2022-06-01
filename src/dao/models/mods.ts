@@ -1,4 +1,4 @@
-import type { BigNumber } from '@ethersproject/bignumber';
+import type { BigNumber } from 'ethers';
 
 export interface PayoutMod {
 	beneficiary?: string;

@@ -1,7 +1,5 @@
-import * as constants from '@ethersproject/constants';
-import { BigNumber } from '@ethersproject/bignumber';
-import { getAddress } from '@ethersproject/address';
-import { parseEther } from '@ethersproject/units';
+import { BigNumber, utils, constants } from 'ethers';
+
 import {
 	FUNDING_CYCLE_WARNING_TEXT,
 	RESERVED_RATE_WARNING_THRESHOLD_PERCENT
@@ -132,7 +130,7 @@ const parameters: {
 			const dataSource = val.toHexString();
 			return dataSource === BigNumber.from('0').toHexString()
 				? constants.AddressZero
-				: getAddress(dataSource);
+				: utils.getAddress(dataSource);
 		}
 	}
 ];
@@ -216,7 +214,7 @@ const reservedRateText = (fundingCycle, fundingCycleMetadata, symbol: string = '
 		weightedAmount(
 			fundingCycle?.weight,
 			fundingCycleMetadata?.reservedRate.toNumber(),
-			parseEther('1'),
+			utils.parseEther('1'),
 			'payer'
 		),
 		{
@@ -227,7 +225,7 @@ const reservedRateText = (fundingCycle, fundingCycleMetadata, symbol: string = '
 		weightedAmount(
 			fundingCycle?.weight,
 			fundingCycleMetadata?.reservedRate.toNumber(),
-			parseEther('1'),
+			utils.parseEther('1'),
 			'reserved'
 		),
 		{

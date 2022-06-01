@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { getContext, onMount } from 'svelte';
-	import * as constants from '@ethersproject/constants';
+	import { constants } from 'ethers';
 	import type Store from 'src/tiles/Store';
 	import { connectedAccount } from '$stores/web3';
 	import { tokenSymbolText } from '$utils/tokenSymbolText';

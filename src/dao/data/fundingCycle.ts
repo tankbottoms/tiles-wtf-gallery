@@ -1,4 +1,4 @@
-// import { BigNumber, type BigNumberish } from '@ethersproject/bignumber'
+// import { BigNumber, type BigNumberish } from 'ethers'
 // import { V1ContractName } from '$models/v1/contracts'
 // import type { V1FundingCycle } from '$models/v1/fundingCycle'
 // import type { V1TerminalName } from '$models/v1/terminals'

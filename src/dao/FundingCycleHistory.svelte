@@ -1,7 +1,7 @@
 <script lang="ts">
-	import type Store from '$utils/Store';
+	import type Store from 'src/tiles/Store';
 	import { modal } from '$stores';
-	import { BigNumber } from '@ethersproject/bignumber';
+	import { BigNumber } from 'ethers';
 	import Icon from '$components/Icon.svelte';
 	import { formatHistoricalDate } from '$utils/formatDate';
 	import { formatWad } from '$utils/formatNumber';

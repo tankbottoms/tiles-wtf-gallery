@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { BigNumber } from '@ethersproject/bignumber';
+	import { BigNumber } from 'ethers';
 	// TODO move
 	import CollapsibleSection from '$components/CollapsibleSection.svelte';
 	import Icon from '$components/Icon.svelte';

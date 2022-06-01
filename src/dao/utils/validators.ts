@@ -1,5 +1,4 @@
-import { isAddress } from '@ethersproject/address';
-import * as constants from '@ethersproject/constants';
+import { constants, utils } from 'ethers';
 import type { PayoutMod } from '$models/mods';
 import type { Split } from '$models/v2/splits';
 
@@ -18,7 +17,7 @@ export function validateEthAddress(
 	// If user edits an (already approved) address and doesn't change it, we accept
 	if (modalMode === 'Edit' && address === mods[editingModIndex ?? 0]?.beneficiary)
 		return Promise.resolve();
-	else if (!address || !isAddress(address)) return Promise.reject('Address is required');
+	else if (!address || !utils.isAddress(address)) return Promise.reject('Address is required');
 	else if (address === constants.AddressZero) return Promise.reject('Cannot use zero address');
 	else if (mods.some((mod) => mod.beneficiary === address))
 		return Promise.reject('A payout for this address already exists');

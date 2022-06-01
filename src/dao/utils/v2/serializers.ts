@@ -1,4 +1,4 @@
-import { BigNumber } from '@ethersproject/bignumber';
+import { BigNumber } from 'ethers';
 import type {
 	V2FundingCycleData,
 	V2FundingCycleMetadata,

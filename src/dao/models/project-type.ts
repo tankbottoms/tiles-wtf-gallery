@@ -1,4 +1,4 @@
-import type { BigNumber } from '@ethersproject/bignumber';
+import type { BigNumber } from 'ethers';
 import type { V2BallotState } from '$models/ballot';
 import type { V2FundingCycle, V2FundingCycleMetadata } from '$models/v2/fundingCycle';
 import type { ProjectMetadataV4 } from '$models/project-metadata';

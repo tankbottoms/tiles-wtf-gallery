@@ -1,5 +1,7 @@
 import { BigNumber, type BigNumberish } from 'ethers';
-import { formatUnits, parseUnits } from '@ethersproject/units';
+import { utils } from 'ethers';
+
+const { formatUnits, parseUnits } = utils;
 
 import { WAD_DECIMALS } from '$constants/numbers';
 

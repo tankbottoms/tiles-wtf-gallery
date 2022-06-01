@@ -1,4 +1,4 @@
-import { parseEther } from '@ethersproject/units';
+import { utils } from 'ethers';
 import { getEtherPrice } from '$data/eth';
 import { CurrencyUtils } from '$utils/formatCurrency';
 import { V2_CURRENCY_USD } from '$utils/v2/currency';
@@ -21,5 +21,5 @@ export function getWeiConverter({
 	if (currency === V2_CURRENCY_USD) {
 		return converter.usdToWei(amount);
 	}
-	return parseEther(amount ?? '0');
+	return utils.parseEther(amount ?? '0');
 }

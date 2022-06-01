@@ -1,4 +1,4 @@
-import { BigNumber } from '@ethersproject/bignumber';
+import { BigNumber } from 'ethers';
 import type { BigNumberish } from 'ethers';
 
 import { SECONDS_IN_DAY, SECONDS_IN_HOUR } from '$constants/numbers';

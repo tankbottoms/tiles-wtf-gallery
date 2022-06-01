@@ -16,14 +16,14 @@
 
 	import { page } from '$app/stores';
 	import type { V2ProjectContextType } from '$models/project-type';
-	import { contracts, readContract, readContractByAddress } from '$utils/web3/contractReader';
+	import { readContract, readContractByAddress } from '$utils/web3/contractReader';
 	import { V2ContractName } from '$models/v2/contracts';
 	import { ETH_PAYOUT_SPLIT_GROUP } from '$constants/v2/splits';
 	import { ETH_TOKEN_ADDRESS } from '$constants/v2/juiceboxTokens';
 	import { getProjectMetadata } from '$data/project';
 	import Activity from '$dao/Activity.svelte';
 	import Modal from '$components/Modal.svelte';
-	import Loading from '$components/Loading.svelte'
+	import Loading from '$components/Loading.svelte';
 	import { JUICEBOX_MONEY_METADATA_DOMAIN } from '$constants/v2/metadataDomain';
 	import { Currency } from '$constants';
 	import { getCurrencyConverter } from '$data/currency';
@@ -42,7 +42,7 @@
 
 	onMount(async () => {
 		try {
-			// TODO this is where we set the projectID for tiles v2 
+			// TODO this is where we set the projectID for tiles v2
 			$project.projectId = BigNumber.from(1);
 			const metadataCID = await readContract(V2ContractName.JBProjects, 'metadataContentOf', [
 				$project.projectId,
@@ -210,15 +210,12 @@
 <section>
 	<div class="content">
 		{#if issue}
-			<!-- <Issue center> -->
 			{issue}
-			<!-- </Issue> -->
 		{:else if loading}
-		<Loading height={500} />
+			<Loading height={500} />
 		{:else}
 			<div>
 				<Head />
-				<!-- <Stats /> -->
 				<Paid />
 				<div class="row">
 					<Details />

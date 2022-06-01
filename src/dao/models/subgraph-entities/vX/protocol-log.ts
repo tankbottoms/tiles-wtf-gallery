@@ -1,4 +1,4 @@
-import { BigNumber } from '@ethersproject/bignumber';
+import { BigNumber } from 'ethers';
 
 export type ProtocolLog = {
 	id: '1'; // Only one entity exists

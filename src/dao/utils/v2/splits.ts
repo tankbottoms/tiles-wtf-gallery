@@ -1,5 +1,5 @@
-import { BigNumber } from '@ethersproject/bignumber';
-import * as constants from '@ethersproject/constants';
+import { BigNumber } from 'ethers';
+import { constants } from 'ethers';
 import type { PayoutMod } from '$models/mods';
 import type { Split } from '$models/v2/splits';
 import { percentToPermyriad, permyriadToPercent } from '$utils/formatNumber';

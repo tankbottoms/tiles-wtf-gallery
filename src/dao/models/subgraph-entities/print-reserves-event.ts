@@ -1,4 +1,4 @@
-import { BigNumber } from '@ethersproject/bignumber';
+import { BigNumber } from 'ethers';
 
 import { parseProjectJson, type Project } from './project';
 import type { ProjectJson } from './project';

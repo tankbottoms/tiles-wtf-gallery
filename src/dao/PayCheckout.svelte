@@ -2,7 +2,7 @@
 	import { getContext, onMount } from 'svelte';
 	import type { BigNumber } from 'ethers';
 	import type { V2ProjectContextType } from '$models/project-type';
-	import type Store from '$utils/Store';
+	import type Store from 'src/tiles/Store';
 	import { formatWad } from '$utils/formatNumber';
 	import { weightedAmount } from '$utils/v2/math';
 	import {
@@ -23,8 +23,10 @@
 	import { readNetwork } from '$constants/networks';
 	import { ETH_TOKEN_ADDRESS } from '$constants/v2/juiceboxTokens';
 	import { connectedAccount, walletConnect } from '$stores/web3';
-	import { randomBytes } from 'ethers/lib/utils';
+	import { utils } from 'ethers';
 	import { V2ContractName } from '$models/v2/contracts';
+
+	const { randomBytes } = utils;
 
 	const projectContext = getContext('PROJECT') as Store<V2ProjectContextType>;
 

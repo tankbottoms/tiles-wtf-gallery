@@ -1,5 +1,5 @@
-import { BigNumber } from '@ethersproject/bignumber';
-import * as constants from '@ethersproject/constants';
+import { BigNumber } from 'ethers';
+import { constants } from 'ethers';
 import { invertPermyriad } from '$utils/bigNumbers';
 import { fromWad, percentToPermyriad } from '$utils/formatNumber';
 import type { WeightFunction } from '$utils/math';

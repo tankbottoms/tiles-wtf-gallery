@@ -3,9 +3,8 @@
 	import ETH from '$components/Ethereum.svelte';
 	import CurrencyInput from '$components/CurrencyInput.svelte';
 	import { formatWad } from '$utils/formatNumber';
-	import { parseEther } from '@ethersproject/units';
 	import { Currency, CurrencyName } from '$constants';
-	import { BigNumber } from 'ethers';
+	import { BigNumber, utils } from 'ethers';
 	import { getCurrencyConverter, getWeiConverter } from '$data/currency';
 	import { tokenSymbolText } from '$utils/tokenSymbolText';
 	import type { WeightFunction } from '$utils/math';
@@ -29,9 +28,9 @@
 	function onPay() {
 		let weiAmount: BigNumber;
 		if (currency == Currency.ETH) {
-			weiAmount = parseEther(amount.toString());
+			weiAmount = utils.parseEther(amount.toString());
 		} else {
-			weiAmount = parseEther(formattedETHAmount);
+			weiAmount = utils.parseEther(formattedETHAmount);
 		}
 		onClick(weiAmount);
 	}

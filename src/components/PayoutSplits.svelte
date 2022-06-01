@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { BigNumber } from '@ethersproject/bignumber';
+	import { BigNumber } from 'ethers';
 	import { getTotalSplitsPercentage } from '$utils/v2/distributions';
 	import ETH from '$components/Ethereum.svelte';
 	import Icon from '$components/Icon.svelte';

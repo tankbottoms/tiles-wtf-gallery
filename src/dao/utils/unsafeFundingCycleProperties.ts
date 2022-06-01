@@ -1,4 +1,4 @@
-import * as constants from '@ethersproject/constants';
+import { constants } from 'ethers';
 
 import { RESERVED_RATE_WARNING_THRESHOLD_PERCENT } from '$constants/fundingWarningText';
 

@@ -1,4 +1,4 @@
-import * as constants from '@ethersproject/constants';
+import { constants } from 'ethers';
 // import { t } from '@lingui/macro';
 
 import { readNetwork } from '$constants/networks';
