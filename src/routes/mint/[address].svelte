@@ -20,6 +20,16 @@
 		}
 	}
 
+	function download() {
+		const blob = new Blob([tile], { type: 'text/plain' });
+		const url = window.URL.createObjectURL(blob);
+		const link = document.createElement('a');
+		link.href = url;
+		link.download = 'tile.svg';
+		link.click();
+		window.URL.revokeObjectURL(url);
+	}
+
 	onMount(() => {
 		// Check if legitimate address
 		if (!utils.isAddress($page.params.address)) {
@@ -45,6 +55,7 @@
 		{/if}
 	{/if}
 </section>
+<button class="download" on:click={download}> Download SVG </button>
 
 <style>
 	button {
@@ -62,5 +73,11 @@
 		justify-content: center;
 		height: calc(100vh - 100px);
 		line-height: 1.3;
+	}
+
+	.download {
+		position: fixed;
+		bottom: 20px;
+		right: 20px;
 	}
 </style>
