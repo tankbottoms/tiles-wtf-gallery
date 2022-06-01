@@ -3,14 +3,22 @@
 	import { page } from '$app/stores';
 	import { utils } from 'ethers';
 	import { generateTile } from '$utils/tilesStandalone';
+	import { connectedAccount, provider } from '$stores/web3';
 
-    let price = 0.04;
+	let price = 0.04;
 	let tile: string;
 	let showInvalidAddress = false;
+	let showInsufficientBalance = false;
 
-    function mint() {
-        console.log("🛠  Implement mint")
-    }
+	async function mint() {
+		console.log('🛠  Implement mint');
+		// Todo check the balance of the wallet
+		const balance = await $provider.getBalance($connectedAccount);
+		const amount = utils.formatEther(balance);
+		if (Number(amount) < price) {
+			showInsufficientBalance = true;
+		}
+	}
 
 	onMount(() => {
 		// Check if legitimate address
@@ -31,7 +39,10 @@
 		<p>{$page.params.address}</p>
 		<!-- TODO check if available -->
 		<p>Available</p>
-        <button on:click={mint}>MINT ({price} ETH)</button>
+		<button on:click={mint}>MINT ({price} ETH)</button>
+		{#if showInsufficientBalance}
+			<p>Insufficient balance</p>
+		{/if}
 	{/if}
 </section>
 
@@ -42,7 +53,7 @@
 		cursor: pointer;
 		border-bottom: 3px solid gold;
 		padding: 0px;
-        margin-top: 20px;
+		margin-top: 20px;
 	}
 	section {
 		display: flex;
