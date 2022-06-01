@@ -14,7 +14,6 @@
 	import Paid from '$dao/Paid.svelte';
 	import Store from '$utils/Store';
 
-	import { page } from '$app/stores';
 	import type { V2ProjectContextType } from '$models/project-type';
 	import { readContract, readContractByAddress } from '$utils/web3/contractReader';
 	import { V2ContractName } from '$models/v2/contracts';
@@ -37,8 +36,6 @@
 
 	let loading = true;
 	let issue: string | false = false;
-
-	const isNewDeploy = $page.url.searchParams.get('newDeploy');
 
 	onMount(async () => {
 		try {
