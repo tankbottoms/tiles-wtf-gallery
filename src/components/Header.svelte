@@ -13,17 +13,18 @@
 		console.log('🛠 TODO read contract, number of minted tiles and current price');
 		// Async import module due to window being undefined
 		const web3 = await import('$stores/web3');
+		const connectedAccountStore = web3.connectedAccount;
 		connect = web3.walletConnect;
 		disconnect = web3.disconnectWallet;
 		provider = web3.provider;
-		const connectedAccountStore = web3.connectedAccount;
 
 		connectedAccountStore.subscribe(async () => {
 			connectedAccount = connectedAccountStore.get();
-			// TODO find out why the provider doesn't have lookup
-			const ens = $provider && await $provider.lookupAddress(connectedAccount);
-			if (ens) {
-				connectedAccount = ens;
+			if (connectedAccount) {
+				const ens = $provider && (await $provider.lookupAddress(connectedAccount));
+				if (ens) {
+					connectedAccount = ens;
+				}
 			}
 		});
 	});
