@@ -34,15 +34,12 @@
 	<p>Generated from any ETH address</p>
 	<p>Each is unique & subjectively rare</p>
 	<p>Value is for you to decide</p>
-	<a href="#/">Manifesto</a>
-	<a href="#/">DAO</a>
-	<a href="#/">FAQ</a>
+	<a href="/about">About</a>
+	<a href="/dao">DAO</a>
+	<a href="/faq">FAQ</a>
 	<div class="group">
 		<div>
 			<a href="/mint">Mint a Tile</a>
-		</div>
-		<div>
-			<a href="#/">Dreamland</a>
 		</div>
 	</div>
 </section>
