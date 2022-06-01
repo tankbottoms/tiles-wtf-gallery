@@ -1,5 +1,5 @@
 <script>
-	import { generateTile, generateRandomAddresses } from '../tiles-standalone';
+	import { generateTile, generateRandomAddresses } from '$utils/tilesStandalone';
 	import { onMount } from 'svelte';
 
 	let tile = '';
