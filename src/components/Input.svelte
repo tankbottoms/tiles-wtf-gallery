@@ -23,7 +23,7 @@
 		background: transparent;
 		border: 1px solid var(--stroke-primary);
 		transition: border-color 120ms ease-out;
-		padding: 4px 11px;
+		padding: 4px 4px;
 		line-height: 1.5715;
 	}
 
