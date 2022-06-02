@@ -40,7 +40,7 @@
 	onMount(async () => {
 		try {
 			// TODO this is where we set the projectID for tiles v2
-			$project.projectId = BigNumber.from(1);
+			$project.projectId = BigNumber.from(98);
 			const metadataCID = await readContract(V2ContractName.JBProjects, 'metadataContentOf', [
 				$project.projectId,
 				JUICEBOX_MONEY_METADATA_DOMAIN

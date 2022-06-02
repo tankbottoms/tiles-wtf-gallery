@@ -8,7 +8,6 @@
 		"resolveJsonModule": true,
 		"skipLibCheck": true,
 		"sourceMap": true,
-		"strict": true,
 		"paths": {
 			"$data": ["src/dao/data"],
 			"$data/*": ["src/dao/data/*"],

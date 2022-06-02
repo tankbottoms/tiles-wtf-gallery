@@ -1,4 +1,5 @@
 <script lang="ts">
+	import "../antd.css";
 	export let value: string | number | undefined = undefined;
 	export let label: string = undefined;
 </script>
@@ -23,7 +24,7 @@
 		background: transparent;
 		border: 1px solid var(--stroke-primary);
 		transition: border-color 120ms ease-out;
-		padding: 4px 11px;
+		padding: 4px 4px;
 		line-height: 1.5715;
 	}
 

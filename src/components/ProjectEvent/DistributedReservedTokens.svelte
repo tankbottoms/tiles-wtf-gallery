@@ -59,7 +59,9 @@
 		<p class="timestamp">called by {getTruncatedAddress(event.caller)}</p>
 		{#each events as e}
 			<p>
-				{formatWad(e.tokenCount)}
+				{formatWad(e.tokenCount, {
+					precision: 2,
+				})}
 			</p>
 		{/each}
 		{#if event.beneficiaryTokenCount}

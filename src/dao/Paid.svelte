@@ -33,7 +33,7 @@
 
 	$: ownerBalance = owner ? getEthBalance(owner) : BigNumber.from(0);
 
-	const distributionLimitType = getDistributionLimitType($projectsContext.distributionLimit);
+	const distributionLimitType = getDistributionLimitType($projectsContext.distributionLimit || BigNumber.from(0));
 
 	async function payTreasury(weiAmount: BigNumber) {
 		// TODO contract

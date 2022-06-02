@@ -16,29 +16,29 @@ type V2ProjectLoadingStates = {
 export type V2ProjectContextType = {
 	isPreviewMode?: boolean;
 
-	projectId: BigNumber | undefined;
-	projectMetadata: ProjectMetadataV4 | undefined;
-	tokenAddress: string | undefined;
-	tokenSymbol: string | undefined;
-	terminals: string[] | undefined; // array of terminal addresses, 0xABC...
-	primaryTerminal: string | undefined;
-	ETHBalance: BigNumber | undefined;
-	projectOwnerAddress: string | undefined;
-	balanceInDistributionLimitCurrency: BigNumber | undefined;
-	usedDistributionLimit: BigNumber | undefined; // how much has been distributed
+	projectId: BigNumber;
+	projectMetadata: ProjectMetadataV4;
+	tokenAddress: string;
+	tokenSymbol: string;
+	terminals: string[]; // array of terminal addresses, 0xABC...
+	primaryTerminal: string;
+	ETHBalance: BigNumber;
+	projectOwnerAddress: string;
+	balanceInDistributionLimitCurrency: BigNumber;
+	usedDistributionLimit: BigNumber; // how much has been distributed
 
-	fundingCycleMetadata: V2FundingCycleMetadata | undefined;
-	fundingCycle: V2FundingCycle | undefined;
-	ballotState: V2BallotState | undefined;
+	fundingCycleMetadata: V2FundingCycleMetadata;
+	fundingCycle: V2FundingCycle;
+	ballotState: V2BallotState;
 
-	distributionLimit: BigNumber | undefined;
-	distributionLimitCurrency: Currency | undefined;
+	distributionLimit: BigNumber;
+	distributionLimitCurrency: Currency;
 
-	payoutSplits: Split[] | undefined;
-	reservedTokensSplits: Split[] | undefined;
+	payoutSplits: Split[];
+	reservedTokensSplits: Split[];
 
-	primaryTerminalCurrentOverflow: BigNumber | undefined;
-	totalTokenSupply: BigNumber | undefined;
+	primaryTerminalCurrentOverflow: BigNumber;
+	totalTokenSupply: BigNumber;
 
 	loading: V2ProjectLoadingStates;
 

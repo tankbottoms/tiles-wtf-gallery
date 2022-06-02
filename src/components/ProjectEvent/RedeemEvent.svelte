@@ -22,7 +22,7 @@
 		<div class="amount">
 			{formatWad(event.amount, { precision: 0 })}
 			{tokenSymbolText({
-				tokenSymbol: $project.tokenSymbol,
+				tokenSymbol: $project?.tokenSymbol,
 				capitalize: false,
 				plural: true
 			})}

@@ -118,7 +118,7 @@
 {#if payoutSplits.length === 0}
 	<InfoSpaceBetween>
 		<p slot="left">
-			{isPreview ? '(you)' : getTruncatedAddress(projectOwnerAddress)}
+			{isPreview ? '(you)' : getTruncatedAddress(projectOwnerAddress || '')}
 			<OwnerCrown /> :
 		</p>
 		<p slot="right">

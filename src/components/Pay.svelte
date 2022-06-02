@@ -8,6 +8,7 @@
 	import { getCurrencyConverter, getWeiConverter } from '$data/currency';
 	import { tokenSymbolText } from '$utils/tokenSymbolText';
 	import type { WeightFunction } from '$utils/math';
+	import { parseEther } from 'ethers/lib/utils';
 
 	export let disabled = false;
 	export let onClick: (weiAmount: BigNumber) => void;
@@ -74,9 +75,10 @@
 	$: {
 		receiveText = getReceiveText(currency);
 		const ETHAmount = converter.usdToWei(amount?.toString());
-		formattedETHAmount = formatWad(ETHAmount, {
-			precision: 9
-		});
+		formattedETHAmount =
+			formatWad(ETHAmount, {
+				precision: 9
+			}) || '';
 	}
 </script>
 

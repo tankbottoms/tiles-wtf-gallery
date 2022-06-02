@@ -268,7 +268,7 @@ export const formatGraphQuery = <E extends EntityKey, K extends EntityKeys<E>>(
 	)} } }`;
 };
 
-const subgraphUrl = import.meta.env.VITE_SUBGRAPH_URL;
+const subgraphUrl = import.meta.env.VITE_SUBGRAPH_URL_RINKEBY;
 
 export const trimHexZero = (hexStr: string) => hexStr.replace('0x0', '0x');
 
