@@ -1,6 +1,7 @@
 <script context="module" lang="ts">
 	export function getTruncatedAddress(address: string) {
-		return `${address.slice(0, 6)}...${address.slice(-6)}`;
+		if (address) return `${address.slice(0, 6)}...${address.slice(-6)}`;
+		return '';
 	}
 </script>
 
