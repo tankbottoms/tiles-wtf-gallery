@@ -12,7 +12,7 @@
 	export let disabled = false;
 	export let onClick: (weiAmount: BigNumber) => void;
 	export let payButton: string = 'Pay';
-	export let payInCurrency: Currency = Currency.ETH;
+	export const payInCurrency: Currency = Currency.ETH;
 	export let reservedRate: number;
 	export let token: string = 'tokens';
 	export let weight: BigNumber;
@@ -58,7 +58,7 @@
 		}
 
 		const receivedTickets = formatReceivedTickets(
-			(payInCurrency === Currency.ETH ? parseEther('1') : converter.usdToWei('1')) ??
+			(payInCurrency === Currency.ETH ? utils.parseEther('1') : converter.usdToWei('1')) ??
 				BigNumber.from(0)
 		);
 
