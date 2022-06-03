@@ -3,7 +3,7 @@ html {
 }
 
 body {
-  background: #34495e;
+  background: #ffffff;
   color: whitesmoke;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));

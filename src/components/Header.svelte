@@ -3,7 +3,7 @@
 	import { web3Connect, web3Disconnect, provider, connectedAccount } from '$stores/web3';
 
 	let count = 0;
-	let price = 0.04;
+	let price = 0.01;
 
 	onMount(async () => {
 		console.log('🛠 TODO read contract, number of minted tiles and current price');

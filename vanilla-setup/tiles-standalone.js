@@ -29,6 +29,7 @@ const svgs = [
     '<path d="M50 0C50 27.6142 72.3858 50 100 50V0H50Z" fill="#000"/>',
     '<path d="M50 0C50 27.6142 27.6142 50 0 50V0H50Z" fill="#000"/>',
 ];
+
 const canvasColor = `#faf3e8`;
 const head = `<svg
 xmlns="http://www.w3.org/2000/svg"
@@ -43,16 +44,20 @@ id="SvgjsSvg1000"
 <g transform="matrix(1,0,0,1,30,30)">
 <g>
 `;
+
 const foot = `
 </g>
 </g>
 </svg>`;
+
 let sectorSize = 100;
+
 function __spreadArray(r, e) {
     for (var s = 0, i = e.length, o = r.length; s < i; s++, o++)
         r[o] = e[s];
     return r;
 }
+
 function ringVariantsFrom(r) {
     var e = r.positions, s = r.positionKind, i = r.sizes, o = r.layers, t = r.solid;
     return e.flatMap(function (r) {
@@ -69,6 +74,7 @@ function ringVariantsFrom(r) {
         });
     });
 }
+
 const ringVariants = __spreadArray(__spreadArray(__spreadArray(__spreadArray(__spreadArray(__spreadArray(__spreadArray([null], ringVariantsFrom({
     positionKind: "intersection",
     positions: [
@@ -126,6 +132,7 @@ const ringVariants = __spreadArray(__spreadArray(__spreadArray(__spreadArray(__s
     sizes: [1, 2],
     layers: [0],
 }));
+
 const getAddressSegments = (r) => {
     /* Return this: [
     [ '0', 'x', '4', '5' ],
@@ -150,12 +157,17 @@ const getAddressSegments = (r) => {
         return r;
     }, []);
 };
+
 const toNum = (r) => {
     return Number(`0x${r.join("")}`);
 };
-//const address =
-// process.argv.find((arg) => arg.startsWith("0x")) ||
-//  "0x458e5eBAe41DaEEd84A19893e71892F491515f83";
+
+/*
+const address =
+process.argv.find((arg) => arg.startsWith("0x")) ||
+ "0x458e5eBAe41DaEEd84A19893e71892F491515f83";
+*/
+
 const red = "#FE4465", black = "#222", blue = "#1A49EF", yellow = "#F8D938";
 const sectorColorVariants = {
     0: [red, yellow, black],
@@ -175,10 +187,12 @@ const sectorColorVariants = {
     14: [yellow, black, blue],
     15: [yellow, black, red],
 };
+
 const sectorColorsFromInt16 = (r) => {
     var e = sectorColorVariants[r];
     return { layer0: e[0], layer1: e[1], layer2: e[2] };
 };
+
 const generateTileSectors = (r) => {
     return r.map(function (r) {
         var e = sectorColorsFromInt16(Number(`0x${r[0]}`));
@@ -189,6 +203,7 @@ const generateTileSectors = (r) => {
         ];
     });
 };
+
 function generateTile(address) {
     let str = head;
     const addr = address.slice(2);
@@ -292,11 +307,14 @@ setInterval(() => {
     const tile = generateTile(randomAddressess[current]);
     setDocumentElementToTile(tile, randomAddressess[current]);
 }, 3000);
+
+/*
 // NOTE: when running from command line and wanting SVG saved to directory
-// require("fs").writeFileSync(
-//   process.argv.find((arg) => arg.startsWith("-o"))?.replace("-o", "") ||
-//     "./tiles-alone/output.svg",
-//   str
-// );
-// console.log(address);
-//# sourceMappingURL=tiles-standalone.js.map
+require("fs").writeFileSync(
+  process.argv.find((arg) => arg.startsWith("-o"))?.replace("-o", "") ||
+    "./tiles-alone/output.svg",
+  str
+);
+console.log(address);
+# sourceMappingURL=tiles-standalone.js.map
+*/
