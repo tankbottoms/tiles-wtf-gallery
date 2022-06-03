@@ -10,16 +10,11 @@
 	</p>
 	<p>
 		<a href="https://github.com/tankbottoms/tiles-on-chain">Tiles v2 on chain</a> contains the
-		re-implementation. The contract structure employed follows a composable pattern which will be
-		familiar with anyone involved in the Juicebox NFT minting toolkit. The Tile contract uses
-		Juicebox v2 ProjectPayer (<a
-			href="https://info.juicebox.money/docs/protocol/build/utilities/project-payer"
-			>https://info.juicebox.money/docs/protocol/build/utilities/project-payer</a
-		>) as its transparent treasury.
+		re-implementation. 
 	</p>
 	<p>
-		Original Tiles v1 token holders may mint their token for free (sans gas), if someone has
-		preemptively minted another individual&#39;s address, a small premium would be required to seize
+		Original Tiles v1 token holders may mint their tile for free, if someone has preemptively 
+		minted another individual&#39;s address, a small premium will be required to seize
 		the token.
 	</p>
 </section>
