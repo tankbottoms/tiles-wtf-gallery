@@ -144,7 +144,7 @@ const getAddressSegments = (r) => {
   [ '5', '1', '5', 'f' ]
 ]
   From this input: 
-"0x458e5eBAe41DaEEd84A19893e71892F491515f83" */
+"0x5d95baEBB8412AD827287240A5c281E3bB30d27E" */
 	let e = [];
 	return r.split('').reduce(function (r, s) {
 		if ((e.push(s), 4 === e.length)) {
@@ -161,7 +161,8 @@ const toNum = (r) => {
 
 //const address =
 // process.argv.find((arg) => arg.startsWith("0x")) ||
-//  "0x458e5eBAe41DaEEd84A19893e71892F491515f83";
+/* "0x5d95baEBB8412AD827287240A5c281E3bB30d27E" */
+//  "";
 
 const red = '#FE4465',
 	black = '#222',

@@ -1,1 +1,0 @@
-import{S as e,i as n,s as a,v as s}from"../chunks/index-e63e67ba.js";import{g as r}from"../chunks/navigation-0e6511d1.js";import"../chunks/singletons-d1fb5791.js";function i(t){return s(()=>{r(window.location.pathname,{replaceState:!0})}),[]}class c extends e{constructor(o){super(),n(this,o,i,null,a,{})}}export{c as default};
