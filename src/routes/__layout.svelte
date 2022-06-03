@@ -1,9 +1,9 @@
 <script>
 	import Header from '$components/Header.svelte';
-	import Intl from '$components/IntlProvider.svelte';
+	import Intl from '$jbx/provider/Intl.svelte';
 </script>
 
-<Intl>
+<Intl config={{}}>
 	<Header />
 	<slot />
 </Intl>

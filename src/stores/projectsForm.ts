@@ -1,10 +1,10 @@
-import Store from '$utils/Store';
+import Store from '$jbx/utils/Store';
 import type {
 	ProjectSearchFilter,
 	ProjectCategory,
 	ProjectSortType
-} from '$models/project-visibility';
-import type { Project } from '$models/subgraph-entities/vX/project';
+} from '$jbx/models/project-visibility';
+import type { Project } from '$jbx/models/subgraph-entities/vX/project';
 
 export const selectedProjectsTab = new Store<ProjectCategory>('all');
 export const sortType = new Store<ProjectSortType>('totalPaid');

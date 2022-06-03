@@ -17,7 +17,7 @@ import {
 import type { User } from 'firebase/auth';
 import { connectedAccount } from './web3';
 import { browser } from '$app/env';
-import Store from '$lib/utils/Store';
+import Store from '$jbx/utils/Store';
 import { derived } from 'svelte/store';
 import { FIREBASE_CONFIG } from '../../environment';
 
