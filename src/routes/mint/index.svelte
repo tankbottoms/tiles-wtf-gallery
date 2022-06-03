@@ -90,14 +90,14 @@
 </div>
 
 <!-- TODO the social links -->
-<div class="socialIcons">
+<div class="socialIcons" target="_blank">
 	<a href="https://twitter.com/Tile_DAO">
 		<Icon name="twitter" />
 	</a>
-	<a href="https://discord.gg/U3fMydKj4J">
+	<a href="https://discord.gg/U3fMydKj4J" target="_blank">
 		<Icon name="discord" />
 	</a>
-	<a href="https://github.com/tankbottoms/tiles-on-chain">
+	<a href="https://github.com/tankbottoms/tiles-on-chain" target="_blank">
 		<Icon name="github" />
 	</a>
 </div>
