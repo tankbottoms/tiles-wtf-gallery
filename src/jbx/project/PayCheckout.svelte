@@ -19,11 +19,10 @@
 	import Checkbox from '$jbx/components/Checkbox.svelte';
 	import { bind, openModal } from '$jbx/components/Modal.svelte';
 	import PendingTransaction from '$jbx/components/PendingTransaction.svelte';
-	import { contracts, writeContract } from '$jbx/utils/web3/contractReader';
-	import { readNetwork } from '$stores/web3';
+	import { writeContract } from '$jbx/utils/web3/contractReader';
 	import { ETH_TOKEN_ADDRESS } from '$jbx/constants/v2/juiceboxTokens';
 	import { connectedAccount, web3Connect } from '$stores/web3';
-	import { randomBytes } from 'ethers/lib/utils';
+	import { randomBytes } from 'ethers/lib/utils.js';
 	import { V2ContractName } from '$jbx/models/v2/contracts';
 
 	const projectContext = getContext('PROJECT') as Store<V2ProjectContextType>;

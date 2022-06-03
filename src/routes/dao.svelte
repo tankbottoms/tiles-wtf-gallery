@@ -42,7 +42,7 @@
 	let loading = true;
 	let issue: string | false = false;
 
-	const isNewDeploy = $page.url.searchParams.get('newDeploy');
+	const isNewDeploy = browser ? $page.url.searchParams.get('newDeploy') : false;
 
 	function checkNetworkId(_chainId: number) {
 		if ($chainId !== _chainId) throw Error('aborting because network was changed');
