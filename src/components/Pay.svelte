@@ -8,7 +8,6 @@
 	import { getCurrencyConverter, getWeiConverter } from '$data/currency';
 	import { tokenSymbolText } from '$utils/tokenSymbolText';
 	import type { WeightFunction } from '$utils/math';
-	import { parseEther } from 'ethers/lib/utils';
 
 	export let disabled = false;
 	export let onClick: (weiAmount: BigNumber) => void;
