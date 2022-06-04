@@ -49,6 +49,17 @@ const config = {
 					$stores: path.resolve('./src/stores'),
 					$tiles: path.resolve('./src/tiles'),
 				}
+			},
+			build: {
+				rollupOptions: {
+					plugins: [nodePolyfills({ 
+						crypto: true,
+						http: true
+					})]
+				},
+				commonjsOptions: {
+					transformMixedEsModules: true
+				}
 			}
 		}
 	}
