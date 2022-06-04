@@ -52,7 +52,8 @@
 		try {
 			loading = true;
 			let networkId = Number($readNetwork.id);
-			$project.projectId = BigNumber.from(98);
+			$project.projectId = BigNumber.from($chainId === 4 ? 98 : 1);
+
 			const metadataCID = await readContract(V2ContractName.JBProjects, 'metadataContentOf', [
 				$project.projectId,
 				JUICEBOX_MONEY_METADATA_DOMAIN

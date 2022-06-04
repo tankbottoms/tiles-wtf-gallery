@@ -1,5 +1,5 @@
 import type { V2ContractName } from '$jbx/models/v2/contracts';
-import { readNetwork } from '$stores/web3';
+import { chainId, readNetwork } from '$stores/web3';
 import { provider } from '$stores/web3';
 import { ethers, type ContractTransaction } from 'ethers';
 
