@@ -31,13 +31,17 @@
 			showInvalidAddress = false;
 		}
 	}
+	/*
+	TODO: firebase function to tweet the last tile which was minted
+	*/
 </script>
 
-<section>
+<section>	
 	<h1>Mint a Tile</h1>
 	<p>Enter an 0x address to find its matching Tile, or browse the randomly generated list below.</p>
 	<input placeholder={AddressZero} bind:value={input} />
 </section>
+
 <section class:grid>
 	{#if tile}
 		<div class="tileContainer" on:click={() => goto(`mint/${input}`)}>
@@ -84,15 +88,16 @@
 		-
 	</div>
 </div>
+
 <!-- TODO the social links -->
-<div class="socialIcons">
-	<a href="/#">
+<div class="socialIcons" target="_blank">
+	<a href="https://twitter.com/Tile_DAO">
 		<Icon name="twitter" />
 	</a>
-	<a href="/#">
+	<a href="https://discord.gg/U3fMydKj4J" target="_blank">
 		<Icon name="discord" />
 	</a>
-	<a href="/#">
+	<a href="https://github.com/tankbottoms/tiles-on-chain" target="_blank">
 		<Icon name="github" />
 	</a>
 </div>

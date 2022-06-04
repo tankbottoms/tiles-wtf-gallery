@@ -1,6 +1,7 @@
 <section>
     <h1>FAQ</h1>
-    <p>Coming soon.</p>
+    <b>WTF?</b>
+	<p>TBD</p>
 </section>
 
 <style>

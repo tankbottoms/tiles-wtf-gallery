@@ -12,7 +12,7 @@
 
 	async function mint() {
 		console.log('🛠  Implement mint');
-		// Todo check the balance of the wallet
+		// TODO check the balance of the wallet
 		const balance = await $provider.getBalance($connectedAccount);
 		const amount = utils.formatEther(balance);
 		if (Number(amount) < price) {
@@ -55,6 +55,7 @@
 		{/if}
 	{/if}
 </section>
+
 <button class="download" on:click={download}> Download SVG </button>
 
 <style>

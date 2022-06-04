@@ -6,7 +6,7 @@
 	let tile = '';
 	let address = '';
 	onMount(() => {
-		const randomAddresses = generateRandomAddresses(10);
+		const randomAddresses = generateRandomAddresses(25);
 		address = randomAddresses[0];
 		tile = generateTile(address);
 
@@ -28,12 +28,11 @@
 		<p id="address" />
 	</div>
 	<section>
-		<h1>Tiles</h1>
+		<h1>Tiles v1.2 (on-chain)</h1>
 		<p>Infinite artwork</p>
 		<p>Generated from any ETH address</p>
-		<p>Each is unique & subjectively rare</p>
-		<p>Value is for you to decide</p>
-		<a href="/about">About</a>
+		<p>Each is unique & subjectively rare</p>		
+		<a href="/wtf">WTF</a>
 		<a href="/dao">DAO</a>
 		<a href="/faq">FAQ</a>
 		<div class="group">

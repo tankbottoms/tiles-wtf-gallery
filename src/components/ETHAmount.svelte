@@ -8,7 +8,6 @@
 	import Ethereum from '$components/Ethereum.svelte';
 
 	// import CurrencySymbol from '../CurrencySymbol'
-
 	// import ETHToUSD from './ETHToUSD'
 
 	export let amount;
