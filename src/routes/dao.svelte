@@ -6,6 +6,9 @@
 </script>
 
 <script lang="ts">
+	import type { V2CurrencyOption } from '$jbx/models/v2/currencyOption';
+	import type { V2ProjectContextType } from '$jbx/create/stores';
+
 	import { BigNumber } from 'ethers';
 	import { modal } from '$stores';
 	import { onMount, setContext } from 'svelte';
@@ -18,7 +21,6 @@
 	import Store from '$jbx/utils/Store';
 
 	import { page } from '$app/stores';
-	import type { V2ProjectContextType } from '$jbx/create/stores';
 	import { contracts, readContract, readContractByAddress } from '$jbx/utils/web3/contractReader';
 	import { V2ContractName } from '$jbx/models/v2/contracts';
 	import { ETH_PAYOUT_SPLIT_GROUP } from '$jbx/constants/v2/splits';
@@ -31,7 +33,6 @@
 	import { Currency } from '$jbx/constants';
 	import { getCurrencyConverter } from '$jbx/data/currency';
 	import { V2CurrencyName, V2_CURRENCY_ETH, V2_CURRENCY_USD } from '$jbx/utils/v2/currency';
-	import type { V2CurrencyOption } from '$jbx/models/v2/currencyOption';
 	import ERC20ContractAbi from '$jbx/constants/ERC20ContractAbi';
 	import { chainId, readNetwork } from '$stores/web3';
 
@@ -41,6 +42,8 @@
 
 	let loading = true;
 	let issue: string | false = false;
+	let cached = false;
+	let cachedRender = true;
 
 	const isNewDeploy = browser ? $page.url.searchParams.get('newDeploy') : false;
 
@@ -48,17 +51,19 @@
 		if ($chainId !== _chainId) throw Error('aborting because network was changed');
 	}
 
-	async function fetchProject() {
+	async function fetchProject(cached = false, showLoadingUI = true) {
 		if (!browser) return;
 		try {
-			loading = true;
+			if (showLoadingUI) loading = true;
 			let networkId = Number($readNetwork.id);
 			$project.projectId = BigNumber.from($chainId === 4 ? 98 : 1);
 
-			const metadataCID = await readContract(V2ContractName.JBProjects, 'metadataContentOf', [
-				$project.projectId,
-				JUICEBOX_MONEY_METADATA_DOMAIN
-			]);
+			const metadataCID = await readContract(
+				V2ContractName.JBProjects,
+				'metadataContentOf',
+				[$project.projectId, JUICEBOX_MONEY_METADATA_DOMAIN],
+				cached
+			);
 
 			checkNetworkId(networkId);
 			const metadata = await getProjectMetadata(metadataCID);
@@ -66,24 +71,28 @@
 
 			/****/
 			checkNetworkId(networkId);
-			[$project.fundingCycle, $project.fundingCycleMetadata] = await readContract(
+			const { fundingCycle, metadata: fundingCycleMetadata } = await readContract(
 				V2ContractName.JBController,
 				'currentFundingCycleOf',
-				[$project.projectId]
+				[$project.projectId],
+				cached
 			);
+			$project.fundingCycle = fundingCycle;
+			$project.fundingCycleMetadata = fundingCycleMetadata;
 
 			/****/
 			checkNetworkId(networkId);
 			const splitResult = await readContract(
 				V2ContractName.JBSplitsStore,
 				'splitsOf',
-				$project.projectId && $project?.fundingCycle?.configuration?.toString()
+				$project.projectId && $project?.fundingCycle?.[1]?.toString()
 					? [
 							$project.projectId.toHexString(),
 							$project?.fundingCycle?.configuration?.toString(),
 							ETH_PAYOUT_SPLIT_GROUP
 					  ]
-					: null
+					: [],
+				cached
 			);
 
 			checkNetworkId(networkId);
@@ -105,7 +114,8 @@
 					$project.tokenAddress = await readContract(
 						V2ContractName.JBTokenStore,
 						'tokenOf',
-						$project.projectId ? [$project.projectId.toHexString()] : []
+						$project.projectId ? [$project.projectId.toHexString()] : [],
+						cached
 					);
 
 					checkNetworkId(networkId);
@@ -132,34 +142,9 @@
 								$project.projectId.toHexString(),
 								$project.tokenAddress || '0x0000000000000000000000000000000000000000'
 						  ]
-						: []
+						: [],
+					cached
 				)) || [];
-
-			/****/
-			checkNetworkId(networkId);
-			const value = await readContract(
-				V2ContractName.JBSplitsStore,
-				'splitsOf',
-				$project.projectId && $project.fundingCycle?.configuration?.toString()
-					? [
-							$project.projectId.toHexString(),
-							$project.fundingCycle?.configuration?.toString(),
-							ETH_PAYOUT_SPLIT_GROUP
-					  ]
-					: null
-			);
-
-			checkNetworkId(networkId);
-			$project.payoutSplits = value.map((split) => {
-				return {
-					percent: split.percent.toNumber(),
-					lockedUntil: split.lockedUntil.toNumber(),
-					projectId: split.projectId.toHexString(),
-					beneficiary: split.beneficiary,
-					allocator: split.allocator,
-					preferClaimed: split.preferClaimed
-				};
-			});
 
 			/****/
 			checkNetworkId(networkId);
@@ -168,10 +153,11 @@
 				'distributionLimitOf',
 				[
 					$project.projectId,
-					$project.fundingCycle?.configuration?.toString(),
+					$project.fundingCycle?.[0]?.toString(),
 					$project.primaryTerminal,
 					ETH_TOKEN_ADDRESS
-				]
+				],
+				cached
 			);
 
 			/****/
@@ -179,9 +165,10 @@
 			$project.usedDistributionLimit = await readContract(
 				V2ContractName.JBSingleTokenPaymentTerminalStore,
 				'usedDistributionLimitOf',
-				$project.primaryTerminal && $project.projectId && $project.fundingCycle?.number
-					? [$project.primaryTerminal, $project.projectId, $project.fundingCycle?.number]
-					: null
+				$project.primaryTerminal && $project.projectId && $project.fundingCycle?.[0]
+					? [$project.primaryTerminal, $project.projectId, $project.fundingCycle?.[0]]
+					: null,
+				cached
 			);
 
 			/****/
@@ -189,9 +176,10 @@
 			$project.reservedTokenBalance = await readContract(
 				V2ContractName.JBController,
 				'reservedTokenBalanceOf',
-				$project.projectId && $project.fundingCycleMetadata.reservedRate
-					? [$project.projectId, $project.fundingCycleMetadata.reservedRate]
-					: []
+				$project.projectId && $project.fundingCycleMetadata?.[1]
+					? [$project.projectId, $project.fundingCycleMetadata?.[1]]
+					: [],
+				cached
 			);
 
 			/****/
@@ -199,7 +187,8 @@
 			const owner = await readContract(
 				V2ContractName.JBProjects,
 				'ownerOf',
-				$project.projectId ? [BigNumber.from($project.projectId).toHexString()] : null
+				$project.projectId ? [BigNumber.from($project.projectId).toHexString()] : null,
+				cached
 			);
 
 			$project.projectOwnerAddress = owner;
@@ -210,7 +199,8 @@
 				'balanceOf',
 				$project.primaryTerminal && $project.projectId
 					? [$project.primaryTerminal, $project.projectId]
-					: null
+					: null,
+				cached
 			);
 			checkNetworkId(networkId);
 			// if ETH, no conversion necessary
@@ -242,10 +232,16 @@
 		}
 	}
 
-	onMount(fetchProject);
-
-	$: if ($readNetwork) {
-		fetchProject();
+	let count = 0;
+	if (browser) {
+		readNetwork.subscribe((network) => {
+			const wasCached = cachedRender;
+			fetchProject(cachedRender).then(() => {
+				wasCached && count === 0 && setTimeout(fetchProject, 2000, false, false);
+				count++;
+			});
+			cachedRender = false;
+		});
 	}
 </script>
 

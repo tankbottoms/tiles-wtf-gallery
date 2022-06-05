@@ -27,6 +27,7 @@ import RinkebyJBETHERC20ProjectPayerDeployer from '../../deployments/rinkeby/JBE
 import RinkebyJBPrices from '../../deployments/rinkeby/JBPrices';
 import RinkebyJBTokenStore from '../../deployments/rinkeby/JBTokenStore';
 import { get } from 'svelte/store';
+import { parseCachedData, parseContractResponse } from '../cached';
 
 export const contracts = {
 	mainnet: {
@@ -72,14 +73,46 @@ export async function readContractByAddress(
 	return await contract[functionName](...args);
 }
 
-export async function readContract(contractName: V2ContractName, functionName: string, args = []) {
+export async function readContract(
+	contractName: V2ContractName,
+	functionName: string,
+	args = [],
+	cached = false
+) {
 	console.log(contractName, functionName, args);
+
+	const cache = await caches.open('READ_CONTRACT_CACHE');
+
+	const contractAddress = contracts[get(readNetwork).alias][contractName].address;
+	const abi = contracts[get(readNetwork).alias][contractName].abi;
+	const id = btoa(
+		JSON.stringify({
+			chainId: readNetwork.get().id,
+			contractAddress,
+			functionName,
+			args
+		})
+	);
+	if (cached) {
+		const response = await cache.match(id);
+		if (response) {
+			const result = await response.text();
+			const data = parseCachedData(JSON.parse(result));
+			if (typeof data !== 'undefined' && data !== null) {
+				return data;
+			}
+		} else console.log('cache miss');
+	}
+
 	const contract = new ethers.Contract(
-		contracts[get(readNetwork).alias][contractName].address,
-		contracts[get(readNetwork).alias][contractName].abi,
+		contractAddress,
+		abi,
 		new ethers.providers.JsonRpcProvider(get(readNetwork).rpcUrl)
 	);
-	return await contract[functionName](...args);
+
+	const response = parseContractResponse(await contract[functionName](...args));
+	await cache.put(id, new Response(JSON.stringify(response)));
+	return response;
 }
 
 export async function writeContract(
