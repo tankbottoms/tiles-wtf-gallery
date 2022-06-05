@@ -49,6 +49,7 @@
 	}
 
 	async function fetchProject() {
+		if (!browser) return;
 		try {
 			loading = true;
 			let networkId = Number($readNetwork.id);
@@ -99,20 +100,6 @@
 
 			/****/
 			checkNetworkId(networkId);
-			$project.primaryTerminal =
-				(await readContract(
-					V2ContractName.JBDirectory,
-					'primaryTerminalOf',
-					$project.projectId
-						? [
-								$project.projectId.toHexString(),
-								$project.tokenAddress || '0x0000000000000000000000000000000000000000'
-						  ]
-						: []
-				)) || [];
-
-			/****/
-			checkNetworkId(networkId);
 			try {
 				if (!BigNumber.from($project.tokenAddress || 0).eq(0)) {
 					$project.tokenAddress = await readContract(
@@ -133,6 +120,20 @@
 					throw error;
 				}
 			}
+
+			/****/
+			checkNetworkId(networkId);
+			$project.primaryTerminal =
+				(await readContract(
+					V2ContractName.JBDirectory,
+					'primaryTerminalOf',
+					$project.projectId
+						? [
+								$project.projectId.toHexString(),
+								$project.tokenAddress || '0x0000000000000000000000000000000000000000'
+						  ]
+						: []
+				)) || [];
 
 			/****/
 			checkNetworkId(networkId);
