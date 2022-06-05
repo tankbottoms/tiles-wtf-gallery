@@ -34,7 +34,7 @@
 	import { getCurrencyConverter } from '$jbx/data/currency';
 	import { V2CurrencyName, V2_CURRENCY_ETH, V2_CURRENCY_USD } from '$jbx/utils/v2/currency';
 	import ERC20ContractAbi from '$jbx/constants/ERC20ContractAbi';
-	import { chainId, readNetwork } from '$stores/web3';
+	import { chainId, provider, readNetwork } from '$stores/web3';
 
 	let project = new Store<V2ProjectContextType>({} as any);
 
@@ -56,7 +56,7 @@
 		try {
 			if (showLoadingUI) loading = true;
 			let networkId = Number($readNetwork.id);
-			$project.projectId = BigNumber.from($chainId === 4 ? 98 : 1);
+			$project.projectId = BigNumber.from($chainId === 4 ? 98 : 41);
 
 			const metadataCID = await readContract(
 				V2ContractName.JBProjects,
@@ -234,13 +234,18 @@
 
 	let count = 0;
 	if (browser) {
-		readNetwork.subscribe((network) => {
-			const wasCached = cachedRender;
-			fetchProject(cachedRender).then(() => {
-				wasCached && count === 0 && setTimeout(fetchProject, 2000, false, false);
-				count++;
+		let firstTime = true;
+		provider.subscribe(($provider) => {
+			if (!$provider || !firstTime) return;
+			firstTime = false;
+			readNetwork.subscribe((network) => {
+				const wasCached = cachedRender;
+				fetchProject(cachedRender).then(() => {
+					wasCached && count === 0 && setTimeout(fetchProject, 2000, false, false);
+					count++;
+				});
+				cachedRender = false;
 			});
-			cachedRender = false;
 		});
 	}
 </script>
@@ -258,7 +263,7 @@
 			<Issue center>
 				{issue}
 			</Issue>
-		{:else if loading}
+		{:else if loading || !$provider}
 			<Loading height={500} />
 		{:else}
 			<div>

@@ -12,13 +12,12 @@ import {
 	getNetworkAliasByChainId,
 	setNetworkAliasInQueryParams
 } from '$jbx/utils/web3/networkName';
-import { derived } from 'svelte/store';
 
 export const ethPrice = new Store(0);
 export const daiPrice = new Store(0);
 export const provider = new Store<providers.Web3Provider>();
 export const connectedAccount = new Store('');
-export const chainId = new Store<number>(4);
+export const chainId = new Store<number>(1);
 export const web3Onboard = new Store<OnboardAPI>();
 
 let unsub;
