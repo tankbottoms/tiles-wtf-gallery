@@ -81,7 +81,7 @@ export async function readContract(
 ) {
 	console.log(contractName, functionName, args);
 
-	const cache = await caches.open('READ_CONTRACT_CACHE');
+	const cache = await caches.open('CONTRACT_RESPONSE');
 
 	const contractAddress = contracts[get(readNetwork).alias][contractName].address;
 	const abi = contracts[get(readNetwork).alias][contractName].abi;
