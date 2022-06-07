@@ -62,7 +62,8 @@
 		<InfoSpaceBetween>
 			<h4 slot="left">Activity</h4>
 			<div slot="right">
-				<p><Icon name="download" /></p>
+				<!-- TODO come back and implement download -->
+				<!-- <p><Icon name="download" /></p> -->
 				<Dropdown {options} bind:value={current} size="sm" />
 			</div>
 		</InfoSpaceBetween>

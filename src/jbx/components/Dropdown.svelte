@@ -47,7 +47,7 @@
 	.custom-select {
 		width: 100%;
 		position: relative;
-		border: 1px solid var(--stroke-primary);
+		border: 1px solid var(--stroke-tertiary);
 		border-radius: 2px;
 	}
 
@@ -79,15 +79,13 @@
 	}
 
 	.select-selected {
-		color: var(--text-primary);
-		font-weight: 300 !important;
-		border: 1px solid transparent;
-		border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
+		color: var(--text-secondary);
+		font-weight: 400 !important;
 		cursor: pointer;
 	}
 
 	.select-selected.sm {
-		padding: 1px 12px;
+		padding: 3px 12px;
 	}
 
 	.select-selected.md {
