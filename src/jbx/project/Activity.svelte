@@ -113,16 +113,6 @@
 		align-items: end;
 	}
 
-	div[slot='right'] p {
-		margin: 0;
-		margin-right: 10px;
-		transform: scale(1.2);
-	}
-
-	div[slot='right'] p:hover {
-		cursor: pointer;
-	}
-
 	.loading {
 		color: var(--text-header);
 		margin-top: 50px;

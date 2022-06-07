@@ -5,6 +5,7 @@
 	import { getTruncatedAddress } from '$jbx/components/Address.svelte';
 	import EtherscanLink from '$jbx/components/EtherscanLink.svelte';
 	import type { PayEvent } from '$jbx/models/subgraph-entities/vX/pay-event';
+	import RichNote from '../RichNote.svelte';
 
 	export let event: Partial<PayEvent>;
 </script>
@@ -27,3 +28,5 @@
 		{/if}
 	</div>
 </InfoSpaceBetween>
+<div style="margin-top: 10px" />
+<RichNote note={event.note} style={{ marginTop: '10px' }} />
