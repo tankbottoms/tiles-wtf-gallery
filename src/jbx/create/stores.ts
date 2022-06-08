@@ -45,6 +45,9 @@ export type V2ProjectContextType = {
 	balanceInDistributionLimitCurrency: BigNumber | undefined;
 	usedDistributionLimit: BigNumber | undefined; // how much has been distributed
 
+	createdAt: number | undefined;
+	totalVolume: BigNumber | undefined;
+
 	fundingCycleMetadata: V2FundingCycleMetadata | undefined;
 	fundingCycle: V2FundingCycle | undefined;
 	ballotState: V2BallotState | undefined;
