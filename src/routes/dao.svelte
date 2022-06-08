@@ -25,7 +25,7 @@
 	import { V2ContractName } from '$jbx/models/v2/contracts';
 	import { ETH_PAYOUT_SPLIT_GROUP } from '$jbx/constants/v2/splits';
 	import { ETH_TOKEN_ADDRESS } from '$jbx/constants/v2/juiceboxTokens';
-	import { getProjectMetadata } from '$jbx/data/project';
+	import { getProjects, getProjectMetadata } from '$jbx/data/project';
 	import Activity from '$jbx/project/Activity.svelte';
 	import NextSteps from '$jbx/project/NextSteps.svelte';
 	import { JUICEBOX_MONEY_METADATA_DOMAIN } from '$jbx/constants/v2/metadataDomain';
@@ -53,10 +53,25 @@
 
 	async function fetchProject(cached = false, showLoadingUI = true) {
 		if (!browser) return;
+
+		const projectId = BigNumber.from($chainId === 4 ? 98 : 41);
+
+		try {
+			const data = await getProjects({
+				projectId,
+				keys: ['createdAt', 'totalPaid']
+			});
+			$project.totalVolume = data[0].totalPaid;
+			$project.createdAt = data[0].createdAt;
+		} catch (e) {
+			console.error('error fetching project total paid');
+			console.error(e);
+		}
+
 		try {
 			if (showLoadingUI) loading = true;
 			let networkId = Number($readNetwork.id);
-			$project.projectId = BigNumber.from($chainId === 4 ? 98 : 41);
+			$project.projectId = projectId;
 
 			const metadataCID = await readContract(
 				V2ContractName.JBProjects,
