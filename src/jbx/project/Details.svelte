@@ -23,7 +23,7 @@
 	import UpcomingFundingCycle from './UpcomingFundingCycle.svelte';
 	import FundingCycleHistory from './FundingCycleHistory.svelte';
 	import ManageToken from './ManageToken.svelte';
-	import Graph from './Graph.svelte';
+	import Graph from './Graph';
 
 	let clientWidth = 500;
 
@@ -92,7 +92,11 @@
 </script>
 
 <section bind:clientWidth>
-	<Graph width={clientWidth} />
+	<Graph
+		width={clientWidth}
+		projectId={$projectContext.projectId}
+		createdAt={$projectContext.createdAt}
+	/>
 	{#if hasIssuedERC20}
 		<div class="rewards">
 			<h4>

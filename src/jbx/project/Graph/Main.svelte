@@ -1,10 +1,54 @@
 <script lang="ts">
-	import Chart from './Chart.svelte';
+	import { onMount } from 'svelte';
 	import Dropdown from '$jbx/components/Dropdown.svelte';
+	import Chart from './Chart.svelte';
+	import { loadBlockRefs } from './loadBlockRefs';
+	import { daysToMillis } from './utils';
+	import type { Duration } from './types';
 
 	export let width: number;
+	export let createdAt: number | undefined;
+	export let projectId: number | undefined;
 
+	let events = [];
 	let tab = 0;
+	let duration: Duration;
+
+	console.log(createdAt)
+
+	// @ts-ignore
+	const now = new Date() - 5 * 60 * 1000;
+
+	const epochToEpochMs = (epoch: number) => epoch * 1000;
+
+	export const getDuration = ({
+		createdAt,
+		now
+	}: {
+		createdAt: number | undefined;
+		now: number;
+	}): Duration => {
+		let duration: Duration;
+		if (!createdAt) return;
+		const createdAtMs = epochToEpochMs(createdAt);
+		if (createdAtMs > now - daysToMillis(1)) {
+			duration = 1;
+		} else if (createdAtMs > now - daysToMillis(7)) {
+			duration = 7;
+		} else {
+			duration = 30;
+		}
+
+		return duration;
+	};
+
+	onMount(() => {
+		duration = getDuration({ createdAt, now });
+
+		loadBlockRefs({ duration, now }).then((blockRefs) => {
+			console.log(blockRefs);
+		});
+	});
 </script>
 
 <header>
