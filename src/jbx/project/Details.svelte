@@ -11,6 +11,7 @@
 	import FundingCycleDetails from '$jbx/components/FundingCycleDetails.svelte';
 	import type { V2ProjectContextType } from '$jbx/models/project-type';
 	import Button from '$jbx/components/Button.svelte';
+	import Dropdown from '$jbx/components/Dropdown.svelte';
 	import Trans from '$jbx/components/Trans.svelte';
 	import PopInfo from '$jbx/components/PopInfo.svelte';
 	import { formatPercent, formatWad } from '$jbx/utils/formatNumber';
@@ -93,6 +94,76 @@
 </script>
 
 <section bind:clientWidth>
+	<div class="graph">
+		<header>
+			<div class="tabs">
+				<div on:click={() => (tab = 0)}>
+					<div class="tab" class:active={tab === 0}>Volume</div>
+				</div>
+				<div on:click={() => (tab = 1)}>
+					<div class="tab" class:active={tab === 1}>In Juicebox</div>
+				</div>
+			</div>
+			<div class="dropdown">
+				<Dropdown
+					size="xs"
+					options={[
+						{
+							label: '24 HOURS',
+							value: '24H'
+						},
+						{
+							label: '7 DAYS',
+							value: '7D'
+						},
+						{
+							label: '30 DAYS',
+							value: '30D'
+						},
+						{
+							label: '90 DAYS',
+							value: '90D'
+						},
+						{
+							label: '1 YEAR',
+							value: '1Y'
+						}
+					]}
+					value="30D"
+				/>
+			</div>
+		</header>
+
+		<div>
+			{#if tab === 0}
+				<Chart
+					width={clientWidth}
+					data={Array(100)
+						.fill(0)
+						.map((_, i) => {
+							const date = new Date(i * 86400000);
+							return [
+								`${date.getMonth() + 1}/${date.getDate()}`,
+								Math.random() * i * 0.2 + i * 0.8
+							];
+						})}
+				/>
+			{:else if tab === 1}
+				<Chart
+					width={clientWidth}
+					data={Array(100)
+						.fill(0)
+						.map((_, i) => {
+							const date = new Date(i * 86400000);
+							return [
+								`${date.getMonth() + 1}/${date.getDate()}`,
+								Math.random() * i * 0.2 + i * 0.8
+							];
+						})}
+				/>
+			{/if}
+		</div>
+	</div>
 	{#if hasIssuedERC20}
 		<div class="rewards">
 			<h4>
@@ -186,68 +257,6 @@
 </section>
 
 <!-- NOTE: keeping this to add back the Chart at later date -->
-
-<!-- <div style="margin-bottom: 40px;">
-		<div>
-			<div style="display: flex; justify-content: space-between; align-items: baseline;">
-				<div>
-					<div class="ant-space ant-space-horizontal ant-space-align-center" style="gap: 24px;">
-						<div class="ant-space-item" on:click={() => (tab = 0)}>
-							<div
-								style="text-transform: uppercase; font-size: 0.8rem; font-weight: {tab === 0
-									? 600
-									: 400}; color: rgba(0, 0, 0, {tab === 0 ? 0.6 : 0.333}); cursor: pointer;"
-							>
-								Volume
-							</div>
-						</div>
-						<div class="ant-space-item" on:click={() => (tab = 1)}>
-							<div
-								style="text-transform: uppercase; font-size: 0.8rem; font-weight: {tab === 1
-									? 600
-									: 400}; color: rgba(0, 0, 0, {tab === 1 ? 0.6 : 0.333}); cursor: pointer;"
-							>
-								In Juicebox
-							</div>
-						</div>
-					</div>
-				</div>
-				<DropDown
-					options={['24 HOURS', '7 DAYS', '30 DAYS', '90 DAYS', '1 YEAR']}
-					selected="30 DAYS"
-				/>
-			</div>
-			<div style="position: relative;">
-				{#if tab === 0}
-					<Chart
-						width={clientWidth}
-						data={Array(100)
-							.fill(0)
-							.map((_, i) => {
-								const date = new Date(i * 86400000);
-								return [
-									`${date.getMonth() + 1}/${date.getDate()}`,
-									Math.random() * i * 0.2 + i * 0.8
-								];
-							})}
-					/>
-				{:else if tab === 1}
-					<Chart
-						width={clientWidth}
-						data={Array(100)
-							.fill(0)
-							.map((_, i) => {
-								const date = new Date(i * 86400000);
-								return [
-									`${date.getMonth() + 1}/${date.getDate()}`,
-									Math.random() * i * 0.2 + i * 0.8
-								];
-							})}
-					/>
-				{/if}
-			</div>
-		</div>
-	</div> -->
 <style>
 	section {
 		padding: 10px 20px 0px;
@@ -288,6 +297,32 @@
 
 	small {
 		color: var(--text-tertiary);
+	}
+
+	.graph header {
+		display: flex;
+		justify-content: space-between;
+	}
+
+	.graph .tabs {
+		display: flex;
+		gap: 24px;
+	}
+	.graph .tab {
+		font-weight: 400;
+		text-transform: uppercase;
+		font-size: 0.8rem;
+		color: var(--text-tertiary);
+		cursor: pointer;
+	}
+
+	.graph .tab.active {
+		font-weight: 700;
+		color: var(--text-secondary);
+	}
+
+	.graph .dropdown {
+		width: 100px;
 	}
 
 	.address-balance {
