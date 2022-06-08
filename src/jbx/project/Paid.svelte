@@ -135,13 +135,15 @@
 						</span>
 					{/if}
 				{:else if distributionLimitType === DistributionLimitType.None}
-					<Popover
-						slot="right"
-						message="The target for this funding cycle is 0, meaning all funds in Juicebox are currently
-		considered overflow. Overflow can be redeemed by token holders, but not distributed."
-					>
+					<div class="amount-sub">
 						<Trans>100% overflow</Trans>
-					</Popover>
+						<Popover
+							slot="right"
+							message="The distribution limit for this funding cycle is 0, meaning all funds in Juicebox are currently considered overflow. Overflow can be redeemed by token holders, but not distributed."
+						>
+							<Icon name="questionCircle" />
+						</Popover>
+					</div>
 				{:else}
 					<ETHAmount amount={$projectsContext.usedDistributionLimit} />/ NO LIMIT
 				{/if}
@@ -228,6 +230,7 @@
 
 	.amount-sub {
 		font-size: 0.75rem;
+		font-weight: 500;
 		color: var(--text-tertiary);
 	}
 
