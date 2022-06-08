@@ -24,6 +24,7 @@
 		position: absolute;
 		transform: translate(0, 10px);
 		padding: 12px 16px;
+		text-transform: none;
 
 		background: var(--background-l0);
 		box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
