@@ -1,6 +1,5 @@
 <script lang="ts">
-	import Chart from './Chart.svelte';
-	import { getContext, onMount } from 'svelte';
+	import { getContext } from 'svelte';
 	import * as constants from '@ethersproject/constants';
 	import type Store from '$jbx/utils/Store';
 	import { connectedAccount } from '$stores/web3';
@@ -11,7 +10,6 @@
 	import FundingCycleDetails from '$jbx/components/FundingCycleDetails.svelte';
 	import type { V2ProjectContextType } from '$jbx/models/project-type';
 	import Button from '$jbx/components/Button.svelte';
-	import Dropdown from '$jbx/components/Dropdown.svelte';
 	import Trans from '$jbx/components/Trans.svelte';
 	import PopInfo from '$jbx/components/PopInfo.svelte';
 	import { formatPercent, formatWad } from '$jbx/utils/formatNumber';
@@ -25,9 +23,9 @@
 	import UpcomingFundingCycle from './UpcomingFundingCycle.svelte';
 	import FundingCycleHistory from './FundingCycleHistory.svelte';
 	import ManageToken from './ManageToken.svelte';
+	import Graph from './Graph.svelte';
 
 	let clientWidth = 500;
-	let tab = 0;
 
 	const projectContext = getContext('PROJECT') as Store<V2ProjectContextType>;
 	const tokenSymbol = $projectContext.tokenSymbol;
@@ -94,76 +92,7 @@
 </script>
 
 <section bind:clientWidth>
-	<div class="graph">
-		<header>
-			<div class="tabs">
-				<div on:click={() => (tab = 0)}>
-					<div class="tab" class:active={tab === 0}>Volume</div>
-				</div>
-				<div on:click={() => (tab = 1)}>
-					<div class="tab" class:active={tab === 1}>In Juicebox</div>
-				</div>
-			</div>
-			<div class="dropdown">
-				<Dropdown
-					size="xs"
-					options={[
-						{
-							label: '24 HOURS',
-							value: '24H'
-						},
-						{
-							label: '7 DAYS',
-							value: '7D'
-						},
-						{
-							label: '30 DAYS',
-							value: '30D'
-						},
-						{
-							label: '90 DAYS',
-							value: '90D'
-						},
-						{
-							label: '1 YEAR',
-							value: '1Y'
-						}
-					]}
-					value="30D"
-				/>
-			</div>
-		</header>
-
-		<div>
-			{#if tab === 0}
-				<Chart
-					width={clientWidth}
-					data={Array(100)
-						.fill(0)
-						.map((_, i) => {
-							const date = new Date(i * 86400000);
-							return [
-								`${date.getMonth() + 1}/${date.getDate()}`,
-								Math.random() * i * 0.2 + i * 0.8
-							];
-						})}
-				/>
-			{:else if tab === 1}
-				<Chart
-					width={clientWidth}
-					data={Array(100)
-						.fill(0)
-						.map((_, i) => {
-							const date = new Date(i * 86400000);
-							return [
-								`${date.getMonth() + 1}/${date.getDate()}`,
-								Math.random() * i * 0.2 + i * 0.8
-							];
-						})}
-				/>
-			{/if}
-		</div>
-	</div>
+	<Graph width={clientWidth} />
 	{#if hasIssuedERC20}
 		<div class="rewards">
 			<h4>
@@ -297,32 +226,6 @@
 
 	small {
 		color: var(--text-tertiary);
-	}
-
-	.graph header {
-		display: flex;
-		justify-content: space-between;
-	}
-
-	.graph .tabs {
-		display: flex;
-		gap: 24px;
-	}
-	.graph .tab {
-		font-weight: 400;
-		text-transform: uppercase;
-		font-size: 0.8rem;
-		color: var(--text-tertiary);
-		cursor: pointer;
-	}
-
-	.graph .tab.active {
-		font-weight: 700;
-		color: var(--text-secondary);
-	}
-
-	.graph .dropdown {
-		width: 100px;
 	}
 
 	.address-balance {
