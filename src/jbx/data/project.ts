@@ -13,10 +13,7 @@ import {
 import type { ProjectState } from '$jbx/models/project-visibility';
 import type { Project, TrendingProject } from '$jbx/models/subgraph-entities/vX/project';
 
-// TODO don't hardcode this here, use the utils/ipfs after issue with @pinata/sdk has been solved
-import { IPFS_GATEWAY_HOSTNAME } from '$jbx/constants/ipfs';
 import { ipfsCidToFirebaseUrl } from '$jbx/utils/ipfs';
-const ipfsCidUrl = (hash: string) => `https://${IPFS_GATEWAY_HOSTNAME}/ipfs/${hash}`;
 
 type ProjectStat = Record<
 	string,
@@ -64,8 +61,8 @@ const queryOpts = (
 
 	if (opts.projectId) {
 		where.push({
-			key: 'id' as const,
-			value: opts.projectId.toString()
+			key: 'projectId' as const,
+			value: opts.projectId.toNumber()
 		});
 	}
 
