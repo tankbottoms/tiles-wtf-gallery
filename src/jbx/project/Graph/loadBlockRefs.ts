@@ -1,14 +1,12 @@
 // TODO seems unnecessary to install moment.js just for this script
 // https://github.com/monosux/ethereum-block-by-date/blob/master/src/ethereum-block-by-date.js
 // attempted to do so in jbx/utils/etherumBlockByDate.ts but brainfog
-// import EthDater from 'ethereum-block-by-date'
-import { EthereumBlockByDate } from '$jbx/utils/ethereumBlockByDate'
-
-import { formatISO, getUnixTime } from 'date-fns'
+import { formatISO } from 'date-fns'
 
 import { readProvider } from '$jbx/constants/readProvider'
 import type { BlockRef, Duration } from './types'
 import { daysToMillis } from './utils'
+import { EthereumBlockByDate } from '$jbx/utils/ethereumBlockByDate';
 
 export const loadBlockRefs = async ({
   duration,
@@ -54,7 +52,6 @@ export const loadBlockRefs = async ({
       })
 
       return newBlockRefs
-      // setBlockRefs(newBlockRefs)
     })
   return blockRefs
 }
