@@ -1,6 +1,7 @@
 import type { Project } from '$jbx/models/subgraph-entities/vX/project';
 import { fromWad } from '$jbx/utils/formatNumber';
 import { type WhereConfig, querySubgraph } from '$jbx/utils/graph';
+import type { BigNumber } from 'ethers';
 
 import type { BlockRef, EventRef, ShowGraph } from './types';
 
@@ -12,7 +13,7 @@ export const loadProjectEvents = async ({
 }: {
 	blockRefs: BlockRef[];
 	showGraph: ShowGraph;
-	projectId: number;
+	projectId: BigNumber;
 	cv: string;
 }) => {
 	const newEvents: EventRef[] = [];
@@ -35,7 +36,7 @@ export const loadProjectEvents = async ({
 	blockRefs.forEach(blockRef => {
 		const whereOpts: WhereConfig<'project'>[] = [];
 		if (projectId) {
-			whereOpts.push({ key: 'projectId', value: projectId });
+			whereOpts.push({ key: 'projectId', value: projectId.toNumber() });
 		}
 		if (cv) {
 			whereOpts.push({ key: 'cv', value: cv });

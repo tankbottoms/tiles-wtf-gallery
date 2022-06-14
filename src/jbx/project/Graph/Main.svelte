@@ -1,20 +1,23 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
+	import type { BigNumber } from 'ethers';
 	import Dropdown from '$jbx/components/Dropdown.svelte';
 	import Chart from './Chart.svelte';
-	import { loadBlockRefs } from './loadBlockRefs';
 	import { daysToMillis } from './utils';
-	import type { Duration } from './types';
+	import { loadBlockRefs } from './loadBlockRefs';
+	import { loadProjectEvents } from './loadProjectEvents';
+	import type { Duration, ShowGraph } from './types';
 
 	export let width: number;
 	export let createdAt: number | undefined;
-	export let projectId: number | undefined;
+	export let projectId: BigNumber | undefined;
 
-	let events = [];
-	let tab = 0;
+	console.log(projectId)
+
 	let duration: Duration;
-
-	console.log(createdAt)
+	let events = [];
+	let showGraph: ShowGraph = 'volume';
+	let tab = 0;
 
 	// @ts-ignore
 	const now = new Date() - 5 * 60 * 1000;
@@ -45,8 +48,23 @@
 	onMount(() => {
 		duration = getDuration({ createdAt, now });
 
-		loadBlockRefs({ duration, now }).then((blockRefs) => {
-			console.log(blockRefs);
+		console.log(duration)
+
+		loadBlockRefs({ duration, now }).then(async (blockRefs) => {
+			// TODO load the project events
+			const projectEvents = await loadProjectEvents({
+				blockRefs,
+				showGraph,
+				projectId,
+				cv: '2',
+			})
+
+			console.log(projectEvents)
+			// load the domain (what is the domain?)
+
+			// load tapEvents if we're showing the balance chart 
+
+			// sort the events
 		});
 	});
 </script>

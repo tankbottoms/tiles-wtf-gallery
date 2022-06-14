@@ -26,9 +26,6 @@ export const loadBlockRefs = async ({
       false,
     )
     .then((res: (BlockRef & { block: number })[]) => {
-
-      console.log(res)
-
       const newBlockRefs: BlockRef[] = []
       const blocksCount = 40
 
