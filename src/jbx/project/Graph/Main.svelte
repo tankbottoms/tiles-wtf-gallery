@@ -39,8 +39,12 @@
 			duration = 1;
 		} else if (createdAtMs > now - daysToMillis(7)) {
 			duration = 7;
-		} else {
+		} else if (createdAtMs > now - daysToMillis(30)) {
 			duration = 30;
+		} else if (createdAtMs > now - daysToMillis(90)) {
+			duration = 90;
+		} else {
+			duration = 365;
 		}
 
 		return duration;
@@ -59,6 +63,7 @@
 	}
 
 	function setEvents() {
+		loading = true;
 		loadBlockRefs({ duration, now })
 			.then(async (blockRefs) => {
 				const projectEvents = await loadProjectEvents({
@@ -93,11 +98,10 @@
 	}
 
 	function switchTab(tab: ShowGraph) {
-		loading = true;
 		showGraph = tab;
 		setEvents();
 	}
-
+	
 	onMount(() => {
 		duration = getDuration({ createdAt, now });
 		setEvents();
@@ -119,26 +123,31 @@
 			options={[
 				{
 					label: '24 HOURS',
-					value: '24H'
+					value: 1
 				},
 				{
 					label: '7 DAYS',
-					value: '7D'
+					value: 7
 				},
 				{
 					label: '30 DAYS',
-					value: '30D'
+					value: 30
 				},
 				{
 					label: '90 DAYS',
-					value: '90D'
+					value: 90
 				},
 				{
 					label: '1 YEAR',
-					value: '1Y'
+					value: 1
 				}
 			]}
-			value="30D"
+			on:select={(e) => {
+				duration = e.detail.value;
+				console.log(duration)
+				setEvents();
+			}}
+			value={duration}
 		/>
 	</div>
 </header>
