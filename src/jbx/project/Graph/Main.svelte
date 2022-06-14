@@ -6,13 +6,14 @@
 	import { daysToMillis } from './utils';
 	import { loadBlockRefs } from './loadBlockRefs';
 	import { loadProjectEvents } from './loadProjectEvents';
+	import { loadTapEvents } from './loadTapEvents';
 	import type { Duration, ShowGraph } from './types';
 
 	export let width: number;
 	export let createdAt: number | undefined;
 	export let projectId: BigNumber | undefined;
 
-	console.log(projectId)
+	console.log(projectId);
 
 	let duration: Duration;
 	let events = [];
@@ -45,10 +46,20 @@
 		return duration;
 	};
 
+	function formatEvents(events: any[]): [string, number][] {
+		return events.map((event: any) => {
+			let date = epochToEpochMs(event.timestamp);
+			// TODO: what is up with these type issues?! AGH, locale returns a string?!
+			date = new Date(date).toLocaleDateString() as string;
+			// Remove the last 5 characters which correspond to year /202x
+			date = date.substring(0, date.length - 5);
+			const value = event.value;
+			return [date, value] as [string, number];
+		});
+	}
+
 	onMount(() => {
 		duration = getDuration({ createdAt, now });
-
-		console.log(duration)
 
 		loadBlockRefs({ duration, now }).then(async (blockRefs) => {
 			// TODO load the project events
@@ -56,15 +67,22 @@
 				blockRefs,
 				showGraph,
 				projectId,
-				cv: '2',
-			})
+				cv: '2'
+			});
 
-			console.log(projectEvents)
-			// load the domain (what is the domain?)
+			if (showGraph === 'balance') {
+				const tapEvents = await loadTapEvents({ projectId, duration, now });
+				projectEvents.concat(tapEvents);
+			}
 
-			// load tapEvents if we're showing the balance chart 
-
-			// sort the events
+			let sortedEvents = projectEvents.sort((a, b) => (a.timestamp < b.timestamp ? -1 : 1));
+			sortedEvents = sortedEvents.map((e, i) => {
+				if (e.tapped) {
+					return { ...e, previousBalance: sortedEvents[i - 1]?.value };
+				}
+				return e;
+			});
+			events = formatEvents(sortedEvents);
 		});
 	});
 </script>
@@ -109,26 +127,10 @@
 </header>
 
 <div>
-	{#if tab === 0}
-		<Chart
-			{width}
-			data={Array(100)
-				.fill(0)
-				.map((_, i) => {
-					const date = new Date(i * 86400000);
-					return [`${date.getMonth() + 1}/${date.getDate()}`, Math.random() * i * 0.2 + i * 0.8];
-				})}
-		/>
-	{:else if tab === 1}
-		<Chart
-			{width}
-			data={Array(100)
-				.fill(0)
-				.map((_, i) => {
-					const date = new Date(i * 86400000);
-					return [`${date.getMonth() + 1}/${date.getDate()}`, Math.random() * i * 0.2 + i * 0.8];
-				})}
-		/>
+	{#if tab === 0 && events.length > 0}
+		<Chart {width} data={events} />
+	{:else if tab === 1 && events.length > 0}
+		<Chart {width} data={events} />
 	{/if}
 </div>
 
