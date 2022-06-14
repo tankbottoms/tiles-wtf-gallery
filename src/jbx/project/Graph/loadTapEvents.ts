@@ -20,7 +20,7 @@ export const loadTapEvents = async ({
     where: projectId
       ? [
           {
-            key: 'project',
+            key: 'projectId',
             value: projectId.toNumber(),
           },
           {
