@@ -45,7 +45,8 @@
 <section class:grid>
 	{#if tile}
 		<div class="tileContainer" on:click={() => goto(`mint/${input}`)}>
-			{@html tile}
+			{@html tile}						
+		</div>
 			<span>{input}</span>
 		</div>
 	{:else if showInvalidAddress}
