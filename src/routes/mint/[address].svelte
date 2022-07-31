@@ -4,6 +4,7 @@
 	import { utils } from 'ethers';
 	import { generateTile } from '$tiles/tilesStandalone';
 	import { connectedAccount, provider } from '$stores/web3';
+	import { readContractByAddress } from '$jbx/utils/web3/contractReader';
 
 	let price = 0.04;
 	let tile: string;
@@ -11,12 +12,57 @@
 	let showInsufficientBalance = false;
 
 	async function mint() {
-		console.log('🛠  Implement mint');
-		// TODO check the balance of the wallet
+		if (!$provider) {
+			// TODO: prompt to connect
+			return;
+		}
+
 		const balance = await $provider.getBalance($connectedAccount);
 		const amount = utils.formatEther(balance);
+
 		if (Number(amount) < price) {
 			showInsufficientBalance = true;
+		} else {
+			const abi = [
+				{
+					inputs: [],
+					name: 'mint',
+					outputs: [
+						{
+							internalType: 'uint256',
+							name: 'mintedTokenId',
+							type: 'uint256'
+						}
+					],
+					stateMutability: 'payable',
+					type: 'function'
+				},
+				{
+					inputs: [
+						{
+							internalType: 'address',
+							name: 'tile',
+							type: 'address'
+						}
+					],
+					name: 'grab',
+					outputs: [
+						{
+							internalType: 'uint256',
+							name: 'mintedTokenId',
+							type: 'uint256'
+						}
+					],
+					stateMutability: 'payable',
+					type: 'function'
+				}
+			];
+
+			if ($page.params.address == $connectedAccount) {
+				readContractByAddress('0x0', abi, 'mint', [{ value: price }]);
+			} else {
+				readContractByAddress('0x0', abi, 'grab', [$page.params.address, { value: price }]);
+			}
 		}
 	}
 

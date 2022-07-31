@@ -306,7 +306,7 @@ function setDocumentElementToTile(tile: string, address: string) {
   document.getElementById("address").innerHTML = address;
 }
 
-// When the script loads, create 10 addressess and loop through them to generate tiles
+// When the script loads, create 10 addresses and loop through them to generate tiles
 // and populate the div element with them every 3 seconds
 
 const randomAddresses = generateRandomAddresses();
