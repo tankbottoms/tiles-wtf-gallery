@@ -33,7 +33,7 @@
 		<p>Generated from any ETH address</p>
 		<p>Each is unique & subjectively rare</p>		
 		<a href="/wtf">WTF</a>
-		<a href="/dao">DAO</a>
+		<!--<a href="/dao">DAO</a>-->
 		<a href="/faq">FAQ</a>
 		<div class="group">
 			<div>
