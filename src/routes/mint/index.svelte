@@ -36,7 +36,7 @@
 	*/
 </script>
 
-<section>	
+<section>
 	<h1>Mint a Tile</h1>
 	<p>Enter an 0x address to find its matching Tile, or browse the randomly generated list below.</p>
 	<input placeholder={AddressZero} bind:value={input} />
@@ -45,8 +45,7 @@
 <section class:grid>
 	{#if tile}
 		<div class="tileContainer" on:click={() => goto(`mint/${input}`)}>
-			{@html tile}						
-		</div>
+			{@html tile}
 			<span>{input}</span>
 		</div>
 	{:else if showInvalidAddress}
