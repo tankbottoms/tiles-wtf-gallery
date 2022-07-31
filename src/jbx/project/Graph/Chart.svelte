@@ -187,7 +187,7 @@
 
 <style>
 	svg {
-		margin-top: 1rem;
+		margin-top: 5px;
 		width: 100%;
 	}
 </style>

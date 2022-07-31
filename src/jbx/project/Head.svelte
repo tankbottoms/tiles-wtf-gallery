@@ -128,7 +128,7 @@
 
 	.clickable-icon {
 		cursor: pointer;
-		color: var(--icon-primary);
+		color: var(--icon-action-primary);
 		margin: 0px 5px;
 		font-size: 1rem;
 	}

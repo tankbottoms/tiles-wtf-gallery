@@ -1,6 +1,5 @@
 <script lang="ts">
-	import Chart from './Chart.svelte';
-	import { getContext, onMount } from 'svelte';
+	import { getContext } from 'svelte';
 	import * as constants from '@ethersproject/constants';
 	import type Store from '$jbx/utils/Store';
 	import { connectedAccount } from '$stores/web3';
@@ -24,9 +23,9 @@
 	import UpcomingFundingCycle from './UpcomingFundingCycle.svelte';
 	import FundingCycleHistory from './FundingCycleHistory.svelte';
 	import ManageToken from './ManageToken.svelte';
+	import Graph from './Graph';
 
 	let clientWidth = 500;
-	let tab = 0;
 
 	const projectContext = getContext('PROJECT') as Store<V2ProjectContextType>;
 	const tokenSymbol = $projectContext.tokenSymbol;
@@ -93,6 +92,11 @@
 </script>
 
 <section bind:clientWidth>
+	<Graph
+		width={clientWidth}
+		projectId={$projectContext.projectId}
+		createdAt={$projectContext.createdAt}
+	/>
 	{#if hasIssuedERC20}
 		<div class="rewards">
 			<h4>
@@ -186,68 +190,6 @@
 </section>
 
 <!-- NOTE: keeping this to add back the Chart at later date -->
-
-<!-- <div style="margin-bottom: 40px;">
-		<div>
-			<div style="display: flex; justify-content: space-between; align-items: baseline;">
-				<div>
-					<div class="ant-space ant-space-horizontal ant-space-align-center" style="gap: 24px;">
-						<div class="ant-space-item" on:click={() => (tab = 0)}>
-							<div
-								style="text-transform: uppercase; font-size: 0.8rem; font-weight: {tab === 0
-									? 600
-									: 400}; color: rgba(0, 0, 0, {tab === 0 ? 0.6 : 0.333}); cursor: pointer;"
-							>
-								Volume
-							</div>
-						</div>
-						<div class="ant-space-item" on:click={() => (tab = 1)}>
-							<div
-								style="text-transform: uppercase; font-size: 0.8rem; font-weight: {tab === 1
-									? 600
-									: 400}; color: rgba(0, 0, 0, {tab === 1 ? 0.6 : 0.333}); cursor: pointer;"
-							>
-								In Juicebox
-							</div>
-						</div>
-					</div>
-				</div>
-				<DropDown
-					options={['24 HOURS', '7 DAYS', '30 DAYS', '90 DAYS', '1 YEAR']}
-					selected="30 DAYS"
-				/>
-			</div>
-			<div style="position: relative;">
-				{#if tab === 0}
-					<Chart
-						width={clientWidth}
-						data={Array(100)
-							.fill(0)
-							.map((_, i) => {
-								const date = new Date(i * 86400000);
-								return [
-									`${date.getMonth() + 1}/${date.getDate()}`,
-									Math.random() * i * 0.2 + i * 0.8
-								];
-							})}
-					/>
-				{:else if tab === 1}
-					<Chart
-						width={clientWidth}
-						data={Array(100)
-							.fill(0)
-							.map((_, i) => {
-								const date = new Date(i * 86400000);
-								return [
-									`${date.getMonth() + 1}/${date.getDate()}`,
-									Math.random() * i * 0.2 + i * 0.8
-								];
-							})}
-					/>
-				{/if}
-			</div>
-		</div>
-	</div> -->
 <style>
 	section {
 		padding: 10px 20px 0px;

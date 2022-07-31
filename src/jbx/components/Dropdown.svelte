@@ -2,7 +2,7 @@
 	import { slide } from 'svelte/transition';
 	import { createEventDispatcher } from 'svelte';
 
-	export let size: 'sm' | 'md' | 'lg' = 'md';
+	export let size: 'xs' | 'sm' | 'md' | 'lg' = 'md';
 	export let options: { [key: string]: any }[];
 	export let value = options[0].value;
 
@@ -47,7 +47,7 @@
 	.custom-select {
 		width: 100%;
 		position: relative;
-		border: 1px solid var(--stroke-primary);
+		border: 1px solid var(--stroke-tertiary);
 		border-radius: 2px;
 	}
 
@@ -79,15 +79,18 @@
 	}
 
 	.select-selected {
-		color: var(--text-primary);
-		font-weight: 300 !important;
-		border: 1px solid transparent;
-		border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
+		color: var(--text-secondary);
+		font-weight: 400 !important;
 		cursor: pointer;
 	}
 
+	.select-selected.xs {
+		padding: 3px 12px;
+		font-size: 11px;
+	}
+
 	.select-selected.sm {
-		padding: 1px 12px;
+		padding: 3px 12px;
 	}
 
 	.select-selected.md {
@@ -103,6 +106,10 @@
 		border: 6px solid transparent;
 		border-color: var(--text-primary) transparent transparent transparent;
 		right: 10px;
+	}
+
+	.select-selected.xs:after {
+		top: 8px;
 	}
 
 	.select-selected.sm:after {

@@ -62,7 +62,8 @@
 		<InfoSpaceBetween>
 			<h4 slot="left">Activity</h4>
 			<div slot="right">
-				<p><Icon name="download" /></p>
+				<!-- TODO come back and implement download -->
+				<!-- <p><Icon name="download" /></p> -->
 				<Dropdown {options} bind:value={current} size="sm" />
 			</div>
 		</InfoSpaceBetween>
@@ -110,16 +111,6 @@
 		font-weight: 300;
 		display: flex;
 		align-items: end;
-	}
-
-	div[slot='right'] p {
-		margin: 0;
-		margin-right: 10px;
-		transform: scale(1.2);
-	}
-
-	div[slot='right'] p:hover {
-		cursor: pointer;
 	}
 
 	.loading {

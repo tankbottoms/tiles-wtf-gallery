@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { getContext } from 'svelte';
-	import { modal } from '$stores';
 	import type { V2ProjectContextType } from '$jbx/models/project-type';
 	import { Currency, DistributionLimitType } from '$jbx/constants';
 	import { getEthBalance } from '$jbx/data/eth';
@@ -12,7 +11,7 @@
 	import USDAmount from '$jbx/components/USDAmount.svelte';
 	import Trans from '$jbx/components/Trans.svelte';
 	import EtherscanLink from '$jbx/components/EtherscanLink.svelte';
-	import Modal, { bind, openModal } from '$jbx/components/Modal.svelte';
+	import { bind, openModal } from '$jbx/components/Modal.svelte';
 	import Pay from '$jbx/components/Pay.svelte';
 	import PayHeadsUp from '$jbx/components/PayHeadsUp.svelte';
 	import PayCheckout from '$jbx/project/PayCheckout.svelte';
@@ -30,6 +29,7 @@
 	$: owner = $projectsContext.projectOwnerAddress;
 	$: metadata = $projectsContext.projectMetadata;
 	$: tokenSymbol = $projectsContext.tokenSymbol;
+	$: totalVolume = $projectsContext.totalVolume;
 
 	$: ownerBalance = owner ? getEthBalance(owner) : BigNumber.from(0);
 
@@ -54,6 +54,28 @@
 
 <section>
 	<div class="stats">
+		<InfoSpaceBetween>
+			<div slot="left">
+				<h4>Volume</h4>
+				<Popover placement="right" message="The balance of this project in the Juicebox contract.">
+					<Icon name="questionCircle" />
+				</Popover>
+			</div>
+			<div slot="right">
+				{#if BigNumber.from($projectsContext?.distributionLimitCurrency).eq(Currency.ETH)}
+					<span class="amount">
+						<ETHAmount amount={totalVolume} precision={2} />
+					</span>
+				{:else}
+					<span class="amount-sub">
+						<ETHAmount amount={balance || BigNumber.from(0)} precision={2} padEnd />
+					</span>
+					<h4 class="amount">
+						<USDAmount amount={totalVolume} precision={2} padEnd />
+					</h4>
+				{/if}
+			</div>
+		</InfoSpaceBetween>
 		<InfoSpaceBetween>
 			<div slot="left">
 				<h4>In Treasury</h4>
@@ -113,13 +135,15 @@
 						</span>
 					{/if}
 				{:else if distributionLimitType === DistributionLimitType.None}
-					<Popover
-						slot="right"
-						message="The target for this funding cycle is 0, meaning all funds in Juicebox are currently
-		considered overflow. Overflow can be redeemed by token holders, but not distributed."
-					>
+					<div class="amount-sub">
 						<Trans>100% overflow</Trans>
-					</Popover>
+						<Popover
+							slot="right"
+							message="The distribution limit for this funding cycle is 0, meaning all funds in Juicebox are currently considered overflow. Overflow can be redeemed by token holders, but not distributed."
+						>
+							<Icon name="questionCircle" />
+						</Popover>
+					</div>
 				{:else}
 					<ETHAmount amount={$projectsContext.usedDistributionLimit} />/ NO LIMIT
 				{/if}
@@ -190,6 +214,7 @@
 	div[slot='left'],
 	div[slot='left'] h4 {
 		color: var(--text-tertiary);
+		margin: 2px 0;
 	}
 
 	.amount {
@@ -205,18 +230,12 @@
 
 	.amount-sub {
 		font-size: 0.75rem;
+		font-weight: 500;
 		color: var(--text-tertiary);
 	}
 
 	.amount-owner {
 		font-size: 1rem;
-	}
-
-	.all-assets {
-		text-align: right;
-		text-transform: uppercase;
-		color: var(--text-tertiary);
-		cursor: pointer;
 	}
 
 	@media (max-width: 850px) {
