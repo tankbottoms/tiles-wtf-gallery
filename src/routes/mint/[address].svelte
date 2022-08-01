@@ -1,18 +1,79 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import { page } from '$app/stores';
-	import { utils } from 'ethers';
+	import { BigNumber, utils } from 'ethers';
 	import { generateTile } from '$tiles/tilesStandalone';
 	import { connectedAccount, provider } from '$stores/web3';
 	import { readContractByAddress } from '$jbx/utils/web3/contractReader';
 
-	let price = 0.04;
+	const tileABI = [
+		{
+			inputs: [],
+			name: 'mint',
+			outputs: [
+				{
+					internalType: 'uint256',
+					name: 'mintedTokenId',
+					type: 'uint256'
+				}
+			],
+			stateMutability: 'payable',
+			type: 'function'
+		},
+		{
+			inputs: [
+				{
+					internalType: 'address',
+					name: 'tile',
+					type: 'address'
+				}
+			],
+			name: 'grab',
+			outputs: [
+				{
+					internalType: 'uint256',
+					name: 'mintedTokenId',
+					type: 'uint256'
+				}
+			],
+			stateMutability: 'payable',
+			type: 'function'
+		},
+		{
+			inputs: [],
+			name: 'totalSupply',
+			outputs: [
+				{
+					internalType: 'uint256',
+					name: '',
+					type: 'uint256'
+				}
+			],
+			stateMutability: 'view',
+			type: 'function'
+		}
+	];
+	let price = 0;
+	let formattedPrice = Number(utils.formatEther(price));
 	let tile: string;
 	let showInvalidAddress = false;
 	let showInsufficientBalance = false;
 
+	async function getPrice(basePrice, multiplier, tierSize) {
+		const currentSupply = await readContractByAddress(
+			'0xB9c73D46357708e23B99106FBF9e26C0F0412743',
+			tileABI,
+			'totalSupply'
+		);
+        const expectedPrice = currentSupply.div(tierSize).mul(multiplier).mul(basePrice);
+        if (expectedPrice.eq(0)) { return basePrice; }
+
+		return expectedPrice;
+	}
+
 	async function mint() {
 		if (!$provider) {
+			console.log('account not connected');
 			// TODO: prompt to connect
 			return;
 		}
@@ -20,48 +81,25 @@
 		const balance = await $provider.getBalance($connectedAccount);
 		const amount = utils.formatEther(balance);
 
-		if (Number(amount) < price) {
+		if (Number(amount) < formattedPrice) {
 			showInsufficientBalance = true;
 		} else {
-			const abi = [
-				{
-					inputs: [],
-					name: 'mint',
-					outputs: [
-						{
-							internalType: 'uint256',
-							name: 'mintedTokenId',
-							type: 'uint256'
-						}
-					],
-					stateMutability: 'payable',
-					type: 'function'
-				},
-				{
-					inputs: [
-						{
-							internalType: 'address',
-							name: 'tile',
-							type: 'address'
-						}
-					],
-					name: 'grab',
-					outputs: [
-						{
-							internalType: 'uint256',
-							name: 'mintedTokenId',
-							type: 'uint256'
-						}
-					],
-					stateMutability: 'payable',
-					type: 'function'
-				}
-			];
-
 			if ($page.params.address == $connectedAccount) {
-				readContractByAddress('0x0', abi, 'mint', [{ value: price }]);
+				readContractByAddress(
+					'0xB9c73D46357708e23B99106FBF9e26C0F0412743',
+					tileABI,
+					'mint',
+					[{ value: utils.parseEther(`${price}`) }],
+					$provider.getSigner()
+				);
 			} else {
-				readContractByAddress('0x0', abi, 'grab', [$page.params.address, { value: price }]);
+				readContractByAddress(
+					'0xB9c73D46357708e23B99106FBF9e26C0F0412743',
+					tileABI,
+					'grab',
+					[$page.params.address, { value: utils.parseEther(`${price}`) }],
+					$provider.getSigner()
+				);
 			}
 		}
 	}
@@ -76,7 +114,7 @@
 		window.URL.revokeObjectURL(url);
 	}
 
-	onMount(() => {
+	onMount(async () => {
 		// Check if legitimate address
 		if (!utils.isAddress($page.params.address)) {
 			showInvalidAddress = true;
@@ -84,6 +122,8 @@
 			tile = generateTile($page.params.address);
 			showInvalidAddress = false;
 		}
+
+        price = await getPrice(utils.parseEther('0.0001'), 2, 512); // TODO: consts
 	});
 </script>
 
@@ -95,7 +135,7 @@
 		<p>{$page.params.address}</p>
 		<!-- TODO check if available -->
 		<p>Available</p>
-		<button on:click={mint}>MINT ({price} ETH)</button>
+		<button on:click={mint}>MINT ({formattedPrice} ETH)</button>
 		{#if showInsufficientBalance}
 			<p>Insufficient balance</p>
 		{/if}
