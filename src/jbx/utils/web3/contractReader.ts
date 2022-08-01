@@ -63,7 +63,7 @@ export async function readContractByAddress(
 	ABI: any[],
 	functionName: string,
 	args = [],
-    signer?: any
+	signer?: any
 ) {
 	console.log(contractAddress, functionName, args, get(readNetwork).rpcUrl);
 	const contract = new ethers.Contract(
@@ -72,12 +72,12 @@ export async function readContractByAddress(
 		new ethers.providers.JsonRpcProvider(get(readNetwork).rpcUrl)
 	);
 
-    if (signer) {
-        return await contract.connect(signer)[functionName](...args);
-    }
-    if (args.length == 0) {
-        return await contract[functionName]();
-    }
+	if (signer) {
+		return await contract.connect(signer)[functionName](...args);
+	}
+	if (args.length == 0) {
+		return await contract[functionName]();
+	}
 	return await contract[functionName](...args);
 }
 

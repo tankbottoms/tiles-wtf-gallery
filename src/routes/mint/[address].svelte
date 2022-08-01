@@ -3,7 +3,7 @@
 	import { page } from '$app/stores';
 	import { BigNumber, utils } from 'ethers';
 	import { generateTile } from '$tiles/tilesStandalone';
-	import { connectedAccount, provider } from '$stores/web3';
+	import { connectedAccount, provider, readNetwork } from '$stores/web3';
 	import { readContractByAddress } from '$jbx/utils/web3/contractReader';
 
 	const tileABI = [
@@ -65,8 +65,10 @@
 			tileABI,
 			'totalSupply'
 		);
-        const expectedPrice = currentSupply.div(tierSize).mul(multiplier).mul(basePrice);
-        if (expectedPrice.eq(0)) { return basePrice; }
+		const expectedPrice = currentSupply.div(tierSize).mul(multiplier).mul(basePrice);
+		if (expectedPrice.eq(0)) {
+			return basePrice;
+		}
 
 		return expectedPrice;
 	}
@@ -122,9 +124,16 @@
 			tile = generateTile($page.params.address);
 			showInvalidAddress = false;
 		}
-
-        price = await getPrice(utils.parseEther('0.0001'), 2, 512); // TODO: consts
+		readNetwork.subscribe(async (net) => {
+			try {
+				price = await getPrice(utils.parseEther('0.0001'), 2, 512); // TODO: consts
+			} catch (error) {
+				console.log(error.message);
+			}
+		});
 	});
+
+	$: formattedPrice = Number(utils.formatEther(price));
 </script>
 
 <section>
