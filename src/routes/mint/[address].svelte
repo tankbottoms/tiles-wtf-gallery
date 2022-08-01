@@ -12,6 +12,8 @@
 	let price = 0;
 	let formattedPrice = Number(utils.formatEther(price));
 	let tile: string;
+    let isAvailable = 0;
+    let availability: string;
 	let showInvalidAddress = false;
 	let showInsufficientBalance = false;
 
@@ -27,7 +29,7 @@
 
 		if (Number(amount) < formattedPrice) {
 			showInsufficientBalance = true;
-		} else {
+		} else if (isAvailable == 0) {
 			if ($page.params.address == $connectedAccount) {
 				readContractByAddress(
 					'0xB9c73D46357708e23B99106FBF9e26C0F0412743',
@@ -45,38 +47,34 @@
 					$provider.getSigner()
 				);
 			}
-			// TODO: seize
-		}
+		} else if (isAvailable == 1) {
+            readContractByAddress(
+                '0xB9c73D46357708e23B99106FBF9e26C0F0412743',
+                tileABI,
+                'seize',
+                [{ value: utils.parseEther(`${price}`) }],
+					$provider.getSigner()
+				);
+        }
 	}
 
-	async function isAvailable(tile, account) {
-		const tokenId = await readContractByAddress(
+	async function checkAvailability(tile, account) {
+        const tokenId = await readContractByAddress(
 			'0xB9c73D46357708e23B99106FBF9e26C0F0412743',
 			tileABI,
 			'idForAddress',
 			[tile]
 		);
 
-		if (tokenId.eq(0)) {
-			return true;
-		}
+        if (tokenId.eq(0)) { return 0; }
 
-		// const owner = await readContractByAddress(
-		// 	'0xB9c73D46357708e23B99106FBF9e26C0F0412743',
-		// 	tileABI,
-		// 	'ownerOf',
-		//     [tokenId]
-		// );
+        if (tile == $connectedAccount) { return 1; }
 
-		if (tile == $connectedAccount) {
-			return true;
-		}
-
-		return true; // TODO
+		return 2;
 	}
 
 	onMount(async () => {
-		// Check if legitimate address
+		// TODO: check if legitimate address
 		if (!utils.isAddress($page.params.address)) {
 			showInvalidAddress = true;
 		} else {
@@ -92,8 +90,11 @@
 				console.warn(error.message);
 			}
 		});
+
+        isAvailable = await checkAvailability(tile, $connectedAccount);
 	});
 
+    $: availability = isAvailable < 2 ? 'Available' : 'Not available';
 	$: formattedPrice = Number(utils.formatEther(price));
 </script>
 
@@ -102,9 +103,8 @@
 		<h1>Not a valid address</h1>
 	{:else if tile}
 		{@html tile}
-		<p>{$page.params.address}</p>
-		<!-- TODO check if available -->
-		<p>Available</p>
+		<p>{$page.params.address}</p
+		<p>{availability}</p>
 		<button on:click={mint}>MINT ({formattedPrice} ETH)</button>
 		{#if showInsufficientBalance}
 			<p>Insufficient balance</p>
