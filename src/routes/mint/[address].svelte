@@ -51,6 +51,57 @@
 			],
 			stateMutability: 'view',
 			type: 'function'
+		},
+		{
+			inputs: [
+				{
+					internalType: 'address',
+					name: '',
+					type: 'address'
+				}
+			],
+			name: 'idForAddress',
+			outputs: [
+				{
+					internalType: 'uint256',
+					name: '',
+					type: 'uint256'
+				}
+			],
+			stateMutability: 'view',
+			type: 'function'
+		},
+		{
+			inputs: [
+				{
+					internalType: 'uint256',
+					name: 'id',
+					type: 'uint256'
+				}
+			],
+			name: 'ownerOf',
+			outputs: [
+				{
+					internalType: 'address',
+					name: 'owner',
+					type: 'address'
+				}
+			],
+			stateMutability: 'view',
+			type: 'function'
+		},
+		{
+			inputs: [],
+			name: 'seize',
+			outputs: [
+				{
+					internalType: 'uint256',
+					name: 'tokenId',
+					type: 'uint256'
+				}
+			],
+			stateMutability: 'payable',
+			type: 'function'
 		}
 	];
 	let price = 0;
@@ -103,7 +154,30 @@
 					$provider.getSigner()
 				);
 			}
+			// TODO: seize
 		}
+	}
+
+	async function isAvailable(tile, account) {
+        const tokenId = await readContractByAddress(
+			'0xB9c73D46357708e23B99106FBF9e26C0F0412743',
+			tileABI,
+			'idForAddress',
+            [tile]
+		);
+
+        if (tokenId.eq(0)) { return true; }
+
+        // const owner = await readContractByAddress(
+		// 	'0xB9c73D46357708e23B99106FBF9e26C0F0412743',
+		// 	tileABI,
+		// 	'ownerOf',
+        //     [tokenId]
+		// );
+
+        if (tile == $connectedAccount) { return true; }
+
+		return true; // TODO
 	}
 
 	function download() {
