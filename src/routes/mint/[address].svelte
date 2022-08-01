@@ -12,8 +12,8 @@
 	let price = 0;
 	let formattedPrice = Number(utils.formatEther(price));
 	let tile: string;
-    let isAvailable = 0;
-    let availability: string;
+	let isAvailable = 0;
+	let availability: string;
 	let showInvalidAddress = false;
 	let showInsufficientBalance = false;
 
@@ -48,27 +48,31 @@
 				);
 			}
 		} else if (isAvailable == 1) {
-            readContractByAddress(
-                '0xB9c73D46357708e23B99106FBF9e26C0F0412743',
-                tileABI,
-                'seize',
-                [{ value: utils.parseEther(`${price}`) }],
-					$provider.getSigner()
-				);
-        }
+			readContractByAddress(
+				'0xB9c73D46357708e23B99106FBF9e26C0F0412743',
+				tileABI,
+				'seize',
+				[{ value: utils.parseEther(`${price}`) }],
+				$provider.getSigner()
+			);
+		}
 	}
 
 	async function checkAvailability(tile, account) {
-        const tokenId = await readContractByAddress(
+		const tokenId = await readContractByAddress(
 			'0xB9c73D46357708e23B99106FBF9e26C0F0412743',
 			tileABI,
 			'idForAddress',
 			[tile]
 		);
 
-        if (tokenId.eq(0)) { return 0; }
+		if (tokenId.eq(0)) {
+			return 0;
+		}
 
-        if (tile == $connectedAccount) { return 1; }
+		if (tile == $connectedAccount) {
+			return 1;
+		}
 
 		return 2;
 	}
@@ -86,15 +90,14 @@
 		return readNetwork.subscribe(async () => {
 			try {
 				price = await getTilePrice(utils.parseEther('0.0001'), 2, 512); // TODO: consts
+				isAvailable = await checkAvailability(tile, $connectedAccount);
 			} catch (error) {
 				console.warn(error.message);
 			}
 		});
-
-        isAvailable = await checkAvailability(tile, $connectedAccount);
 	});
 
-    $: availability = isAvailable < 2 ? 'Available' : 'Not available';
+	$: availability = isAvailable < 2 ? 'Available' : 'Not available';
 	$: formattedPrice = Number(utils.formatEther(price));
 </script>
 
