@@ -103,7 +103,7 @@
 		<h1>Not a valid address</h1>
 	{:else if tile}
 		{@html tile}
-		<p>{$page.params.address}</p
+		<p>{$page.params.address}</p>
 		<p>{availability}</p>
 		<button on:click={mint}>MINT ({formattedPrice} ETH)</button>
 		{#if showInsufficientBalance}
