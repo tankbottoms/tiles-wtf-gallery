@@ -22,8 +22,8 @@
 			"$constants/*": ["src/constants/*"],
 			"$utils": ["src/utils"],
 			"$utils/*": ["src/utils/*"],
-			"$abis": ["src/abis"],
-			"$abis/*": ["src/abis/*"],
+			"$deployments": ["src/deployments"],
+			"$deployments/*": ["src/deployments/*"],
 		}
 	}
 }

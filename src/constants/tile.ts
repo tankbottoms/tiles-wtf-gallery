@@ -1,6 +1,6 @@
-import { utils } from 'ethers';
+import { BigNumber, utils } from 'ethers';
 
-const TILE_BASE_PRICE = utils.parseEther('0.0001');
+const TILE_BASE_PRICE = BigNumber.from(utils.parseEther('0.0001'));
 const TILE_MULTIPLIER = 2;
 const TILE_TIER_SIZE = 512;
 

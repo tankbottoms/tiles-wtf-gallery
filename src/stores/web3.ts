@@ -1,29 +1,39 @@
-import Store from '$jbx/utils/Store';
-import { providers } from 'ethers';
 import type { OnboardAPI } from '@web3-onboard/core';
+import Store from '$utils/Store';
+import { ethers, providers } from 'ethers';
 import injectedModule from '@web3-onboard/injected-wallets';
 import walletConnectModule from '@web3-onboard/walletconnect';
-import { coinbaseWallet, gnosis as gnosisModule } from '$jbx/utils/onboard';
+import { coinbaseWallet, gnosis as gnosisModule } from '$utils/onboard';
 import ledgerModule from '@web3-onboard/ledger';
 import trezorModule from '@web3-onboard/trezor';
 import { browser } from '$app/env';
-import { blocknativeNetworks } from '$jbx/constants/networks';
-import {
-	getNetworkAliasByChainId,
-	setNetworkAliasInQueryParams
-} from '$jbx/utils/web3/networkName';
+import { blocknativeNetworks } from '$constants/networks';
+import { getNetworkAliasByChainId, setNetworkAliasInQueryParams } from '$utils/web3/networkName';
+import { pageReady } from '$stores';
+import { get } from 'svelte/store';
 
-export const ethPrice = new Store(0);
-export const daiPrice = new Store(0);
+export const ethPrice = new Store(1);
+export const daiPrice = new Store(1);
 export const provider = new Store<providers.Web3Provider>();
 export const connectedAccount = new Store('');
 export const chainId = new Store<number>(1);
 export const web3Onboard = new Store<OnboardAPI>();
 
+pageReady.update((state) => {
+	state.web3 = false;
+	return state;
+});
+
+let pendingInitialization: Promise<any>;
+
 let unsub;
 web3Onboard.subscribe((onboard) => {
 	if (!onboard || !browser) return;
-	unsub?.();
+	try {
+		unsub?.();
+	} catch (e) {
+		//
+	}
 	const observable = onboard.state.select('wallets');
 	unsub = observable.subscribe((state) => {
 		const activeWallet = state?.[0];
@@ -54,9 +64,26 @@ web3Onboard.subscribe((onboard) => {
 	}).unsubscribe;
 });
 
-browser && setTimeout(initialize, 500);
+if (browser) {
+	setTimeout(async () => {
+		readNetwork.subscribe((net) => {
+			const returnValue = getDefaultProvider();
+			console.log('Read Network:', returnValue.alias);
+			chainId.set(Number(net.id));
+		});
+		pendingInitialization = initialize();
+		try {
+			await pendingInitialization;
+		} catch (error) {
+			console.log('failed to initialize wallet');
+			console.error(error);
+			pendingInitialization = null;
+		}
+	});
+}
 async function initialize() {
 	const Onboard = (await import('@web3-onboard/core')).default;
+	await new Promise((r) => setTimeout(r, 1000));
 	const injected = injectedModule();
 	// initialize the module with options
 	const walletConnect = walletConnectModule({
@@ -76,17 +103,21 @@ async function initialize() {
 
 	const onboard = Onboard({
 		accountCenter: {
-			mobile: {
+			desktop: {
 				enabled: false
 			},
-			desktop: {
+			mobile: {
 				enabled: false
 			}
 		},
 		wallets: [coinbase, injected, walletConnect, ledger, trezor, gnosis],
 		chains: blocknativeNetworks.map((chain) => {
-			const { alias, subgraphUrl, ..._chain } = chain;
-			return _chain;
+			return {
+				id: chain.id,
+				token: chain.token,
+				label: chain.label,
+				rpcUrl: chain.rpcUrl
+			};
 		}),
 		appMetadata: {
 			name: 'Juicebox',
@@ -108,17 +139,30 @@ async function initialize() {
 			autoSelect: { label: previouslyConnectedWallets[0], disableModals: true }
 		});
 	}
+	pageReady.update((state) => {
+		state.web3 = true;
+		return state;
+	});
 }
 
 export async function web3Connect() {
-	if (!web3Onboard.get() || !web3Onboard.get().state.get().chains.length) {
-		await initialize();
-	}
+	await pendingInitialization;
 	const onboard = web3Onboard.get();
-	if (!onboard) throw Error('web3Onboard is not set');
-	console.log('try connect');
-	const wallets = await onboard.connectWallet();
-	return wallets;
+	if (!onboard) {
+		return console.error('web3Onboard is not set');
+	}
+	if (!web3Onboard.get().state.get().chains.length) {
+		console.log('wallet initializing...');
+		await initialize();
+		console.log('wallet initialized');
+	}
+	if (web3Onboard.get().state.get().chains?.length) {
+		const wallets = await onboard.connectWallet();
+		return wallets;
+	} else {
+		window.location.reload();
+		console.log('error initializing wallet', web3Onboard.get().state.get().chains);
+	}
 }
 
 export async function web3Disconnect() {
@@ -147,11 +191,18 @@ export async function switchNetwork(_chainId: number | string) {
 	});
 }
 
-export const readNetwork = new Store(blocknativeNetworks[0]);
+export const readNetwork = new Store(getDefaultProvider());
 
-chainId.subscribe(($chainId) => {
-	const net = blocknativeNetworks.find((net) => Number(net.id) === Number($chainId));
-	const returnValue = net || blocknativeNetworks[0];
-	console.log('Read Network:', returnValue.alias);
-	readNetwork.set(returnValue);
-});
+export function getProvider() {
+	return provider.get() || new ethers.providers.JsonRpcProvider(get(readNetwork).rpcUrl);
+}
+
+export function getDefaultProvider() {
+	if (browser) {
+		const defaultNetworkAlias = new URLSearchParams(location.search).get('network');
+		return (
+			blocknativeNetworks.find((net) => net.alias === defaultNetworkAlias) || blocknativeNetworks[0]
+		);
+	}
+	return blocknativeNetworks[0];
+}

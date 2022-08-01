@@ -1,10 +1,9 @@
 <script lang="ts">
-	import { NetworkName } from '$models/network-name';
-	import { readNetwork } from '$constants/networks';
 	import Popover from '$components/Popover.svelte';
 	import ExternalLink from './ExternalLink.svelte';
 	import Icon from './Icon.svelte';
 	import { getTruncatedAddress } from '$components/Address.svelte';
+	import { readNetwork } from '$stores/web3';
 
 	export let value: string;
 	export let type: 'tx' | 'address';
@@ -17,8 +16,8 @@
 	}
 
 	let subdomain = '';
-	if (readNetwork.name !== NetworkName.mainnet) {
-		subdomain = readNetwork.name + '.';
+	if ($readNetwork.alias !== NetworkName.mainnet) {
+		subdomain = $readNetwork.alias + '.';
 	}
 
 	const href = `https://${subdomain}etherscan.io/${type}/${value}`;

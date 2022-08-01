@@ -43,13 +43,12 @@ const config = {
 			resolve: {
 				alias: {
 					$jbx: path.resolve('./src/jbx'),
-					$deployments: path.resolve('./src/deployments'),
 					$components: path.resolve('./src/components'),
 					$stores: path.resolve('./src/stores'),
 					$tiles: path.resolve('./src/tiles'),
 					$constants: path.resolve('./src/constants'),
 					$utils: path.resolve('./src/utils'),
-					$abis: path.resolve('./src/abis')
+					$deployments: path.resolve('./src/deployments')
 				}
 			},
 			build: {

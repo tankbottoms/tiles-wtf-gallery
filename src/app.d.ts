@@ -8,3 +8,23 @@ declare namespace App {
 	// interface Session {}
 	// interface Stuff {}
 }
+
+export declare global {
+	interface ContractDeployment {
+		rinkeby: string;
+		mainnet: string;
+		abi: ContractInterface;
+	}
+
+	enum NetworkName {
+		localhost = 'localhost',
+		ropsten = 'ropsten',
+		mainnet = 'mainnet',
+		kovan = 'kovan',
+		rinkeby = 'rinkeby',
+		goerli = 'goerli',
+		xdai = 'xdai',
+		matic = 'matic',
+		mumbai = 'mumbai'
+	}
+}

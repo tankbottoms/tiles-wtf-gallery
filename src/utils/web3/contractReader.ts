@@ -1,12 +1,11 @@
-import type { V2ContractName } from '$jbx/models/v2/contracts';
-import { readNetwork } from '$stores/web3';
+import { getDefaultProvider, readNetwork } from '$stores/web3';
 import { provider } from '$stores/web3';
 import { ethers, Signer, type ContractInterface, type ContractTransaction } from 'ethers';
 
 import Tiles from '$deployments/Tiles';
 
 import { get } from 'svelte/store';
-import { parseCachedData, parseContractResponse } from '../cached';
+import { parseCachedData, parseContractResponse } from '../cache';
 
 export const contracts = {
 	Tiles
@@ -23,7 +22,7 @@ export async function readContractByAddress(
 	const contract = new ethers.Contract(
 		contractAddress,
 		ABI,
-		new ethers.providers.JsonRpcProvider(get(readNetwork).rpcUrl)
+		new ethers.providers.JsonRpcProvider(getDefaultProvider().rpcUrl)
 	);
 
 	if (signer) {
@@ -70,7 +69,7 @@ export async function readContract(
 		const contract = new ethers.Contract(
 			contractAddress,
 			abi,
-			new ethers.providers.JsonRpcProvider(get(readNetwork).rpcUrl)
+			new ethers.providers.JsonRpcProvider(getDefaultProvider().rpcUrl)
 		);
 
 		const response = parseContractResponse(await contract[functionName](...args));

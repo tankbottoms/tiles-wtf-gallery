@@ -1,18 +1,16 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import { utils } from 'ethers';
+	import { BigNumber, utils } from 'ethers';
 	import { page } from '$app/stores';
 	import { generateTile } from '$tiles/tilesStandalone';
-	import { connectedAccount, provider, readNetwork } from '$stores/web3';
-	import { readContractByAddress } from '$jbx/utils/web3/contractReader';
-	import tileABI from '$abis/tilesAbi';
+	import { connectedAccount, provider, readNetwork, web3Connect } from '$stores/web3';
+	import { readContract, writeContract } from '$utils/web3/contractReader';
 	import { getTilePrice } from '$utils/tiles';
 	import { downloadFile } from '$utils/file';
 	import { TILE_BASE_PRICE, TILE_MULTIPLIER, TILE_TIER_SIZE } from '$constants/tile';
-	import contracts from '$constants/contracts';
+	import { pageReady } from '$stores';
 
-	let price = 0;
-	let formattedPrice = Number(utils.formatEther(price));
+	let price = BigNumber.from(0);
 	let tile: string;
 	let isAvailable = 0;
 	let availability: string;
@@ -23,51 +21,37 @@
 		if (!$provider) {
 			console.log('account not connected');
 			// TODO: prompt to connect
+			await web3Connect();
 			return;
 		}
 
 		const balance = await $provider.getBalance($connectedAccount);
-		const amount = utils.formatEther(balance);
+		// const amount = utils.formatEther(balance);
 
-		if (Number(amount) < formattedPrice) {
+		console.log(balance?.toString(), price?.toString());
+		if (balance.lt(price)) {
 			showInsufficientBalance = true;
 		} else if (isAvailable == 0) {
 			if ($page.params.address == $connectedAccount) {
-				readContractByAddress(
-					contracts.tiles,
-					tileABI,
-					'mint',
-					[{ value: utils.parseEther(`${price}`) }],
-					$provider.getSigner()
-				);
+				await writeContract('Tiles', 'mint', [], { value: price });
 			} else {
-				readContractByAddress(
-					contracts.tiles,
-					tileABI,
-					'grab',
-					[$page.params.address, { value: utils.parseEther(`${price}`) }],
-					$provider.getSigner()
-				);
+				await writeContract('Tiles', 'grab', [$page.params.address], {
+					value: price
+				});
 			}
 		} else if (isAvailable == 1) {
-			readContractByAddress(
-				contracts.tiles,
-				tileABI,
-				'seize',
-				[{ value: utils.parseEther(`${price}`) }],
-				$provider.getSigner()
-			);
+			await writeContract('Tiles', 'seize', [], { value: price });
 		}
 	}
 
 	async function checkAvailability(tile, account) {
-		const tokenId = await readContractByAddress(contracts.tiles, tileABI, 'idForAddress', [tile]);
+		const tokenId = await readContract('Tiles', 'idForAddress', [tile]);
 
 		if (tokenId.eq(0)) {
 			return 0;
 		}
 
-		if (tile == $connectedAccount) {
+		if (tile == account) {
 			return 1;
 		}
 
@@ -105,7 +89,7 @@
 		{@html tile}
 		<p>{$page.params.address}</p>
 		<p>{availability}</p>
-		<button on:click={mint}>MINT ({formattedPrice} ETH)</button>
+		<button on:click={mint} disabled={!$pageReady.web3}>MINT ({formattedPrice} ETH)</button>
 		{#if showInsufficientBalance}
 			<p>Insufficient balance</p>
 		{/if}

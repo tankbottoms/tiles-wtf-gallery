@@ -1,13 +1,13 @@
-import { readContractByAddress } from '$jbx/utils/web3/contractReader';
-import tileABI from '$abis/tilesAbi';
-import contracts from '$constants/contracts';
+import { BigNumber } from '@ethersproject/bignumber';
+import { readContract } from './web3/contractReader';
 
-export async function getTilePrice(basePrice, multiplier, tierSize) {
-	const currentSupply = await readContractByAddress(contracts.tiles, tileABI, 'totalSupply');
+export async function getTilePrice(basePrice: BigNumber, multiplier: number, tierSize: number) {
+	const currentSupply = BigNumber.from((await readContract('Tiles', 'totalSupply')) || 0);
+
 	const expectedPrice = currentSupply.div(tierSize).mul(multiplier).mul(basePrice);
 
 	if (expectedPrice.eq(0)) {
-		return basePrice;
+		return BigNumber.from(basePrice);
 	}
 
 	return expectedPrice;

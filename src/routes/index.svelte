@@ -19,7 +19,7 @@
 	});
 </script>
 
-<main>
+<main style="background: black">
 	<div class="tiles-container" on:click={() => goto(`mint/${address}`)}>
 		<div id="tiles">
 			{@html tile}
