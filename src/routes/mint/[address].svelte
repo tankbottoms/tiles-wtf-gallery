@@ -8,6 +8,7 @@
 	import tileABI from '$abis/tilesAbi';
 	import { getTilePrice } from '$utils/tiles';
 	import { downloadFile } from '$utils/file';
+	import { TILE_BASE_PRICE, TILE_MULTIPLIER, TILE_TIER_SIZE } from '$constants/tile';
 
 	let price = 0;
 	let formattedPrice = Number(utils.formatEther(price));
@@ -89,7 +90,7 @@
 		// Returning so it gets unsubscribed when component is destroyed
 		return readNetwork.subscribe(async () => {
 			try {
-				price = await getTilePrice(utils.parseEther('0.0001'), 2, 512); // TODO: consts
+				price = await getTilePrice(TILE_BASE_PRICE, TILE_MULTIPLIER, TILE_TIER_SIZE);
 				isAvailable = await checkAvailability(tile, $connectedAccount);
 			} catch (error) {
 				console.warn(error.message);
