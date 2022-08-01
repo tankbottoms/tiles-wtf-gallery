@@ -6,6 +6,11 @@
 </script>
 
 <script lang="ts">
+
+	/*
+	TODO: Bring in the Juicebox Project UX here
+	*/
+
 	import type { V2CurrencyOption } from '$jbx/models/v2/currencyOption';
 	import type { V2ProjectContextType } from '$jbx/create/stores';
 

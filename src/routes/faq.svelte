@@ -3,6 +3,11 @@
     <b>WTF?</b>
 	<p>TBD</p>
 </section>
+<section>
+    <h1>FAQ</h1>
+    <b>WTF?</b>
+	<p>TBD</p>
+</section>
 
 <style>
 	section {

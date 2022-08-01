@@ -32,16 +32,20 @@
 		<p>Infinite artwork</p>
 		<p>Generated from any ETH address</p>
 		<p>Each is unique & subjectively rare</p>		
-		<a href="/wtf">WTF</a>
-		<!--<a href="/dao">DAO</a>-->
-		<a href="/faq">FAQ</a>
+		<a href="/wtf">wtf</a>
+		<a href="https://juicebox.money/v2/p/41" target="_blank">Juicebox treasury</a>
+		<a href="/faq">faq</a>
 		<div class="group">
 			<div>
-				<a href="/mint">Mint a Tile</a>
+				<a href="/mint">Mint a tile</a>
 			</div>
 		</div>
 	</section>
 </main>
+
+<footer>				
+	<a href="https://info.juicebox.money/tos" target="_blank" class="center">Terms of service</a>				
+</footer>
 
 <style>
 	main {
@@ -65,12 +69,25 @@
 		text-decoration: none;
 		position: relative;
 		border-bottom: 3px solid gold;
-		margin: 0px 5px;
+		margin: 0px 10px;
 	}
 
 	a:hover {
 		border-bottom: 3px solid black;
 	}
+
+	.center {
+  		margin: auto;
+  		font-size: 14px;
+		color: black;
+		text-decoration: none;		
+		align-items: center;
+		justify-items: center;		
+		max-width: 1000px;
+  		border-bottom: 3px solid gold;
+  		margin: 0px 5px;
+	}  
+
 
 	p {
 		font-size: 16px;
