@@ -107,6 +107,8 @@
 	let price = 0;
 	let formattedPrice = Number(utils.formatEther(price));
 	let tile: string;
+    let isAvailable = false;
+    let availability: string;
 	let showInvalidAddress = false;
 	let showInsufficientBalance = false;
 
@@ -158,7 +160,9 @@
 		}
 	}
 
-	async function isAvailable(tile, account) {
+	async function checkAvailability(tile, account) {
+        if (tile == $connectedAccount) { return true; }
+
         const tokenId = await readContractByAddress(
 			'0xB9c73D46357708e23B99106FBF9e26C0F0412743',
 			tileABI,
@@ -168,16 +172,7 @@
 
         if (tokenId.eq(0)) { return true; }
 
-        // const owner = await readContractByAddress(
-		// 	'0xB9c73D46357708e23B99106FBF9e26C0F0412743',
-		// 	tileABI,
-		// 	'ownerOf',
-        //     [tokenId]
-		// );
-
-        if (tile == $connectedAccount) { return true; }
-
-		return true; // TODO
+		return false;
 	}
 
 	function download() {
@@ -205,8 +200,11 @@
 				console.log(error.message);
 			}
 		});
+
+        isAvailable = await checkAvailability(tile, $connectedAccount);
 	});
 
+    $: availability = isAvailable ? 'Available' : 'Not available';
 	$: formattedPrice = Number(utils.formatEther(price));
 </script>
 
@@ -215,9 +213,8 @@
 		<h1>Not a valid address</h1>
 	{:else if tile}
 		{@html tile}
-		<p>{$page.params.address}</p>
-		<!-- TODO check if available -->
-		<p>Available</p>
+		<p>{$page.params.address}</p
+		<p>{availability}</p>
 		<button on:click={mint}>MINT ({formattedPrice} ETH)</button>
 		{#if showInsufficientBalance}
 			<p>Insufficient balance</p>
