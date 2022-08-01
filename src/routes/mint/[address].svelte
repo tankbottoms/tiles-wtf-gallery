@@ -107,7 +107,7 @@
 	let price = 0;
 	let formattedPrice = Number(utils.formatEther(price));
 	let tile: string;
-    let isAvailable = false;
+    let isAvailable = 0;
     let availability: string;
 	let showInvalidAddress = false;
 	let showInsufficientBalance = false;
@@ -138,7 +138,7 @@
 
 		if (Number(amount) < formattedPrice) {
 			showInsufficientBalance = true;
-		} else {
+		} else if (isAvailable == 0) {
 			if ($page.params.address == $connectedAccount) {
 				readContractByAddress(
 					'0xB9c73D46357708e23B99106FBF9e26C0F0412743',
@@ -156,13 +156,18 @@
 					$provider.getSigner()
 				);
 			}
-			// TODO: seize
-		}
+		} else if (isAvailable == 1) {
+            readContractByAddress(
+                '0xB9c73D46357708e23B99106FBF9e26C0F0412743',
+                tileABI,
+                'seize',
+                [{ value: utils.parseEther(`${price}`) }],
+					$provider.getSigner()
+				);
+        }
 	}
 
 	async function checkAvailability(tile, account) {
-        if (tile == $connectedAccount) { return true; }
-
         const tokenId = await readContractByAddress(
 			'0xB9c73D46357708e23B99106FBF9e26C0F0412743',
 			tileABI,
@@ -170,9 +175,11 @@
             [tile]
 		);
 
-        if (tokenId.eq(0)) { return true; }
+        if (tokenId.eq(0)) { return 0; }
 
-		return false;
+        if (tile == $connectedAccount) { return 1; }
+
+		return 2;
 	}
 
 	function download() {
@@ -186,7 +193,7 @@
 	}
 
 	onMount(async () => {
-		// Check if legitimate address
+		// TODO: check if legitimate address
 		if (!utils.isAddress($page.params.address)) {
 			showInvalidAddress = true;
 		} else {
@@ -204,7 +211,7 @@
         isAvailable = await checkAvailability(tile, $connectedAccount);
 	});
 
-    $: availability = isAvailable ? 'Available' : 'Not available';
+    $: availability = isAvailable < 2 ? 'Available' : 'Not available';
 	$: formattedPrice = Number(utils.formatEther(price));
 </script>
 
