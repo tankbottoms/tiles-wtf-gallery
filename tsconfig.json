@@ -18,6 +18,12 @@
 			"$tiles/*": ["src/tiles/*"],
 			"$components": ["src/components"],
 			"$components/*": ["src/components/*"],
+			"$constants": ["src/constants"],
+			"$constants/*": ["src/constants/*"],
+			"$utils": ["src/utils"],
+			"$utils/*": ["src/utils/*"],
+			"$abis": ["src/abis"],
+			"$abis/*": ["src/abis/*"],
 		}
 	}
 }

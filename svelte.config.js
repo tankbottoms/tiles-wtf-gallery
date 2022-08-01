@@ -3,7 +3,6 @@ import preprocess from 'svelte-preprocess';
 import path from 'path';
 import nodePolyfills from 'rollup-plugin-polyfill-node';
 
-
 const MODE = process.env.NODE_ENV;
 const development = MODE === 'development';
 
@@ -48,14 +47,19 @@ const config = {
 					$components: path.resolve('./src/components'),
 					$stores: path.resolve('./src/stores'),
 					$tiles: path.resolve('./src/tiles'),
+					$constants: path.resolve('./src/constants'),
+					$utils: path.resolve('./src/utils'),
+					$abis: path.resolve('./src/abis')
 				}
 			},
 			build: {
 				rollupOptions: {
-					plugins: [nodePolyfills({ 
-						crypto: true,
-						http: true
-					})]
+					plugins: [
+						nodePolyfills({
+							crypto: true,
+							http: true
+						})
+					]
 				},
 				commonjsOptions: {
 					transformMixedEsModules: true

@@ -1,128 +1,19 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
+	import { utils } from 'ethers';
 	import { page } from '$app/stores';
-	import { BigNumber, utils } from 'ethers';
 	import { generateTile } from '$tiles/tilesStandalone';
 	import { connectedAccount, provider, readNetwork } from '$stores/web3';
 	import { readContractByAddress } from '$jbx/utils/web3/contractReader';
+	import tileABI from '$abis/tilesAbi';
+	import { getTilePrice } from '$utils/tiles';
+	import { downloadFile } from '$utils/file';
 
-	const tileABI = [
-		{
-			inputs: [],
-			name: 'mint',
-			outputs: [
-				{
-					internalType: 'uint256',
-					name: 'mintedTokenId',
-					type: 'uint256'
-				}
-			],
-			stateMutability: 'payable',
-			type: 'function'
-		},
-		{
-			inputs: [
-				{
-					internalType: 'address',
-					name: 'tile',
-					type: 'address'
-				}
-			],
-			name: 'grab',
-			outputs: [
-				{
-					internalType: 'uint256',
-					name: 'mintedTokenId',
-					type: 'uint256'
-				}
-			],
-			stateMutability: 'payable',
-			type: 'function'
-		},
-		{
-			inputs: [],
-			name: 'totalSupply',
-			outputs: [
-				{
-					internalType: 'uint256',
-					name: '',
-					type: 'uint256'
-				}
-			],
-			stateMutability: 'view',
-			type: 'function'
-		},
-		{
-			inputs: [
-				{
-					internalType: 'address',
-					name: '',
-					type: 'address'
-				}
-			],
-			name: 'idForAddress',
-			outputs: [
-				{
-					internalType: 'uint256',
-					name: '',
-					type: 'uint256'
-				}
-			],
-			stateMutability: 'view',
-			type: 'function'
-		},
-		{
-			inputs: [
-				{
-					internalType: 'uint256',
-					name: 'id',
-					type: 'uint256'
-				}
-			],
-			name: 'ownerOf',
-			outputs: [
-				{
-					internalType: 'address',
-					name: 'owner',
-					type: 'address'
-				}
-			],
-			stateMutability: 'view',
-			type: 'function'
-		},
-		{
-			inputs: [],
-			name: 'seize',
-			outputs: [
-				{
-					internalType: 'uint256',
-					name: 'tokenId',
-					type: 'uint256'
-				}
-			],
-			stateMutability: 'payable',
-			type: 'function'
-		}
-	];
 	let price = 0;
 	let formattedPrice = Number(utils.formatEther(price));
 	let tile: string;
 	let showInvalidAddress = false;
 	let showInsufficientBalance = false;
-
-	async function getPrice(basePrice, multiplier, tierSize) {
-		const currentSupply = await readContractByAddress(
-			'0xB9c73D46357708e23B99106FBF9e26C0F0412743',
-			tileABI,
-			'totalSupply'
-		);
-		const expectedPrice = currentSupply.div(tierSize).mul(multiplier).mul(basePrice);
-		if (expectedPrice.eq(0)) {
-			return basePrice;
-		}
-
-		return expectedPrice;
-	}
 
 	async function mint() {
 		if (!$provider) {
@@ -159,35 +50,29 @@
 	}
 
 	async function isAvailable(tile, account) {
-        const tokenId = await readContractByAddress(
+		const tokenId = await readContractByAddress(
 			'0xB9c73D46357708e23B99106FBF9e26C0F0412743',
 			tileABI,
 			'idForAddress',
-            [tile]
+			[tile]
 		);
 
-        if (tokenId.eq(0)) { return true; }
+		if (tokenId.eq(0)) {
+			return true;
+		}
 
-        // const owner = await readContractByAddress(
+		// const owner = await readContractByAddress(
 		// 	'0xB9c73D46357708e23B99106FBF9e26C0F0412743',
 		// 	tileABI,
 		// 	'ownerOf',
-        //     [tokenId]
+		//     [tokenId]
 		// );
 
-        if (tile == $connectedAccount) { return true; }
+		if (tile == $connectedAccount) {
+			return true;
+		}
 
 		return true; // TODO
-	}
-
-	function download() {
-		const blob = new Blob([tile], { type: 'text/plain' });
-		const url = window.URL.createObjectURL(blob);
-		const link = document.createElement('a');
-		link.href = url;
-		link.download = 'tile.svg';
-		link.click();
-		window.URL.revokeObjectURL(url);
 	}
 
 	onMount(async () => {
@@ -198,11 +83,13 @@
 			tile = generateTile($page.params.address);
 			showInvalidAddress = false;
 		}
-		readNetwork.subscribe(async (net) => {
+
+		// Returning so it gets unsubscribed when component is destroyed
+		return readNetwork.subscribe(async () => {
 			try {
-				price = await getPrice(utils.parseEther('0.0001'), 2, 512); // TODO: consts
+				price = await getTilePrice(utils.parseEther('0.0001'), 2, 512); // TODO: consts
 			} catch (error) {
-				console.log(error.message);
+				console.warn(error.message);
 			}
 		});
 	});
@@ -225,7 +112,9 @@
 	{/if}
 </section>
 
-<button class="download" on:click={download}> Download SVG </button>
+<button class="download" on:click={() => downloadFile(tile, 'tile.svg', 'image/svg')}>
+	Download SVG
+</button>
 
 <style>
 	button {
