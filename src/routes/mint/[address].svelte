@@ -9,6 +9,7 @@
 	import { getTilePrice } from '$utils/tiles';
 	import { downloadFile } from '$utils/file';
 	import { TILE_BASE_PRICE, TILE_MULTIPLIER, TILE_TIER_SIZE } from '$constants/tile';
+	import contracts from '$constants/contracts';
 
 	let price = 0;
 	let formattedPrice = Number(utils.formatEther(price));
@@ -33,7 +34,7 @@
 		} else if (isAvailable == 0) {
 			if ($page.params.address == $connectedAccount) {
 				readContractByAddress(
-					'0xB9c73D46357708e23B99106FBF9e26C0F0412743',
+					contracts.tiles,
 					tileABI,
 					'mint',
 					[{ value: utils.parseEther(`${price}`) }],
@@ -41,7 +42,7 @@
 				);
 			} else {
 				readContractByAddress(
-					'0xB9c73D46357708e23B99106FBF9e26C0F0412743',
+					contracts.tiles,
 					tileABI,
 					'grab',
 					[$page.params.address, { value: utils.parseEther(`${price}`) }],
@@ -50,7 +51,7 @@
 			}
 		} else if (isAvailable == 1) {
 			readContractByAddress(
-				'0xB9c73D46357708e23B99106FBF9e26C0F0412743',
+				contracts.tiles,
 				tileABI,
 				'seize',
 				[{ value: utils.parseEther(`${price}`) }],
@@ -60,12 +61,7 @@
 	}
 
 	async function checkAvailability(tile, account) {
-		const tokenId = await readContractByAddress(
-			'0xB9c73D46357708e23B99106FBF9e26C0F0412743',
-			tileABI,
-			'idForAddress',
-			[tile]
-		);
+		const tokenId = await readContractByAddress(contracts.tiles, tileABI, 'idForAddress', [tile]);
 
 		if (tokenId.eq(0)) {
 			return 0;
