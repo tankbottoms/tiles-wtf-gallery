@@ -20,10 +20,18 @@
 
 	onMount(async () => {
 		readNetwork.subscribe(async (net) => {
-			count = (await readContract('Tiles', 'totalSupply'))?.toString() || '0';
-			price = formatEther(
-				(await getTilePrice(TILE_BASE_PRICE, TILE_MULTIPLIER, TILE_TIER_SIZE))?.toString() || '0'
-			);
+			try {
+				count = (await readContract('Tiles', 'totalSupply'))?.toString() || '0';
+			} catch (e) {
+				console.error(e.message);
+			}
+			try {
+				price = formatEther(
+					(await getTilePrice(TILE_BASE_PRICE, TILE_MULTIPLIER, TILE_TIER_SIZE))?.toString() || '0'
+				);
+			} catch (e) {
+				console.error(e.message);
+			}
 		});
 
 		connectedAccount.subscribe(async ($connectedAccount) => {
