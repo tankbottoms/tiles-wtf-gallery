@@ -69,7 +69,7 @@ export async function readContract(
 		const contract = new ethers.Contract(
 			contractAddress,
 			abi,
-			new ethers.providers.JsonRpcProvider(getDefaultProvider().rpcUrl)
+			provider.get() || new ethers.providers.JsonRpcProvider(getDefaultProvider().rpcUrl)
 		);
 
 		const response = parseContractResponse(await contract[functionName](...args));

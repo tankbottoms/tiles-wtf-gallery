@@ -18,13 +18,11 @@
 
 	txnResponse.subscribe(async ($txnResponse) => {
 		try {
-			console.log('waiting...');
 			await $txnResponse?.wait();
 			$txnResponse = null;
 		} catch (error) {
 			errorMessage = error.message;
 		}
-		console.log('waited');
 	});
 </script>
 
@@ -43,10 +41,10 @@
 					<img src="/images/quint.gif" alt={''} />
 					<h2>Transaction pending...</h2>
 					<p>Your transaction has been submitted and is awaiting confirmation.</p>
+					<div>
+						<Loading />
+					</div>
 				{/if}
-			</div>
-			<div>
-				<Loading />
 			</div>
 		</section>
 	</div>

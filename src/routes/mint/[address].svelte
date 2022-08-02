@@ -35,7 +35,6 @@
 		}
 
 		const balance = await $provider.getBalance($connectedAccount);
-		// const amount = utils.formatEther(balance);
 
 		console.log(balance?.toString(), price?.toString());
 		if (balance.lt(price)) {
@@ -86,7 +85,6 @@
 			} catch (error) {
 				console.warn(error.message);
 			}
-
 			loading = false;
 		});
 	});
