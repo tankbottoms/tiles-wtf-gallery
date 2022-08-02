@@ -9,13 +9,23 @@
 	import { downloadFile } from '$utils/file';
 	import { TILE_BASE_PRICE, TILE_MULTIPLIER, TILE_TIER_SIZE } from '$constants/tile';
 	import { pageReady } from '$stores';
+	import { txnResponse } from '$components/PendingTxn.svelte';
+
+	enum Available {
+		IS_AVAILABLE = 0,
+		CAN_SEIZE = 1,
+		NOT_AVAILABLE = 2
+	}
 
 	let price = BigNumber.from(0);
 	let tile: string;
-	let isAvailable = 0;
-	let availability: string;
+	let isAvailable: Available = 0;
+	let availability: 'Available' | 'Not available' = 'Available';
 	let showInvalidAddress = false;
 	let showInsufficientBalance = false;
+
+	let loading = false;
+	$: address = $page.params.address;
 
 	async function mint() {
 		if (!$provider) {
@@ -30,27 +40,27 @@
 		console.log(balance?.toString(), price?.toString());
 		if (balance.lt(price)) {
 			showInsufficientBalance = true;
-		} else if (isAvailable == 0) {
-			if ($page.params.address == $connectedAccount) {
-				await writeContract('Tiles', 'mint', [], { value: price });
+		} else if (isAvailable === Available.IS_AVAILABLE) {
+			if ($page.params.address === $connectedAccount) {
+				$txnResponse = await writeContract('Tiles', 'mint', [], { value: price });
 			} else {
-				await writeContract('Tiles', 'grab', [$page.params.address], {
+				$txnResponse = await writeContract('Tiles', 'grab', [$page.params.address], {
 					value: price
 				});
 			}
-		} else if (isAvailable == 1) {
-			await writeContract('Tiles', 'seize', [], { value: price });
+		} else if (isAvailable === Available.CAN_SEIZE) {
+			$txnResponse = await writeContract('Tiles', 'seize', [], { value: price });
 		}
 	}
 
-	async function checkAvailability(tile, account) {
-		const tokenId = await readContract('Tiles', 'idForAddress', [tile]);
+	async function checkAvailability(address) {
+		const tokenId = await readContract('Tiles', 'idForAddress', [address]);
 
 		if (tokenId.eq(0)) {
 			return 0;
 		}
 
-		if (tile == account) {
+		if ($connectedAccount === address) {
 			return 1;
 		}
 
@@ -68,16 +78,22 @@
 
 		// Returning so it gets unsubscribed when component is destroyed
 		return readNetwork.subscribe(async () => {
+			loading = true;
+
 			try {
 				price = await getTilePrice(TILE_BASE_PRICE, TILE_MULTIPLIER, TILE_TIER_SIZE);
-				isAvailable = await checkAvailability(tile, $connectedAccount);
+				isAvailable = await checkAvailability(address);
 			} catch (error) {
 				console.warn(error.message);
 			}
+
+			loading = false;
 		});
 	});
 
-	$: availability = isAvailable < 2 ? 'Available' : 'Not available';
+	$: availability = [Available.IS_AVAILABLE, Available.CAN_SEIZE].includes(isAvailable)
+		? 'Available'
+		: 'Not available';
 	$: formattedPrice = Number(utils.formatEther(price));
 </script>
 
@@ -87,9 +103,15 @@
 	{:else if tile}
 		{@html tile}
 		<p>{$page.params.address}</p>
-		<p>{availability}</p>
+		<p>{loading ? 'Checking availablity...' : availability}</p>
 		{#if $connectedAccount}
-			<button on:click={mint} disabled={!$pageReady.web3}>
+			<button
+				class="mint"
+				on:click={mint}
+				disabled={!$pageReady.web3 ||
+					loading ||
+					![Available.IS_AVAILABLE, Available.CAN_SEIZE].includes(isAvailable)}
+			>
 				MINT ({formattedPrice} ETH)
 			</button>
 		{:else}
@@ -114,6 +136,11 @@
 		padding: 0px;
 		margin-top: 20px;
 	}
+
+	button.mint:disabled {
+		cursor: not-allowed;
+	}
+
 	section {
 		display: flex;
 		flex-direction: column;
