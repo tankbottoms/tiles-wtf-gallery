@@ -1,5 +1,7 @@
 <script lang="ts" context="module">
 	import Store from '$jbx/utils/Store';
+	import { createCustomNotification } from '$utils/notification';
+	import type { UpdateNotification } from 'bnc-notify';
 	import type { ContractTransaction } from 'ethers';
 
 	export const txnResponse = new Store<ContractTransaction>();
@@ -12,11 +14,27 @@
 	let errorMessage = '';
 
 	txnResponse.subscribe(async (_txnResponse) => {
+		let update: UpdateNotification;
 		try {
 			if (!_txnResponse) return;
+			const { update: _update } = createCustomNotification({
+				type: 'pending',
+				message: 'Your transaction has been submitted and is awaiting confirmation.'
+			});
+			update = _update;
 			await _txnResponse?.wait();
+			update?.({
+				type: 'success',
+				message: 'Transaction succesfully completed',
+				autoDismiss: 3000
+			});
 			$txnResponse = null;
 		} catch (error) {
+			update?.({
+				type: 'error',
+				message: 'Transaction aborted',
+				autoDismiss: 3000
+			});
 			errorMessage = error.message;
 		}
 	});

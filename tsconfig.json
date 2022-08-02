@@ -26,6 +26,8 @@
 			"$models/*": ["src/models/*"],
 			"$data": ["src/data"],
 			"$data/*": ["src/data/*"],
+			"$components": ["src/components"],
+			"$components/*": ["src/components/*"],
 			"$jbx": ["src/jbx"],
 			"$jbx/*": ["src/jbx/*"],
 			"$tiles": ["src/tiles"],
