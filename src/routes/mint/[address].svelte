@@ -8,7 +8,7 @@
 	import { getTilePrice } from '$utils/tiles';
 	import { downloadFile } from '$utils/file';
 	import { TILE_BASE_PRICE, TILE_MULTIPLIER, TILE_TIER_SIZE } from '$constants/tile';
-	import { isPageReady, pageReady, whenPageReady } from '$stores';
+	import { pageReady, whenPageReady } from '$stores';
 	import { txnResponse } from '$components/PendingTxn.svelte';
 	import { errorMessage } from '$components/ErrorModal.svelte';
 	import { parseEther } from 'ethers/lib/utils';

@@ -10,13 +10,21 @@
 	} from '$stores/web3';
 	import { getTruncatedAddress } from '$jbx/components/Address.svelte';
 	import { blocknativeNetworks } from '$jbx/constants/networks';
+	import { readContract } from '$jbx/utils/web3/contractReader';
+	import { getTilePrice } from '$utils/tiles';
+	import { TILE_BASE_PRICE, TILE_MULTIPLIER, TILE_TIER_SIZE } from '$constants/tile';
+	import { formatEther, parseEther } from 'ethers/lib/utils';
 
-	let count = 0;
-	let price = 0.01;
+	let count = '0';
+	let price = '0.0000';
 
 	onMount(async () => {
-		console.log('🛠 TODO read contract, number of minted tiles and current price');
-		// Async import module due to window being undefined
+		readNetwork.subscribe(async (net) => {
+			count = (await readContract('Tiles', 'totalSupply'))?.toString() || '0';
+			price = formatEther(
+				(await getTilePrice(TILE_BASE_PRICE, TILE_MULTIPLIER, TILE_TIER_SIZE))?.toString() || '0'
+			);
+		});
 
 		connectedAccount.subscribe(async ($connectedAccount) => {
 			if ($connectedAccount) {
