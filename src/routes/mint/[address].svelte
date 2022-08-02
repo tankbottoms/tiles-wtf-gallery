@@ -10,12 +10,21 @@
 	import { TILE_BASE_PRICE, TILE_MULTIPLIER, TILE_TIER_SIZE } from '$constants/tile';
 	import { pageReady } from '$stores';
 
+	enum AVAILABLE {
+		AVAILABLE = 0,
+		MY_UNAVAILABLE = 1,
+		UNAVAILABLE = 2
+	}
+
 	let price = BigNumber.from(0);
 	let tile: string;
-	let isAvailable = 0;
+	let isAvailable = AVAILABLE.AVAILABLE;
 	let availability: string;
 	let showInvalidAddress = false;
 	let showInsufficientBalance = false;
+	let loading = false;
+
+	$: address = $page.params.address;
 
 	async function mint() {
 		if (!$provider) {
@@ -27,8 +36,6 @@
 
 		const balance = await $provider.getBalance($connectedAccount);
 		// const amount = utils.formatEther(balance);
-
-		console.log(balance?.toString(), price?.toString());
 		if (balance.lt(price)) {
 			showInsufficientBalance = true;
 		} else if (isAvailable == 0) {
@@ -44,21 +51,20 @@
 		}
 	}
 
-	async function checkAvailability(tile, account) {
-		const tokenId = await readContract('Tiles', 'idForAddress', [tile]);
+	async function checkAvailability(address: string) {
+		const tokenId = BigNumber.from((await readContract('Tiles', 'idForAddress', [address])) || 0);
 
 		if (tokenId.eq(0)) {
 			return 0;
 		}
 
-		if (tile == account) {
-			return 1;
-		}
+		if ($connectedAccount?.toLowerCase() == address?.toLowerCase()) return 1;
 
 		return 2;
 	}
 
 	onMount(async () => {
+		loading = true;
 		// TODO: check if legitimate address
 		if (!utils.isAddress($page.params.address)) {
 			showInvalidAddress = true;
@@ -69,16 +75,20 @@
 
 		// Returning so it gets unsubscribed when component is destroyed
 		return readNetwork.subscribe(async () => {
+			loading = true;
 			try {
 				price = await getTilePrice(TILE_BASE_PRICE, TILE_MULTIPLIER, TILE_TIER_SIZE);
-				isAvailable = await checkAvailability(tile, $connectedAccount);
+				isAvailable = await checkAvailability(address);
 			} catch (error) {
 				console.warn(error.message);
 			}
+			loading = false;
 		});
 	});
 
-	$: availability = isAvailable < 2 ? 'Available' : 'Not available';
+	$: availability = [AVAILABLE.AVAILABLE, AVAILABLE.MY_UNAVAILABLE].includes(isAvailable)
+		? 'Available'
+		: 'Not available';
 	$: formattedPrice = Number(utils.formatEther(price));
 </script>
 
@@ -88,8 +98,14 @@
 	{:else if tile}
 		{@html tile}
 		<p>{$page.params.address}</p>
-		<p>{availability}</p>
-		<button on:click={mint} disabled={!$pageReady.web3}>MINT ({formattedPrice} ETH)</button>
+		<p>{loading ? 'Checking Availability...' : availability}</p>
+		<button
+			class="mint"
+			on:click={mint}
+			disabled={!$pageReady.web3 || isAvailable !== AVAILABLE.AVAILABLE || loading}
+		>
+			MINT ({formattedPrice} ETH)
+		</button>
 		{#if showInsufficientBalance}
 			<p>Insufficient balance</p>
 		{/if}
@@ -108,6 +124,9 @@
 		border-bottom: 3px solid gold;
 		padding: 0px;
 		margin-top: 20px;
+	}
+	.mint:disabled {
+		cursor: not-allowed;
 	}
 	section {
 		display: flex;

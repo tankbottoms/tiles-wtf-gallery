@@ -8,8 +8,8 @@
 		readNetwork,
 		switchNetwork
 	} from '$stores/web3';
-	import { getTruncatedAddress } from '$jbx/components/Address.svelte';
-	import { blocknativeNetworks } from '$jbx/constants/networks';
+	import { getTruncatedAddress } from '$components/Address.svelte';
+	import { blocknativeNetworks } from '$constants/networks';
 
 	let count = 0;
 	let price = 0.01;

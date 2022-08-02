@@ -66,10 +66,11 @@ web3Onboard.subscribe((onboard) => {
 
 if (browser) {
 	setTimeout(async () => {
-		readNetwork.subscribe((net) => {
-			const returnValue = getDefaultProvider();
+		chainId.subscribe(($chainId) => {
+			const net = blocknativeNetworks.find((net) => Number(net.id) === Number($chainId));
+			const returnValue = net || getDefaultProvider();
 			console.log('Read Network:', returnValue.alias);
-			chainId.set(Number(net.id));
+			readNetwork.set(returnValue);
 		});
 		pendingInitialization = initialize();
 		try {

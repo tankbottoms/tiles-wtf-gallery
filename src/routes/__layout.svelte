@@ -1,6 +1,6 @@
 <script>
 	import Header from '$components/Header.svelte';
-	import Intl from '$jbx/provider/Intl.svelte';
+	import Intl from '../provider/Intl.svelte';
 </script>
 
 <Intl config={{}}>

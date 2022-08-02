@@ -6,7 +6,7 @@
 </script>
 
 <script lang="ts">
-	export let name: keyof typeof pathsByName | 'discord' | 'sun' | 'moon' | 'info' = 'caret';
+	export let name: keyof typeof pathsByName | 'discord' | 'sun' | 'moon' | 'info' | 'github' = 'caret';
 	export let direction = 'n';
 	export let spin = false;
 	$: paths = pathsByName[name] || [];
