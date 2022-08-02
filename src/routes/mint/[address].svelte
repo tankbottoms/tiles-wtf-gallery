@@ -89,7 +89,13 @@
 		{@html tile}
 		<p>{$page.params.address}</p>
 		<p>{availability}</p>
-		<button on:click={mint} disabled={!$pageReady.web3}>MINT ({formattedPrice} ETH)</button>
+		{#if $connectedAccount}
+			<button on:click={mint} disabled={!$pageReady.web3}>
+				MINT ({formattedPrice} ETH)
+			</button>
+		{:else}
+			<button on:click={mint}>CONNECT WALLET</button>
+		{/if}
 		{#if showInsufficientBalance}
 			<p>Insufficient balance</p>
 		{/if}
