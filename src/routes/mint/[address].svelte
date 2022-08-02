@@ -9,7 +9,7 @@
 	import { downloadFile } from '$utils/file';
 	import { TILE_BASE_PRICE, TILE_MULTIPLIER, TILE_TIER_SIZE } from '$constants/tile';
 	import { pageReady, whenPageReady } from '$stores';
-	import { txnResponse } from '$components/PendingTxn.svelte';
+	import { txnResponse, methodName } from '$components/PendingTxn.svelte';
 	import { errorMessage } from '$components/ErrorModal.svelte';
 	import { parseEther } from 'ethers/lib/utils';
 
@@ -51,10 +51,12 @@
 		}
 		if (isAvailable === Available.IS_AVAILABLE) {
 			if ($page.params.address === $connectedAccount) {
+				$methodName = 'MINT';
 				$txnResponse = await writeContract('Tiles', 'mint', [], { value: price });
 				$txnResponse?.wait();
 				await init();
 			} else {
+				$methodName = 'GRAB';
 				$txnResponse = await writeContract('Tiles', 'grab', [$page.params.address], {
 					value: price
 				});
@@ -62,6 +64,7 @@
 				await init();
 			}
 		} else if (isAvailable === Available.CAN_SEIZE) {
+			$methodName = 'SEIZE';
 			$txnResponse = await writeContract('Tiles', 'seize', [], { value: price });
 			$txnResponse?.wait();
 			await init();

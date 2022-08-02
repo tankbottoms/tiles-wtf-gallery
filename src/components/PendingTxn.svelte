@@ -1,13 +1,20 @@
 <script lang="ts" context="module">
-	import Store from '$jbx/utils/Store';
-	import { createCustomNotification } from '$utils/notification';
-	import type { UpdateNotification } from 'bnc-notify';
-	import type { ContractTransaction } from 'ethers';
+	import Store from '$utils/Store';
 
 	export const txnResponse = new Store<ContractTransaction>();
+	export const methodName = new Store('');
+
+	txnResponse.subscribe((txn) => {
+		if (!txn) {
+			methodName.set('');
+		}
+	});
 </script>
 
 <script lang="ts">
+	import { createCustomNotification } from '$utils/notification';
+	import type { UpdateNotification } from 'bnc-notify';
+	import type { ContractTransaction } from 'ethers';
 	import Icon from './Icon.svelte';
 	import Loading from './Loading.svelte';
 
@@ -52,6 +59,9 @@
 					</h2>
 					<p class="error">{errorMessage}</p>
 				{:else}
+					{#if $methodName}
+						<h2>Method: {$methodName}</h2>
+					{/if}
 					<h2>Transaction pending...</h2>
 					<p>Your transaction has been submitted and is awaiting confirmation.</p>
 					<div>
