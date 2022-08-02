@@ -14,7 +14,7 @@
 	.loading {
 		text-align: center;
 		font-size: 2rem;
-		color: var(--text-header);
+		color: gold;
 	}
 	.loading {
 		display: flex;
