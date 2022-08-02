@@ -1,0 +1,42 @@
+{
+	"catalogs": [
+		{
+			"path": "<rootDir>/src/locales/{locale}/messages",
+			"include": [
+				"<rootDir>"
+			],
+			"exclude": [
+				"**/node_modules/**"
+			]
+		}
+	],
+	"compileNamespace": "ts",
+	"extractBabelOptions": {},
+	"compilerBabelOptions": {},
+	"fallbackLocales": {},
+	"format": "po",
+	"locales": [
+		"en",
+		"uk",
+		"zh",
+		"ru",
+		"tr",
+		"es",
+		"pt",
+		"fr",
+		"id",
+		"ja",
+		"hi"
+	],
+	"extractors": [
+		"babel"
+	],
+	"orderBy": "messageId",
+	"pseudoLocale": "",
+	"rootDir": ".",
+	"runtimeConfigModule": [
+		"lingui_core",
+		"i18n"
+	],
+	"sourceLocale": ""
+}
