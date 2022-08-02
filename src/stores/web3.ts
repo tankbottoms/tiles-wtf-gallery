@@ -46,6 +46,9 @@ web3Onboard.subscribe((onboard) => {
 				if (activeChain) {
 					connectedAccount.set(activeAccount.address);
 					chainId.set(Number(activeChain.id));
+					readNetwork.set(
+						blocknativeNetworks.find((net) => Number(net.id) === Number(activeChain.id))
+					);
 					const networkAlias = getNetworkAliasByChainId(activeChain.id);
 					setNetworkAliasInQueryParams(networkAlias);
 					provider.set(new providers.Web3Provider(activeWallet.provider));

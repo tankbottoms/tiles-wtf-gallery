@@ -58,7 +58,7 @@
 				style="user-select: none"
 				bind:this={buttonElement}
 			>
-				{getTruncatedAddress($connectedAccount)}
+				{getTruncatedAddress($connectedAccount)}({$readNetwork.alias})
 				{#if dropdownOpened}
 					<ul class="dropdown">
 						<li>{getTruncatedAddress($connectedAccount)}</li>
