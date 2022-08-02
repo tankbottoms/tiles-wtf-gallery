@@ -93,7 +93,7 @@
 				MINT ({formattedPrice} ETH)
 			</button>
 		{:else}
-			<button on:click={mint}>CONNECT WALLET</button>
+			<button on:click={() => web3Connect()}>CONNECT WALLET</button>
 		{/if}
 		{#if showInsufficientBalance}
 			<p>Insufficient balance</p>
