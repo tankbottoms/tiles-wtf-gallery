@@ -30,11 +30,11 @@
 	$: address = $page.params.address;
 
 	let balance = BigNumber.from(parseEther('10000'));
-	let hasEnoughBalance = false;
+	let hasEnoughBalance = true;
 
-	$: if (price.gt(0)) {
+	$: if (price.gt(0) && $provider) {
 		(async () => {
-			balance = BigNumber.from(await $provider.getBalance($connectedAccount));
+			balance = BigNumber.from(await $provider?.getBalance($connectedAccount));
 			if (balance.lt(price)) {
 				showInsufficientBalance = true;
 				hasEnoughBalance = false;
@@ -94,6 +94,7 @@
 			showInvalidAddress = false;
 		}
 
+		console.log('init subscribing...');
 		// Returning so it gets unsubscribed when component is destroyed
 		return readNetwork.subscribe(async () => {
 			loading = true;

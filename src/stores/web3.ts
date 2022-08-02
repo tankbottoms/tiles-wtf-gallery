@@ -16,7 +16,7 @@ export const ethPrice = new Store(1);
 export const daiPrice = new Store(1);
 export const provider = new Store<providers.Web3Provider>();
 export const connectedAccount = new Store('');
-export const chainId = new Store<number>(1);
+export const chainId = new Store<number>(Number(getDefaultProvider().id));
 export const web3Onboard = new Store<OnboardAPI>();
 
 pageReady.update((state) => {
