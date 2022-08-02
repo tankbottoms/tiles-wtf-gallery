@@ -11,7 +11,7 @@
 	import { pageReady, whenPageReady } from '$stores';
 	import { txnResponse, methodName } from '$components/PendingTxn.svelte';
 	import { errorMessage } from '$components/ErrorModal.svelte';
-	import { parseEther } from 'ethers/lib/utils';
+	import { parseEther } from 'ethers/lib/utils.js';
 
 	enum Available {
 		IS_AVAILABLE = 0,

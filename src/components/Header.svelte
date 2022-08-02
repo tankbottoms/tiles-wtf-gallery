@@ -13,7 +13,7 @@
 	import { readContract } from '$jbx/utils/web3/contractReader';
 	import { getTilePrice } from '$utils/tiles';
 	import { TILE_BASE_PRICE, TILE_MULTIPLIER, TILE_TIER_SIZE } from '$constants/tile';
-	import { formatEther, parseEther } from 'ethers/lib/utils';
+	import { formatEther } from 'ethers/lib/utils.js';
 
 	let count = '0';
 	let price = '0.0000';
