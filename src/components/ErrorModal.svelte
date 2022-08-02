@@ -1,46 +1,22 @@
 <script lang="ts" context="module">
 	import Store from '$jbx/utils/Store';
-	import type { ContractTransaction } from 'ethers';
-
-	export const txnResponse = new Store<ContractTransaction>();
+	export const errorMessage = new Store<string>();
 </script>
 
 <script lang="ts">
 	import Icon from './Icon.svelte';
-	import Loading from './Loading.svelte';
-
-	let errorMessage = '';
-
-	txnResponse.subscribe(async (_txnResponse) => {
-		try {
-			if (!_txnResponse) return;
-			await _txnResponse?.wait();
-			$txnResponse = null;
-		} catch (error) {
-			errorMessage = error.message;
-		}
-	});
 </script>
 
-{#if $txnResponse}
+{#if $errorMessage}
 	<div class="overlay" />
 	<div class="pending-txn-modal">
 		<section>
-			<div class="x-btn" on:click={() => ($txnResponse = null)}>x</div>
+			<div class="x-btn" on:click={() => ($errorMessage = '')}>x</div>
 			<div>
-				{#if errorMessage}
-					<h2>
-						<Icon name="exclamationCircle" style="color: red; transform: translateY(3px)" /> Error
-					</h2>
-					<p class="error">{errorMessage}</p>
-				{:else}
-					<img src="/images/quint.gif" alt={''} />
-					<h2>Transaction pending...</h2>
-					<p>Your transaction has been submitted and is awaiting confirmation.</p>
-					<div>
-						<Loading />
-					</div>
-				{/if}
+				<h2>
+					<Icon name="exclamationCircle" style="color: red; transform: translateY(3px)" /> Error
+				</h2>
+				<p class="error">{$errorMessage}</p>
 			</div>
 		</section>
 	</div>

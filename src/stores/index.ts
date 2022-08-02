@@ -20,3 +20,14 @@ export const isPageReady = derived(pageReady, ($pageReady) => {
 	}
 	return ready;
 });
+
+export function whenPageReady() {
+	return new Promise((r) => {
+		const unsub = isPageReady.subscribe((state) => {
+			if (state) {
+				r(true);
+				unsub();
+			}
+		});
+	});
+}

@@ -1,4 +1,6 @@
 <script>
+	import ErrorModal from '$components/ErrorModal.svelte';
+
 	import Header from '$components/Header.svelte';
 	import PendingTxn from '$components/PendingTxn.svelte';
 	import Intl from '$jbx/provider/Intl.svelte';
@@ -8,6 +10,7 @@
 	<Header />
 	<slot />
 	<PendingTxn />
+	<ErrorModal />
 </Intl>
 
 <style>

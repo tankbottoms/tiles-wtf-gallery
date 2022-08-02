@@ -8,8 +8,10 @@
 	import { getTilePrice } from '$utils/tiles';
 	import { downloadFile } from '$utils/file';
 	import { TILE_BASE_PRICE, TILE_MULTIPLIER, TILE_TIER_SIZE } from '$constants/tile';
-	import { pageReady } from '$stores';
+	import { isPageReady, pageReady, whenPageReady } from '$stores';
 	import { txnResponse } from '$components/PendingTxn.svelte';
+	import { errorMessage } from '$components/ErrorModal.svelte';
+	import { parseEther } from 'ethers/lib/utils';
 
 	enum Available {
 		IS_AVAILABLE = 0,
@@ -27,28 +29,42 @@
 	let loading = false;
 	$: address = $page.params.address;
 
+	let balance = BigNumber.from(parseEther('10000'));
+	let hasEnoughBalance = false;
+
+	$: if (price.gt(0)) {
+		(async () => {
+			balance = BigNumber.from(await $provider.getBalance($connectedAccount));
+			if (balance.lt(price)) {
+				showInsufficientBalance = true;
+				hasEnoughBalance = false;
+			} else {
+				hasEnoughBalance = true;
+			}
+		})();
+	}
+
 	async function mint() {
-		if (!$provider) {
+		if (!$connectedAccount) {
 			console.log('account not connected');
-			await web3Connect();
-			return;
+			return await web3Connect();
 		}
-
-		const balance = await $provider.getBalance($connectedAccount);
-
-		console.log(balance?.toString(), price?.toString());
-		if (balance.lt(price)) {
-			showInsufficientBalance = true;
-		} else if (isAvailable === Available.IS_AVAILABLE) {
+		if (isAvailable === Available.IS_AVAILABLE) {
 			if ($page.params.address === $connectedAccount) {
 				$txnResponse = await writeContract('Tiles', 'mint', [], { value: price });
+				$txnResponse?.wait();
+				await init();
 			} else {
 				$txnResponse = await writeContract('Tiles', 'grab', [$page.params.address], {
 					value: price
 				});
+				$txnResponse?.wait();
+				await init();
 			}
 		} else if (isAvailable === Available.CAN_SEIZE) {
 			$txnResponse = await writeContract('Tiles', 'seize', [], { value: price });
+			$txnResponse?.wait();
+			await init();
 		}
 	}
 
@@ -66,8 +82,11 @@
 		return 2;
 	}
 
-	onMount(async () => {
-		// TODO: check if legitimate address
+	async function init() {
+		loading = true;
+		await whenPageReady();
+
+		// Check if legitimate address
 		if (!utils.isAddress($page.params.address)) {
 			showInvalidAddress = true;
 		} else {
@@ -84,10 +103,14 @@
 				isAvailable = await checkAvailability(address);
 			} catch (error) {
 				console.warn(error.message);
+				$errorMessage;
 			}
+
 			loading = false;
 		});
-	});
+	}
+
+	onMount(init);
 
 	$: availability = [Available.IS_AVAILABLE, Available.CAN_SEIZE].includes(isAvailable)
 		? 'Available'
@@ -108,14 +131,16 @@
 				on:click={mint}
 				disabled={!$pageReady.web3 ||
 					loading ||
-					![Available.IS_AVAILABLE, Available.CAN_SEIZE].includes(isAvailable)}
+					![Available.IS_AVAILABLE, Available.CAN_SEIZE].includes(isAvailable) ||
+					!hasEnoughBalance}
 			>
 				MINT ({formattedPrice} ETH)
 			</button>
 		{:else}
 			<button on:click={() => web3Connect()}>CONNECT WALLET</button>
 		{/if}
-		{#if showInsufficientBalance}
+		<br />
+		{#if !hasEnoughBalance}
 			<p>Insufficient balance</p>
 		{/if}
 	{/if}
