@@ -20,7 +20,6 @@
 	async function mint() {
 		if (!$provider) {
 			console.log('account not connected');
-			// TODO: prompt to connect
 			await web3Connect();
 			return;
 		}
