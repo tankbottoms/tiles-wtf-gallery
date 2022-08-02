@@ -34,7 +34,6 @@
 					</h2>
 					<p class="error">{errorMessage}</p>
 				{:else}
-					<img src="/images/quint.gif" alt={''} />
 					<h2>Transaction pending...</h2>
 					<p>Your transaction has been submitted and is awaiting confirmation.</p>
 					<div>
