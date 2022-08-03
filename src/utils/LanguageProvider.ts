@@ -7,7 +7,6 @@ import type { Messages } from '@lingui/core';
 // load plural configs
 i18n.loadLocaleData({
 	en: { plurals: en },
-	zh: { plurals: zh },
 	ru: { plurals: ru },
 	tr: { plurals: tr },
 	pt: { plurals: pt },
@@ -55,23 +54,6 @@ export function loadLocale() {
 	}
 	dynamicActivateLocale(locale);
 }
-
-// export default function LanguageProvider({
-//   children,
-// }: {
-//   children: ReactNode
-// }) {
-//   useEffect(() => {
-//     const locale = getLocale()
-//     if (locale === DEFAULT_LOCALE) {
-//       return activateDefaultLocale()
-//     }
-
-//     dynamicActivateLocale(locale)
-//   }, [])
-
-//   return <I18nProvider i18n={i18n}>{children}</I18nProvider>
-// }
 
 export function getText([key]: TemplateStringsArray) {
 	return i18n.messages[key];

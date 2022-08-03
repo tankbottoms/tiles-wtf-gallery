@@ -53,12 +53,12 @@
 		try {
 			if (isAvailable === Available.IS_AVAILABLE) {
 				if ($page.params.address === $connectedAccount) {
-					$methodName = 'MINT';
+					$methodName = 'Mint';
 					$txnResponse = await writeContract('Tiles', 'mint', [], { value: price });
 					$txnResponse?.wait();
 					await init();
 				} else {
-					$methodName = 'GRAB';
+					$methodName = 'Grab';
 					$txnResponse = await writeContract('Tiles', 'grab', [address], {
 						value: price
 					});
@@ -66,12 +66,12 @@
 					await init();
 				}
 			} else if (isAvailable === Available.CAN_SEIZE) {
-				$methodName = 'SEIZE';
+				$methodName = 'Seize';
 				$txnResponse = await writeContract('Tiles', 'seize', [], { value: price });
 				$txnResponse?.wait();
 				await init();
 			}
-			await checkAvailability(address);
+			isAvailable = await checkAvailability(address);
 		} catch (error) {
 			createCustomNotification({
 				type: 'error',
