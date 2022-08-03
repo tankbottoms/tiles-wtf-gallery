@@ -30,7 +30,7 @@
 	<section>
 		<h1>Infinte Tiles v1.2</h1>		
 		<p>Generated from any ETH address</p>
-		<p>Generated on-chain in Solidity</p>
+		<p><a href="https://github.com/tankbottoms/tiles-on-chain/tree/main/contracts/components" target="_blank">Generated on-chain in Solidity</a></p>
 		<p>Each is unique & objectively rare</p>		
 		<a href="/wtf">wtf</a>
 		<a href="https://juicebox.money/v2/p/41" target="_blank">Juicebox</a>
@@ -43,8 +43,12 @@
 	</section>
 </main>
 
-<footer>				
-	<a href="https://info.juicebox.money/tos" target="_blank" class="center">Terms of service</a>				
+<footer>
+	<div class="center">
+		<div class="link">
+		<a href="https://info.juicebox.money/tos" target="_blank">Terms of service</a>				
+		</div>
+	</div>				
 </footer>
 
 <style>
@@ -83,8 +87,7 @@
 		text-decoration: none;		
 		align-items: center;
 		justify-items: center;		
-		max-width: 1000px;
-  		border-bottom: 3px solid gold;
+		text-align: center;		  		
   		margin: 0px 5px;
 	}  
 

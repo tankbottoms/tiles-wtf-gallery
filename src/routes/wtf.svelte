@@ -14,7 +14,7 @@
 	</p>	
 	<p>
 		<a href="https://tiles.art">Original Tiles</a> token holders may mint their tile(s) for free, if someone has preemptively 
-		minted another individual&#39;s address, a small premium will be required to seize the token. Additional minting mechanics maybe gleaned from the <a href="https://github.com/tankbottoms/tiles-on-chain/blob/main/contracts/TileNFT.sol">source</a>.  		
+		minted another individual&#39;s address, the existing rate will be required to seize the token. Additional minting mechanics maybe gleaned from the <a href="https://github.com/tankbottoms/tiles-on-chain/blob/main/contracts/TileNFT.sol">source</a>.  		
 	</p>
 </section>
 
