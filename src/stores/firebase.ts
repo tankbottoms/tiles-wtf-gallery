@@ -91,22 +91,6 @@ export async function getDocuments(
 	}
 }
 
-export async function createMoveDocument(type: string, data: MoveDocument): Promise<boolean> {
-	if (!connectedAccount.get()) return false;
-	data.created_at = new Date().getTime();
-	data.created_by = connectedAccount.get();
-	try {
-		if (typeof type === 'string') {
-			await addDoc(collection(firestore, type), data);
-			return true;
-		}
-		throw Error('unknown document type');
-	} catch (err: unknown) {
-		console.error(`failed to save ${type} document`);
-		return false;
-	}
-}
-
 export async function setDocument(path: string, data: DocumentData): Promise<boolean> {
 	if (!connectedAccount.get()) return false;
 	data.created_at = new Date().getTime();

@@ -159,10 +159,12 @@ const toNum = (r) => {
 	return Number(`0x${r.join('')}`);
 };
 
-//const address =
-// process.argv.find((arg) => arg.startsWith("0x")) ||
-/* "0x5d95baEBB8412AD827287240A5c281E3bB30d27E" */
-//  "";
+/* 
+const address =
+process.argv.find((arg) => arg.startsWith("0x")) ||
+"0x5d95baEBB8412AD827287240A5c281E3bB30d27E" 
+"";
+*/
 
 const red = '#FE4465',
 	black = '#222',
@@ -324,7 +326,7 @@ setInterval(() => {
   setDocumentElementToTile(tile, randomAddresses[current]);
 }, 3000);
 
-NOTE: when running from command line and wanting SVG saved to directory
+// NOTE: when running from command line and wanting SVG saved to directory
 require("fs").writeFileSync(
   process.argv.find((arg) => arg.startsWith("-o"))?.replace("-o", "") ||
     "./tiles-alone/output.svg",

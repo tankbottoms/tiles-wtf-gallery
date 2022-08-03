@@ -32,7 +32,7 @@ web3Onboard.subscribe((onboard) => {
 	try {
 		unsub?.();
 	} catch (e) {
-		//
+		console.log(`[stores/web3.ts] `, e);
 	}
 	const observable = onboard.state.select('wallets');
 	unsub = observable.subscribe((state) => {
@@ -53,15 +53,15 @@ web3Onboard.subscribe((onboard) => {
 					setNetworkAliasInQueryParams(networkAlias);
 					provider.set(new providers.Web3Provider(activeWallet.provider));
 				} else {
-					console.log('no active chain');
+					console.log(`[stores/web3.ts]['no active chain']`);
 					connectedAccount.set('');
 				}
 			} else {
-				console.log('no active account');
+				console.log(`[stores/web3.ts]['no active account']`);
 				connectedAccount.set('');
 			}
 		} else {
-			console.log('no active wallet');
+			console.log(`[stores/web3.ts]['no active wallet']`);
 			connectedAccount.set('');
 		}
 	}).unsubscribe;
@@ -71,15 +71,14 @@ if (browser) {
 	setTimeout(async () => {
 		readNetwork.subscribe((net) => {
 			const returnValue = getDefaultProvider();
-			console.log('Read Network:', returnValue.alias);
+			console.log(`[stores/web3.ts]['read network']`, returnValue.alias);
 			chainId.set(Number(net.id));
 		});
 		pendingInitialization = initialize();
 		try {
 			await pendingInitialization;
 		} catch (error) {
-			console.log('failed to initialize wallet');
-			console.error(error);
+			console.log(`[stores/web3.ts]['failed to initialize wallet']`, error);
 			pendingInitialization = null;
 		}
 	});
@@ -103,7 +102,6 @@ async function initialize() {
 		appUrl: './'
 	});
 	const gnosis = gnosisModule({});
-
 	const onboard = Onboard({
 		accountCenter: {
 			desktop: {
