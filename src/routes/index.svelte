@@ -31,7 +31,7 @@
 		<h1>Infinte Tiles v1.2</h1>		
 		<p>Generated from any ETH address</p>
 		<p>Generated on-chain in Solidity</p>
-		<p>Each is unique & subjectively rare</p>		
+		<p>Each is unique & objectively rare</p>		
 		<a href="/wtf">wtf</a>
 		<a href="https://juicebox.money/v2/p/41" target="_blank">Juicebox</a>
 		<a href="/faq">faq</a>
