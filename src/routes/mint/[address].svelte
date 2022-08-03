@@ -55,22 +55,20 @@
 				if ($page.params.address === $connectedAccount) {
 					$methodName = 'Mint';
 					$txnResponse = await writeContract('Tiles', 'mint', [], { value: price });
-					$txnResponse?.wait();
-					await init();
+					await $txnResponse?.wait();
 				} else {
 					$methodName = 'Grab';
 					$txnResponse = await writeContract('Tiles', 'grab', [address], {
 						value: price
 					});
-					$txnResponse?.wait();
-					await init();
+					await $txnResponse?.wait();
 				}
 			} else if (isAvailable === Available.CAN_SEIZE) {
 				$methodName = 'Seize';
 				$txnResponse = await writeContract('Tiles', 'seize', [], { value: price });
-				$txnResponse?.wait();
-				await init();
+				await $txnResponse?.wait();
 			}
+			isAvailable = Available.NOT_AVAILABLE;
 			isAvailable = await checkAvailability(address);
 		} catch (error) {
 			createCustomNotification({
