@@ -46,9 +46,12 @@ web3Onboard.subscribe((onboard) => {
 				if (activeChain) {
 					connectedAccount.set(activeAccount.address);
 					chainId.set(Number(activeChain.id));
-					readNetwork.set(
-						blocknativeNetworks.find((net) => Number(net.id) === Number(activeChain.id))
+					const newNet = blocknativeNetworks.find(
+						(net) => Number(net.id) === Number(activeChain.id)
 					);
+					if (Number(readNetwork.get().id) !== Number(newNet.id)) {
+						readNetwork.set(newNet);
+					}
 					const networkAlias = getNetworkAliasByChainId(activeChain.id);
 					setNetworkAliasInQueryParams(networkAlias);
 					provider.set(new providers.Web3Provider(activeWallet.provider));
@@ -70,9 +73,9 @@ web3Onboard.subscribe((onboard) => {
 if (browser) {
 	setTimeout(async () => {
 		readNetwork.subscribe((net) => {
-			const returnValue = getDefaultProvider();
+			const returnValue = connectedAccount.get() ? net : getDefaultProvider();
 			console.log('Read Network:', returnValue.alias);
-			chainId.set(Number(net.id));
+			if (chainId.get() !== Number(returnValue.id)) chainId.set(Number(net.id));
 		});
 		pendingInitialization = initialize();
 		try {

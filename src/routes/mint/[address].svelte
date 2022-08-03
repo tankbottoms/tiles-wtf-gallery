@@ -12,6 +12,7 @@
 	import { txnResponse, methodName } from '$components/PendingTxn.svelte';
 	import { errorMessage } from '$components/ErrorModal.svelte';
 	import { parseEther } from 'ethers/lib/utils.js';
+	import { createCustomNotification } from '$utils/notification';
 
 	enum Available {
 		IS_AVAILABLE = 0,
@@ -27,7 +28,7 @@
 	let showInsufficientBalance = false;
 
 	let loading = false;
-	$: address = $page.params.address;
+	$: address = $page.params.address?.padEnd(24, '0');
 
 	let balance = BigNumber.from(parseEther('10000'));
 	let hasEnoughBalance = true;
@@ -49,25 +50,34 @@
 			console.log('account not connected');
 			return await web3Connect();
 		}
-		if (isAvailable === Available.IS_AVAILABLE) {
-			if ($page.params.address === $connectedAccount) {
-				$methodName = 'MINT';
-				$txnResponse = await writeContract('Tiles', 'mint', [], { value: price });
-				$txnResponse?.wait();
-				await init();
-			} else {
-				$methodName = 'GRAB';
-				$txnResponse = await writeContract('Tiles', 'grab', [$page.params.address], {
-					value: price
-				});
+		try {
+			if (isAvailable === Available.IS_AVAILABLE) {
+				if ($page.params.address === $connectedAccount) {
+					$methodName = 'MINT';
+					$txnResponse = await writeContract('Tiles', 'mint', [], { value: price });
+					$txnResponse?.wait();
+					await init();
+				} else {
+					$methodName = 'GRAB';
+					$txnResponse = await writeContract('Tiles', 'grab', [address], {
+						value: price
+					});
+					$txnResponse?.wait();
+					await init();
+				}
+			} else if (isAvailable === Available.CAN_SEIZE) {
+				$methodName = 'SEIZE';
+				$txnResponse = await writeContract('Tiles', 'seize', [], { value: price });
 				$txnResponse?.wait();
 				await init();
 			}
-		} else if (isAvailable === Available.CAN_SEIZE) {
-			$methodName = 'SEIZE';
-			$txnResponse = await writeContract('Tiles', 'seize', [], { value: price });
-			$txnResponse?.wait();
-			await init();
+			await checkAvailability(address);
+		} catch (error) {
+			createCustomNotification({
+				type: 'error',
+				message: error.message?.split('{')[0],
+				autoDismiss: 3000
+			});
 		}
 	}
 
@@ -89,13 +99,13 @@
 		loading = true;
 		await whenPageReady();
 
+		tile = generateTile(address);
 		// Check if legitimate address
-		if (!utils.isAddress($page.params.address)) {
-			showInvalidAddress = true;
-		} else {
-			tile = generateTile($page.params.address);
-			showInvalidAddress = false;
-		}
+		// if (!utils.isAddress(address)) {
+		// 	showInvalidAddress = false;
+		// } else {
+		// 	showInvalidAddress = false;
+		// }
 
 		console.log('init subscribing...');
 		// Returning so it gets unsubscribed when component is destroyed
