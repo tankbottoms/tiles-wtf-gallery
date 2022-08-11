@@ -20,7 +20,8 @@
 		| 'metamask'
 		| 'gnosis'
 		| 'uniswap'
-		| 'sushiswap' = 'caret';
+		| 'sushiswap'
+		| 'github' = 'caret';
 	export let direction = 'n';
 	export let spin = false;
 	export let style = '';

@@ -1,116 +1,144 @@
-import { readNetwork } from '$stores/web3';
+import { connectedAccount, getProvider, readNetwork } from '$stores/web3';
 import { provider } from '$stores/web3';
-import { ethers, Signer, type ContractInterface, type ContractTransaction } from 'ethers';
+import { ethers, type ContractTransaction } from 'ethers';
 
 import Tiles from '$deployments/Tiles';
 
 import { get } from 'svelte/store';
 import { parseCachedData, parseContractResponse } from '../cached';
-import JBETHPaymentTerminal from '../../../deployments/mainnet/JBETHPaymentTerminal';
-import JBProjectHandles from '../../../deployments/mainnet/JBProjectHandles';
-import PublicResolver from '../../../deployments/mainnet/PublicResolver';
-import JBProjects from '../../../deployments/mainnet/JBProjects';
-import JBController from '../../../deployments/mainnet/JBController';
-import JBSplitsStore from '../../../deployments/mainnet/JBSplitsStore';
-import JBFundingCycleStore from '../../../deployments/mainnet/JBFundingCycleStore';
-import JBTokenStore from '../../../deployments/mainnet/JBTokenStore';
+import JBETHPaymentTerminalMainnet from '../../../deployments/mainnet/JBETHPaymentTerminal';
+import JBProjectHandlesMainnet from '../../../deployments/mainnet/JBProjectHandles';
+import PublicResolverMainnet from '../../../deployments/mainnet/PublicResolver';
+import JBProjectsMainnet from '../../../deployments/mainnet/JBProjects';
+import JBControllerMainnet from '../../../deployments/mainnet/JBController';
+import JBSplitsStoreMainnet from '../../../deployments/mainnet/JBSplitsStore';
+import JBFundingCycleStoreMainnet from '../../../deployments/mainnet/JBFundingCycleStore';
+import JBTokenStoreMainnet from '../../../deployments/mainnet/JBTokenStore';
+import JBETHERC20ProjectPayerDeployerMainnet from '../../../deployments/mainnet/JBETHERC20ProjectPayerDeployer';
+
+import JBETHPaymentTerminalRinkeby from '../../../deployments/mainnet/JBETHPaymentTerminal';
+import JBProjectHandlesRinkeby from '../../../deployments/mainnet/JBProjectHandles';
+import PublicResolverRinkeby from '../../../deployments/mainnet/PublicResolver';
+import JBProjectsRinkeby from '../../../deployments/mainnet/JBProjects';
+import JBControllerRinkeby from '../../../deployments/mainnet/JBController';
+import JBSplitsStoreRinkeby from '../../../deployments/mainnet/JBSplitsStore';
+import JBFundingCycleStoreRinkeby from '../../../deployments/mainnet/JBFundingCycleStore';
+import JBTokenStoreRinkeby from '../../../deployments/mainnet/JBTokenStore';
+import JBETHERC20ProjectPayerDeployerRinkeby from '../../../deployments/mainnet/JBETHERC20ProjectPayerDeployer';
+import type { V2ContractName } from '$juicebox/models/v2/contracts';
 
 export const contracts = {
-	Tiles,
-	JBETHPaymentTerminal,
-	JBProjectHandles,
-	PublicResolver,
-	JBProjects,
-	JBController,
-	JBSplitsStore,
-	JBFundingCycleStore,
-	JBTokenStore
+	mainnet: {
+		Tiles,
+		JBETHPaymentTerminalMainnet,
+		JBProjectHandlesMainnet,
+		PublicResolverMainnet,
+		JBProjectsMainnet,
+		JBControllerMainnet,
+		JBSplitsStoreMainnet,
+		JBFundingCycleStoreMainnet,
+		JBTokenStoreMainnet,
+		JBETHERC20ProjectPayerDeployerMainnet
+	},
+	rinkeby: {
+		JBETHPaymentTerminalRinkeby,
+		JBProjectHandlesRinkeby,
+		PublicResolverRinkeby,
+		JBProjectsRinkeby,
+		JBControllerRinkeby,
+		JBSplitsStoreRinkeby,
+		JBFundingCycleStoreRinkeby,
+		JBTokenStoreRinkeby,
+		JBETHERC20ProjectPayerDeployerRinkeby
+	}
+
 };
 
 export async function readContractByAddress(
 	contractAddress,
-	ABI: ContractInterface,
+	ABI: any[],
 	functionName: string,
-	args = [],
-	signer?: Signer
-) {
-	console.log(get(readNetwork).alias?.toUpperCase(), contractAddress, functionName, args);
-	const contract = new ethers.Contract(
-		contractAddress,
-		ABI,
-		new ethers.providers.JsonRpcProvider(get(readNetwork).rpcUrl)
-	);
-
-	if (signer) {
-		return await contract.connect(signer)[functionName](...args);
-	}
-	if (args.length == 0) {
-		return await contract[functionName]();
-	}
-	return await contract[functionName](...args);
-}
-
-export async function readContract(
-	contractName: keyof typeof contracts,
-	functionName: string,
-	args = [],
+	args: Any[] = [],
 	cached = false
 ) {
-	console.log(contractName, functionName, args);
-
 	const cache = await caches.open('CONTRACT_RESPONSE');
-
-	if (contracts[contractName][get(readNetwork).alias]) {
-		const contractAddress = contracts[contractName][get(readNetwork).alias];
-		const abi = contracts[contractName].abi;
-		const id = btoa(
-			JSON.stringify({
-				chainId: readNetwork.get().id,
-				contractAddress,
-				functionName,
-				args
-			})
-		);
-		if (cached) {
-			const response = await cache.match(id);
-			if (response) {
-				const result = await response.text();
-				const data = parseCachedData(JSON.parse(result));
-				if (typeof data !== 'undefined' && data !== null) {
-					return data;
-				}
-			} else console.log('cache miss');
-		}
-
-		const contract = new ethers.Contract(
+	const id = btoa(
+		JSON.stringify({
+			chainId: readNetwork.get().id,
 			contractAddress,
-			abi,
-			new ethers.providers.JsonRpcProvider(get(readNetwork).rpcUrl)
-		);
+			functionName,
+			args
+		})
+	);
+	if (cached) {
+		const response = await cache.match(id);
+		if (response) {
+			const result = await response.text();
+			const data = parseCachedData(JSON.parse(result));
+			if (typeof data !== 'undefined' && data !== null) {
+				return data;
+			}
+		} else console.log('cache miss');
+	}
 
+	const contract = new ethers.Contract(contractAddress, ABI, getProvider());
+
+	if (connectedAccount.get() && getProvider()) {
 		const response = parseContractResponse(await contract[functionName](...args));
 		await cache.put(id, new Response(JSON.stringify(response)));
 		return response;
 	} else {
-		throw Error(`${contractName}: deployment not found on ${get(readNetwork).alias}`);
+		const response = await fetch(
+			`${import.meta.env.VITE_FIREBASE_FUNCTIONS_URL}/app/web3/readContract`,
+			{
+				method: 'POST',
+				headers: {
+					'content-type': 'application/json',
+					apikey: import.meta.env.VITE_API_KEY
+				},
+				body: JSON.stringify({
+					chainId: readNetwork.get().id,
+					address: contractAddress,
+					abi: ABI,
+					function: functionName,
+					args: [...args]
+				})
+			}
+		);
+
+		const jsonResponse = await response.json();
+
+		await cache.put(id, new Response(JSON.stringify(jsonResponse)));
+
+		return parseCachedData(jsonResponse);
 	}
 }
 
-export async function writeContract(
-	contractName: keyof typeof contracts,
+export async function readContract(
+	contractName: V2ContractName,
 	functionName: string,
-	args = [],
+	args: Any[] = [],
+	cached = false
+) {
+	console.log(contractName, functionName, args);
+
+	const contractAddress = contracts[get(readNetwork).alias][contractName].address;
+	const abi = contracts[get(readNetwork).alias][contractName].abi;
+	return await readContractByAddress(contractAddress, abi, functionName, args, cached);
+}
+
+export async function writeContract(
+	contractName: V2ContractName,
+	functionName: string,
+	args: Any[] = [],
 	opts = {}
 ): Promise<ContractTransaction> {
 	const _provider = provider.get();
-	if (contracts[contractName][get(readNetwork).alias]) {
-		const contract = new ethers.Contract(
-			contracts[contractName][get(readNetwork).alias],
-			contracts[contractName].abi,
-			_provider.getSigner()
-		);
-		return await contract[functionName](...args, opts);
-	} else {
-		throw Error(`${contractName}: deployment not found on ${get(readNetwork).alias}`);
-	}
+	const contract = new ethers.Contract(
+		contracts[get(readNetwork).alias][contractName].address,
+		contracts[get(readNetwork).alias][contractName].abi,
+		_provider.getSigner()
+	);
+	return await contract[functionName](...args, opts);
 }
+
