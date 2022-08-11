@@ -33,7 +33,7 @@
 		<p><a href="https://github.com/tankbottoms/tiles-on-chain/tree/main/contracts/components" target="_blank">Generated on-chain in Solidity</a></p>
 		<p>Each is unique & objectively rare</p>		
 		<a href="/wtf">wtf</a>
-		<a href="https://juicebox.money/v2/p/41" target="_blank">Juicebox</a>
+		<a href="/dao">treasury</a>
 		<a href="/faq">faq</a>
 		<div class="group">
 			<div>
@@ -46,7 +46,7 @@
 <footer>
 	<div class="center">
 		<div class="link">
-		<a href="https://info.juicebox.money/tos" target="_blank">Terms of service</a>				
+		<!--<a href="https://info.juicebox.money/tos">Terms of service</a>				-->
 		</div>
 	</div>				
 </footer>

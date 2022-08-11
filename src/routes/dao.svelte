@@ -14,7 +14,7 @@
 	import { BigNumber, constants, ethers } from 'ethers';
 	import { modal } from '$stores';
 	import { setContext } from 'svelte';
-	import Footer from '$juicebox/components/FooterProject.svelte';
+	// import Footer from '$juicebox/components/FooterProject.svelte';
 	import Details from '$juicebox/components/project/Details.svelte';
 	import Head from '$juicebox/components/project/Head.svelte';
 	import Issue from '$juicebox/components/Issue.svelte';
@@ -501,9 +501,12 @@
 	{#if $project?.projectMetadata?.name}
 		<title>{$project?.projectMetadata?.name} | Juicebox</title>
 	{:else}
-		<title>Project | Juicebox</title>
+		<title>Project | Tiles</title>
 	{/if}
 </svelte:head>
+
+<br />
+<br />
 
 <section>
 	<div class="content">
@@ -527,7 +530,6 @@
 			</div>
 		{/if}
 	</div>
-	<Footer />
 </section>
 <br />
 
