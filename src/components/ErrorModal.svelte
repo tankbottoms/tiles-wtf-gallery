@@ -1,5 +1,5 @@
 <script lang="ts" context="module">
-	import Store from '$jbx/utils/Store';
+	import Store from '$juicebox/utils/Store';
 	export const errorMessage = new Store<string>();
 </script>
 

@@ -9,11 +9,11 @@ const config = ({ mode }) => {
 		plugins: [
 			sveltekit(),
 			development &&
-				nodePolyfills({
-					include: ['node_modules/**/*.js', new RegExp('node_modules/.vite/.*js')],
-					http: true,
-					crypto: true
-				})
+			nodePolyfills({
+				include: ['node_modules/**/*.js', new RegExp('node_modules/.vite/.*js')],
+				http: true,
+				crypto: true
+			})
 		],
 		resolve: {
 			alias: {
@@ -24,7 +24,7 @@ const config = ({ mode }) => {
 				$models: path.resolve('./src/models'),
 				$data: path.resolve('./src/data'),
 
-				$jbx: path.resolve('./src/jbx'),
+				$juicebox: path.resolve('./src/juicebox'),
 				$components: path.resolve('./src/components'),
 				$tiles: path.resolve('./src/tiles'),
 				$deployments: path.resolve('./src/deployments'),

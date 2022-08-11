@@ -27,4 +27,6 @@ export declare global {
 		matic = 'matic',
 		mumbai = 'mumbai'
 	}
+	type Address = `0x${string}`;
+	type Any = any;
 }

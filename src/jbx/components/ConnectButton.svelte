@@ -8,8 +8,8 @@
 		chainId,
 		readNetwork
 	} from '$stores/web3';
-	import Icon from '$jbx/components/Icon.svelte';
-	import { getEthBalance } from '$jbx/data/eth';
+	import Icon from '$juicebox/components/Icon.svelte';
+	import { getEthBalance } from '$juicebox/data/eth';
 	import { getTruncatedAddress } from './Address.svelte';
 	import EthAmount from './ETHAmount.svelte';
 	import Trans from './Trans.svelte';

@@ -8,9 +8,9 @@
 		readNetwork,
 		switchNetwork
 	} from '$stores/web3';
-	import { getTruncatedAddress } from '$jbx/components/Address.svelte';
-	import { blocknativeNetworks } from '$jbx/constants/networks';
-	import { readContract } from '$jbx/utils/web3/contractReader';
+	import { getTruncatedAddress } from '$juicebox/components/Address.svelte';
+	import { blocknativeNetworks } from '$juicebox/constants/networks';
+	import { readContract } from '$juicebox/utils/web3/contractReader';
 	import { getTilePrice } from '$utils/tiles';
 	import { TILE_BASE_PRICE, TILE_MULTIPLIER, TILE_TIER_SIZE } from '$constants/tile';
 	import { formatEther } from 'ethers/lib/utils.js';

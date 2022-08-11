@@ -1,4 +1,4 @@
-<script lang="ts" context="module">
+<!-- <script lang="ts" context="module">
 	import { browser } from '$app/env';
 	export const hydrate = true;
 	export const router = browser;
@@ -6,19 +6,18 @@
 </script>
 
 <script lang="ts">
-
 	/*
 	TODO: Bring in the Juicebox Project UX here
 	*/
 
-	import type { V2CurrencyOption } from '$jbx/models/v2/currencyOption';
-	import type { V2ProjectContextType } from '$jbx/create/stores';
+	import type { V2CurrencyOption } from '$juicebox/models/v2/currencyOption';
+	import type { V2ProjectContextType } from '$juicebox/models/project-type';
 
 	import { BigNumber } from 'ethers';
 	import { modal } from '$stores';
 	import { onMount, setContext } from 'svelte';
-	import Button from '$jbx/components/Button.svelte';
-	import Details from '$jbx/project/Details.svelte';
+	import Button from '$juicebox/components/Button.svelte';
+	import Details from '$juicebox/components/project/Details.svelte';
 	import Head from '$jbx/project/Head.svelte';
 	import Issue from '$jbx/components/Issue.svelte';
 	import Modal, { openModal } from '$jbx/components/Modal.svelte';
@@ -349,4 +348,4 @@
 		padding-bottom: 40px;
 		row-gap: 0px;
 	}
-</style>
+</style> -->
