@@ -1,8 +1,8 @@
-import Store from '$jbx/utils/Store';
-import type {	
+import Store from '$juicebox/utils/Store';
+import type {
 	ProjectSortType
-} from '$jbx/models/project-visibility';
-import type { Project } from '$jbx/models/subgraph-entities/vX/project';
+} from '$juicebox/models/project-visibility';
+import type { Project } from '$juicebox/models/subgraph-entities/vX/project';
 
 export const sortType = new Store<ProjectSortType>('totalPaid');
 

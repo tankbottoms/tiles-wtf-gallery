@@ -1,3 +1,3 @@
-import Store from '$jbx/utils/Store';
+import Store from '$juicebox/utils/Store';
 
 export const projectPayAmount = new Store<string>();

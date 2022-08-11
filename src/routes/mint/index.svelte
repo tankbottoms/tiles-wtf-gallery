@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Icon from '$jbx/components/Icon.svelte';
+	import Icon from '$juicebox/components/Icon.svelte';
 	import { constants, utils } from 'ethers';
 	import { onMount } from 'svelte';
 	import { generateTile, generateRandomAddresses } from '$tiles/tilesStandalone';

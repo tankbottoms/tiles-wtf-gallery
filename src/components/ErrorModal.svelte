@@ -1,10 +1,10 @@
 <script lang="ts" context="module">
-	import Store from '$jbx/utils/Store';
+	import Store from '$juicebox/utils/Store';
 	export const errorMessage = new Store<string>();
 </script>
 
 <script lang="ts">
-	import Icon from './Icon.svelte';
+	import Icon from '$juicebox/components/Icon.svelte';
 </script>
 
 {#if $errorMessage}
