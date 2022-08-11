@@ -18,10 +18,9 @@
 	import Details from '$juicebox/components/project/Details.svelte';
 	import Head from '$juicebox/components/project/Head.svelte';
 	import Issue from '$juicebox/components/Issue.svelte';
-	import Modal, { openModal } from '$juicebox/components/Modal.svelte';
+	import Modal from '$juicebox/components/Modal.svelte';
 	import Paid from '$juicebox/components/Paid.svelte';
 	import Store from '$utils/Store';
-	import { page } from '$app/stores';
 	import { readContract, readContractByAddress } from '$juicebox/utils/web3/contractReader';
 	import { V2ContractName } from '$juicebox/models/v2/contracts';
 	import {
@@ -41,7 +40,6 @@
 	import { blocknativeNetworks } from '$constants/networks';
 
 	const projectId = BigNumber.from($chainId === 4 ? 98 : 41);
-	export let redirectIfHasHandle = false;
 
 	let project = new Store<V2ProjectContextType>({} as any);
 	const userTokenBalance = new Store<UserTokenBalanceContext>({
@@ -56,8 +54,6 @@
 	let loading = true;
 	let issue: string | false = false;
 	let cachedRender = true;
-
-	const isNewDeploy = $page.url.searchParams.get('newDeploy');
 
 	function checkNetworkId(_chainId: number) {
 		if (Number($readNetwork.id) !== _chainId) {
@@ -79,6 +75,7 @@
 			loading = false;
 			return;
 		}
+		$project.projectId = BigNumber.from(projectId);
 
 		try {
 			const [resultingProject] = await getProjects({
@@ -87,9 +84,6 @@
 			});
 			if (resultingProject && resultingProject.handle) {
 				$project.handle = resultingProject.handle;
-				if (redirectIfHasHandle) {
-					history.replaceState({}, '', `/@${$project.handle}`);
-				}
 			}
 		} catch (e) {
 			console.error(e);

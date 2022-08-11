@@ -201,10 +201,6 @@
 		width: 260px;
 		border: 1px solid var(--stroke-tertiary);
 	}
-	.exchanges {
-		display: flex;
-		flex-direction: column;
-	}
 	.modal-title {
 		margin-top: 0.5rem;
 	}

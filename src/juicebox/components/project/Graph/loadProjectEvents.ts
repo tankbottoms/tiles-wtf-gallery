@@ -1,6 +1,6 @@
-import type { Project } from '$models/subgraph-entities/vX/project';
-import { fromWad } from '$utils/formatNumber';
-import { type WhereConfig, querySubgraph } from '$utils/graph';
+import type { Project } from '$juicebox/models/subgraph-entities/vX/project';
+import { fromWad } from '$juicebox/utils/formatNumber';
+import { type WhereConfig, querySubgraph } from '$juicebox/utils/graph';
 import type { BigNumber } from 'ethers';
 
 import type { BlockRef, EventRef, ShowGraph } from './types';

@@ -418,8 +418,7 @@ export function formatGraphResponse<E extends EntityKey>(
 export async function querySubgraph<E extends EntityKey, K extends EntityKeys<E>>(
 	opts: GraphQueryOpts<E, K> | null
 ) {
-	const subgraphUrl =
-		`${import.meta.env.VITE_FIREBASE_FUNCTIONS_URL}/app/subgraph/` + readNetwork.get().alias;
+	const subgraphUrl = get(readNetwork).subgraphUrl;
 	if (!subgraphUrl) {
 		// This should _only_ happen in development
 		throw new Error('env.VITE_SUBGRAPH_URL_{NETWORK_NAME} is missing');
@@ -435,7 +434,7 @@ export async function querySubgraph<E extends EntityKey, K extends EntityKeys<E>
 		{
 			query: formatGraphQuery(opts)
 		},
-		{ headers: { 'Content-Type': 'application/json', apikey: import.meta.env.VITE_API_KEY } }
+		{ headers: { 'Content-Type': 'application/json' } }
 	);
 
 	if ('errors' in response.data) {

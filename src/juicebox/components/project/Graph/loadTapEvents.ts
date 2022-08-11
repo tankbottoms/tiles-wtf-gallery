@@ -1,6 +1,6 @@
 import type { BigNumber } from 'ethers';
-import { fromWad } from '$utils/formatNumber';
-import { querySubgraph } from '$utils/graph';
+import { fromWad } from '$juicebox/utils/formatNumber';
+import { querySubgraph } from '$juicebox/utils/graph';
 
 import { daysToMillis } from './utils';
 import type { Duration } from './types';
@@ -19,16 +19,16 @@ export const loadTapEvents = async ({
 		keys: ['netTransferAmount', 'timestamp'],
 		where: projectId
 			? [
-					{
-						key: 'projectId',
-						value: projectId.toNumber()
-					},
-					{
-						key: 'timestamp',
-						value: Math.round((now - daysToMillis(duration)) / 1000),
-						operator: 'gte'
-					}
-			  ]
+				{
+					key: 'projectId',
+					value: projectId.toNumber()
+				},
+				{
+					key: 'timestamp',
+					value: Math.round((now - daysToMillis(duration)) / 1000),
+					operator: 'gte'
+				}
+			]
 			: undefined
 	});
 

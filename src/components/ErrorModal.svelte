@@ -4,7 +4,7 @@
 </script>
 
 <script lang="ts">
-	import Icon from './Icon.svelte';
+	import Icon from '$juicebox/components/Icon.svelte';
 </script>
 
 {#if $errorMessage}

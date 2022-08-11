@@ -1,5 +1,6 @@
 import type { PinataMetadata, PinataPinResponse } from 'pinata_ipfs_sdk';
 import axios from 'axios';
+import pinataClient from 'pinata_ipfs_sdk/src/index.js';
 import { IpfsCacheName } from '$juicebox/models/ipfs-cache/cache-name';
 import { consolidateMetadata, type ProjectMetadataV4 } from '$juicebox/models/project-metadata';
 import { readNetwork } from '$stores/web3';
@@ -7,11 +8,15 @@ import { IPFS_GATEWAY_HOSTNAME } from '$juicebox/constants/ipfs';
 import { dev } from '$app/env';
 import { get } from 'svelte/store';
 
-const api_key = import.meta.env.VITE_API_KEY as string;
+const pinata_api_key = import.meta.env.VITE_PINATA_PINNER_KEY as string;
+const pinata_secret_api_key = import.meta.env.VITE_PINATA_PINNER_SECRET as string;
 
-if (!api_key) {
-	throw new Error('Missing .env vars VITE_API_KEY');
+if (!pinata_api_key || !pinata_secret_api_key) {
+	throw new Error(
+		'Missing .env vars REACT_APP_PINATA_PINNER_KEY or REACT_APP_PINATA_PINNER_SECRET'
+	);
 }
+const pinata = pinataClient(pinata_api_key, pinata_secret_api_key);
 
 export const IPFS_TAGS = {
 	[IpfsCacheName.trendingV2]: `${dev ? 'DEV_trending_projects_v2_' : 'trending_projects_v2_'}${get(readNetwork).alias
@@ -41,7 +46,7 @@ export const ipfsCidToFirebaseUrl = (cid: string) => {
 
 export const cidFromUrl = (url: string | undefined) => url?.split('/').pop();
 
-export function pinFileToIpfs(file: File | Blob | string, metadata?: PinataMetadata) {
+export const pinFileToIpfs = (file: File | Blob | string, metadata?: PinataMetadata) => {
 	let data = new FormData();
 
 	data.append('file', file);
@@ -57,15 +62,16 @@ export function pinFileToIpfs(file: File | Blob | string, metadata?: PinataMetad
 
 	// We use axios here because using `pinata.pinFileToIPFS()` leads to this issue: https://github.com/PinataCloud/Pinata-SDK/issues/84
 	return axios
-		.post(`${import.meta.env.VITE_FIREBASE_FUNCTIONS_URL}/app/ipfs`, data, {
+		.post('https://api.pinata.cloud/pinning/pinFileToIPFS', data, {
 			maxContentLength: Infinity, //this is needed to prevent axios from erroring out with large files
 			headers: {
 				'Content-Type': `multipart/form-data;`,
-				apikey: api_key
+				pinata_api_key,
+				pinata_secret_api_key
 			}
 		})
 		.then((res) => res.data as PinataPinResponse);
-}
+};
 
 export const uploadProjectMetadata = (
 	metadata: Omit<ProjectMetadataV4, 'version'>,

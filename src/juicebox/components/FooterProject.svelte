@@ -1,5 +1,5 @@
 <script>
-	import EstimateGas from './EstimateGas.svelte';
+	// import EstimateGas from './EstimateGas.svelte';
 </script>
 
 <footer>
@@ -7,7 +7,7 @@
 		<a href={null} on:click|preventDefault={() => window.scrollTo(0, 0)}>Back to top</a> |
 		<a href="/terms-of-service" target="_blank">Terms of Service</a>
 	</div>
-	<EstimateGas />
+	<!-- <EstimateGas /> -->
 </footer>
 
 <style>

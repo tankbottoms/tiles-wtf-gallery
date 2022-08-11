@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { addressFromEns } from '$utils/web3/address';
+	import { addressFromEns } from '$juicebox/utils/web3/address';
 
 	import { utils } from 'ethers';
 	import { onMount } from 'svelte';

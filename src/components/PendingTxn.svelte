@@ -15,8 +15,8 @@
 	import { createCustomNotification } from '$utils/notification';
 	import type { UpdateNotification } from 'bnc-notify';
 	import type { ContractTransaction } from 'ethers';
-	import Icon from './Icon.svelte';
-	import Loading from './Loading.svelte';
+	import Icon from '$juicebox/components/Icon.svelte';
+	import Loading from '$juicebox/components/Loading.svelte';
 
 	let errorMessage = '';
 

@@ -1,7 +1,7 @@
 import { blocknativeNetworks } from '$constants/networks';
 import { providers } from 'ethers';
 
-export function getTruncatedAddress(address: string) {
+function getTruncatedAddress(address: string) {
 	return address && address.startsWith('0x')
 		? `${address.slice(0, 6)}...${address.slice(-6)}`
 		: address;

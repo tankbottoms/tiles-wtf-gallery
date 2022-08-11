@@ -3,10 +3,10 @@
 // attempted to do so in jbx/utils/etherumBlockByDate.ts but brainfog
 import { formatISO } from 'date-fns';
 
-import { readProvider } from '$constants/readProvider';
+import { readProvider } from '$juicebox/constants/readProvider';
 import type { BlockRef, Duration } from './types';
 import { daysToMillis } from './utils';
-import { EthereumBlockByDate } from '$utils/ethereumBlockByDate';
+import { EthereumBlockByDate } from '$juicebox/utils/ethereumBlockByDate';
 
 export const loadBlockRefs = async ({ duration, now }: { duration: Duration; now: number }) => {
 	// Get number of most recent block, and block at start of duration window
