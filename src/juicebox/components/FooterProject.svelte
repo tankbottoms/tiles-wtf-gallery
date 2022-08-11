@@ -5,7 +5,7 @@
 <footer>
 	<div class="links">
 		<a href={null} on:click|preventDefault={() => window.scrollTo(0, 0)}>Back to top</a> |
-		<a href="/terms-of-service" target="_blank">Terms of Service</a>
+		<!-- <a href="/terms-of-service" target="_blank">Terms of Service</a> -->
 	</div>
 	<!-- <EstimateGas /> -->
 </footer>

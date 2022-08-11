@@ -22,7 +22,7 @@
 	import { writeContract } from '$juicebox/utils/web3/contractReader';
 	import { ETH_TOKEN_ADDRESS } from '$juicebox/constants/v2/juiceboxTokens';
 	import { connectedAccount, web3Connect } from '$stores/web3';
-	import { randomBytes } from 'ethers/lib/utils';
+	import { randomBytes } from 'ethers/lib/utils.js';
 	import { V2ContractName } from '$juicebox/models/v2/contracts';
 	import Textarea from './Textarea.svelte';
 	import Expandable from './Expandable.svelte';

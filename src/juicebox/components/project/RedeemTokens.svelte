@@ -20,7 +20,7 @@
 	import { V2BallotState } from '$juicebox/models/ballot';
 	import { V2_CURRENCY_USD } from '$juicebox/utils/v2/currency';
 	import { connectedAccount } from '$stores/web3';
-	import { randomBytes } from 'ethers/lib/utils';
+	import { randomBytes } from 'ethers/lib/utils.js';
 	import { bind, openModal } from '../Modal.svelte';
 	import PendingTransaction from '../PendingTransaction.svelte';
 

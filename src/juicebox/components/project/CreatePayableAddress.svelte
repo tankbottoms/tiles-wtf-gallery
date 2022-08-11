@@ -14,7 +14,7 @@
 	import type Store from '$utils/Store';
 	import { contracts, writeContract } from '$juicebox/utils/web3/contractReader';
 	import { constants } from 'ethers';
-	import { isAddress } from 'ethers/lib/utils';
+	import { isAddress } from 'ethers/lib/utils.js';
 	import { getContext } from 'svelte';
 
 	export let close: () => void;
