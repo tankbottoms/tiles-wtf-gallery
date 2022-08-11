@@ -97,7 +97,7 @@
 
 <style>
 	section {
-		flex: 0 0 50%;
+		flex: 0 0 44%;
 		width: 100%;
 		padding-left: 20px;
 		padding-right: 20px;

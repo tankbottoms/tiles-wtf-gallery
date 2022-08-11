@@ -14,7 +14,8 @@
 	footer {
 		padding: 30px 20px;
 		background: var(--background-l1);
-		position: relative;
+		position: fixed;
+		bottom: 0;
 		width: 100vw;
 	}
 

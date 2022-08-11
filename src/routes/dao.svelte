@@ -112,7 +112,6 @@
 				[$project.projectId, JUICEBOX_MONEY_METADATA_DOMAIN],
 				cached
 			);
-
 			checkNetworkId(networkId);
 			const metadata = await getProjectMetadata(metadataCID);
 			$project.projectMetadata = metadata;
@@ -538,17 +537,15 @@
 	section {
 		display: flex;
 		flex-direction: column;
-		height: 100%;
+		padding-bottom: 82px;
 		background: transparent;
 	}
 
 	.content {
-		height: 100%;
 		max-width: 1080px;
 		margin: 0px auto;
 		padding: 20px;
 		width: 100%;
-		overflow: hidden;
 	}
 
 	.row {
