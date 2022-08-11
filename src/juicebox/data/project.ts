@@ -14,7 +14,7 @@ import type { ProjectState } from '$juicebox/models/project-visibility';
 import type { Project, TrendingProject } from '$juicebox/models/subgraph-entities/vX/project';
 
 // TODO don't hardcode this here, use the utils/ipfs after issue with @pinata/sdk has been solved
-import { ipfsCidToFirebaseUrl } from '$juicebox/utils/ipfs';
+import { ipfsCidUrl } from '$juicebox/utils/ipfs';
 
 type ProjectStat = Record<
 	string,
@@ -113,12 +113,14 @@ export async function getProjectMetadata(metadataUri: string | undefined) {
 		console.error('No metadataUri provided');
 		return;
 	}
-	const url = ipfsCidToFirebaseUrl(metadataUri);
-	const response = await axios.get(url, {
-		headers: {
-			apikey: import.meta.env.VITE_API_KEY
-		}
-	});
+	// const url = ipfsCidToFirebaseUrl(metadataUri);
+	// const response = await axios.get(url, {
+	// 	headers: {
+	// 		apikey: import.meta.env.VITE_API_KEY
+	// 	}
+	// });
+	const url = ipfsCidUrl(metadataUri);
+	const response = await axios.get(url);
 	return consolidateMetadata(response.data);
 }
 

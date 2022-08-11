@@ -53,26 +53,26 @@
 		return true;
 	}
 
-	async function getGnosisBalanceInEth(address: string) {
-		try {
-			const { data } = await axios(
-				`${import.meta.env.VITE_FIREBASE_FUNCTIONS_URL}/app/gnosis/balances/${utils.getAddress(
-					address
-				)}/total`,
-				{
-					headers: {
-						apikey: import.meta.env.VITE_API_KEY
-					}
-				}
-			);
-			if (data?.ethValue) {
-				return BigNumber.from(data?.ethValue);
-			}
-			return BigNumber.from(0);
-		} catch (error) {
-			console.error(error);
-		}
-	}
+	// async function getGnosisBalanceInEth(address: string) {
+	// 	try {
+	// 		const { data } = await axios(
+	// 			`${import.meta.env.VITE_FIREBASE_FUNCTIONS_URL}/app/gnosis/balances/${utils.getAddress(
+	// 				address
+	// 			)}/total`,
+	// 			{
+	// 				headers: {
+	// 					apikey: import.meta.env.VITE_API_KEY
+	// 				}
+	// 			}
+	// 		);
+	// 		if (data?.ethValue) {
+	// 			return BigNumber.from(data?.ethValue);
+	// 		}
+	// 		return BigNumber.from(0);
+	// 	} catch (error) {
+	// 		console.error(error);
+	// 	}
+	// }
 </script>
 
 {#if mounted}
@@ -117,7 +117,7 @@
 							{#if owners?.length}
 								<small>Threshold: {threshold} / {owners?.length}</small>
 							{/if}
-							{#await getGnosisBalanceInEth(address)}
+							<!-- {#await getGnosisBalanceInEth(address)}
 								<small>Balance: ...</small>
 							{:then balance}
 								<small
@@ -125,7 +125,7 @@
 										thousandsSeparator: ','
 									})}
 								</small>
-							{/await}
+							{/await} -->
 							{#each owners || [] as owner}
 								<div class="owner">
 									<a href="https://etherscan.io/address/{owner}" target="_blank">

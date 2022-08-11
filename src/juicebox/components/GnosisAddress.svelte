@@ -35,29 +35,29 @@
 
 	async function checkAddressInfo(address: string) {
 		const cachedResult = setGet()[address?.toLowerCase()];
-		const { data, status }: { data: ApiResponse; status: number } =
-			typeof cachedResult === 'object'
-				? { data: cachedResult, status: 200 }
-				: await axios.get(
-						`${import.meta.env.VITE_FIREBASE_FUNCTIONS_URL}/app/gnosis/check/${address}`,
-						{
-							headers: {
-								apikey: import.meta.env.VITE_API_KEY
-							}
-						}
-				  );
-		if (status < 400) {
-			isGnosis = true;
-			gnosisAddress = address;
-			mastercopy = data.masterCopy;
-			owners = data.owners;
-			threshold = data.threshold;
-			if (typeof cachedResult !== 'object') {
-				setGet({ ...setGet(), [address?.toLowerCase()]: data });
-			}
-		} else {
-			setGet({ ...setGet(), [address?.toLowerCase()]: {} });
-		}
+		// const { data, status }: { data: ApiResponse; status: number } =
+		// 	typeof cachedResult === 'object'
+		// 		? { data: cachedResult, status: 200 }
+		// 		: await axios.get(
+		// 				`${import.meta.env.VITE_FIREBASE_FUNCTIONS_URL}/app/gnosis/check/${address}`,
+		// 				{
+		// 					headers: {
+		// 						apikey: import.meta.env.VITE_API_KEY
+		// 					}
+		// 				}
+		// 		  );
+		// if (status < 400) {
+		// isGnosis = true;
+		// gnosisAddress = address;
+		// mastercopy = data.masterCopy;
+		// owners = data.owners;
+		// threshold = data.threshold;
+		// if (typeof cachedResult !== 'object') {
+		// 	setGet({ ...setGet(), [address?.toLowerCase()]: data });
+		// }
+		// } else {
+		setGet({ ...setGet(), [address?.toLowerCase()]: {} });
+		// }
 	}
 </script>
 
