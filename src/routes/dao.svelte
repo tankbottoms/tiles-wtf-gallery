@@ -13,8 +13,7 @@
 	import type { V2CurrencyOption } from '$juicebox/models/v2/currencyOption';
 	import { BigNumber, constants, ethers } from 'ethers';
 	import { modal } from '$stores';
-	import { setContext } from 'svelte';
-	// import Footer from '$juicebox/components/FooterProject.svelte';
+	import { setContext } from 'svelte';	
 	import Details from '$juicebox/components/project/Details.svelte';
 	import Head from '$juicebox/components/project/Head.svelte';
 	import Issue from '$juicebox/components/Issue.svelte';

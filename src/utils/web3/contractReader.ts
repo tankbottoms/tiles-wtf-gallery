@@ -7,7 +7,6 @@ import Tiles from '$deployments/Tiles';
 import { get } from 'svelte/store';
 import { parseCachedData, parseContractResponse } from '../cache';
 
-
 const etherscanKey = import.meta.env.VITE_ETHERSCAN_API_KEY;
 
 export const contracts = {
@@ -21,7 +20,7 @@ export async function readContractByAddress(
 	args = [],
 	signer?: Signer
 ) {
-	console.log(get(readNetwork).alias?.toUpperCase(), contractAddress, functionName, args);
+	console.warn(get(readNetwork).alias?.toUpperCase(), contractAddress, functionName, args);
 	const contract = new ethers.Contract(
 		contractAddress,
 		ABI,
@@ -43,8 +42,7 @@ export async function readContract(
 	args = [],
 	cached = false
 ) {
-	console.log(contractName, functionName, args);
-
+	console.warn(contractName, functionName, args);
 	const cache = await caches.open('CONTRACT_RESPONSE');
 
 	if (contracts[contractName][get(readNetwork).alias]) {
@@ -66,7 +64,7 @@ export async function readContract(
 				if (typeof data !== 'undefined' && data !== null) {
 					return data;
 				}
-			} else console.log('cache miss');
+			} else console.log('ContractReader: cache miss');
 		}
 
 		const contract = new ethers.Contract(
@@ -102,7 +100,9 @@ export async function writeContract(
 	}
 }
 
-export async function getTransactionsByAddress(address: string): Promise<ethers.providers.TransactionResponse[]> {
+export async function getTransactionsByAddress(
+	address: string
+): Promise<ethers.providers.TransactionResponse[]> {
 	let provider = new ethers.providers.EtherscanProvider(getDefaultProvider().alias, etherscanKey);
 	let history = await provider.getHistory(address);
 	return history;
@@ -113,13 +113,17 @@ export async function getTilesHistory(): Promise<any> {
 	const sorted = transactions.sort((a, b) => a.timestamp - b.timestamp);
 	const iface = new ethers.utils.Interface(Tiles.abi);
 	let tiles = [];
-	sorted.forEach(tx => {
+	sorted.forEach((tx) => {
 		try {
 			const decodedData = iface.parseTransaction({ data: tx.data });
+			tiles.push(decodedData.args[0]);
+			/*
+			// Is there a reason to filter?
 			if (decodedData.name === 'grab') {
 				tiles.push(decodedData.args[0]);
-			}
-		} catch { }
+			} 
+			*/
+		} catch {}
 	});
 	return tiles;
 }

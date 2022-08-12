@@ -297,41 +297,6 @@ export function generateTile(address: string) {
   `;
 		}
 	}
-
 	str += foot;
 	return str;
 }
-
-/*
-function setDocumentElementToTile(tile: string, address: string) {
-  document.getElementById("tiles").innerHTML = tile;
-  document.getElementById("address").innerHTML = address;
-}
-
-// When the script loads, create 10 addresses and loop through them to generate tiles
-// and populate the div element with them every 3 seconds
-
-const randomAddresses = generateRandomAddresses();
-const tile = generateTile(randomAddresses[0]);
-setDocumentElementToTile(tile, randomAddresses[0]);
-
-let current = 1;
-
-setInterval(() => {
-  current++;
-  if (current >= randomAddresses.length) {
-    current = 0;
-  }
-  const tile = generateTile(randomAddresses[current]);
-  setDocumentElementToTile(tile, randomAddresses[current]);
-}, 3000);
-
-// NOTE: when running from command line and wanting SVG saved to directory
-require("fs").writeFileSync(
-  process.argv.find((arg) => arg.startsWith("-o"))?.replace("-o", "") ||
-    "./tiles-alone/output.svg",
-  str
-);
-
-console.log(address);
-*/

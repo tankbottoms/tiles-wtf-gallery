@@ -1,4 +1,6 @@
 <script lang="ts">
+import { ITERM_SESSION_ID } from '$env/static/private';
+
 	import { readNetwork } from '$stores/web3';
 	import { generateTile } from '$tiles/tilesStandalone';
 	import { getTilesHistory } from '$utils/web3/contractReader';
@@ -13,21 +15,22 @@
 				const history = await getTilesHistory();
 				tiles = history.map((address) => ({ address, tile: generateTile(address) }));
 			} catch (e) {
-				console.error(e.message);
+				console.error(`getTilesHistory error: ${e.message}`);
+				// console.error(e.message);
 			}
-		});
+		});				
 	});
 </script>
 
 <section>
-	<h1>Mint history</h1>
+	<h3>mint history</h3>
 </section>
 
 <section class:grid>
 	{#each tiles as item}
 		<div class="tileContainer">
 			{@html item.tile}
-			<span>{item.address}</span>
+			<span>{item.timestamp} - {item.address}</span>
 		</div>
 	{/each}
 </section>
@@ -69,7 +72,7 @@
 		margin-top: 2.5rem;
 	}
 
-	h1 {
+	h3 {
 		text-align: center;
 	}
 

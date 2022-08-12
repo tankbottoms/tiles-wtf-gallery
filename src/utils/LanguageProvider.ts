@@ -16,11 +16,9 @@ i18n.loadLocaleData({
 
 const getLocale = (): string => {
 	let locale = detect(fromUrl('lang'), fromStorage('lang'), fromNavigator()) ?? DEFAULT_LOCALE;
-
 	if (!SUPPORTED_LOCALES.includes(locale)) {
 		locale = DEFAULT_LOCALE;
 	}
-
 	return locale;
 };
 
