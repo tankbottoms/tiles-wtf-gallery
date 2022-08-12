@@ -118,8 +118,6 @@ export async function getTilesHistory(): Promise<any> {
 			const decodedData = iface.parseTransaction({ data: tx.data });
 			if (decodedData.name === 'grab') {
 				tiles.push(decodedData.args[0]);
-			} else {
-				console.error(decodedData);
 			}
 		} catch {}
 	});

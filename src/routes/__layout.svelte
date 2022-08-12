@@ -2,7 +2,7 @@
 	import ErrorModal from '$components/ErrorModal.svelte';
 	import Header from '$components/Header.svelte';
 	import PendingTxn from '$components/PendingTxn.svelte';
-	import Intl from '$juicebox/provder/Intl.svelte';
+	import Intl from '$juicebox/provider/Intl.sveltee';
 	import { notify } from '$utils/notification';
 	import { onMount } from 'svelte';
 	import { loadLocale } from '$utils/LanguageProvider';

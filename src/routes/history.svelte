@@ -11,6 +11,7 @@
 		readNetwork.subscribe(async (net) => {
 			try {
 				const history = await getTilesHistory();
+				console.log(history);
 				tiles = history.map((address) => ({ address, tile: generateTile(address) }));
 			} catch (e) {				
 				console.error(e.message);
@@ -27,7 +28,7 @@
 	{#each tiles as item}
 		<div class="tileContainer">
 			{@html item.tile}
-			<span>{item.timestamp} - {item.address}</span>
+			<span>{item.address}</span>
 		</div>
 	{/each}
 </section>
