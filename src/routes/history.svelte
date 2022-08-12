@@ -1,6 +1,4 @@
 <script lang="ts">
-import { ITERM_SESSION_ID } from '$env/static/private';
-
 	import { readNetwork } from '$stores/web3';
 	import { generateTile } from '$tiles/tilesStandalone';
 	import { getTilesHistory } from '$utils/web3/contractReader';
@@ -14,9 +12,8 @@ import { ITERM_SESSION_ID } from '$env/static/private';
 			try {
 				const history = await getTilesHistory();
 				tiles = history.map((address) => ({ address, tile: generateTile(address) }));
-			} catch (e) {
-				console.error(`getTilesHistory error: ${e.message}`);
-				// console.error(e.message);
+			} catch (e) {				
+				console.error(e.message);
 			}
 		});				
 	});
