@@ -116,13 +116,7 @@ export async function getTilesHistory(): Promise<any> {
 	sorted.forEach((tx) => {
 		try {
 			const decodedData = iface.parseTransaction({ data: tx.data });
-			decodedData.name !== undefined ? tiles.push(decodedData.args[0]) : console.error(decodedData);
-			/*
-			// TODO: Is there a reason to filter?
-			if (decodedData.name === 'grab') {
-				tiles.push(decodedData.args[0]);
-			} 
-			*/
+			decodedData.name === 'grab' ? tiles.push(decodedData.args[0]) : console.error(decodedData);
 		} catch {}
 	});
 	return tiles;
