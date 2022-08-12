@@ -5,6 +5,7 @@
 
 	let tile = '';
 	let address = '';
+
 	onMount(() => {
 		const randomAddresses = generateRandomAddresses(25);
 		address = randomAddresses[0];
@@ -28,16 +29,16 @@
 		<p id="address" />
 	</div>
 	<section>
-		<h1>Infinte Tiles v1.2</h1>		
-		<p>Generated from any ETH address</p>
-		<p><a href="https://github.com/tankbottoms/tiles-on-chain/tree/main/contracts/components" target="_blank">Generated on-chain in Solidity</a></p>
-		<p>Each is unique & objectively rare</p>		
+		<h1>infinte tiles v1.2</h1>		
+		<p>generated from any eth address</p>
+		<p><a href="https://github.com/tankbottoms/tiles-on-chain/tree/main/contracts/components" target="_blank">generated on-chain in solidity</a></p>
+		<p>each is unique & objectively rare</p>		
 		<a href="/wtf">wtf</a>
 		<a href="/dao">treasury</a>
 		<a href="/faq">faq</a>
 		<div class="group">
 			<div>
-				<a href="/mint">Mint a tile</a>
+				<a href="/mint">mint a tile</a>
 			</div>
 		</div>
 	</section>

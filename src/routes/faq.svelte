@@ -1,19 +1,19 @@
 <section>
-    <h1>FAQ</h1>
-    <b>Wtf?</b>
-	<p>See <a href="/wtf" target="_blank">Wtf</a></p>	
-    <b>Purpose of this project?</b>
-	<p>If you are blind and have no appreciation for art, algorithmic or otherwise, then the purpose of this site is to demonstrate an Infinite Tiles minting project which routes the NFT proceeds to a <a href="https://juicebox.money/v2/p/41" target="_blank">Juicebox treasury</a>.</p>	
-	<b>How will the Tiles v1.2 proceeds be used?</b>
-	<p>TBD</p>
-	<b>Do existing Tiles owners pay anything?</b>
-	<p>No.  Existing <a href="https://etherscan.io/address/0x64931F06d3266049Bf0195346973762E6996D764" target="_blank">Tile</a> owners may mint for free, this is called <a href="https://github.com/tankbottoms/tiles-on-chain/blob/main/contracts/TileNFT.sol#L124" target="_blank">grabbing</a>.</p>
-	<b>How are the Tiles priced?</b>
-	<p>The base price will start out as 0.0001 ETH and be multipled by 2 every 512 tiles minted, thus the next teir after the first will be priced as 0.0002 for 512 tiles and so on.</p>
-	<p>Details maybe found in the <a href="https://github.com/tankbottoms/tiles-on-chain/blob/main/scripts/mainnet.ts" target="_blank">deploy script</a>, the Tiles has what is called the <a href="https://github.com/tankbottoms/tiles-on-chain/blob/main/contracts/LegacyOwnershipPriceResolver.sol">LegacyOwnershipPriceResolver</a> which governs how pricing is resolved.  
-		If a Tile for which the address owner discovers is unavailable, that user has the option to pay the existing rate and <a href="https://github.com/tankbottoms/tiles-on-chain/blob/main/contracts/TileNFT.sol#L171">seize</a>.</p>
-	<b>Jango.eth has the ENS Tile.eth, does that have anything to do with anything?</b>
-	<p>What?</p>	
+    <h1>faq</h1>
+    <b>wtf?</b>
+	<p>see <a href="/wtf" target="_blank">wtf</a></p>	
+    <b>purpose of this project?</b>
+	<p>reset and slow the pricing function of the original tiles to be accessible. implement tiles to be completely on chain. distribute proceeds to the juicebox community. open source a fully operational svelte <a href="https://juicebox.money/v2/p/41" target="_blank">juicebox treasury</a>.</p>	
+	<b>how will the tiles v1.2 proceeds be used?</b>
+	<p>tbd</p>
+	<b>do existing Tiles owners pay anything?</b>
+	<p>no.  existing <a href="https://etherscan.io/address/0x64931F06d3266049Bf0195346973762E6996D764" target="_blank">infinite tile</a> owners may mint for free, this is called <a href="https://github.com/tankbottoms/tiles-on-chain/blob/main/contracts/TileNFT.sol#L124" target="_blank">grabbing</a>.</p>
+	<b>how are the tiles priced?</b>
+	<p>the base price will start out as <b>0.0001 ETH and be multipled by 2 every 512 tiles minted</b>, thus the next teir after the first will be priced as 0.0002 for 512 tiles and so on.</p>
+	<p>details maybe found in the <a href="https://github.com/tankbottoms/tiles-on-chain/blob/main/scripts/mainnet.ts" target="_blank">deploy script</a>, the Tiles has what is called the <a href="https://github.com/tankbottoms/tiles-on-chain/blob/main/contracts/LegacyOwnershipPriceResolver.sol">LegacyOwnershipPriceResolver</a> which governs how pricing is resolved.  
+		if a tile for which the address owner discovers is unavailable, that user has the option to pay the existing rate and claim, this is called <a href="https://github.com/tankbottoms/tiles-on-chain/blob/main/contracts/TileNFT.sol#L171">seizing</a>.</p>
+	<b>what are the license terms of the source code for the contracts and the website?</b>
+	<p>the licensing terms for the website are you can use the code for anything except to fuck juicebox.money, move.xyz, jango.eth, tankbottoms.eth. fuck can be interpreted in the broadest manner.</p>	
 </section>
 
 <style>
