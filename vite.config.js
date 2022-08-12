@@ -9,11 +9,11 @@ const config = ({ mode }) => {
 		plugins: [
 			sveltekit(),
 			development &&
-			nodePolyfills({
-				include: ['node_modules/**/*.js', new RegExp('node_modules/.vite/.*js')],
-				http: true,
-				crypto: true
-			})
+				nodePolyfills({
+					include: ['node_modules/**/*.js', new RegExp('node_modules/.vite/.*js')],
+					http: true,
+					crypto: true
+				})
 		],
 		resolve: {
 			alias: {
@@ -37,6 +37,9 @@ const config = ({ mode }) => {
 		},
 		ssr: {
 			noExternal: ['@lingui/*', 'lingui-core/*']
+		},
+		optimizeDeps: {
+			esbuildOptions: { target: 'es2020', supported: { bigint: true } }
 		},
 		build: {
 			target: ['es2020'],
