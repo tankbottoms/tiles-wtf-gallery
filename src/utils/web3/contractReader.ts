@@ -116,7 +116,11 @@ export async function getTilesHistory(): Promise<any> {
 	sorted.forEach((tx) => {
 		try {
 			const decodedData = iface.parseTransaction({ data: tx.data });
-			decodedData.name === 'grab' ? tiles.push(decodedData.args[0]) : console.error(decodedData);
+			if (decodedData.name === 'grab') {
+				tiles.push(decodedData.args[0]);
+			} else {
+				console.error(decodedData);
+			}
 		} catch {}
 	});
 	return tiles;
