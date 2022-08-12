@@ -65,6 +65,7 @@
 			<img src="/favicon.svg" alt="Logo" />
 		</a>
 		{count} minted // current price: {price} ETH
+		<a href="/history"> Total supply </a>
 	</div>
 
 	<div class="right">

@@ -7,6 +7,9 @@ import Tiles from '$deployments/Tiles';
 import { get } from 'svelte/store';
 import { parseCachedData, parseContractResponse } from '../cache';
 
+
+const etherscanKey = import.meta.env.VITE_ETHERSCAN_API_KEY;
+
 export const contracts = {
 	Tiles
 };
@@ -97,4 +100,26 @@ export async function writeContract(
 	} else {
 		throw Error(`${contractName}: deployment not found on ${get(readNetwork).alias}`);
 	}
+}
+
+export async function getTransactionsByAddress(address: string): Promise<ethers.providers.TransactionResponse[]> {
+	let provider = new ethers.providers.EtherscanProvider(getDefaultProvider().alias, etherscanKey);
+	let history = await provider.getHistory(address);
+	return history;
+}
+
+export async function getTilesHistory(): Promise<any> {
+	const transactions = await getTransactionsByAddress(Tiles[get(readNetwork).alias]);
+	const sorted = transactions.sort((a, b) => a.timestamp - b.timestamp);
+	const iface = new ethers.utils.Interface(Tiles.abi);
+	let tiles = [];
+	sorted.forEach(tx => {
+		try {
+			const decodedData = iface.parseTransaction({ data: tx.data });
+			if (decodedData.name === 'grab') {
+				tiles.push(decodedData.args[0]);
+			}
+		} catch { }
+	});
+	return tiles;
 }
