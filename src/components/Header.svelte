@@ -22,13 +22,19 @@
 		readNetwork.subscribe(async (net) => {
 			try {
 				count = (await readContract('Tiles', 'totalSupply'))?.toString() || '0';
+				console.log(`onMount readNetwork subscription returned. totalSupply count: ${count}`);
 			} catch (e) {
+				console.error(`onMount readNetwork subscription error: ${e}`);
 				console.error(e.message);
 			}
 			try {
 				price = formatEther(
 					(await getTilePrice(TILE_BASE_PRICE, TILE_MULTIPLIER, TILE_TIER_SIZE))?.toString() || '0'
 				);
+				console.log(`Tile base price: ${TILE_BASE_PRICE}`);
+				console.log(`Tile multiplier: ${TILE_MULTIPLIER}`);
+				console.log(`Tile tier size: ${TILE_TIER_SIZE}`);
+				console.log(`Tile price`, price);
 			} catch (e) {
 				console.error(e.message);
 			}

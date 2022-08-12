@@ -13,7 +13,7 @@
 	<p>details maybe found in the <a href="https://github.com/tankbottoms/tiles-on-chain/blob/main/scripts/mainnet.ts" target="_blank">deploy script</a>, the Tiles has what is called the <a href="https://github.com/tankbottoms/tiles-on-chain/blob/main/contracts/LegacyOwnershipPriceResolver.sol">LegacyOwnershipPriceResolver</a> which governs how pricing is resolved.  
 		if a tile for which the address owner discovers is unavailable, that user has the option to pay the existing rate and claim, this is called <a href="https://github.com/tankbottoms/tiles-on-chain/blob/main/contracts/TileNFT.sol#L171">seizing</a>.</p>
 	<b>what are the license terms of the source code for the contracts and the website?</b>
-	<p>the licensing terms for the website are you can use the code for anything except to fuck juicebox.money, move.xyz, jango.eth, tankbottoms.eth. fuck can be interpreted in the broadest manner.</p>	
+	<p>the license terms for the svelte repo is simple, if you use a juicebox treasury you can use the code; also can't do anything which is offensive to tankbottoms.</p>	
 </section>
 
 <style>
