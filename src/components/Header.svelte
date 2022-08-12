@@ -22,13 +22,19 @@
 		readNetwork.subscribe(async (net) => {
 			try {
 				count = (await readContract('Tiles', 'totalSupply'))?.toString() || '0';
+				console.log(`onMount readNetwork subscription returned. totalSupply count: ${count}`);
 			} catch (e) {
+				console.error(`onMount readNetwork subscription error: ${e}`);
 				console.error(e.message);
 			}
 			try {
 				price = formatEther(
 					(await getTilePrice(TILE_BASE_PRICE, TILE_MULTIPLIER, TILE_TIER_SIZE))?.toString() || '0'
 				);
+				console.log(`Tile base price: ${TILE_BASE_PRICE}`);
+				console.log(`Tile multiplier: ${TILE_MULTIPLIER}`);
+				console.log(`Tile tier size: ${TILE_TIER_SIZE}`);
+				console.log(`Tile price`, price);
 			} catch (e) {
 				console.error(e.message);
 			}
@@ -64,7 +70,7 @@
 		<a href="/">
 			<img src="/favicon.svg" alt="Logo" />
 		</a>
-		{count} minted // current price: {price} ETH
+		<a href="/history">{count} minted</a> // current price: {price} ETH
 	</div>
 
 	<div class="right">
@@ -92,8 +98,8 @@
 						<li on:click={web3Disconnect}>disconnect</li>
 					</ul>
 				{/if}
-			</p>
-			<button class="disconnect" on:click={web3Disconnect}>X</button>
+			</p>			
+				<button class="disconnect" on:click={web3Disconnect}>X</button>			
 		{:else}
 			<button on:click={web3Connect}>connect</button>
 		{/if}
@@ -104,8 +110,7 @@
 	.dropdown {
 		position: absolute;
 		right: 0;
-		top: 70%;
-		/* background: red; */
+		top: 70%;		
 		list-style: none;
 		padding: 0;
 	}
@@ -121,11 +126,12 @@
 	header,
 	.right,
 	.left {
-		display: flex;
+		display: flex;		
+		padding: 5px 0px;
 	}
 
 	header {
-		justify-content: space-between;
+		justify-content: space-between;		
 	}
 
 	.right,
@@ -134,9 +140,9 @@
 		gap: 10px;
 	}
 
-	.right {
-		position: relative;
-		justify-content: flex-end;
+	.right {			
+		position: relative;		
+		justify-content: flex-end; 				
 	}
 
 	img {
@@ -161,6 +167,9 @@
 	}
 
 	.disconnect {
-		padding: 0;
+		/*padding: 0;*/
+		position: relative;		
+		justify-content: flex-end; 				
 	}
+
 </style>

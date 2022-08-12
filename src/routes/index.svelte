@@ -29,7 +29,7 @@
 		<p id="address" />
 	</div>
 	<section>
-		<h1>infinte tiles v1.2</h1>		
+		<h1>infinite tiles v1.2</h1>		
 		<p>generated from any eth address</p>
 		<p><a href="https://github.com/tankbottoms/tiles-on-chain/tree/main/contracts/components" target="_blank">generated on-chain in solidity</a></p>
 		<p>each is unique & objectively rare</p>		
