@@ -110,6 +110,7 @@ export async function getTransactionsByAddress(
 
 export async function getTilesHistory(): Promise<any> {
 	const transactions = await getTransactionsByAddress(Tiles[get(readNetwork).alias]);
+	console.log(transactions);
 	const sorted = transactions.sort((a, b) => a.timestamp - b.timestamp);
 	const iface = new ethers.utils.Interface(Tiles.abi);
 	let tiles = [];
