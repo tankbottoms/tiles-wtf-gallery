@@ -1,23 +1,33 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
+	import { onMount, onDestroy } from 'svelte';
 	import Trans from './Trans.svelte';
 	import type { ContractTransaction } from 'ethers';
 	import Icon from './Icon.svelte';
+	import { generateRandomAddresses, generateTile } from '$tiles/tilesStandalone';
 
 	export let txnResponse: ContractTransaction;
 	export let functionName = '';
 	export let close: () => void;
 
 	let errorMessage = '';
+	let tile = '';
+	let interval: NodeJS.Timeout;
 
 	onMount(async () => {
 		try {
+			const addresses = generateRandomAddresses(25);
+			let i = 0;
+			setInterval(() => {
+				tile = generateTile(addresses[i++ % addresses.length]);
+			}, 200);
 			await txnResponse.wait();
 			close();
 		} catch (error) {
 			errorMessage = error.message?.match(/^[\w\s]+/)?.[0];
 		}
 	});
+
+	onDestroy(() => clearInterval(interval));
 </script>
 
 <section>
@@ -28,6 +38,13 @@
 			</h2>
 			<p class="error">{errorMessage}</p>
 		{:else}
+			{#if tile}
+				<div class="tile">
+					<div>
+						{@html tile}
+					</div>
+				</div>
+			{/if}
 			{#if functionName}
 				<h2>
 					Method:
@@ -57,5 +74,12 @@
 	div {
 		max-width: 400px;
 		text-align: center;
+	}
+	.tile {
+		width: 200px;
+		height: 200px;
+	}
+	.tile > :global(div) {
+		transform: translate(30%, -27%) scale(0.6);
 	}
 </style>

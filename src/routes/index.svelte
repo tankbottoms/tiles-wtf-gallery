@@ -2,6 +2,7 @@
 	import { generateTile, generateRandomAddresses } from '$tiles/tilesStandalone';
 	import { onMount } from 'svelte';
 	import { goto } from '$app/navigation';
+	import { readNetwork } from '$stores/web3';
 
 	let tile = '';
 	let address = '';
@@ -39,7 +40,7 @@
 		</p>
 		<p>each is unique & objectively rare</p>
 		<a href="/wtf">wtf</a>
-		<a href="/dao">treasury</a>
+		<a href="/dao?{$readNetwork ? `network=${$readNetwork?.alias}` : ''}">treasury</a>
 		<a href="/faq">faq</a>
 		<div class="group">
 			<div>
