@@ -30,8 +30,8 @@ export interface DistributePayoutsEvent extends BaseEventEntity, BaseProjectEnti
 
 export type DistributePayoutsEventJson = Partial<
 	Record<keyof Omit<DistributePayoutsEvent, 'splitDistributions'>, string> &
-	BaseEventEntityJson &
-	BaseProjectEntityJson
+		BaseEventEntityJson &
+		BaseProjectEntityJson
 > & {
 	splitDistributions: DistributeToPayoutSplitEventJson[];
 };

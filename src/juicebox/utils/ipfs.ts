@@ -19,8 +19,9 @@ if (!pinata_api_key || !pinata_secret_api_key) {
 const pinata = pinataClient(pinata_api_key, pinata_secret_api_key);
 
 export const IPFS_TAGS = {
-	[IpfsCacheName.trendingV2]: `${dev ? 'DEV_trending_projects_v2_' : 'trending_projects_v2_'}${get(readNetwork).alias
-		}`,
+	[IpfsCacheName.trendingV2]: `${dev ? 'DEV_trending_projects_v2_' : 'trending_projects_v2_'}${
+		get(readNetwork).alias
+	}`,
 
 	METADATA: dev ? 'DEV_juicebox_project_metadata' : 'juicebox_project_metadata',
 

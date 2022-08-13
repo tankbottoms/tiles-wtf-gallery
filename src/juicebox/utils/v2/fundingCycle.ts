@@ -2,9 +2,7 @@ import * as constants from '@ethersproject/constants';
 import { BigNumber } from '@ethersproject/bignumber';
 import { getAddress } from '@ethersproject/address';
 import { parseEther } from '@ethersproject/units';
-import {
-	FUNDING_CYCLE_WARNING_TEXT,
-} from '$juicebox/constants/fundingWarningText';
+import { FUNDING_CYCLE_WARNING_TEXT } from '$juicebox/constants/fundingWarningText';
 import type {
 	V2FundingCycle,
 	V2FundingCycleMetadata,
@@ -35,7 +33,7 @@ export const hasDistributionLimit = (
 ): boolean => {
 	return Boolean(
 		fundAccessConstraint?.distributionLimit &&
-		!parseWad(fundAccessConstraint.distributionLimit).eq(MAX_DISTRIBUTION_LIMIT)
+			!parseWad(fundAccessConstraint.distributionLimit).eq(MAX_DISTRIBUTION_LIMIT)
 	);
 };
 
@@ -70,71 +68,71 @@ const parameters: {
 		val: BigNumber
 	) => string | boolean | BigNumber | number | undefined | V2FundingCycleMetadataGlobal;
 }[] = [
-		{
-			name: 'version',
-			bits: 8,
-			parser: (val: BigNumber) => val.toNumber() as V2FundingCycleMetadata['version']
-		},
-		{
-			name: 'global',
-			bits: 16,
-			parser: (val) => {
-				return {
-					allowSetTerminals: bigNumberToBoolean(BigNumber.from(val).shr(1)),
-					allowSetController: bigNumberToBoolean(BigNumber.from(val).shr(2))
-				};
-			}
-		},
-		{ name: 'reservedRate', bits: 16 },
-		{ name: 'redemptionRate', bits: 16, parser: invertPermyriad },
-		{ name: 'ballotRedemptionRate', bits: 16, parser: invertPermyriad },
-		{ name: 'pausePay', bits: 1, parser: bigNumberToBoolean },
-		{
-			name: 'pauseDistributions',
-			bits: 1,
-			parser: bigNumberToBoolean
-		},
-		{ name: 'pauseRedeem', bits: 1, parser: bigNumberToBoolean },
-		{ name: 'pauseBurn', bits: 1, parser: bigNumberToBoolean },
-		{ name: 'allowMinting', bits: 1, parser: bigNumberToBoolean },
-		{ name: 'allowChangeToken', bits: 1, parser: bigNumberToBoolean },
-		{
-			name: 'allowTerminalMigration',
-			bits: 1,
-			parser: bigNumberToBoolean
-		},
-		{
-			name: 'allowControllerMigration',
-			bits: 1,
-			parser: bigNumberToBoolean
-		},
-		{ name: 'holdFees', bits: 1, parser: bigNumberToBoolean },
-		{
-			name: 'useTotalOverflowForRedemptions',
-			bits: 1,
-			parser: bigNumberToBoolean
-		},
-		{
-			name: 'useDataSourceForPay',
-			bits: 1,
-			parser: bigNumberToBoolean
-		},
-		{
-			name: 'useDataSourceForRedeem',
-			bits: 1,
-			parser: bigNumberToBoolean
-		},
-		{
-			name: 'dataSource',
-			bits: 0,
-			parser: (val) => {
-				const dataSource = val.toHexString();
-				return dataSource === BigNumber.from('0').toHexString()
-					? constants.AddressZero
-					: getAddress(dataSource);
-			}
+	{
+		name: 'version',
+		bits: 8,
+		parser: (val: BigNumber) => val.toNumber() as V2FundingCycleMetadata['version']
+	},
+	{
+		name: 'global',
+		bits: 16,
+		parser: (val) => {
+			return {
+				allowSetTerminals: bigNumberToBoolean(BigNumber.from(val).shr(1)),
+				allowSetController: bigNumberToBoolean(BigNumber.from(val).shr(2))
+			};
 		}
-	];
+	},
+	{ name: 'reservedRate', bits: 16 },
+	{ name: 'redemptionRate', bits: 16, parser: invertPermyriad },
+	{ name: 'ballotRedemptionRate', bits: 16, parser: invertPermyriad },
+	{ name: 'pausePay', bits: 1, parser: bigNumberToBoolean },
+	{
+		name: 'pauseDistributions',
+		bits: 1,
+		parser: bigNumberToBoolean
+	},
+	{ name: 'pauseRedeem', bits: 1, parser: bigNumberToBoolean },
+	{ name: 'pauseBurn', bits: 1, parser: bigNumberToBoolean },
+	{ name: 'allowMinting', bits: 1, parser: bigNumberToBoolean },
+	{ name: 'allowChangeToken', bits: 1, parser: bigNumberToBoolean },
+	{
+		name: 'allowTerminalMigration',
+		bits: 1,
+		parser: bigNumberToBoolean
+	},
+	{
+		name: 'allowControllerMigration',
+		bits: 1,
+		parser: bigNumberToBoolean
+	},
+	{ name: 'holdFees', bits: 1, parser: bigNumberToBoolean },
+	{
+		name: 'useTotalOverflowForRedemptions',
+		bits: 1,
+		parser: bigNumberToBoolean
+	},
+	{
+		name: 'useDataSourceForPay',
+		bits: 1,
+		parser: bigNumberToBoolean
+	},
+	{
+		name: 'useDataSourceForRedeem',
+		bits: 1,
+		parser: bigNumberToBoolean
+	},
+	{
+		name: 'dataSource',
+		bits: 0,
+		parser: (val) => {
+			const dataSource = val.toHexString();
+			return dataSource === BigNumber.from('0').toHexString()
+				? constants.AddressZero
+				: getAddress(dataSource);
+		}
+	}
+];
 
 export const decodeV2FundingCycleMetadata = (packedMetadata: BigNumber): V2FundingCycleMetadata => {
 	const metadata = parameters.reduce((metadata, parameter, i) => {
@@ -143,10 +141,10 @@ export const decodeV2FundingCycleMetadata = (packedMetadata: BigNumber): V2Fundi
 			parameter.bits === 16
 				? bits16
 				: parameter.bits === 8
-					? bits8
-					: parameter.bits === 1
-						? bits1
-						: 0;
+				? bits8
+				: parameter.bits === 1
+				? bits1
+				: 0;
 
 		// 2. Get the amount of bits to shift right by.
 		const shiftRightBits =

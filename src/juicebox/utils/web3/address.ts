@@ -22,5 +22,5 @@ export async function addressFromEns(ens: string, truncate: boolean = false) {
 	try {
 		const address = await privider.resolveName(ens);
 		return address;
-	} catch (error) { }
+	} catch (error) {}
 }

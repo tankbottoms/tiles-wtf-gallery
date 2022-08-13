@@ -19,16 +19,16 @@ export const loadTapEvents = async ({
 		keys: ['netTransferAmount', 'timestamp'],
 		where: projectId
 			? [
-				{
-					key: 'projectId',
-					value: projectId.toNumber()
-				},
-				{
-					key: 'timestamp',
-					value: Math.round((now - daysToMillis(duration)) / 1000),
-					operator: 'gte'
-				}
-			]
+					{
+						key: 'projectId',
+						value: projectId.toNumber()
+					},
+					{
+						key: 'timestamp',
+						value: Math.round((now - daysToMillis(duration)) / 1000),
+						operator: 'gte'
+					}
+			  ]
 			: undefined
 	});
 

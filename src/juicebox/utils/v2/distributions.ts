@@ -91,7 +91,7 @@ export function getTotalSplitsPercentage(splits: Split[]) {
 					.mul(10 ** 12)
 					.div(SPLITS_TOTAL_PERCENT)
 					.toNumber() /
-				10 ** 10,
+					10 ** 10,
 			0
 		)
 	);

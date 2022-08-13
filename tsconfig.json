@@ -31,9 +31,9 @@
 			"$juicebox": ["src/juicebox"],
 			"$juicebox/*": ["src/juicebox/*"],
 			"$tiles": ["src/tiles"],
-			"$tiles/*": ["src/tiles/*"],
-			"$deployments": ["src/deployments"],
-			"$deployments/*": ["src/deployments/*"],
+			"$tiles/*": ["src/tiles/*"],			
+			"$deployments": [ "src/deployments"],
+			"$deployments/*": ["src/deployments/*"]
 		}
 	}
 }

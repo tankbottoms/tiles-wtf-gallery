@@ -162,19 +162,19 @@ export type WhereConfig<E extends EntityKey> = {
 	key: EntityKeys<E>;
 	value: string | number | boolean | string[] | number[] | null;
 	operator?:
-	| 'not'
-	| 'gt'
-	| 'lt'
-	| 'gte'
-	| 'lte'
-	| 'in'
-	| 'not_in'
-	| 'contains'
-	| 'not_contains'
-	| 'starts_with'
-	| 'ends_with'
-	| 'not_starts_with'
-	| 'not_ends_with';
+		| 'not'
+		| 'gt'
+		| 'lt'
+		| 'gte'
+		| 'lte'
+		| 'in'
+		| 'not_in'
+		| 'contains'
+		| 'not_contains'
+		| 'starts_with'
+		| 'ends_with'
+		| 'not_starts_with'
+		| 'not_ends_with';
 };
 
 export type BlockConfig = {
@@ -197,9 +197,9 @@ export interface GraphQueryOpts<E extends EntityKey, K extends EntityKeys<E>> {
 	keys: (
 		| K
 		| {
-			entity: EntityKey;
-			keys: string[]; // hard to type accurate nested keys. All bets are off when this is used.
-		}
+				entity: EntityKey;
+				keys: string[]; // hard to type accurate nested keys. All bets are off when this is used.
+		  }
 	)[];
 	orderDirection?: OrderDirection;
 	where?: WhereConfig<E> | WhereConfig<E>[];
@@ -233,8 +233,8 @@ export const formatGraphQuery = <E extends EntityKey, K extends EntityKeys<E>>(
 		(Array.isArray(where.value)
 			? `[${where.value.map((v) => (typeof v === 'string' ? `"${v}"` : v)).join(',')}]`
 			: typeof where.value === 'number'
-				? where.value
-				: `"${where.value}"`);
+			? where.value
+			: `"${where.value}"`);
 
 	addArg('text', opts.text ? `"${opts.text}"` : undefined);
 	addArg('first', opts.first);
@@ -259,14 +259,15 @@ export const formatGraphQuery = <E extends EntityKey, K extends EntityKeys<E>>(
 
 	let overrideEntity: string = opts.entity;
 
-	return `{ ${overrideEntity}${isPluralQuery(opts.entity) ? 's' : ''}${args ? `(${args})` : ''
-		} {${opts.keys.reduce(
-			(acc, key) =>
-				typeof key === 'string' || typeof key === 'number' || typeof key === 'symbol'
-					? acc + ' ' + key.toString()
-					: acc + ` ${key.entity} { ${key.keys.join(' ')} }`,
-			''
-		)} } }`;
+	return `{ ${overrideEntity}${isPluralQuery(opts.entity) ? 's' : ''}${
+		args ? `(${args})` : ''
+	} {${opts.keys.reduce(
+		(acc, key) =>
+			typeof key === 'string' || typeof key === 'number' || typeof key === 'symbol'
+				? acc + ' ' + key.toString()
+				: acc + ` ${key.entity} { ${key.keys.join(' ')} }`,
+		''
+	)} } }`;
 };
 
 export const trimHexZero = (hexStr: string) => hexStr.replace('0x0', '0x');
@@ -463,8 +464,8 @@ export async function querySubgraphExhaustive<E extends EntityKey, K extends Ent
 			first: pageSize,
 			...(page > 0
 				? {
-					skip: pageSize * page
-				}
+						skip: pageSize * page
+				  }
 				: {})
 		});
 

@@ -30,10 +30,10 @@ export const user = new Store<User & Record<string, any>>();
 export const userdata = derived(user, ($user) =>
 	$user
 		? {
-			username: $user?.reloadUserInfo?.screenName,
-			name: $user?.displayName,
-			profile_image_url: $user?.reloadUserInfo?.photoUrl
-		}
+				username: $user?.reloadUserInfo?.screenName,
+				name: $user?.displayName,
+				profile_image_url: $user?.reloadUserInfo?.photoUrl
+		  }
 		: null
 );
 

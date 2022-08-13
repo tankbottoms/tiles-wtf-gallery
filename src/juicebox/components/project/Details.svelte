@@ -4,10 +4,16 @@
 	import type Store from '$utils/Store';
 	import { connectedAccount } from '$stores/web3';
 	import { tokenSymbolText } from '$juicebox/utils/tokenSymbolText';
-	import { decodeV2FundingCycleMetadata, V2FundingCycleRiskCount } from '$juicebox/utils/v2/fundingCycle';
+	import {
+		decodeV2FundingCycleMetadata,
+		V2FundingCycleRiskCount
+	} from '$juicebox/utils/v2/fundingCycle';
 	import HeavyBorderBox from '$juicebox/components/HeavyBorderBox.svelte';
 	import FundingCycleDetails from '$juicebox/components/FundingCycleDetails.svelte';
-	import type { UserTokenBalanceContext, V2ProjectContextType } from '$juicebox/models/project-type';
+	import type {
+		UserTokenBalanceContext,
+		V2ProjectContextType
+	} from '$juicebox/models/project-type';
 	import Button from '$juicebox/components/Button.svelte';
 	import Trans from '$juicebox/components/Trans.svelte';
 	import PopInfo from '$juicebox/components/PopInfo.svelte';

@@ -93,11 +93,11 @@ export const splitPercentFrom = (percentage: number): BigNumber => {
 export const formatReservedRate = (reservedRate: BigNumber | undefined): string => {
 	return reservedRate
 		? (
-			reservedRate
-				.mul(100)
-				.div(MAX_RESERVED_RATE / 100)
-				.toNumber() / 100
-		).toString()
+				reservedRate
+					.mul(100)
+					.div(MAX_RESERVED_RATE / 100)
+					.toNumber() / 100
+		  ).toString()
 		: '0';
 };
 

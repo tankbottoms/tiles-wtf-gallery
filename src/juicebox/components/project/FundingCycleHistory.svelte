@@ -7,7 +7,7 @@
 	import { formatDiscountRate } from '$juicebox/utils/v2/math';
 	import Modal, { bind, openModal } from '../Modal.svelte';
 	import { getContext, onMount } from 'svelte';
-	// TODO move the type to somewhere else
+	// TODO: move the type to somewhere else
 	import type { V2ProjectContextType } from '$juicebox/models/project-type';
 	import HistoricalFundingCycle from './HistoricalFundingCycle.svelte';
 	import HeavyBorderBox from '../HeavyBorderBox.svelte';
@@ -17,7 +17,7 @@
 	import { ETH_TOKEN_ADDRESS } from '$juicebox/constants/v2/juiceboxTokens';
 	import { decodeV2FundingCycleMetadata } from '$juicebox/utils/v2/fundingCycle';
 
-	// TODO move project context from create
+	// TODO: move project context from create
 	// import { V2ProjectContext } from 'contexts/v2/projectContext'
 
 	// TODO contract reader
