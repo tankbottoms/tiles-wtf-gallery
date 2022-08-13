@@ -147,7 +147,7 @@
 			{:else}
 				<EnsOrAddress address={$project.projectOwnerAddress} />
 			{/if}
-			<OwnerCrown />:
+			<span><OwnerCrown translateX={8} translateY={2} />:</span>
 		</p>
 		<p slot="right">
 			{100 - totalSplitPercentagePayoutSplits}%
@@ -176,6 +176,11 @@
 	p.info {
 		color: var(--text-secondary);
 		font-size: 0.8rem;
+	}
+
+	p[slot='left'] {
+		display: inline-flex;
+		gap: 0;
 	}
 
 	div[slot='addon'] {
