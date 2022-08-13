@@ -9,8 +9,7 @@
 	import Popover from '../Popover.svelte';
 	import ToolsDrawer from './ToolsDrawer.svelte';
 	import ProjectLogo from '../ProjectLogo.svelte';
-	import { connectedAccount } from '$stores/web3';
-	import Skeleton from '../../components/Skeleton.svelte';
+	import Skeleton from '../Skeleton.svelte';
 	import { browser } from '$app/env';
 
 	export let loadingMetadata = false;

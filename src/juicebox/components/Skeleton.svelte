@@ -32,10 +32,10 @@
 
 	@keyframes skeleton-animation {
 		from {
-			background: #444;
+			background: #bbb;
 		}
 		to {
-			background: #666;
+			background: #ddd;
 		}
 	}
 </style>

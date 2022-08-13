@@ -7,18 +7,18 @@
 	export let balanceInTargetCurrency: BigNumber | undefined;
 	export let overflowAmountInTargetCurrency: BigNumber | undefined;
 
-	const percentPaid =
+	$: percentPaid =
 		balanceInTargetCurrency && targetAmount
 			? fracDiv(balanceInTargetCurrency.toString(), targetAmount.toString()) * 100
 			: 0;
 
-	const percentOverflow = fracDiv(
+	$: percentOverflow = fracDiv(
 		(overflowAmountInTargetCurrency?.sub(targetAmount ?? 0) ?? 0).toString(),
 		(targetAmount ?? 0).toString()
 	);
 
-	const hasTargetAmount = targetAmount.gt(0);
-	const hasOverflow = overflowAmountInTargetCurrency?.gt(0) ?? false;
+	$: hasTargetAmount = targetAmount.gt(0);
+	$: hasOverflow = overflowAmountInTargetCurrency?.gt(0) ?? false;
 </script>
 
 <div id="fundingProgressBar">
