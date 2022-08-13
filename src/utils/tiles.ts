@@ -14,16 +14,20 @@ export async function getTilePrice(basePrice: BigNumber, multiplier: number, tie
 	return expectedPrice;
 }
 
-export async function getTilesHistory(): Promise<string[]> {
+export async function getTilesHistory() {
 	const transactions = await getTransactionsByAddress(Tiles[readNetwork.get().alias]);
 	const sorted = transactions.sort((a, b) => (a.timestamp || 0) - (b.timestamp || 0));
 	const iface = new ethers.utils.Interface(Tiles.abi);
-	let tiles: string[] = [];
+	let tiles: { address: string; timestamp: number; blockNumber: number }[] = [];
 	sorted.forEach((tx) => {
 		try {
 			const decodedData = iface.parseTransaction({ data: tx.data });
 			if (decodedData.name === 'grab') {
-				tiles.push(decodedData.args[0]);
+				tiles.push({
+					address: decodedData.args[0],
+					timestamp: tx.timestamp || 0,
+					blockNumber: tx.blockNumber || 0
+				});
 			}
 		} catch {}
 	});

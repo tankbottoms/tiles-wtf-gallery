@@ -3,10 +3,16 @@
 	import { readNetwork } from '$stores/web3';
 	import { generateTile } from '$tiles/tilesStandalone';
 	import { getTilesHistory } from '$utils/tiles';
+	import moment from 'moment';
 	import { onMount } from 'svelte';
 
 	let grid = true;
-	let tiles: any[] = [];
+	let tiles: {
+		address: string;
+		tile: string;
+		timestamp: number;
+		blockNumber: number;
+	}[] = [];
 	let loading = false;
 
 	onMount(async () => {
@@ -14,7 +20,11 @@
 			try {
 				loading = true;
 				const history = await getTilesHistory();
-				tiles = history.map((address) => ({ address, tile: generateTile(address) }));
+				tiles = history.map(({ address, ...rest }) => ({
+					address,
+					tile: generateTile(address),
+					...rest
+				}));
 				loading = false;
 			} catch (e: any) {
 				console.error(e.message);
@@ -30,8 +40,16 @@
 <section class:grid>
 	{#each tiles as item}
 		<div class="tileContainer">
-			{@html item.tile}
-			<span class="address">{item.address}</span>
+			<div class="image">
+				{@html item.tile}
+			</div>
+
+			<div class="address">{item.address}</div>
+			{#if item.timestamp}
+				{#await moment(item.timestamp * 1000) then date}
+					<div class="timestamp">{date.format('LLL')}</div>
+				{/await}
+			{/if}
 		</div>
 	{:else}
 		{#if loading}
@@ -93,10 +111,6 @@
 		color: #222;
 		margin-bottom: 80px;
 		text-align: center;
-	}
-
-	.tileContainer span {
-		opacity: 0.75;
 	}
 
 	.menu {
