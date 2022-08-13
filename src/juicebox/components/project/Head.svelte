@@ -174,11 +174,6 @@
 		opacity: 0.8;
 	}
 
-	.add-handle-btn:hover {
-		color: var(--icon-action-primary);
-		cursor: pointer;
-	}
-
 	/* Small screen */
 	@media (max-width: 750px) {
 		section {

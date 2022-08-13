@@ -320,15 +320,6 @@
 			background-color: var(--background-l0);
 			width: 100%;
 		}
-		.inputs {
-			display: flex;
-			gap: 16px;
-
-			.dropdown {
-				min-width: 100px;
-				flex-shrink: 1;
-			}
-		}
 
 		.button {
 			display: flex;

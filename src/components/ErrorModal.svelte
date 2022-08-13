@@ -51,9 +51,6 @@
 		right: 1rem;
 		cursor: pointer;
 	}
-	img {
-		max-width: 100px;
-	}
 	section {
 		display: flex;
 		flex-direction: column;

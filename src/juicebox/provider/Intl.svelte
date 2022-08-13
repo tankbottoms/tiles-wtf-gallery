@@ -5,6 +5,7 @@
 	const store = new Store(i18n);
 
 	export let config: any;
+    config;
 
 	$: {
 		store.set(i18n);

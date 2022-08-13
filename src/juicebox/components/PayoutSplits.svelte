@@ -23,8 +23,6 @@
 	import EnsOrAddress from './EnsOrAddress.svelte';
 	import Button from './Button.svelte';
 	import { formattedNum } from '$juicebox/utils/formatNumber';
-	import Drawer from './Drawer.svelte';
-	import ProjectConfigurationDrawer, { Drawers } from './project/ProjectConfigurationDrawer.svelte';
 
 	export let currency: BigNumber = BigNumber.from(V2_CURRENCY_ETH);
 	export let distributionLimit: BigNumber = BigNumber.from(0);
@@ -199,14 +197,6 @@
 		</p>
 	</InfoSpaceBetween>
 {/if}
-
-<Drawer bind:shown={drawerShown}>
-	<ProjectConfigurationDrawer
-		close={() => (drawerShown = false)}
-		drawerOpen={true}
-		current={Drawers.Funding}
-	/>
-</Drawer>
 
 <style>
 	div[slot='left'] {

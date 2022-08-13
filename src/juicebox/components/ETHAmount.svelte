@@ -5,7 +5,6 @@
 	import Ethereum from './Ethereum.svelte';
 	export let amount: BigNumber;
 	export let precision = undefined;
-	export let padEnd = false;
 
 	$: amount = amount || BigNumber.from(0);
 

@@ -250,9 +250,6 @@
 		font-weight: 300;
 		font-size: 0.8rem;
 	}
-	ul {
-		margin-top: 20px;
-	}
 
 	.buttons {
 		margin-bottom: 10px;
@@ -267,10 +264,6 @@
 	}
 	.item {
 		margin: 20px 0px;
-	}
-
-	.secondary {
-		color: var(--text-secondary);
 	}
 
 	@media (max-width: 768px) {

@@ -6,8 +6,6 @@
 	export let tokenSymbol: string;
 	export let exchangeLink: string;
 	export let WETHPrice: string;
-	export let loading = false;
-	export let style = '';
 
 	const icon = exchangeName?.toLowerCase() as 'uniswap' | 'sushiswap';
 </script>
@@ -42,9 +40,5 @@
 	.name {
 		display: inline-block;
 		transform: translateY(-2px);
-	}
-	.left .right {
-		display: flex;
-		align-items: center;
 	}
 </style>
