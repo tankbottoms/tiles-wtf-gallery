@@ -70,7 +70,7 @@
 		<a href="/">
 			<img src="/favicon.svg" alt="Logo" />
 		</a>
-		<a href="/history">{count} minted</a> // current price: {price} ETH
+		<a class="primary-text" href="/history">{count} minted</a> // current price: {price} ETH
 	</div>
 
 	<div class="right">
@@ -106,7 +106,7 @@
 	</div>
 </header>
 
-<style>
+<style lang="scss">
 	.dropdown {
 		position: absolute;
 		right: 0;
@@ -138,6 +138,13 @@
 	.left {
 		align-items: center;
 		gap: 10px;
+	}
+
+	.left a {
+		color: inherit;
+		&:hover {
+			text-decoration: underline;
+		}
 	}
 
 	.right {
