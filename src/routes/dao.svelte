@@ -12,7 +12,7 @@
 	} from '$juicebox/models/project-type';
 	import type { V2CurrencyOption } from '$juicebox/models/v2/currencyOption';
 	import { BigNumber, constants, ethers } from 'ethers';
-	import { modal } from '$stores';
+	import { modal, pageReady } from '$stores';
 	import { setContext } from 'svelte';
 	import Details from '$juicebox/components/project/Details.svelte';
 	import Head from '$juicebox/components/project/Head.svelte';
@@ -34,13 +34,15 @@
 	import { getCurrencyConverter } from '$juicebox/data/currency';
 	import { V2CurrencyName, V2_CURRENCY_ETH, V2_CURRENCY_USD } from '$juicebox/utils/v2/currency';
 	import ERC20ContractAbi from '$juicebox/constants/ERC20ContractAbi';
-	import { chainId, connectedAccount, readNetwork } from '$stores/web3';
+	import { chainId, connectedAccount, getDefaultProvider, readNetwork } from '$stores/web3';
 	import { V2OperatorPermission } from '$juicebox/constants/v2/operatorPermission';
 	import { blocknativeNetworks } from '$constants/networks';
 
-	const projectId = BigNumber.from($chainId === 4 ? 98 : 41);
+	let projectId = BigNumber.from(Number(getDefaultProvider().id) === 4 ? 98 : 41);
 
-	let project = new Store<V2ProjectContextType>({} as any);
+	let project = new Store<V2ProjectContextType>({
+		projectId: projectId
+	} as any);
 	const userTokenBalance = new Store<UserTokenBalanceContext>({
 		claimedBalance: BigNumber.from(0),
 		unclaimedBalance: BigNumber.from(0),
@@ -63,7 +65,7 @@
 
 	function checkNetworkId(_chainId: number) {
 		if (Number($readNetwork.id) !== _chainId) {
-			console.log('Network changed', $chainId, _chainId);
+			console.log('Network changed', $chainId, 'from', _chainId);
 			throw {
 				message: `aborting: network was changed (from: ${_chainId} to: ${$chainId})`,
 				errorCode: 'networkChanged'
@@ -88,6 +90,7 @@
 			// loading = false;
 			return;
 		}
+		projectId = BigNumber.from(Number(getDefaultProvider().id) === 4 ? 98 : 41);
 		$project.projectId = projectId;
 
 		try {
@@ -478,9 +481,24 @@
 		console.log(`Project #${$project.projectId}`, $project);
 	}
 
+	$: if ($pageReady.web3) {
+	}
+
+	function init() {
+		readNetwork.subscribe(() => {
+			loading = true;
+			issue = '';
+			fetchProject();
+		});
+	}
+
 	if (browser) {
-		readNetwork.subscribe(async () => {
-			await fetchProject();
+		let unsub = () => {};
+		unsub = pageReady.subscribe(({ web3 }) => {
+			if (web3) {
+				unsub?.();
+				init();
+			}
 		});
 	}
 </script>
