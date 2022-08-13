@@ -335,7 +335,14 @@
 		<path d="M6.76855 7.28818L7.08117 6.63281L7.83447 6.97556L6.76855 7.28818Z" fill="#233447" />
 	</svg>
 {:else if name === 'gnosis'}
-	<svg fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 11 11" width="1em" height="1em">
+	<svg
+		{...$$restProps}
+		fill="none"
+		xmlns="http://www.w3.org/2000/svg"
+		viewBox="0 0 11 11"
+		width="1em"
+		height="1em"
+	>
 		<path
 			d="M3.23314 6.26331C3.54926 6.26331 3.85767 6.15794 4.10697 5.96518L2.1023 3.96051C1.61912 4.58504 1.73478 5.48458 2.35931 5.96775C2.61118 6.15794 2.91702 6.26331 3.23314 6.26331Z"
 		/>
@@ -351,6 +358,7 @@
 	</svg>
 {:else if name === 'uniswap'}
 	<svg
+		{...$$restProps}
 		width="168.3"
 		height="193.8"
 		enable-background="new 0 0 168.3 193.8"
@@ -383,6 +391,7 @@
 	>
 {:else if name === 'sushiswap'}
 	<svg
+		{...$$restProps}
 		width="24"
 		height="24"
 		enable-background="new 0 0 24 24"
@@ -451,6 +460,7 @@
 	>
 {:else if name === 'pen'}
 	<svg
+		{...$$restProps}
 		viewBox="64 64 896 896"
 		focusable="false"
 		data-icon="edit"

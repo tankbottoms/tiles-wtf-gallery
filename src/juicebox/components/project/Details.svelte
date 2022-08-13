@@ -209,8 +209,9 @@
 			<h4 slot="left">
 				<PopInfo
 					message="A project's lifetime is defined in funding cycles. If a funding target is set, the project can withdraw no more than the target for the duration of the cycle."
-					>Funding cycle</PopInfo
 				>
+					Funding cycle
+				</PopInfo>
 			</h4>
 			<div slot="right">
 				{#if $projectContext.projectOwnerAddress.toLowerCase() === $connectedAccount.toLowerCase()}

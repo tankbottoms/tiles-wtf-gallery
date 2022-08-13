@@ -89,8 +89,8 @@
 		<h4 slot="header">Advanced options (optional)</h4>
 
 		<div class="collapse">
-			<label for="memo"
-				>Custom memo
+			<label for="memo">
+				Custom memo
 				<Popover
 					placement="right"
 					message="The onchain memo for each transaction made through the address. It will appear in the project's payment feed when someone pays this address."

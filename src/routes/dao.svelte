@@ -472,15 +472,11 @@
 		loading = false;
 	}
 
-	let count = 0;
 	if (browser) {
 		readNetwork.subscribe((network) => {
-			const wasCached = cachedRender;
-			fetchProject(cachedRender).then(() => {
-				wasCached && count === 0 && setTimeout(fetchProject, 2000, false, false);
-				count++;
+			fetchProject().then(() => {
+				setTimeout(fetchProject, 2000, false, false);
 			});
-			cachedRender = false;
 		});
 	}
 </script>

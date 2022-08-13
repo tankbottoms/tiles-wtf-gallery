@@ -58,17 +58,15 @@
 <CollapsibleSection alignCaret="center" {expanded}>
 	<div slot="header">
 		<h4 class="collapse-header">
-			{#if fundingCycle.duration.gt(0)}
-				Cycle #{fundingCycle.number.toString()}
-			{:else}
-				Details
-			{/if}
+			Cycle #{fundingCycle.number.toString()}
 			<span class="risks">
 				{#if fundingCycleRiskCount > 0}
 					<Popover
 						message="Some funding cycle properties may indicate risk for
-    project contributors."><Icon name="exclamationCircle" /></Popover
-					>{fundingCycleRiskCount}
+    project contributors."
+					>
+						<Icon name="exclamationCircle" style="transform: translateY(3px);color: var(--text-warn)" />
+					</Popover>
 				{/if}
 			</span>
 		</h4>
