@@ -30,11 +30,11 @@
 	</div>
 	<section>
 		<h1>infinite tiles v2</h1>
-		<p>generated from an eth address</p>
+		<p>generated from any eth address</p>
 		<p>
 			<a
-				href="https://github.com/tankbottoms/tiles-on-chain/tree/main/contracts/components"
-				target="_blank">generated on-chain in solidity</a
+				href="https://github.com/tankbottoms/tiles-on-chain/blob/main/contracts/components/TileContentProvider.sol"
+				target="_blank">fully on-chain artwork in solidity</a
 			>
 		</p>
 		<p>each is unique & objectively rare</p>
