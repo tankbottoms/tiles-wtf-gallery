@@ -36,8 +36,6 @@
 	import EnsOrAddress from '../EnsOrAddress.svelte';
 	import Graph from './Graph';
 	import Popover from '../Popover.svelte';
-	import ProjectConfigurationDrawer from './ProjectConfigurationDrawer.svelte';
-	import Drawer from '../Drawer.svelte';
 
 	const projectContext = getContext('PROJECT') as Store<V2ProjectContextType>;
 	const tokenSymbol = $projectContext.tokenSymbol;
@@ -283,10 +281,6 @@
 		</div>
 	</div>
 </section>
-
-<Drawer bind:shown={drawerShown}>
-	<ProjectConfigurationDrawer close={() => (drawerShown = false)} />
-</Drawer>
 
 <style>
 	section {

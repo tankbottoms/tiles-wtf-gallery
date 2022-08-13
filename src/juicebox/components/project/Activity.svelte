@@ -65,7 +65,6 @@
 	function openDownloadModal() {
 		openModal(DownloadActivityModal);
 	}
-	$: console.log(events)
 </script>
 
 <section>

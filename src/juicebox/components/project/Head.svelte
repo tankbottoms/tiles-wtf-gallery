@@ -8,18 +8,13 @@
 	import Paragraph from '../Paragraph.svelte';
 	import Popover from '../Popover.svelte';
 	import ToolsDrawer from './ToolsDrawer.svelte';
-	import ProjectConfigurationDrawer from './ProjectConfigurationDrawer.svelte';
 	import ProjectLogo from '../ProjectLogo.svelte';
-	import { connectedAccount } from '$stores/web3';
 
 	let drawerShown = false;
 	let current;
 
 	const projectContext = getContext('PROJECT') as Store<V2ProjectContextType>;
 	$: metadata = $projectContext.projectMetadata;
-
-	// TODO: contract reader (useHasPermission)
-	const showReconfigure = true;
 
 	const prettyUrl = (url: string) => {
 		if (url.startsWith('https://')) {
@@ -68,18 +63,6 @@
 						name="tool"
 					/>
 				</div>
-				<!-- TODO: projectOwnerAddress doesn't seem to be set -->
-				{#if showReconfigure && $projectContext.projectOwnerAddress.toLowerCase() === $connectedAccount.toLowerCase()}
-					<div class="clickable-icon">
-						<Icon
-							name="setting"
-							on:click={() => {
-								drawerShown = !drawerShown;
-								current = ProjectConfigurationDrawer;
-							}}
-						/>
-					</div>
-				{/if}
 			</div>
 		</InfoSpaceBetween>
 		<div
@@ -93,14 +76,6 @@
 					@{$projectContext.handle}
 				</span>
 				&nbsp;
-			{:else if $connectedAccount && $projectContext.projectOwnerAddress?.toLocaleLowerCase() === $connectedAccount?.toLowerCase()}
-				<span
-					class="add-handle-btn"
-					on:click={() => {
-						drawerShown = !drawerShown;
-						current = ProjectConfigurationDrawer;
-					}}><Icon name="pen" /> Add handle</span
-				>&nbsp;
 			{/if}
 			{#if metadata?.infoUri}
 				<a href={metadata.infoUri} target="_blank" rel="noopener noreferrer"
