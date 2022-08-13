@@ -31,7 +31,7 @@
 	{#each tiles as item}
 		<div class="tileContainer">
 			{@html item.tile}
-			<span>{item.address}</span>
+			<span class="address">{item.address}</span>
 		</div>
 	{:else}
 		{#if loading}
@@ -96,7 +96,7 @@
 	}
 
 	.tileContainer span {
-		opacity: 0.25;
+		opacity: 0.75;
 	}
 
 	.menu {
