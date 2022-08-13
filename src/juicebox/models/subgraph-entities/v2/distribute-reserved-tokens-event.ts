@@ -27,8 +27,8 @@ export interface DistributeReservedTokensEvent extends BaseEventEntity, BaseProj
 
 export type DistributeReservedTokensEventJson = Partial<
 	Record<keyof Omit<DistributeReservedTokensEvent, 'splitDistributions'>, string> &
-	BaseEventEntityJson &
-	BaseProjectEntityJson
+		BaseEventEntityJson &
+		BaseProjectEntityJson
 > & {
 	splitDistributions: DistributeToReservedTokenSplitEventJson[];
 };

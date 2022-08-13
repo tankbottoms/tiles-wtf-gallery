@@ -121,7 +121,7 @@
 
 <section>
 	{#if showInvalidAddress}
-		<h1>Not a valid address</h1>
+		<h1>not a valid address</h1>
 	{:else if tile}
 		{@html tile}
 		<p>{$page.params.address}</p>
@@ -142,13 +142,13 @@
 		{/if}
 		<br />
 		{#if !hasEnoughBalance}
-			<p>Insufficient balance</p>
+			<p>insufficient balance</p>
 		{/if}
 	{/if}
 </section>
 
 <button class="download" on:click={() => downloadFile(tile, 'tile.svg', 'image/svg')}>
-	Download SVG
+	download svg
 </button>
 
 <style>

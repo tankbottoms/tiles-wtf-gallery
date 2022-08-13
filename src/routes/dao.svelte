@@ -13,7 +13,7 @@
 	import type { V2CurrencyOption } from '$juicebox/models/v2/currencyOption';
 	import { BigNumber, constants, ethers } from 'ethers';
 	import { modal } from '$stores';
-	import { setContext } from 'svelte';	
+	import { setContext } from 'svelte';
 	import Details from '$juicebox/components/project/Details.svelte';
 	import Head from '$juicebox/components/project/Head.svelte';
 	import Issue from '$juicebox/components/Issue.svelte';
@@ -472,10 +472,7 @@
 			}
 		} catch (error) {
 			if (error.errorCode === 'networkChanged') return fetchProject(cached, showLoadingUI);
-			console.error(error);
-			// loading = false;
-			// issue = 'error reading token balance';
-			// return;
+			console.error(error);			
 		}
 
 		console.log(`Project #${$project.projectId}`, $project);
@@ -500,7 +497,7 @@
 	{#if $project?.projectMetadata?.name}
 		<title>{$project?.projectMetadata?.name} | Juicebox</title>
 	{:else}
-		<title>Project | Tiles</title>
+		<title>Project | Tiles v2</title>
 	{/if}
 </svelte:head>
 

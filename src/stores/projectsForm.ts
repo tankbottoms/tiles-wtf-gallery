@@ -1,7 +1,5 @@
 import Store from '$juicebox/utils/Store';
-import type {
-	ProjectSortType
-} from '$juicebox/models/project-visibility';
+import type { ProjectSortType } from '$juicebox/models/project-visibility';
 import type { Project } from '$juicebox/models/subgraph-entities/vX/project';
 
 export const sortType = new Store<ProjectSortType>('totalPaid');

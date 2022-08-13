@@ -29,10 +29,15 @@
 		<p id="address" />
 	</div>
 	<section>
-		<h1>infinite tiles v1.2</h1>		
-		<p>generated from any eth address</p>
-		<p><a href="https://github.com/tankbottoms/tiles-on-chain/tree/main/contracts/components" target="_blank">generated on-chain in solidity</a></p>
-		<p>each is unique & objectively rare</p>		
+		<h1>infinite tiles v2</h1>
+		<p>generated from an eth address</p>
+		<p>
+			<a
+				href="https://github.com/tankbottoms/tiles-on-chain/tree/main/contracts/components"
+				target="_blank">generated on-chain in solidity</a
+			>
+		</p>
+		<p>each is unique & objectively rare</p>
 		<a href="/wtf">wtf</a>
 		<a href="/dao">treasury</a>
 		<a href="/faq">faq</a>
@@ -47,9 +52,9 @@
 <footer>
 	<div class="center">
 		<div class="link">
-		<!--<a href="https://info.juicebox.money/tos">Terms of service</a>				-->
+			<!--<a href="https://info.juicebox.money/tos">Terms of service</a>				-->
 		</div>
-	</div>				
+	</div>
 </footer>
 
 <style>
@@ -82,16 +87,15 @@
 	}
 
 	.center {
-  		margin: auto;
-  		font-size: 14px;
+		margin: auto;
+		font-size: 14px;
 		color: black;
-		text-decoration: none;		
+		text-decoration: none;
 		align-items: center;
-		justify-items: center;		
-		text-align: center;		  		
-  		margin: 0px 5px;
-	}  
-
+		justify-items: center;
+		text-align: center;
+		margin: 0px 5px;
+	}
 
 	p {
 		font-size: 16px;

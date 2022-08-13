@@ -129,12 +129,12 @@ export function getProjectStatsFromPayments(payments = []) {
 		const projectId = curr.project.id?.toString();
 		return projectId
 			? {
-				...acc,
-				[projectId]: {
-					trendingVolume: BigNumber.from(acc[projectId]?.trendingVolume ?? 0).add(curr.amount),
-					paymentsCount: (acc[projectId]?.paymentsCount ?? 0) + 1
-				}
-			}
+					...acc,
+					[projectId]: {
+						trendingVolume: BigNumber.from(acc[projectId]?.trendingVolume ?? 0).add(curr.amount),
+						paymentsCount: (acc[projectId]?.paymentsCount ?? 0) + 1
+					}
+			  }
 			: acc;
 	}, {} as ProjectStat);
 }
@@ -242,20 +242,20 @@ export async function myProjectsQuery(wallet: string | undefined) {
 	const projectsQuery = await querySubgraph(
 		wallet
 			? {
-				entity: 'project',
-				keys,
-				where: [
-					{
-						key: 'owner',
-						operator: 'in',
-						value: [wallet]
-					},
-					{
-						key: 'cv',
-						value: '2'
-					}
-				]
-			}
+					entity: 'project',
+					keys,
+					where: [
+						{
+							key: 'owner',
+							operator: 'in',
+							value: [wallet]
+						},
+						{
+							key: 'cv',
+							value: '2'
+						}
+					]
+			  }
 			: null
 	);
 
@@ -267,26 +267,26 @@ export async function holdingsProjectsQuery(wallet: string | undefined) {
 		const participants = await querySubgraphExhaustive(
 			wallet
 				? {
-					entity: 'participant',
-					orderBy: 'balance',
-					orderDirection: 'desc',
-					keys: [
-						{
-							entity: 'project',
-							keys: ['id']
-						}
-					],
-					where: [
-						{
-							key: 'cv',
-							value: '2'
-						},
-						{
-							key: 'wallet',
-							value: wallet
-						}
-					]
-				}
+						entity: 'participant',
+						orderBy: 'balance',
+						orderDirection: 'desc',
+						keys: [
+							{
+								entity: 'project',
+								keys: ['id']
+							}
+						],
+						where: [
+							{
+								key: 'cv',
+								value: '2'
+							},
+							{
+								key: 'wallet',
+								value: wallet
+							}
+						]
+				  }
 				: null
 		);
 
@@ -308,14 +308,14 @@ export async function holdingsProjectsQuery(wallet: string | undefined) {
 	const projectsQuery = await querySubgraph(
 		projectIds
 			? {
-				entity: 'project',
-				keys,
-				where: {
-					key: 'id',
-					operator: 'in',
-					value: projectIds
-				}
-			}
+					entity: 'project',
+					keys,
+					where: {
+						key: 'id',
+						operator: 'in',
+						value: projectIds
+					}
+			  }
 			: null
 	);
 

@@ -31,7 +31,7 @@
 			showInvalidAddress = false;
 		}
 	}
-	
+
 	/*
 	TODO: firebase function to tweet the last tile which was minted
 	*/

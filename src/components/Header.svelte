@@ -98,8 +98,8 @@
 						<li on:click={web3Disconnect}>disconnect</li>
 					</ul>
 				{/if}
-			</p>			
-				<button class="disconnect" on:click={web3Disconnect}>X</button>			
+			</p>
+			<button class="disconnect" on:click={web3Disconnect}>X</button>
 		{:else}
 			<button on:click={web3Connect}>connect</button>
 		{/if}
@@ -110,7 +110,7 @@
 	.dropdown {
 		position: absolute;
 		right: 0;
-		top: 70%;		
+		top: 70%;
 		list-style: none;
 		padding: 0;
 	}
@@ -126,12 +126,12 @@
 	header,
 	.right,
 	.left {
-		display: flex;		
+		display: flex;
 		padding: 5px 0px;
 	}
 
 	header {
-		justify-content: space-between;		
+		justify-content: space-between;
 	}
 
 	.right,
@@ -140,9 +140,9 @@
 		gap: 10px;
 	}
 
-	.right {			
-		position: relative;		
-		justify-content: flex-end; 				
+	.right {
+		position: relative;
+		justify-content: flex-end;
 	}
 
 	img {
@@ -168,8 +168,7 @@
 
 	.disconnect {
 		/*padding: 0;*/
-		position: relative;		
-		justify-content: flex-end; 				
+		position: relative;
+		justify-content: flex-end;
 	}
-
 </style>

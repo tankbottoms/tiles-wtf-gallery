@@ -116,7 +116,6 @@ export async function readContract(
 	return await readContractByAddress(contractAddress, abi, functionName, args, cached);
 }
 
-
 export async function writeContract(
 	contractName: V2ContractName,
 	functionName: string,
@@ -131,4 +130,3 @@ export async function writeContract(
 	);
 	return await contract[functionName](...args, opts);
 }
-

@@ -3,11 +3,7 @@ import {
 	type PrintReservesEvent,
 	type PrintReservesEventJson
 } from '../v1/print-reserves-event';
-import {
-	parseTapEventJson,
-	type TapEvent,
-	type TapEventJson
-} from '../v1/tap-event';
+import { parseTapEventJson, type TapEvent, type TapEventJson } from '../v1/tap-event';
 
 import {
 	type DistributeToPayoutModEvent,

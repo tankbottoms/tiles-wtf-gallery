@@ -1,8 +1,5 @@
 import { BigNumber } from '@ethersproject/bignumber';
-import {
-	parseParticipantJson,
-	type ParticipantJson
-} from './participant';
+import { parseParticipantJson, type ParticipantJson } from './participant';
 
 import {
 	type DeployedERC20Event,

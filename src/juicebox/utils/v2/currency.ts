@@ -1,4 +1,8 @@
-import type { V2CurrencyETH, V2CurrencyOption, V2CurrencyUSD } from '$juicebox/models/v2/currencyOption';
+import type {
+	V2CurrencyETH,
+	V2CurrencyOption,
+	V2CurrencyUSD
+} from '$juicebox/models/v2/currencyOption';
 
 import {
 	type CurrencyMetadata,

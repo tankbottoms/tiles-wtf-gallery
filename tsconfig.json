@@ -8,83 +8,33 @@
 		"allowJs": true,
 		"esModuleInterop": true,
 		"resolveJsonModule": true,
-		"lib": [
-			"DOM"
-		],
+		"lib": ["DOM"],
 		"target": "ES2017",
 		"paths": {
-			"$env": [
-				"src/env"
-			],
-			"$env/*": [
-				"src/env/*"
-			],
-			"$lib": [
-				"src/lib"
-			],
-			"$lib/*": [
-				"src/lib/*"
-			],
-			"$stores": [
-				"src/stores"
-			],
-			"$stores/*": [
-				"src/stores/*"
-			],
-			"$utils": [
-				"src/utils"
-			],
-			"$utils/*": [
-				"src/utils/*"
-			],
-			"$assets": [
-				"src/assets"
-			],
-			"$assets/*": [
-				"src/assets/*"
-			],
-			"$constants": [
-				"src/constants"
-			],
-			"$constants/*": [
-				"src/constants/*"
-			],
-			"$models": [
-				"src/models"
-			],
-			"$models/*": [
-				"src/models/*"
-			],
-			"$data": [
-				"src/data"
-			],
-			"$data/*": [
-				"src/data/*"
-			],
-			"$components": [
-				"src/components"
-			],
-			"$components/*": [
-				"src/components/*"
-			],
-			"$juicebox": [
-				"src/juicebox"
-			],
-			"$juicebox/*": [
-				"src/juicebox/*"
-			],
-			"$tiles": [
-				"src/tiles"
-			],
-			"$tiles/*": [
-				"src/tiles/*"
-			],
-			"$deployments": [
-				"src/deployments"
-			],
-			"$deployments/*": [
-				"src/deployments/*"
-			],
+			"$env": ["src/env"],
+			"$env/*": ["src/env/*"],
+			"$lib": ["src/lib"],
+			"$lib/*": ["src/lib/*"],
+			"$stores": ["src/stores"],
+			"$stores/*": ["src/stores/*"],
+			"$utils": ["src/utils"],
+			"$utils/*": ["src/utils/*"],
+			"$assets": ["src/assets"],
+			"$assets/*": ["src/assets/*"],
+			"$constants": ["src/constants"],
+			"$constants/*": ["src/constants/*"],
+			"$models": ["src/models"],
+			"$models/*": ["src/models/*"],
+			"$data": ["src/data"],
+			"$data/*": ["src/data/*"],
+			"$components": ["src/components"],
+			"$components/*": ["src/components/*"],
+			"$juicebox": ["src/juicebox"],
+			"$juicebox/*": ["src/juicebox/*"],
+			"$tiles": ["src/tiles"],
+			"$tiles/*": ["src/tiles/*"],
+			"$deployments": ["src/deployments"],
+			"$deployments/*": ["src/deployments/*"]
 		}
 	}
 }

@@ -3,7 +3,7 @@
 	import { constants, utils } from 'ethers';
 	import { onMount } from 'svelte';
 	import { generateTile, generateRandomAddresses } from '$tiles/tilesStandalone';
-	
+
 	export const txnResponse = new Store<ContractTransaction>();
 	export const methodName = new Store('');
 
@@ -22,7 +22,7 @@
 	import Loading from '$juicebox/components/Loading.svelte';
 
 	let errorMessage = '';
-	let input: string | undefined;	
+	let input: string | undefined;
 	let randomTiles: any[] = [];
 	let tile = '';
 	let showInvalidAddress = false;
@@ -70,7 +70,7 @@
 			tile = '';
 			showInvalidAddress = false;
 		}
-	}	
+	}
 </script>
 
 {#if $txnResponse}
@@ -84,15 +84,15 @@
 						<Icon name="exclamationCircle" style="color: red; transform: translateY(3px)" /> Error
 					</h2>
 					<p class="error">{errorMessage}</p>
-				{:else}				
+				{:else}
 					{#each randomTiles as item}
 						<div class="tileContainer">
 							{@html item.tile}
 							<span>{item.address}</span>
 						</div>
-					{/each}			
+					{/each}
 
-					{#if $methodName}					
+					{#if $methodName}
 						<h2>method: {$methodName}</h2>
 					{/if}
 					<h2>transaction pending...</h2>

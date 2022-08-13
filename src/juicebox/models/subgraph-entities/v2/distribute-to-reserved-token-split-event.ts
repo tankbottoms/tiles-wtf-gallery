@@ -24,8 +24,8 @@ export interface DistributeToReservedTokenSplitEvent extends BaseEventEntity, Ba
 
 export type DistributeToReservedTokenSplitEventJson = Partial<
 	Record<keyof DistributeToReservedTokenSplitEvent, string> &
-	BaseEventEntityJson &
-	BaseProjectEntityJson
+		BaseEventEntityJson &
+		BaseProjectEntityJson
 >;
 
 export const parseDistributeToReservedTokenSplitEventJson = (

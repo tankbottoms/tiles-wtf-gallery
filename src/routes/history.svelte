@@ -13,10 +13,10 @@
 				const history = await getTilesHistory();
 				console.log(history);
 				tiles = history.map((address) => ({ address, tile: generateTile(address) }));
-			} catch (e) {				
+			} catch (e) {
 				console.error(e.message);
 			}
-		});				
+		});
 	});
 </script>
 

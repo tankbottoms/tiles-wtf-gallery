@@ -21,8 +21,9 @@ export function detailedTimeString({
 	const daysText = `${days && days > 0 ? days.toString() + 'd ' : ''}`;
 	const hoursText = `${hours && hours >= 1 ? Math.floor(hours) + 'h ' : ''}`;
 	const minutesText = `${minutes && minutes >= 1 ? Math.floor(minutes) + 'm ' : ''}`;
-	const secondsText = `${seconds && seconds > 0 && !roundToMinutes ? Math.floor(seconds) + 's' : ''
-		}`;
+	const secondsText = `${
+		seconds && seconds > 0 && !roundToMinutes ? Math.floor(seconds) + 's' : ''
+	}`;
 
 	return `${daysText}${hoursText}${minutesText}${secondsText}`.trimEnd() || '--';
 }

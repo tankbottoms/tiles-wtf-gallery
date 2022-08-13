@@ -1,9 +1,5 @@
 import { BigNumber } from '@ethersproject/bignumber';
-import {
-	parseProjectJson,
-	type Project,
-	type ProjectJson
-} from '../vX/project';
+import { parseProjectJson, type Project, type ProjectJson } from '../vX/project';
 
 import {
 	type BaseEventEntity,
