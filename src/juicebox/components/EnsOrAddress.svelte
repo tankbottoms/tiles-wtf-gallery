@@ -75,7 +75,7 @@
 	// }
 </script>
 
-{#if mounted}
+{#if mounted && address}
 	<span>
 		<GnosisAddress address={utils.getAddress(address)} let:isGnosis let:owners let:threshold>
 			<div class="align">

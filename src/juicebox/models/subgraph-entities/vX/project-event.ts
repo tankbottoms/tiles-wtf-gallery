@@ -56,6 +56,11 @@ import {
 	type ProjectCreateEventJson
 } from './project-create-event';
 import { parseRedeemEventJson, type RedeemEvent, type RedeemEventJson } from './redeem-event';
+import {
+	parseDeployETHERC20ProjectPayerEventJson,
+	type DeployETHERC20ProjectPayerEvent,
+	type DeployETHERC20ProjectPayerEventJson
+} from '../v2/deploy-eth-erc20-project-payer-event';
 
 export type ProjectEvent = {
 	cv: string;
@@ -84,12 +89,14 @@ export type ProjectEvent = {
 	distributeToPayoutSplitEvent: Partial<DistributePayoutsEvent> | null;
 	distributeToReservedTokenSplitEvent: Partial<DistributeToReservedTokenSplitEvent> | null;
 	useAllowanceEvent: Partial<UseAllowanceEvent> | null;
+	deployETHERC20ProjectPayerEvent: Partial<DeployETHERC20ProjectPayerEvent> | null;
 };
 
 export type ProjectEventJson = Pick<
 	ProjectEvent,
 	'id' | 'timestamp' | 'projectId' | 'project' // primitive types
 > & {
+	cv: string;
 	payEvent: PayEventJson | null;
 	mintTokensEvent: MintTokensEventJson | null;
 	redeemEvent: RedeemEventJson | null;
@@ -106,6 +113,7 @@ export type ProjectEventJson = Pick<
 	distributeToReservedTokenSplitEvent: DistributeToReservedTokenSplitEventJson | null;
 	distributeToPayoutSplitEvent: DistributeToPayoutSplitEventJson | null;
 	useAllowanceEvent: UseAllowanceEventJson | null;
+	deployETHERC20ProjectPayerEvent: DeployETHERC20ProjectPayerEventJson | null;
 };
 
 export const parseProjectEventJson = (j: ProjectEventJson): ProjectEvent => ({
@@ -141,5 +149,9 @@ export const parseProjectEventJson = (j: ProjectEventJson): ProjectEvent => ({
 	distributeToPayoutSplitEvent: j.distributeToPayoutSplitEvent
 		? parseDistributeToPayoutSplitEventJson(j.distributeToPayoutSplitEvent)
 		: null,
-	useAllowanceEvent: j.useAllowanceEvent ? parseUseAllowanceEventJson(j.useAllowanceEvent) : null
+	useAllowanceEvent: j.useAllowanceEvent ? parseUseAllowanceEventJson(j.useAllowanceEvent) : null,
+
+	deployETHERC20ProjectPayerEvent: j.deployETHERC20ProjectPayerEvent
+		? parseDeployETHERC20ProjectPayerEventJson(j.deployETHERC20ProjectPayerEvent)
+		: null
 });

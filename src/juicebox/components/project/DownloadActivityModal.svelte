@@ -14,7 +14,12 @@
 
 	export let close;
 
-	let loading: boolean;
+	let loadingPayments = false;
+	let loadingRedeemed = false;
+	let loadingDistributed = false;
+	let loadingDistributedReserved = false;
+	let loadingEvents = false;
+	let loadingERC20PaymentAddress = false;
 	const project = getContext('PROJECT') as Store<V2ProjectContextType>;
 	const resolved: Record<string, { ens: string; timestamp: number }> = {};
 
@@ -55,7 +60,26 @@
 	}
 
 	async function getEvents(filter?: keyof ProjectEvent) {
-		loading = true;
+		switch (filter) {
+			case 'payEvent':
+				loadingPayments = true;
+				break;
+			case 'redeemEvent':
+				loadingRedeemed = true;
+				break;
+			case 'distributePayoutsEvent':
+				loadingDistributed = true;
+				break;
+			case 'distributeReservedTokensEvent':
+				loadingDistributedReserved = true;
+				break;
+			case 'deployETHERC20ProjectPayerEvent':
+				loadingERC20PaymentAddress = true;
+				break;
+			default:
+				loadingEvents = true;
+				break;
+		}
 		let where: WhereConfig<'projectEvent'>[] = [
 			{ key: 'cv', value: '2' },
 			{ key: 'projectId', value: $project.projectId.toNumber() }
@@ -70,6 +94,15 @@
 		return await getAllProjectEvents(where);
 	}
 
+	function setLoadingFalse() {
+		loadingPayments = false;
+		loadingRedeemed = false;
+		loadingDistributed = false;
+		loadingDistributedReserved = false;
+		loadingEvents = false;
+		loadingERC20PaymentAddress = false;
+	}
+
 	function downloadCsv(rows: string[][], name: string) {
 		const csvContent = 'data:text/csv;charset=utf-8,' + rows.map((e) => e.join(',')).join('\n');
 		const encodedUri = encodeURI(csvContent);
@@ -79,7 +112,7 @@
 		document.body.appendChild(link);
 
 		link.click();
-		loading = false;
+		setLoadingFalse();
 	}
 	async function downloadPayments() {
 		try {
@@ -110,8 +143,8 @@
 			downloadCsv(rows, 'payments');
 		} catch (e) {
 			console.error('Error downloading events', e);
-			loading = false;
 		}
+		setLoadingFalse();
 	}
 	async function downloadRedeemed() {
 		try {
@@ -144,8 +177,8 @@
 			downloadCsv(rows, 'redeemed');
 		} catch (e) {
 			console.error('Error downloading participants', e);
-			loading = false;
 		}
+		setLoadingFalse();
 	}
 	async function downloadFunds() {
 		try {
@@ -181,8 +214,8 @@
 			downloadCsv(rows, 'distributed_funds');
 		} catch (e) {
 			console.error('Error downloading participants', e);
-			loading = false;
 		}
+		setLoadingFalse();
 	}
 	async function downloadReservedTokens() {
 		try {
@@ -218,9 +251,38 @@
 			downloadCsv(rows, 'distributed_reserved_tokens');
 		} catch (e) {
 			console.error('Error downloading participants', e);
-			loading = false;
 		}
+		setLoadingFalse();
 	}
+
+	async function downloadECR20PayementAddress() {
+		try {
+			const events = await getEvents('deployETHERC20ProjectPayerEvent');
+
+			const rows = [
+				['Project ID', 'ID', `Address`, 'Deployed By', 'Memo', 'Date', 'TransactionHash'] // CSV header row
+			];
+			for await (const e of events) {
+				const info = e.deployETHERC20ProjectPayerEvent;
+				let date = formatDate((info.timestamp ?? 0) * 1000);
+				const ens = await getEns(info.caller);
+				rows.push([
+					$project.projectId.toString(),
+					info.id,
+					info.address,
+					ens || info.caller,
+					info.memo || '',
+					date,
+					info.txHash
+				]);
+			}
+			downloadCsv(rows, 'erc20_project_payer_address');
+		} catch (e) {
+			console.error('Error downloading participants', e);
+		}
+		setLoadingFalse();
+	}
+
 	async function downloadEvents() {
 		try {
 			const events = await getEvents();
@@ -261,22 +323,45 @@
 			downloadCsv(rows, 'events');
 		} catch (e) {
 			console.error('Error downloading participants', e);
-			loading = false;
 		}
+		setLoadingFalse();
 	}
 </script>
 
 <section>
 	<h4>
-		<PopInfo message="Tooltip text">Download CSV of project activity</PopInfo>
+		<PopInfo
+			message="This list is using an experimental data index and may be inaccurate for some projects."
+			>Download CSV of project activity</PopInfo
+		>
 	</h4>
-	<Button size="md" type="tertiary" on:click={downloadPayments} {loading}>Payments</Button>
-	<Button size="md" type="tertiary" on:click={downloadRedeemed} {loading}>Redeemed</Button>
-	<Button size="md" type="tertiary" on:click={downloadFunds} {loading}>Distributed funds</Button>
-	<Button size="md" type="tertiary" on:click={downloadReservedTokens} {loading}>
+	<Button size="md" type="tertiary" on:click={downloadPayments} loading={loadingPayments}
+		>Payments</Button
+	>
+	<Button size="md" type="tertiary" on:click={downloadRedeemed} loading={loadingRedeemed}
+		>Redeemed</Button
+	>
+	<Button size="md" type="tertiary" on:click={downloadFunds} loading={loadingDistributed}
+		>Distributed funds</Button
+	>
+	<Button
+		size="md"
+		type="tertiary"
+		on:click={downloadReservedTokens}
+		loading={loadingDistributedReserved}
+	>
 		Distributed reserved tokens
 	</Button>
-	<Button size="md" type="tertiary" on:click={downloadEvents} {loading}>Events</Button>
+	<Button
+		size="md"
+		type="tertiary"
+		on:click={downloadECR20PayementAddress}
+		loading={loadingERC20PaymentAddress}
+	>
+		ETH-ERC20 payment address
+	</Button>
+	<Button size="md" type="tertiary" on:click={downloadEvents} loading={loadingEvents}>Events</Button
+	>
 	<div class="close">
 		<Button size="md" type="secondary" on:click={close}>Close</Button>
 	</div>

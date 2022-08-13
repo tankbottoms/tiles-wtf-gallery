@@ -81,7 +81,8 @@
 			);
 			openModal(
 				bind(PendingTransaction, {
-					txnResponse
+					txnResponse,
+					functionName: 'pay'
 				})
 			);
 		} catch (error) {

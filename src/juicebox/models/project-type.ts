@@ -5,6 +5,7 @@ import type { ProjectMetadataV4 } from './project-metadata';
 import type { Split } from './v2/splits';
 import type { Token } from './v2/tokens';
 import type { Vest } from './v2/vests';
+import type { ProjectEvent } from './subgraph-entities/vX/project-event';
 
 export type UserTokenBalanceContext = {
 	claimedBalance: BigNumber;
@@ -22,6 +23,9 @@ type V2ProjectLoadingStates = {
 
 export type V2ProjectContextType = {
 	isPreviewMode?: boolean;
+
+	handle: string;
+
 	projectId: BigNumber | undefined;
 	projectMetadata: ProjectMetadataV4 | undefined;
 	tokenAddress: string | undefined;
@@ -59,9 +63,10 @@ export type V2ProjectContextType = {
 
 	hasIssueTicketsPermissions?: Record<string, boolean>;
 
-	handle: string;
 	tokenWhitelist: Token[];
 	vests: Vest[];
+
+	events: ProjectEvent[] | undefined;
 };
 
 export type ProjectType = 'standard' | 'bidpool';

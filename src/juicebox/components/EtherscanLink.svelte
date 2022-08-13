@@ -18,7 +18,6 @@
 	}
 
 	const href = `https://${subdomain}etherscan.io/${type}/${value}`;
-	const innerWidth = window?.innerWidth;
 </script>
 
 {#if showTooltip}

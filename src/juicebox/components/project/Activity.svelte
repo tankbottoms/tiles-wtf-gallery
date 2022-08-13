@@ -21,11 +21,13 @@
 		distributePayoutsEvent = 'Distributed Funds',
 		distributeReservedTokensEvent = 'Distributed Tokens',
 		deployedERC20Event = 'ERC20 Deployed',
-		projectCreateEvent = 'Project Created'
+		projectCreateEvent = 'Project Created',
+		deployETHERC20ProjectPayerEvent = 'ETH-ERC20 Address Created'
 	}
 
 	export let loading: boolean = false;
-	export let current: ActivityFilter = ActivityFilter.all;
+	export let loadingMetadata = false;
+	export let current: ActivityFilter = ActivityFilter['All events'];
 
 	let events: ProjectEventType[] = [];
 
@@ -34,7 +36,7 @@
 		value: key
 	}));
 
-	$: {
+	$: if (!loadingMetadata) {
 		loadEvents(current, 0, 80).then((e) => (events = e));
 	}
 
@@ -65,6 +67,8 @@
 	function openDownloadModal() {
 		openModal(DownloadActivityModal);
 	}
+
+	$: $project.events = events;
 </script>
 
 <section>
@@ -72,7 +76,9 @@
 		<InfoSpaceBetween>
 			<h4 slot="left">Activity</h4>
 			<div slot="right">
-				<p on:click={openDownloadModal}><Icon name="download" /></p>
+				{#if !loading && !loadingMetadata}
+					<p on:click={openDownloadModal}><Icon name="download" /></p>
+				{/if}
 				<Dropdown {options} bind:value={current} size="sm" />
 			</div>
 		</InfoSpaceBetween>
@@ -80,9 +86,11 @@
 	{#each events as event}
 		<ProjectEvent {event} />
 	{:else}
-		<p class="noActivity">No activity yet</p>
+		{#if !loading && !loadingMetadata}
+			<p class="noActivity">No activity yet</p>
+		{/if}
 	{/each}
-	{#if loading}
+	{#if loading || loadingMetadata}
 		<div class="loading">
 			<Icon name="loading" spin />
 		</div>
@@ -98,7 +106,7 @@
 
 <style>
 	section {
-		flex: 0 0 44%;
+		flex: 0 0 50%;
 		width: 100%;
 		padding-left: 20px;
 		padding-right: 20px;

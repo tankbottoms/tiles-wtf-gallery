@@ -34,19 +34,29 @@
 	import EnsOrAddress from '../EnsOrAddress.svelte';
 	import Graph from './Graph';
 	import Popover from '../Popover.svelte';
+	import Skeleton from '../Skeleton.svelte';
+	import Loading from '../Loading.svelte';
 
 	const projectContext = getContext('PROJECT') as Store<V2ProjectContextType>;
-	const tokenSymbol = $projectContext.tokenSymbol;
-	const tokenAddress = $projectContext.tokenAddress;
-	const currentFC = $projectContext.fundingCycle;
-	const payoutSplits = $projectContext.payoutSplits;
-	const reservedTokensSplits = $projectContext.reservedTokensSplits;
+
+	export let loadingMetadata = false;
+	export let loadingFindingCycle = false;
+	export let loadingUserTokenBalance = false;
 
 	let upcomingRiskCount: number;
 	let tabs = [];
 	let currentTab;
 
+	$: tokenSymbol = $projectContext.tokenSymbol;
+	$: tokenAddress = $projectContext.tokenAddress;
+	$: currentFC = $projectContext.fundingCycle;
+	$: payoutSplits = $projectContext.payoutSplits;
+	$: reservedTokensSplits = $projectContext.reservedTokensSplits;
 	$: fcMetadata = currentFC ? decodeV2FundingCycleMetadata(currentFC.metadata) : null;
+	$: claimedBalance = $userTokenBalance.claimedBalance;
+	$: unclaimedBalance = $userTokenBalance.unclaimedBalance;
+	$: totalBalance = $userTokenBalance.totalBalance;
+	$: userOwnershipPercentage = formatPercent(totalBalance, $projectContext.totalTokenSupply) || '0';
 
 	const tokenText = tokenSymbolText({
 		tokenSymbol: tokenSymbol,
@@ -56,19 +66,14 @@
 
 	const userTokenBalance = getContext('USER_TOKEN_BALANCE') as Store<UserTokenBalanceContext>;
 
-	$: claimedBalance = $userTokenBalance.claimedBalance;
-	$: unclaimedBalance = $userTokenBalance.unclaimedBalance;
-	$: totalBalance = $userTokenBalance.totalBalance;
-	$: userOwnershipPercentage = formatPercent(totalBalance, $projectContext.totalTokenSupply) || '0';
-
 	$: claimedBalanceFormatted = formatWad(claimedBalance ?? 0, {
 		precision: 0
 	});
 
-	const fundingCycleData = serializeV2FundingCycleData(currentFC);
-	const riskCount = V2FundingCycleRiskCount(currentFC);
+	$: fundingCycleData = currentFC && serializeV2FundingCycleData(currentFC);
+	$: riskCount = currentFC && V2FundingCycleRiskCount(currentFC);
 
-	$: {
+	$: if (!loadingFindingCycle) {
 		// NOTE this looks bad, but it does only run once on the update of upcomingRiskCount - so it's ok
 		tabs = $projectContext.fundingCycle?.number?.gt(0)
 			? [
@@ -110,11 +115,13 @@
 </script>
 
 <section bind:clientWidth>
-	<Graph
-		width={clientWidth}
-		projectId={$projectContext.projectId}
-		createdAt={$projectContext.createdAt}
-	/>
+	<Skeleton loading={loadingMetadata} width="100%" height="300px">
+		<Graph
+			width={clientWidth}
+			projectId={$projectContext.projectId}
+			createdAt={$projectContext.createdAt}
+		/>
+	</Skeleton>
 	<!-- TODO add logic for when to show owner buttons -->
 	<div class="rewards">
 		{#if !$projectContext.tokenAddress || $projectContext.tokenAddress === ethers.constants.AddressZero}
@@ -143,14 +150,17 @@
 			<div>
 				<p class="label"><Trans>Project token</Trans>:</p>
 				<span class="project-token">
-					{tokenSymbol} (<EnsOrAddress
-						address={tokenAddress}
-						token={{
-							symbol: tokenSymbol,
-							decimals: 18,
-							image: $projectContext.projectMetadata.logoUri
-						}}
-					/>)
+					<Skeleton loading={true} width="5rem" height="1rem">
+						{tokenSymbol}
+						(<EnsOrAddress
+							address={tokenAddress}
+							token={{
+								symbol: tokenSymbol,
+								decimals: 18,
+								image: $projectContext.projectMetadata.logoUri
+							}}
+						/>)
+					</Skeleton>
 				</span>
 			</div>
 		{/if}
@@ -158,17 +168,26 @@
 		<InfoSpaceBetween>
 			<div slot="left">
 				<p class="label"><Trans>Total supply</Trans>:</p>
-				<span
-					>{formatWad($projectContext.totalTokenSupply, {
-						precision: $projectContext.totalTokenSupply.gt(1000) ? 0 : 3
-					})}
-					{tokenText}</span
+				<Skeleton
+					loading={!$projectContext.totalTokenSupply}
+					width="5rem"
+					height="1.2rem"
+					style="transform: translateY(6px)"
 				>
+					<span>
+						{formatWad($projectContext.totalTokenSupply, {
+							precision: $projectContext.totalTokenSupply?.gt(1000) ? 0 : 3
+						})}
+						{tokenText}
+					</span>
+				</Skeleton>
 			</div>
 			<div slot="right">
-				<Button on:click={() => openModal(TokenHolders)} type="secondary" size="sm">
-					<p class="buttonText">Holders</p>
-				</Button>
+				{#if $projectContext.totalTokenSupply}
+					<Button on:click={() => openModal(TokenHolders)} type="secondary" size="sm">
+						<p class="buttonText">Holders</p>
+					</Button>
+				{/if}
 			</div>
 		</InfoSpaceBetween>
 
@@ -177,96 +196,122 @@
 				<div slot="left">
 					<p class="label"><Trans>Your balance</Trans>:</p>
 					<div class="address-balance">
-						<span>{claimedBalanceFormatted} {tokenText}</span>
-						<!-- <span><Trans>{unclaimedBalanceFormatted} {tokenText} claimable</Trans></span> -->
-						<small><Trans>{userOwnershipPercentage}% of total supply</Trans></small>
+						<Skeleton
+							loading={loadingUserTokenBalance}
+							width="5rem"
+							height="1.2rem"
+							style="transform: translateY(6px)"
+						>
+							<span>{claimedBalanceFormatted} {tokenText}</span>
+						</Skeleton>
+						<small style="margin-top: 2px;">
+							<Skeleton
+								loading={loadingUserTokenBalance}
+								width="10rem"
+								height="1rem"
+								style="margin-top: 6px;"
+							>
+								<Trans>{userOwnershipPercentage}% of total supply</Trans>
+							</Skeleton>
+						</small>
 					</div>
 				</div>
 				<div slot="right">
-					<Button on:click={() => openModal(ManageToken)} type="secondary" size="sm">
-						<p class="buttonText">Manage {tokenSymbol || 'tokens'}</p>
-					</Button>
+					<Skeleton
+						loading={loadingUserTokenBalance}
+						width="5rem"
+						height="1.2rem"
+						style="transform: translateY(6px)"
+					>
+						<Button on:click={() => openModal(ManageToken)} type="secondary" size="sm">
+							<p class="buttonText">Manage {tokenSymbol || 'tokens'}</p>
+						</Button>
+					</Skeleton>
 				</div>
 			</InfoSpaceBetween>
 		{/if}
 	</div>
+
 	<div class="fundingCycle">
-		<InfoSpaceBetween>
-			<h4 slot="left">
-				<PopInfo
-					message="A project's lifetime is defined in funding cycles. If a funding target is set, the project can withdraw no more than the target for the duration of the cycle."
-				>
-					Funding cycle
-				</PopInfo>
-			</h4>
-			<div slot="right">
-				{#if $projectContext.projectOwnerAddress.toLowerCase() === $connectedAccount.toLowerCase()}
-					<Button type="secondary" size="sm" on:click={() => (drawerShown = !drawerShown)}>
-						<Icon name="setting" style="transform: translateY(2px);" />
-						Reconfigure upcoming
-					</Button>
-				{/if}
-			</div>
-		</InfoSpaceBetween>
-		<nav>
-			{#each tabs as tab}
-				<div
-					role="button"
-					class:active={tab.key === currentTab}
-					on:click={() => {
-						currentTab = tab.key;
-					}}
-				>
-					{tab.label}
-					{#if tab.issue}
-						<span class="warning">
-							<Popover message={tab.issue} placement="top">
-								<Icon name="exclamationCircle" />
-							</Popover>
-						</span>
+		{#if loadingFindingCycle}
+			<Loading />
+		{:else}
+			<InfoSpaceBetween>
+				<h4 slot="left">
+					<PopInfo
+						message="A project's lifetime is defined in funding cycles. If a funding target is set, the project can withdraw no more than the target for the duration of the cycle."
+						>Funding cycle</PopInfo
+					>
+				</h4>
+				<div slot="right">
+					{#if $projectContext.projectOwnerAddress && $projectContext.projectOwnerAddress.toLowerCase() === $connectedAccount.toLowerCase()}
+						<Button type="secondary" size="sm" on:click={() => (drawerShown = !drawerShown)}>
+							<Icon name="setting" style="transform: translateY(2px);" />
+							Reconfigure upcoming
+						</Button>
 					{/if}
 				</div>
-			{:else}
-				<HeavyBorderBox>No active funding cycle.</HeavyBorderBox>
-			{/each}
-		</nav>
-		<div>
-			{#if currentTab === 'current'}
-				<HeavyBorderBox>
-					<FundingCycleDetails
-						tokenSymbol={$projectContext.tokenSymbol || 'token'}
-						fundingCycle={currentFC}
-						fundingCycleMetadata={fcMetadata}
-						distributionLimit={$projectContext.distributionLimit}
-						currentDistributionLimitCurrencyType={$projectContext.distributionLimitCurrency}
-					/>
-				</HeavyBorderBox>
-				<HeavyBorderBox>
-					<PayoutSplits
-						balanceInDistributionLimitCurrency={$projectContext.balanceInDistributionLimitCurrency}
-						currency={$projectContext.distributionLimitCurrency}
-						distributionLimit={$projectContext.distributionLimit}
-						{payoutSplits}
-						projectOwnerAddress={$projectContext.projectOwnerAddress}
-						usedDistributionLimit={$projectContext.usedDistributionLimit}
-					/>
-				</HeavyBorderBox>
-				<HeavyBorderBox>
-					<ReservedTokenSplits
-						{reservedTokens}
-						fundingCycleMetadata={fcMetadata}
-						{reservedTokensSplits}
-						{tokenSymbol}
-						{tokenAddress}
-						projectOwnerAddress={$projectContext.projectOwnerAddress}
-					/>
-				</HeavyBorderBox>
-			{:else if currentTab === 'upcoming'}
-				<UpcomingFundingCycle />
-			{:else if currentTab === 'history'}
-				<FundingCycleHistory />
-			{/if}
-		</div>
+			</InfoSpaceBetween>
+			<nav>
+				{#each tabs as tab}
+					<div
+						role="button"
+						class:active={tab.key === currentTab}
+						on:click={() => {
+							currentTab = tab.key;
+						}}
+					>
+						{tab.label}
+						{#if tab.issue}
+							<span class="warning">
+								<Popover message={tab.issue} placement="top">
+									<Icon name="exclamationCircle" />
+								</Popover>
+							</span>
+						{/if}
+					</div>
+				{:else}
+					<HeavyBorderBox>No active funding cycle.</HeavyBorderBox>
+				{/each}
+			</nav>
+			<div>
+				{#if currentTab === 'current'}
+					<HeavyBorderBox>
+						<FundingCycleDetails
+							tokenSymbol={$projectContext.tokenSymbol || 'token'}
+							fundingCycle={currentFC}
+							fundingCycleMetadata={fcMetadata}
+							distributionLimit={$projectContext.distributionLimit}
+							currentDistributionLimitCurrencyType={$projectContext.distributionLimitCurrency}
+						/>
+					</HeavyBorderBox>
+					<HeavyBorderBox>
+						<PayoutSplits
+							balanceInDistributionLimitCurrency={$projectContext.balanceInDistributionLimitCurrency}
+							currency={$projectContext.distributionLimitCurrency}
+							distributionLimit={$projectContext.distributionLimit}
+							{payoutSplits}
+							projectOwnerAddress={$projectContext.projectOwnerAddress}
+							usedDistributionLimit={$projectContext.usedDistributionLimit}
+						/>
+					</HeavyBorderBox>
+					<HeavyBorderBox>
+						<ReservedTokenSplits
+							{reservedTokens}
+							fundingCycleMetadata={fcMetadata}
+							{reservedTokensSplits}
+							{tokenSymbol}
+							{tokenAddress}
+							projectOwnerAddress={$projectContext.projectOwnerAddress}
+						/>
+					</HeavyBorderBox>
+				{:else if currentTab === 'upcoming'}
+					<UpcomingFundingCycle />
+				{:else if currentTab === 'history'}
+					<FundingCycleHistory />
+				{/if}
+			</div>
+		{/if}
 	</div>
 </section>
 
@@ -324,13 +369,6 @@
 		margin-bottom: 40px;
 	}
 
-	.settingButton {
-		display: flex;
-		align-items: center;
-		padding: 0px 8px;
-	}
-
-	.settingButton p,
 	.buttonText {
 		line-height: 1;
 		margin: 0;
@@ -356,5 +394,6 @@
 
 	.project-token {
 		display: inline-flex;
+		font-size: 1rem;
 	}
 </style>

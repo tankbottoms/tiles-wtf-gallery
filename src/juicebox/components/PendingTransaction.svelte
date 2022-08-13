@@ -5,6 +5,7 @@
 	import Icon from './Icon.svelte';
 
 	export let txnResponse: ContractTransaction;
+	export let functionName = '';
 	export let close: () => void;
 
 	let errorMessage = '';
@@ -27,7 +28,14 @@
 			</h2>
 			<p class="error">{errorMessage}</p>
 		{:else}
-			<img src="/images/quint.gif" alt={'Juicebox loading animation'} />
+			{#if functionName}
+				<h2>
+					Method:
+					<span style="text-transform: capitalize;">
+						{functionName}
+					</span>
+				</h2>
+			{/if}
 			<h2>
 				<Trans>Transaction pending...</Trans>
 			</h2>
@@ -39,9 +47,6 @@
 </section>
 
 <style>
-	img {
-		max-width: 100px;
-	}
 	section {
 		display: flex;
 		align-items: center;

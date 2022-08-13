@@ -17,6 +17,7 @@
 	import type { Price as UniPrice, Token as UniToken } from '@uniswap/sdk-core';
 	import type { Token as SushiToken, Price as SushiPrice } from '@sushiswap/sdk';
 	import TokenAmmPriceRow from './TokenAMMPriceRow.svelte';
+	import { connectedAccount, web3Connect } from '$stores/web3';
 
 	export let disabled = false;
 	export let onClick: (weiAmount: BigNumber) => void;
@@ -35,6 +36,10 @@
 	const projectContext = getContext('PROJECT') as Store<V2ProjectContextType>;
 
 	function onPay() {
+		if (!$connectedAccount) {
+			web3Connect();
+			return;
+		}
 		let weiAmount: BigNumber;
 		if (currency.eq(V2_CURRENCY_ETH)) {
 			weiAmount = parseEther(amount.toString());
@@ -154,14 +159,12 @@
 										tokenSymbol={$projectContext.tokenSymbol}
 										exchangeLink={`https://app.uniswap.org/#/swap?inputCurrency=ETH&outputCurrency=${$projectContext.tokenAddress}`}
 										WETHPrice={uniswapPriceData?.WETHPrice.toFixed(0)}
-										loading={loadingAMMPrice}
 									/>
 									<TokenAmmPriceRow
 										exchangeName="Sushiswap"
 										tokenSymbol={$projectContext.tokenSymbol}
 										exchangeLink={`https://app.sushi.com/swap?inputCurrency=ETH&outputCurrency=${$projectContext.tokenAddress}`}
 										WETHPrice={sushiswapPriceData?.midPrice.toFixed(0)}
-										loading={loadingAMMPrice}
 									/>
 								</div>
 							{/if}

@@ -9,12 +9,20 @@
 	import Popover from '../Popover.svelte';
 	import ToolsDrawer from './ToolsDrawer.svelte';
 	import ProjectLogo from '../ProjectLogo.svelte';
+	import { connectedAccount } from '$stores/web3';
+	import Skeleton from '../../components/Skeleton.svelte';
+	import { browser } from '$app/env';
 
+	export let loadingMetadata = false;
+	export let loading = false;
 	let drawerShown = false;
 	let current;
 
 	const projectContext = getContext('PROJECT') as Store<V2ProjectContextType>;
 	$: metadata = $projectContext.projectMetadata;
+
+	// TODO: contract reader (useHasPermission)
+	const showReconfigure = true;
 
 	const prettyUrl = (url: string) => {
 		if (url.startsWith('https://')) {
@@ -38,67 +46,84 @@
 
 <section>
 	<div class="logo-wrapper">
-		<!-- <img src={metadata.logoUri} alt="JuiceboxDAO logo" /> -->
-		<ProjectLogo uri={metadata.logoUri} size={170} />
+		<Skeleton loading={loadingMetadata} width="170px" height="170px">
+			<ProjectLogo uri={metadata?.logoUri} size={170} />
+		</Skeleton>
 	</div>
 
 	<div class="info-wrapper">
-		<InfoSpaceBetween stack={window?.innerWidth < 500}>
+		<InfoSpaceBetween stack={browser ? window?.innerWidth < 500 : true}>
 			<h1 slot="left">
-				{metadata?.name || 'Untitled project'}
+				<Skeleton loading={loadingMetadata} width="320px" height="1.7rem">
+					{metadata?.name || 'Untitled project'}
+				</Skeleton>
 			</h1>
 			<div slot="right" style="display: flex; align-items: center;">
-				<span style="color: var(--text-tertiary); padding-right: 10px;"
-					>ID:{$projectContext.projectId.toString()}
-					<Popover message="This project uses the V2 version of the Juicebox contracts.">
-						<span class="terminal-version">V2</span>
-					</Popover>
+				<span style="color: var(--text-tertiary); padding-right: 10px;">
+					<Skeleton loading={loadingMetadata} width="3rem" height="1rem">
+						ID:{$projectContext.projectId.toString()}
+						<Popover message="This project uses the V2 version of the Juicebox contracts.">
+							<span class="terminal-version">V2</span>
+						</Popover>
+					</Skeleton>
 				</span>
-				<div class="clickable-icon">
-					<Icon
-						on:click={() => {
-							drawerShown = !drawerShown;
-							current = ToolsDrawer;
-						}}
-						name="tool"
-					/>
-				</div>
+				{#if !loading}
+					<div class="clickable-icon">
+						<Skeleton loading={loadingMetadata} width="1rem" height="1rem">
+							<Icon
+								on:click={() => {
+									drawerShown = !drawerShown;
+									current = ToolsDrawer;
+								}}
+								name="tool"
+							/>
+						</Skeleton>
+					</div>
+				{/if}
 			</div>
 		</InfoSpaceBetween>
 		<div
 			style="display: flex; flex-wrap: wrap; padding-top: 8px; padding-bottom: 4px; font-weight: 500;"
 		>
-			{#if metadata.archived}
-				<span class="archived">(ARCHIVED)</span>&nbsp;
-			{/if}
-			{#if $projectContext.handle}
-				<span class="project-handle">
-					@{$projectContext.handle}
-				</span>
-				&nbsp;
-			{/if}
-			{#if metadata?.infoUri}
-				<a href={metadata.infoUri} target="_blank" rel="noopener noreferrer"
-					>{prettyUrl(metadata.infoUri)}</a
-				>
-			{/if}
-			{#if metadata?.twitter}
-				<a
-					href={'https://twitter.com/' + metadata.twitter}
-					target="_blank"
-					rel="noopener noreferrer"
-					><span style="social-icon"><Icon name="twitter" /></span>@{metadata.twitter}</a
-				>
-			{/if}
-			{#if metadata?.discord}
-				<a href={linkUrl(metadata.discord)} target="_blank" rel="noopener noreferrer"
-					><span class="social-icon"><Icon name="discord" /></span>Discord</a
-				>
-			{/if}
+			<Skeleton loading={loadingMetadata} width="250px" height="1rem">
+				{#if metadata?.archived}
+					<span class="archived">(ARCHIVED)</span>&nbsp;
+				{/if}
+				{#if $projectContext.handle}
+					<span class="project-handle">
+						@{$projectContext.handle}
+					</span>
+					&nbsp;
+				{/if}
+				{#if metadata?.infoUri}
+					<a href={metadata?.infoUri} target="_blank" rel="noopener noreferrer"
+						>{prettyUrl(metadata?.infoUri)}</a
+					>
+				{/if}
+				{#if metadata?.twitter}
+					<a
+						href={'https://twitter.com/' + metadata?.twitter}
+						target="_blank"
+						rel="noopener noreferrer"
+						><span style="social-icon"><Icon name="twitter" /></span>@{metadata?.twitter}</a
+					>
+				{/if}
+				{#if metadata?.discord}
+					<a href={linkUrl(metadata?.discord)} target="_blank" rel="noopener noreferrer"
+						><span class="social-icon"><Icon name="discord" /></span>Discord</a
+					>
+				{/if}
+			</Skeleton>
 			<!-- TODO: Projects which are from Juicebox's Directory should have the Juicebox logo, popup to have the JB directory -->
 		</div>
 
-		<Paragraph description={metadata?.description || ''} characterLimit={250} markdown />
+		{#if loadingMetadata}
+			<Skeleton loading={loadingMetadata} width="100%" height="1rem" />
+			<Skeleton loading={loadingMetadata} width="100%" height="1rem" />
+			<Skeleton loading={loadingMetadata} width="50%" height="1rem" />
+		{:else}
+			<Paragraph description={metadata?.description || ''} characterLimit={250} markdown />
+		{/if}
 	</div>
 </section>
 
