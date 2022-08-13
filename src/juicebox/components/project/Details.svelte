@@ -30,9 +30,7 @@
 	import FundingCycleHistory from './FundingCycleHistory.svelte';
 	import ManageToken from './ManageToken.svelte';
 	import InfoSpaceBetween from '../InfoSpaceBetween.svelte';
-	import IssueErc20 from './IssueERC20.svelte';
 	import TokenHolders from './TokenHolders.svelte';
-	import { V2OperatorPermission } from '$juicebox/constants/v2/operatorPermission';
 	import EnsOrAddress from '../EnsOrAddress.svelte';
 	import Graph from './Graph';
 	import Popover from '../Popover.svelte';
@@ -130,16 +128,6 @@
 						<Trans>{tokenSymbol || 'Tokens'}</Trans>
 					</PopInfo>
 				</h4>
-				<div slot="right">
-					{#if $projectContext.hasIssueTicketsPermissions[V2OperatorPermission.ISSUE]}
-						<Button type="secondary" size="sm" on:click={() => openModal(IssueErc20)}>
-							<div class="settingButton">
-								<Icon name="setting" />
-								<p>Issue ERC-20</p>
-							</div>
-						</Button>
-					{/if}
-				</div>
 			</InfoSpaceBetween>
 		{:else}
 			<!-- NOTE: this is the same as the <h4> above, so make sure to keep them in-synch -->

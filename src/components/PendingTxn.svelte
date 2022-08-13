@@ -1,6 +1,6 @@
 <script lang="ts" context="module">
 	import Store from '$utils/Store';
-	import { constants, utils } from 'ethers';
+	import { utils } from 'ethers';
 	import { onMount } from 'svelte';
 	import { generateTile, generateRandomAddresses } from '$tiles/tilesStandalone';
 
