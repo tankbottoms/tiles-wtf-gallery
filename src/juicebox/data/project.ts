@@ -13,7 +13,7 @@ import {
 import type { ProjectState } from '$juicebox/models/project-visibility';
 import type { Project, TrendingProject } from '$juicebox/models/subgraph-entities/vX/project';
 
-// TODO don't hardcode this here, use the utils/ipfs after issue with @pinata/sdk has been solved
+// TODO: don't hardcode this here, use the utils/ipfs after issue with @pinata/sdk has been solved
 import { ipfsCidUrl } from '$juicebox/utils/ipfs';
 
 type ProjectStat = Record<

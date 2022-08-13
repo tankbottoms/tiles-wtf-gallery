@@ -6,14 +6,9 @@
 		"esModuleInterop": true,
 		"forceConsistentCasingInFileNames": true,
 		"resolveJsonModule": true,
-<<<<<<< HEAD
-		"lib": ["DOM"],
-		"target": "ES2017",
-=======
 		"skipLibCheck": true,
 		"sourceMap": true,
 		"strict": true,
->>>>>>> 256a77af7509a5e98c20dba10af0c452e3abb7d3
 		"paths": {
 			"$env": ["src/env"],
 			"$env/*": ["src/env/*"],
