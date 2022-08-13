@@ -31,9 +31,7 @@
 				V2ContractName.JBController,
 				'issueTokenFor',
 				[$projectContext.projectId, name, symbol],
-				{
-					gasLimit: '10000000'
-				}
+				{}
 			);
 			const txn = await pendingTxn.wait();
 			console.log(txn.transactionHash);

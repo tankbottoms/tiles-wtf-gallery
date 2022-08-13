@@ -76,8 +76,7 @@
 					randomBytes(1) //delegateMetadata
 				],
 				{
-					value: weiAmount,
-					gasLimit: '10000000'
+					value: weiAmount
 				}
 			);
 			openModal(
