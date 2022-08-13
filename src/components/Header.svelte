@@ -70,7 +70,10 @@
 		<a href="/">
 			<img src="/favicon.svg" alt="Logo" />
 		</a>
-		<a class="primary-text" href="/history">{count} minted</a> // current price: {price} ETH
+		<a class="primary-text" href="/history?{$readNetwork ? `network=${$readNetwork?.alias}` : ''}">
+			{count} minted
+		</a>
+		// current price: {price} ETH
 	</div>
 
 	<div class="right">
