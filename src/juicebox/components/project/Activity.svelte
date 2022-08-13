@@ -4,12 +4,13 @@
 	import Icon from '../Icon.svelte';
 	import InfoSpaceBetween from '../InfoSpaceBetween.svelte';
 	import type { V2ProjectContextType } from '$juicebox/models/project-type';
-	import ProjectEvent from '../ProjectEvent/Main.svelte';
 	import { getProjectEvents } from '$juicebox/data/event';
 	import Dropdown from '../Dropdown.svelte';
 	import type { WhereConfig } from '$juicebox/utils/graph';
 	import { openModal } from '../Modal.svelte';
 	import DownloadActivityModal from './DownloadActivityModal.svelte';
+	import ProjectEvent from '../ProjectEvent';
+	import type { ProjectEvent as ProjectEventType } from '$juicebox/models/subgraph-entities/vX/project-event';
 
 	const project = getContext('PROJECT') as Store<V2ProjectContextType>;
 
@@ -24,9 +25,9 @@
 	}
 
 	export let loading: boolean = false;
-	export let current: ActivityFilter = ActivityFilter['All events'];
+	export let current: ActivityFilter = ActivityFilter.all;
 
-	let events = [];
+	let events: ProjectEventType[] = [];
 
 	const options = Object.keys(ActivityFilter).map((key) => ({
 		label: ActivityFilter[key],
@@ -64,6 +65,7 @@
 	function openDownloadModal() {
 		openModal(DownloadActivityModal);
 	}
+	$: console.log(events)
 </script>
 
 <section>

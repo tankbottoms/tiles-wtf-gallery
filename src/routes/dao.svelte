@@ -34,7 +34,7 @@
 	import { getCurrencyConverter } from '$juicebox/data/currency';
 	import { V2CurrencyName, V2_CURRENCY_ETH, V2_CURRENCY_USD } from '$juicebox/utils/v2/currency';
 	import ERC20ContractAbi from '$juicebox/constants/ERC20ContractAbi';
-	import { chainId, connectedAccount, getProvider, provider, readNetwork } from '$stores/web3';
+	import { chainId, connectedAccount, readNetwork } from '$stores/web3';
 	import { V2OperatorPermission } from '$juicebox/constants/v2/operatorPermission';
 	import { blocknativeNetworks } from '$constants/networks';
 
@@ -64,7 +64,7 @@
 		}
 	}
 
-	async function fetchProject(cached = false, showLoadingUI = true) {
+	async function fetchProject(cached = false, showLoadingUI = true): Promise<void> {
 		if (!browser) return;
 		if (showLoadingUI) loading = true;
 		issue = '';
@@ -97,7 +97,7 @@
 			$project.totalVolume = data[0].totalPaid;
 			$project.createdAt = data[0].createdAt;
 			checkNetworkId(networkId);
-		} catch (error) {
+		} catch (error: any) {
 			// NOTE: no need to fail here as this info is not critical
 			console.error('Could not fetch createdAt and totalPaid');
 			console.error(error);
@@ -115,7 +115,7 @@
 			const metadata = await getProjectMetadata(metadataCID);
 			$project.projectMetadata = metadata;
 			if (!metadata) return;
-		} catch (error) {
+		} catch (error: any) {
 			if (error.errorCode === 'networkChanged') return fetchProject(cached, showLoadingUI);
 			loading = false;
 			console.error(error);
@@ -134,7 +134,7 @@
 
 			$project.fundingCycle = fundingCycle;
 			$project.fundingCycleMetadata = fundingCycleMetadata;
-		} catch (error) {
+		} catch (error: any) {
 			if (error.errorCode === 'networkChanged') return fetchProject(cached, showLoadingUI);
 			loading = false;
 			console.error(error);
@@ -153,7 +153,7 @@
 
 			$project.queuedFundingCycle = fundingCycle;
 			$project.queuedFundingCycleMetadata = fundingCycleMetadata;
-		} catch (error) {
+		} catch (error: any) {
 			if (error.errorCode === 'networkChanged') return fetchProject(cached, showLoadingUI);
 			loading = false;
 			console.error(error);
@@ -163,16 +163,14 @@
 
 		try {
 			checkNetworkId(networkId);
-			const splitResult = await readContract(
+			const splitResult: any[] = await readContract(
 				V2ContractName.JBSplitsStore,
 				'splitsOf',
-				$project.projectId && $project?.fundingCycle?.configuration?.toString()
-					? [
-							$project.projectId.toHexString(),
-							$project?.fundingCycle?.configuration?.toString(),
-							ETH_PAYOUT_SPLIT_GROUP
-					  ]
-					: null,
+				[
+					$project.projectId.toHexString(),
+					$project?.fundingCycle?.configuration?.toString(),
+					ETH_PAYOUT_SPLIT_GROUP
+				],
 				cached
 			);
 
@@ -187,7 +185,7 @@
 					preferClaimed: split?.preferClaimed
 				};
 			});
-		} catch (error) {
+		} catch (error: any) {
 			if (error.errorCode === 'networkChanged') return fetchProject(cached, showLoadingUI);
 			loading = false;
 			console.error(error);
@@ -219,7 +217,7 @@
 					preferClaimed: split?.preferClaimed
 				};
 			});
-		} catch (error) {
+		} catch (error: any) {
 			if (error.errorCode === 'networkChanged') return fetchProject(cached, showLoadingUI);
 			loading = false;
 			console.error(error);
@@ -245,7 +243,7 @@
 					cached
 				);
 			}
-		} catch (error) {
+		} catch (error: any) {
 			if (error.errorCode === 'networkChanged') return fetchProject(cached, showLoadingUI);
 			loading = false;
 			console.error(error);
@@ -258,7 +256,7 @@
 			$project.totalTokenSupply = await readContract(V2ContractName.JBTokenStore, 'totalSupplyOf', [
 				BigNumber.from($project.projectId).toHexString()
 			]);
-		} catch (error) {
+		} catch (error: any) {
 			if (error.errorCode === 'networkChanged') return fetchProject(cached, showLoadingUI);
 			loading = false;
 			console.error(error);
@@ -275,7 +273,7 @@
 					[$project.projectId],
 					cached
 				)) || [];
-		} catch (error) {
+		} catch (error: any) {
 			if (error.errorCode === 'networkChanged') return fetchProject(cached, showLoadingUI);
 			loading = false;
 			console.error(error);
@@ -298,7 +296,7 @@
 					cached
 				);
 			}
-		} catch (error) {
+		} catch (error: any) {
 			if (error.errorCode === 'networkChanged') return fetchProject(cached, showLoadingUI);
 			loading = false;
 			console.error(error);
@@ -316,7 +314,7 @@
 					[$project.primaryTerminal, $project.projectId]
 				);
 			}
-		} catch (error) {
+		} catch (error: any) {
 			if (error.errorCode === 'networkChanged') return fetchProject(cached, showLoadingUI);
 			loading = false;
 			console.error(error);
@@ -330,13 +328,11 @@
 				$project.usedDistributionLimit = await readContract(
 					V2ContractName.JBSingleTokenPaymentTerminalStore,
 					'usedDistributionLimitOf',
-					$project.primaryTerminal && $project.projectId && $project.fundingCycle?.number
-						? [$project.primaryTerminal, $project.projectId, $project.fundingCycle?.number]
-						: null,
+					[$project.primaryTerminal, $project.projectId, $project.fundingCycle?.number],
 					cached
 				);
 			}
-		} catch (error) {
+		} catch (error: any) {
 			if (error.errorCode === 'networkChanged') return fetchProject(cached, showLoadingUI);
 			console.error(error);
 			loading = false;
@@ -349,12 +345,10 @@
 			$project.reservedTokenBalance = await readContract(
 				V2ContractName.JBController,
 				'reservedTokenBalanceOf',
-				$project.projectId && $project.fundingCycleMetadata.reservedRate
-					? [$project.projectId, $project.fundingCycleMetadata.reservedRate]
-					: [],
+				[$project.projectId, $project.fundingCycleMetadata?.reservedRate],
 				cached
 			);
-		} catch (error) {
+		} catch (error: any) {
 			if (error.errorCode === 'networkChanged') return fetchProject(cached, showLoadingUI);
 			loading = false;
 			console.error(error);
@@ -367,12 +361,12 @@
 			const owner = await readContract(
 				V2ContractName.JBProjects,
 				'ownerOf',
-				$project.projectId ? [BigNumber.from($project.projectId).toHexString()] : null,
+				[BigNumber.from($project.projectId).toHexString()],
 				cached
 			);
 
 			$project.projectOwnerAddress = owner;
-		} catch (error) {
+		} catch (error: any) {
 			if (error.errorCode === 'networkChanged') return fetchProject(cached, showLoadingUI);
 			loading = false;
 			console.error(error);
@@ -402,7 +396,7 @@
 					  ))
 					: false;
 			}
-		} catch (error) {
+		} catch (error: any) {
 			if (error.errorCode === 'networkChanged') return fetchProject(cached, showLoadingUI);
 			loading = false;
 			console.error(error);
@@ -416,9 +410,7 @@
 				const ETHBalance = await readContract(
 					V2ContractName.JBSingleTokenPaymentTerminalStore,
 					'balanceOf',
-					$project.primaryTerminal && $project.projectId
-						? [$project.primaryTerminal, $project.projectId]
-						: null,
+					[$project.primaryTerminal, $project.projectId],
 					cached
 				);
 				// if ETH, no conversion necessary
@@ -435,7 +427,7 @@
 					$project.balanceInDistributionLimitCurrency = BigNumber.from(ETHBalance);
 				}
 			}
-		} catch (error) {
+		} catch (error: any) {
 			if (error.errorCode === 'networkChanged') return fetchProject(cached, showLoadingUI);
 			loading = false;
 			console.error(error);
@@ -470,9 +462,9 @@
 					[$connectedAccount, $project.projectId]
 				);
 			}
-		} catch (error) {
+		} catch (error: any) {
 			if (error.errorCode === 'networkChanged') return fetchProject(cached, showLoadingUI);
-			console.error(error);			
+			console.error(error);
 		}
 
 		console.log(`Project #${$project.projectId}`, $project);
