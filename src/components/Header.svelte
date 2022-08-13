@@ -127,7 +127,7 @@
 	.right,
 	.left {
 		display: flex;
-		padding: 5px 0px;
+		padding: 5px 5px;
 	}
 
 	header {
