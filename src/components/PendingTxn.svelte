@@ -1,6 +1,9 @@
 <script lang="ts" context="module">
 	import Store from '$utils/Store';
-
+	import { constants, utils } from 'ethers';
+	import { onMount } from 'svelte';
+	import { generateTile, generateRandomAddresses } from '$tiles/tilesStandalone';
+	
 	export const txnResponse = new Store<ContractTransaction>();
 	export const methodName = new Store('');
 
@@ -19,6 +22,10 @@
 	import Loading from '$juicebox/components/Loading.svelte';
 
 	let errorMessage = '';
+	let input: string | undefined;	
+	let randomTiles: any[] = [];
+	let tile = '';
+	let showInvalidAddress = false;
 
 	txnResponse.subscribe(async (_txnResponse) => {
 		let update: UpdateNotification;
@@ -26,7 +33,7 @@
 			if (!_txnResponse) return;
 			const { update: _update } = createCustomNotification({
 				type: 'pending',
-				message: 'Your transaction has been submitted and is awaiting confirmation.'
+				message: 'Your transaction has been submitted and is awaiting confirmation'
 			});
 			update = _update;
 			await _txnResponse?.wait();
@@ -45,6 +52,25 @@
 			errorMessage = error.message;
 		}
 	});
+
+	onMount(() => {
+		const randomAddresses = generateRandomAddresses(51);
+		randomTiles = randomAddresses.map((address) => ({ address, tile: generateTile(address) }));
+	});
+
+	$: {
+		if (utils.isAddress(input || '')) {
+			console.log(input);
+			tile = generateTile(input || '');
+			showInvalidAddress = false;
+		} else if (input !== '' && input !== undefined) {
+			tile = '';
+			showInvalidAddress = true;
+		} else {
+			tile = '';
+			showInvalidAddress = false;
+		}
+	}	
 </script>
 
 {#if $txnResponse}
@@ -58,12 +84,19 @@
 						<Icon name="exclamationCircle" style="color: red; transform: translateY(3px)" /> Error
 					</h2>
 					<p class="error">{errorMessage}</p>
-				{:else}
-					{#if $methodName}
-						<h2>Method: {$methodName}</h2>
+				{:else}				
+					{#each randomTiles as item}
+						<div class="tileContainer">
+							{@html item.tile}
+							<span>{item.address}</span>
+						</div>
+					{/each}			
+
+					{#if $methodName}					
+						<h2>method: {$methodName}</h2>
 					{/if}
-					<h2>Transaction pending...</h2>
-					<p>Your transaction has been submitted and is awaiting confirmation.</p>
+					<h2>transaction pending...</h2>
+					<p>your transaction has been submitted and is awaiting confirmation.</p>
 					<div>
 						<Loading />
 					</div>

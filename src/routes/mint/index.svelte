@@ -8,7 +8,7 @@
 	const { AddressZero } = constants;
 
 	let input: string | undefined;
-	let grid = false;
+	let grid = true;
 	let randomTiles: any[] = [];
 	let tile = '';
 	let showInvalidAddress = false;
@@ -37,8 +37,8 @@
 </script>
 
 <section>
-	<h1>Mint a Tile</h1>
-	<p>Enter an 0x address to find its matching Tile, or browse the randomly generated list below.</p>
+	<h1>mint a Tile</h1>
+	<p>enter an 0x address to find its matching Tile, or browse the randomly generated list below.</p>
 	<input placeholder={AddressZero} bind:value={input} />
 </section>
 
@@ -49,7 +49,7 @@
 			<span>{input}</span>
 		</div>
 	{:else if showInvalidAddress}
-		<p>Not a valid address</p>
+		<p>Not a valid Ethereum address</p>
 	{:else}
 		{#each randomTiles as item}
 			<div class="tileContainer" on:click={() => goto(`mint/${item.address}`)}>
