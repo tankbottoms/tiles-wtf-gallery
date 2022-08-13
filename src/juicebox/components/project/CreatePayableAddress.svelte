@@ -85,7 +85,7 @@
 		><b><Trans>tokens can't be issued to their personal wallets and will be lost.</Trans></b>
 	</p>
 
-	<CollapsibleSection>
+	<CollapsibleSection expanded={false}>
 		<h4 slot="header">Advanced options (optional)</h4>
 
 		<div class="collapse">
