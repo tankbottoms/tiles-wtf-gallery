@@ -63,7 +63,7 @@
 
 	let pendingRequest = 0;
 
-	$: cacheExpiry = Date.now() - daysToMillis(duration) * 0.03;
+	$: cacheExpiry = daysToMillis(2 / 24); // 2 hour
 	const cacheKey = () => `EVENTS_${$chainId}_${projectId.toString()}_${showGraph}_${duration}`;
 
 	async function setEvents() {
@@ -134,7 +134,7 @@
 		if (cachedEvents[key]) {
 			events = cachedEvents[key].events || [];
 			const cachedAt = cachedEvents[key].cachedAt as number;
-			if (!events.length || cachedAt <= cacheExpiry) {
+			if (!events.length || Date.now() - cachedAt > cacheExpiry) {
 				loading = true;
 				setEvents();
 			} else {
