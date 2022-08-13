@@ -243,14 +243,7 @@
 						>Funding cycle</PopInfo
 					>
 				</h4>
-				<div slot="right">
-					{#if $projectContext.projectOwnerAddress && $projectContext.projectOwnerAddress.toLowerCase() === $connectedAccount.toLowerCase()}
-						<Button type="secondary" size="sm" on:click={() => (drawerShown = !drawerShown)}>
-							<Icon name="setting" style="transform: translateY(2px);" />
-							Reconfigure upcoming
-						</Button>
-					{/if}
-				</div>
+				<div slot="right" />
 			</InfoSpaceBetween>
 			<nav>
 				{#each tabs as tab}

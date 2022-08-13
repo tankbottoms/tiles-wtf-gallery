@@ -139,14 +139,7 @@
 			Distribution splits
 		</PopInfo>
 	</h4>
-	<div slot="right" style="margin-bottom: 20px">
-		{#if $projectContext?.projectOwnerAddress?.toLowerCase() === $connectedAccount?.toLowerCase()}
-			<Button type="secondary" size="sm" disabled={isPreview} on:click={() => (drawerShown = true)}>
-				<Icon name="setting" style="transform: translateY(2px);" />
-				Edit payouts
-			</Button>
-		{/if}
-	</div>
+	<div slot="right" style="margin-bottom: 20px" />
 </InfoSpaceBetween>
 {#each payoutSplits as split}
 	<SimpleSplits

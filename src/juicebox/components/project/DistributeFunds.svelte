@@ -163,7 +163,12 @@
 	<p class="info"><Icon name="infoCircle" /> Recipients will receive payouts in ETH.</p>
 	<div slot="footer">
 		<Button type="secondary" size="md" on:click={close}>Close</Button>
-		<Button type="primary" size="md" on:click={distributeFunds}>Distribute funds</Button>
+		<Button
+			type="primary"
+			size="md"
+			on:click={distributeFunds}
+			disabled={!$project.distributionLimitCurrency?.toNumber() || !amount}>Distribute funds</Button
+		>
 	</div>
 </ActionModal>
 
