@@ -46,7 +46,7 @@
 	{#if tile}
 		<div class="tileContainer" on:click={() => goto(`mint/${input}`)}>
 			{@html tile}
-			<span>{input}</span>
+			<span class="address">{input}</span>
 		</div>
 	{:else if showInvalidAddress}
 		<p>not a valid ethereum address</p>
@@ -54,7 +54,7 @@
 		{#each randomTiles as item}
 			<div class="tileContainer" on:click={() => goto(`mint/${item.address}`)}>
 				{@html item.tile}
-				<span>{item.address}</span>
+				<span class="address">{item.address}</span>
 			</div>
 		{/each}
 	{/if}
@@ -170,9 +170,5 @@
 		color: #222;
 		margin-bottom: 80px;
 		text-align: center;
-	}
-
-	.tileContainer span {
-		opacity: 0.25;
 	}
 </style>
