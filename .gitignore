@@ -6,5 +6,7 @@ node_modules
 .env
 .env.*
 !.env.example
-package-lock.json
+.vercel
+.output
 *.log
+yarn.lock

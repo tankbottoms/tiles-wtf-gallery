@@ -2,7 +2,7 @@ import { sveltekit } from '@sveltejs/kit/vite';
 import nodePolyfills from 'rollup-plugin-polyfill-node';
 import path from 'path';
 
-/** @type {import('vite').UserConfig} */
+/** @type {() => import('vite').UserConfig} */
 const config = ({ mode }) => {
 	const development = mode === 'development';
 	return {
@@ -32,11 +32,14 @@ const config = ({ mode }) => {
 				crypto: 'crypto-browserify',
 				stream: 'stream-browserify',
 				assert: 'assert',
-				'@coinbase/wallet-sdk': '@coinbase/wallet-sdk/dist/index.js'
+				util: path.resolve('./libraries/util')
 			}
 		},
 		ssr: {
 			noExternal: ['@lingui/*', 'lingui-core/*']
+		},
+		optimizeDeps: {
+			esbuildOptions: { target: 'es2020', supported: { bigint: true } }
 		},
 		build: {
 			target: ['es2020'],
