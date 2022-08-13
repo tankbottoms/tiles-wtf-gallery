@@ -14,22 +14,22 @@ export const contracts = {
 };
 
 export async function readContractByAddress(
-	contractAddress,
+	contractAddress: string,
 	ABI: ContractInterface,
 	functionName: string,
 	args = [],
-	signer?: Signer
+	verbose = true
 ) {
-	console.warn(get(readNetwork).alias?.toUpperCase(), contractAddress, functionName, args);
+	if (verbose) {
+		console.warn(get(readNetwork).alias?.toUpperCase(), contractAddress, functionName, args);
+	}
+	const network = getDefaultProvider();
 	const contract = new ethers.Contract(
 		contractAddress,
 		ABI,
-		new ethers.providers.JsonRpcProvider(getDefaultProvider().rpcUrl)
+		new ethers.providers.JsonRpcProvider(network.rpcUrl)
 	);
 
-	if (signer) {
-		return await contract.connect(signer)[functionName](...args);
-	}
 	if (args.length == 0) {
 		return await contract[functionName]();
 	}
@@ -67,13 +67,9 @@ export async function readContract(
 			} else console.log('ContractReader: cache miss');
 		}
 
-		const contract = new ethers.Contract(
-			contractAddress,
-			abi,
-			provider.get() || new ethers.providers.JsonRpcProvider(getDefaultProvider().rpcUrl)
+		const response = parseContractResponse(
+			await readContractByAddress(contractAddress, abi, functionName, args, false)
 		);
-
-		const response = parseContractResponse(await contract[functionName](...args));
 		await cache.put(id, new Response(JSON.stringify(response)));
 		return response;
 	} else {
@@ -103,23 +99,7 @@ export async function writeContract(
 export async function getTransactionsByAddress(
 	address: string
 ): Promise<ethers.providers.TransactionResponse[]> {
-	let provider = new ethers.providers.EtherscanProvider(getDefaultProvider().alias, etherscanKey);
+	let provider = new ethers.providers.EtherscanProvider(readNetwork.get().alias, etherscanKey);
 	let history = await provider.getHistory(address);
 	return history;
-}
-
-export async function getTilesHistory(): Promise<any> {
-	const transactions = await getTransactionsByAddress(Tiles[get(readNetwork).alias]);
-	const sorted = transactions.sort((a, b) => a.timestamp - b.timestamp);
-	const iface = new ethers.utils.Interface(Tiles.abi);
-	let tiles = [];
-	sorted.forEach((tx) => {
-		try {
-			const decodedData = iface.parseTransaction({ data: tx.data });
-			if (decodedData.name === 'grab') {
-				tiles.push(decodedData.args[0]);
-			}
-		} catch {}
-	});
-	return tiles;
 }

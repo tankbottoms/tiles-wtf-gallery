@@ -26,7 +26,7 @@ pageReady.update((state) => {
 
 let pendingInitialization: Promise<any>;
 
-let unsub;
+let unsub: Function;
 web3Onboard.subscribe((onboard) => {
 	if (!onboard || !browser) return;
 	try {
@@ -49,7 +49,7 @@ web3Onboard.subscribe((onboard) => {
 					const newNet = blocknativeNetworks.find(
 						(net) => Number(net.id) === Number(activeChain.id)
 					);
-					if (Number(readNetwork.get().id) !== Number(newNet.id)) {
+					if (newNet && Number(readNetwork.get().id) !== Number(newNet.id)) {
 						readNetwork.set(newNet);
 					}
 					const networkAlias = getNetworkAliasByChainId(activeChain.id);
@@ -82,7 +82,7 @@ if (browser) {
 			await pendingInitialization;
 		} catch (error) {
 			console.log(`[stores/web3.ts]['failed to initialize wallet']`, error);
-			pendingInitialization = null;
+			pendingInitialization = null as any;
 		}
 	});
 }

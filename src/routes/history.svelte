@@ -1,22 +1,25 @@
 <script lang="ts">
+	import Loading from '$juicebox/components/Loading.svelte';
 	import { readNetwork } from '$stores/web3';
 	import { generateTile } from '$tiles/tilesStandalone';
-	import { getTilesHistory } from '$utils/web3/contractReader';
+	import { getTilesHistory } from '$utils/tiles';
 	import { onMount } from 'svelte';
 
-	let grid = false;
+	let grid = true;
 	let tiles: any[] = [];
+	let loading = false;
 
 	onMount(async () => {
 		readNetwork.subscribe(async (net) => {
 			try {
+				loading = true;
 				const history = await getTilesHistory();
-				console.log(history);
 				tiles = history.map((address) => ({ address, tile: generateTile(address) }));
-			} catch (e) {				
+				loading = false;
+			} catch (e: any) {
 				console.error(e.message);
 			}
-		});				
+		});
 	});
 </script>
 
@@ -30,6 +33,12 @@
 			{@html item.tile}
 			<span>{item.address}</span>
 		</div>
+	{:else}
+		{#if loading}
+			<Loading />
+		{:else}
+			no data available
+		{/if}
 	{/each}
 </section>
 
