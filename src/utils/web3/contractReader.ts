@@ -1,10 +1,7 @@
 import { getDefaultProvider, readNetwork } from '$stores/web3';
 import { provider } from '$stores/web3';
-import { ethers, Signer, type ContractInterface, type ContractTransaction } from 'ethers';
-
+import { ethers, type ContractInterface, type ContractTransaction } from 'ethers';
 import Tiles from '$deployments/Tiles';
-
-import { get } from 'svelte/store';
 import { parseCachedData, parseContractResponse } from '../cache';
 
 const etherscanKey = import.meta.env.VITE_ETHERSCAN_API_KEY;
@@ -21,7 +18,7 @@ export async function readContractByAddress(
 	verbose = true
 ) {
 	if (verbose) {
-		console.log(get(readNetwork).alias?.toUpperCase(), contractAddress, functionName, args);
+		console.log(readNetwork.get().alias?.toUpperCase(), contractAddress, functionName, args);
 	}
 	const network = getDefaultProvider();
 	const contract = new ethers.Contract(
@@ -45,8 +42,8 @@ export async function readContract(
 	console.log(contractName, functionName, args);
 	const cache = await caches.open('CONTRACT_RESPONSE');
 
-	if (contracts[contractName][get(readNetwork).alias]) {
-		const contractAddress = contracts[contractName][get(readNetwork).alias];
+	if (contracts[contractName][readNetwork.get().alias]) {
+		const contractAddress = contracts[contractName][readNetwork.get().alias];
 		const abi = contracts[contractName].abi;
 		const id = btoa(
 			JSON.stringify({
@@ -73,7 +70,7 @@ export async function readContract(
 		await cache.put(id, new Response(JSON.stringify(response)));
 		return response;
 	} else {
-		throw Error(`${contractName}: deployment not found on ${get(readNetwork).alias}`);
+		throw Error(`${contractName}: deployment not found on ${readNetwork.get().alias}`);
 	}
 }
 
@@ -84,15 +81,15 @@ export async function writeContract(
 	opts = {}
 ): Promise<ContractTransaction> {
 	const _provider = provider.get();
-	if (contracts[contractName][get(readNetwork).alias]) {
+	if (contracts[contractName][readNetwork.get().alias]) {
 		const contract = new ethers.Contract(
-			contracts[contractName][get(readNetwork).alias],
+			contracts[contractName][readNetwork.get().alias],
 			contracts[contractName].abi,
 			_provider.getSigner()
 		);
 		return await contract[functionName](...args, opts);
 	} else {
-		throw Error(`${contractName}: deployment not found on ${get(readNetwork).alias}`);
+		throw Error(`${contractName}: deployment not found on ${readNetwork.get().alias}`);
 	}
 }
 
