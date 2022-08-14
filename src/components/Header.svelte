@@ -34,7 +34,7 @@
 				console.log(`Tile base price: ${TILE_BASE_PRICE}`);
 				console.log(`Tile multiplier: ${TILE_MULTIPLIER}`);
 				console.log(`Tile tier size: ${TILE_TIER_SIZE}`);
-				console.log(`Tile price`, price);
+				console.log(`Tile price:`, price);
 			} catch (e: any) {
 				console.error(e.message);
 			}
