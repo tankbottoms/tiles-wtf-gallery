@@ -55,7 +55,7 @@
 		{#if loading}
 			<Loading />
 		{:else}
-			no data available
+			shockingly nothing has been minted, or something is wrong.
 		{/if}
 	{/each}
 </section>

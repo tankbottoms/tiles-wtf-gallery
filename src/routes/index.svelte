@@ -112,19 +112,4 @@
 		margin-bottom: 20px;
 		font-weight: 600;
 	}
-
-	/* Attempt to fix size of tile */
-	/* #tiles {
-        width: 70vh;
-        height: 70vh;
-        max-width: 100vw;
-        max-height: 100vw;
-        min-width: 360px;
-        min-height: 360px;
-    } */
-	/* 
-	:global(#tiles svg) {
-        width: 100%;
-        height: 100%;
-	} */
 </style>
