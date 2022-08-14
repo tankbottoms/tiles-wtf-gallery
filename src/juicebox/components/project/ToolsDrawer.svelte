@@ -34,7 +34,7 @@
 		$project.projectOwnerAddress.toLowerCase() === $connectedAccount.toLowerCase()
 			? [
 					'General',
-					'Ownership'
+					// 'Ownership'
 					// 'Roles'
 					// 'Landing Page'
 			  ]
@@ -237,8 +237,8 @@
 				</div>
 			</div>
 		</HeavyBorderBox>
-	{:else if currentTab === 1}
-		<HeavyBorderBox margin="32px" padding="16px 32px">
+	<!-- {:else if currentTab === 1} -->
+		<!-- <HeavyBorderBox margin="32px" padding="16px 32px">
 			<div class="box">
 				<h4><Trans>Transfer ownership</Trans></h4>
 				<p>
@@ -269,7 +269,7 @@
 					>
 				</p>
 				<p>
-					<!-- TODO: discord link -->
+					TODO: discord link
 					<Icon name="exclamationCircle" />
 					<Trans>
 						If you have already deployed a payable address and have lost it, please contact the
@@ -283,7 +283,7 @@
 					>
 				</div>
 			</div>
-		</HeavyBorderBox>
+		</HeavyBorderBox> -->
 	{/if}
 </section>
 
