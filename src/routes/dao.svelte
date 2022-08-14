@@ -493,9 +493,9 @@
 
 <svelte:head>
 	{#if $project?.projectMetadata?.name}
-		<title>{$project?.projectMetadata?.name} | Tiles v2</title>
+		<title>{$project?.projectMetadata?.name} | Infinite Tiles v2</title>
 	{:else}
-		<title>Project | Tiles v2</title>
+		<title>Project | Infinite Tiles v2</title>
 	{/if}
 </svelte:head>
 

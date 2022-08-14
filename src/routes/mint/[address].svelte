@@ -48,7 +48,7 @@
 
 	async function mint() {
 		if (!$connectedAccount) {
-			console.log('account not connected');
+			console.log('Account not connected');
 			return await web3Connect();
 		}
 		try {
@@ -94,16 +94,8 @@
 	async function init() {
 		loading = true;
 		await whenPageReady();
-
-		tile = generateTile(address);
-		// Check if legitimate address
-		// if (!utils.isAddress(address)) {
-		// 	showInvalidAddress = false;
-		// } else {
-		// 	showInvalidAddress = false;
-		// }
-
-		console.log('init subscribing...');
+		tile = generateTile(address);		
+		console.log('Init subscribing...');
 		// Returning so it gets unsubscribed when component is destroyed
 		return readNetwork.subscribe(async () => {
 			loading = true;
@@ -145,7 +137,12 @@
 					!hasEnoughBalance}
 			>
 				MINT ({formattedPrice} ETH)
-			</button>
+			</button>		
+			<!--
+			<div class="link">
+				<a href="/tos?{$readNetwork ? `network=${$readNetwork?.alias}` : ''}">*terms of sale</a>
+			</div>	
+			-->				
 		{:else}
 			<button on:click={() => web3Connect()}>CONNECT WALLET</button>
 		{/if}
@@ -155,8 +152,8 @@
 		{/if}
 	{/if}
 </section>
-
-<button class="download" on:click={() => downloadFile(tile, 'tile.svg', 'image/svg')}>
+	
+<button class="download" on:click={() => downloadFile(tile, `${address}.svg`, 'image/svg')}>
 	Download SVG
 </button>
 
@@ -176,6 +173,14 @@
 		cursor: not-allowed;
 	}
 
+	.fineprint {		
+		align-items: bottom;
+		justify-content: center;		
+		line-height: 1.3;
+		margin: 1vh 1vw;
+		font-size: 12px;
+	}
+
 	section {
 		display: flex;
 		flex-direction: column;
@@ -190,4 +195,5 @@
 		bottom: 20px;
 		right: 20px;
 	}
+	
 </style>

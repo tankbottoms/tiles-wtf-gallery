@@ -30,7 +30,7 @@
 		<p id="address" />
 	</div>
 	<section>
-		<h1>infinite tiles v2</h1>
+		<h1>infinite (∞) tiles v2</h1>
 		<p>generated from any eth address</p>
 		<p>
 			<a
@@ -44,19 +44,11 @@
 		<a href="/faq?{$readNetwork ? `network=${$readNetwork?.alias}` : ''}">faq</a>
 		<div class="group">
 			<div>
-				<a href="/mint?{$readNetwork ? `network=${$readNetwork?.alias}` : ''}">mint a tile</a>
+				<a href="/mint?{$readNetwork ? `network=${$readNetwork?.alias}` : ''}">mint a tile(s)</a>
 			</div>
 		</div>
 	</section>
 </main>
-
-<footer>
-	<div class="center">
-		<div class="link">
-			<a href="/tos?{$readNetwork ? `network=${$readNetwork?.alias}` : ''}">terms of sale</a>
-		</div>
-	</div>
-</footer>
 
 <style>
 	main {
@@ -85,17 +77,6 @@
 
 	a:hover {
 		border-bottom: 3px solid black;
-	}
-
-	.center {
-		margin: auto;
-		font-size: 14px;
-		color: black;
-		text-decoration: none;
-		align-items: center;
-		justify-items: center;
-		text-align: center;
-		margin: 0px 5px;
 	}
 
 	p {

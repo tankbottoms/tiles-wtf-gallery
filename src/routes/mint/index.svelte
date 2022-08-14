@@ -2,6 +2,7 @@
 	import Icon from '$juicebox/components/Icon.svelte';
 	import { constants, utils } from 'ethers';
 	import { onMount } from 'svelte';
+	import { readNetwork } from '$stores/web3';
 	import { generateTile, generateRandomAddresses } from '$tiles/tilesStandalone';
 	import { goto } from '$app/navigation';
 
@@ -104,6 +105,14 @@
 	</a>
 </div>
 
+<footer>
+	<div class="footer">
+		<div class="link">
+			<a href="/tos?{$readNetwork ? `network=${$readNetwork?.alias}` : ''}">terms of sale</a>
+		</div>
+	</div>
+</footer>
+
 <style>
 	section {
 		margin: 0 auto;
@@ -179,5 +188,16 @@
 	}
 	.address {
 		color: var(--text-primary);
+	}
+
+	.footer {
+		margin: auto;
+		font-size: 14px;
+		color: black;
+		text-decoration: none;
+		align-items: center;
+		justify-items: center;
+		text-align: center;
+		margin: 0px 5px;
 	}
 </style>

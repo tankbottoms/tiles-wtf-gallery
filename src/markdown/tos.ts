@@ -1,9 +1,9 @@
 export default `
 
-<div align="center"> Tiles NFT Terms of Sale </div>
+<div align="center"> Infinite Tiles DAO - NFT Terms of Sale </div>
 <br />
 
-This is an agreement between you (**Purchaser, you**) and Tiles, an Unincorporated Non-Profit in the State of Delaware (**Tiles, Seller, we, us**) related to the purchase of a non-fungible token (**NFT**) for an associated digital asset (**Digital Asset**). We agree to sell, and you agree to purchase, the NFT subject to these terms and conditions, inclusive of any license rights or obligations explained below (**Terms**).
+This is an agreement between you (**Purchaser, you**) and Infinite Tiles DAO, an Unincorporated Non-Profit in the State of Delaware (**Tiles, Seller, we, us**) related to the purchase of a non-fungible token (**NFT**) for an associated digital asset (**Digital Asset**). We agree to sell, and you agree to purchase, the NFT subject to these terms and conditions, inclusive of any license rights or obligations explained below (**Terms**).
 
 These Terms will apply to you or any subsequent owner of the NFT, and you agree to make any subsequent purchaser of the NFT, or any rights in the NFT, aware of these Terms. These Terms are subject to change at the sole discretion of Tiles. Any subsequent transfer of rights in the NFT or continued use of the NFT are subject to all changes to these Terms, unless otherwise noted in such changes. Notice in this agreement refers to any messages which will be sent using the Ethereum address associated with this NFT.
 

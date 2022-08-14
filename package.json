@@ -1,7 +1,7 @@
 {
 	"name": "tiles-wtf-gallery",
 	"version": "0.2.0",
-	"license": "license.md",
+	"license": "LICENSE",
 	"scripts": {
 		"dev": "vite dev --port 8080",
 		"build": "vite build && node scripts/ipfs-fallback.js",

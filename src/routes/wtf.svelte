@@ -6,26 +6,25 @@
 	/>
 	<caption
 		><a href="https://twitter.com/peripheralist">@peripheralist</a>, presumably on a warm relaxing
-		day, contemplating life, the universe, and everything</caption
+		day, contemplating life, the universe, ∞ and everything</caption
 	>
 	<br />
 	<h1>wtf?</h1>
 	<p>
 		as the name suggests,
-		<a href="https://github.com/tankbottoms/tiles-on-chain">infinite tiles v2 (on-chain)</a> is a
-		reverse-engineered, onchain re-implementation of @peripheralist’s
+		<a href="https://github.com/tankbottoms/tiles-on-chain">infinite tiles v2</a> is a
+		reverse-engineered, on-chain re-implementation of @peripheralist’s
 		<a href="https://github.com/TileDAO">Tiles</a>.
 	</p>
 	<p>
-		the website implements an nft minting page and a fully featured treasury interface for
-		contributions, token emissions, and funding cycle configuration. this makes infinite tiles v2 an
-		attractive dao solution; offering a completely on-chain nft coupled with advanced treasury
+		the website implements an nft minting page and a fully featured treasury interface. this makes infinite tiles v2 an
+		attractive dao solution; offering an nft minting experience coupled with advanced treasury
 		management.
 	</p>
 	<p>
 		the <a href="https://github.com/tankbottoms/tiles-on-chain">wtf-nft</a> and
-		<a href="https://github.com/tankbottoms/tiles-wtf-gallery">wtf-gallery</a> repos were built to enable
-		a highly curated experience and to decentralize the Juicebox frontend.
+		<a href="https://github.com/tankbottoms/tiles-wtf-gallery">wtf-gallery</a> github repos were built to enable
+		a highly curated experience and to decentralize the <a href="https://snapshot.org/#/jbdao.eth/proposal/0x122ec83036d4ed2379c98ed6c566666256169aac1ee4316f60da24bd768c7ff6" target="_blank">Juicebox frontend</a>.
 	</p>
 	<h1>wtf?</h1>
 	<p>
