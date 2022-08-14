@@ -177,7 +177,7 @@
 													<Icon name="copy" style="transform: translateY(3px)" />
 												</span>
 											{:else if asset.type === 'project'}
-												<a href="/projects/{asset.id}?{$readNetwork ? `network=${$readNetwork?.alias}` : ''}">
+												<a href={null}>
 													Project ID: {asset.id}
 												</a>
 											{/if}
@@ -207,7 +207,12 @@
 												<span>{asset.symbol ?? 'TOKENs'}</span>
 											</a>
 										{:else if asset.type === 'project'}
-											<a style="color: var(--text-primary);" href="/projects/{asset.id}?{$readNetwork ? `network=${$readNetwork?.alias}` : ''}">
+											<a
+												style="color: var(--text-primary);"
+												href="/projects/{asset.id}?{$readNetwork
+													? `network=${$readNetwork?.alias}`
+													: ''}"
+											>
 												{#if asset.symbol}
 													<span>{asset.symbol}</span>
 												{:else}
@@ -229,18 +234,7 @@
 	</div>
 	<div>
 		<div style="display: flex; justify-content: space-between; margin-top: 20px;">
-			{#if $connectedAccount && $project.projectOwnerAddress?.toLowerCase() === $connectedAccount?.toLowerCase()}
-				<button
-					type="button"
-					class="ant-btn ant-btn-text ant-btn-sm"
-					on:click={() => openModal(bind(EditAssetsModal, {}))}
-				>
-					<Icon name="setting" />
-					<span>Edit tracked assets</span>
-				</button>
-			{:else}
-				<div>&nbsp;</div>
-			{/if}
+			<div>&nbsp;</div>
 			<button type="button" class="ant-btn ant-btn-default" on:click={() => closeModal()}
 				>Done</button
 			>
