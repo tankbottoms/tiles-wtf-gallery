@@ -478,7 +478,10 @@
 
 		loading = false;
 
-		console.log(`Project #${$project.projectId}`, $project);
+		console.log(
+			`[routes/dao.svelte][${getDefaultProvider().alias}] Project #${$project.projectId}`,
+			$project
+		);
 	}
 
 	$: if ($pageReady.web3) {
