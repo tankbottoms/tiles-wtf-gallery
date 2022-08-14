@@ -87,7 +87,6 @@
 		let networkId = Number($readNetwork.id);
 		if ($connectedAccount && !blocknativeNetworks.find((net) => Number(net.id) === $chainId)) {
 			issue = 'Current network is not supported';
-			// loading = false;
 			return;
 		}
 		projectId = BigNumber.from(Number(getDefaultProvider().id) === 4 ? 98 : 41);
@@ -140,7 +139,6 @@
 			$project.fundingCycleMetadata = fundingCycleMetadata;
 		} catch (error) {
 			if (error.errorCode === 'networkChanged') return fetchProject(cached, showLoadingUI);
-			// loading = false;
 			console.error(error);
 			issue = 'error reading current funding cycle';
 			return;
@@ -158,7 +156,6 @@
 			$project.queuedFundingCycleMetadata = fundingCycleMetadata;
 		} catch (error) {
 			if (error.errorCode === 'networkChanged') return fetchProject(cached, showLoadingUI);
-			// loading = false;
 			console.error(error);
 			issue = 'error reading current funding cycle';
 			return;
@@ -175,7 +172,6 @@
 			$project.projectOwnerAddress = owner;
 		} catch (error) {
 			if (error.errorCode === 'networkChanged') return fetchProject(cached, showLoadingUI);
-			// loading = false;
 			console.error(error);
 			issue = 'error reading owner of project';
 			return;
@@ -208,7 +204,6 @@
 			});
 		} catch (error) {
 			if (error.errorCode === 'networkChanged') return fetchProject(cached, showLoadingUI);
-			// loading = false;
 			console.error(error);
 			issue = 'error reading payout splits';
 			return;
@@ -235,7 +230,6 @@
 			});
 		} catch (error) {
 			if (error.errorCode === 'networkChanged') return fetchProject(cached, showLoadingUI);
-			// loading = false;
 			console.error(error);
 			issue = 'error reading reserved tokens splits';
 			return;
@@ -263,7 +257,6 @@
 			}
 		} catch (error) {
 			if (error.errorCode === 'networkChanged') return fetchProject(cached, showLoadingUI);
-			// loading = false;
 			console.error(error);
 			issue = 'error reading token address/symbol';
 			return;
@@ -276,7 +269,6 @@
 			]);
 		} catch (error) {
 			if (error.errorCode === 'networkChanged') return fetchProject(cached, showLoadingUI);
-			// loading = false;
 			console.error(error);
 			issue = 'error reading total token supply';
 			return;
@@ -293,7 +285,6 @@
 				)) || [];
 		} catch (error) {
 			if (error.errorCode === 'networkChanged') return fetchProject(cached, showLoadingUI);
-			// loading = false;
 			console.error(error);
 			issue = 'error reading primary terminal of project';
 			return;
@@ -317,7 +308,6 @@
 			loadingDistributed = false;
 		} catch (error) {
 			if (error.errorCode === 'networkChanged') return fetchProject(cached, showLoadingUI);
-			// loading = false;
 			console.error(error);
 			issue = 'error reading distributionLimit';
 			return;
@@ -335,7 +325,6 @@
 			}
 		} catch (error) {
 			if (error.errorCode === 'networkChanged') return fetchProject(cached, showLoadingUI);
-			// loading = false;
 			console.error(error);
 			issue = 'error reading owner of project';
 			return;
@@ -356,7 +345,6 @@
 		} catch (error) {
 			if (error.errorCode === 'networkChanged') return fetchProject(cached, showLoadingUI);
 			console.error(error);
-			// loading = false;
 			issue = 'error reading usedDistributionLimitOf';
 			return;
 		}
@@ -373,7 +361,6 @@
 			);
 		} catch (error) {
 			if (error.errorCode === 'networkChanged') return fetchProject(cached, showLoadingUI);
-			// loading = false;
 			console.error(error);
 			issue = 'error reading reservedTokenBalanceOf';
 			return;
@@ -403,7 +390,6 @@
 			}
 		} catch (error) {
 			if (error.errorCode === 'networkChanged') return fetchProject(cached, showLoadingUI);
-			// loading = false;
 			console.error(error);
 			issue = 'error reading permissions';
 			return;
@@ -437,7 +423,6 @@
 			loadingInTreasury = false;
 		} catch (error) {
 			if (error.errorCode === 'networkChanged') return fetchProject(cached, showLoadingUI);
-			// loading = false;
 			console.error(error);
 			issue = 'error reading balance of project';
 			return;

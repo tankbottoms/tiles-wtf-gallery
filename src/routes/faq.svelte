@@ -1,61 +1,67 @@
 <section>
-	<h1>faq</h1>
-	<h2>wtf?</h2>
+	<h1>wtf?</h1>
 	<p>see <a href="/wtf" target="_blank">wtf</a></p>
-	
-	<h2>purpose of this project?</h2>
-			<ul>
-		<li>implement the nft visual rendering algorithm in solidity; and</li> 
-		<li>reset and slow the tile cost; and </li>
-		<li>self-hosted <a href="https://juicebox.money/v2/p/41" target="_blank">juicebox treasury</a			
-		>.</li> 
-		</ul> 		
-	
-	<h2>how will the tiles v2 proceeds be used?</h2>
-	<p>to encourage, promote and reward early adopter juicebox community members, member projects, and builders.</p>	
-	
-	<h2>do existing Tiles owners pay anything?</h2>
-	<p>
-		no. owners of the original <a
+	<br/><h1>purpose?</h1>
+	<ul>
+		<li>
+			implement <a href="https://tiles.art">tiles'</a> visual rendering algorithm in solidity;
+		</li>
+		<li>reset and reduce the cost of tiles; and</li>
+		<li>
+			self-host a <a href="https://juicebox.money/v2/p/41" target="_blank">juicebox treasury</a>.
+		</li>
+	</ul>
+	<br/><h1>where does the money go?</h1>
+	<p>to encourage and reward early juicebox community members, projects, and builders.</p>
+
+	<br/><h1>
+		do owners of <a href="https://twitter.com/peripheralist">@Peripheralist's</a> original
+		<a
 			href="https://etherscan.io/address/0x64931F06d3266049Bf0195346973762E6996D764"
-			target="_blank">infinite tile(s)</a
-		>
-		mint for free, this is called
+			target="_blank"
+			>infite Tiles
+		</a>
+		NFT collection mint for free, and is it called
 		<a
 			href="https://github.com/tankbottoms/tiles-on-chain/blob/main/contracts/TileNFT.sol#L124"
-			target="_blank">grabbing</a
-		>. 
-	</p>
-	
-	<h2>how are the tiles priced?</h2>
-	<p>
-		the base price will start out as <b>0.0001 ETH and be multipled by 2 every 512 tiles minted</b>,
-		thus the next tier after the first will be priced as 0.0002 for 512 tiles and so on.
-	</p>
-	<p>
-		initialization parameters were set in the <a
-			href="https://github.com/tankbottoms/tiles-on-chain/blob/main/scripts/mainnet.ts#L46"
-			target="_blank">deploy script</a
-		>, the tile pricing is governed by the 
-		<a
-			href="https://github.com/tankbottoms/tiles-on-chain/blob/main/contracts/LegacyOwnershipPriceResolver.sol"
-			>legacy ownership price resolver</a
-		>. 
-		</p>
-		<p>
-		if a tile for which the address owner discovers is
-		unavailable, that user has the option to pay the existing rate and claim, this is called
-		<a href="https://github.com/tankbottoms/tiles-on-chain/blob/main/contracts/TileNFT.sol#L171"
-			>seizing</a
-		>.
-	</p>
-	<h2>what are the license terms of the source code for the contracts and the website?</h2>
-	<p>
-		use of the source code is solely for users, projects which route their proceeds through the juicebox protocol treasury.  see the we-party license <a href="https://github.com/tankbottoms/tiles-wtf-gallery/blob/main/LICENSE.md" target="_blank">terms</a>.
-	</p>
-	<p>
+			target="_blank">"grabbing"?</a
+		>
+	</h1>
+	<p>Yes, very astute question.</p>
 
+	<br/><h1>how are v2 tiles priced?</h1>
+	<p>mints start at 0.0001 ETH. every 512 mints, the price doubles.</p>
+	<br/><h1>any fun facts?</h1>
+	<p>yes.</p>
+	<ol>
+		<li>
+			parameters were set in the <a
+				href="https://github.com/tankbottoms/tiles-on-chain/blob/main/scripts/mainnet.ts#L46"
+				target="_blank">deploy script</a
+			>, and pricing is governed by the
+			<a
+				href="https://github.com/tankbottoms/tiles-on-chain/blob/main/contracts/LegacyOwnershipPriceResolver.sol"
+				>legacy ownership price resolver</a
+			>.
+		</li>
+		<li>
+			if somebody minted the tile with your wallet's address, you can mint it anew to reclaim it.
+			this is lovingly called
+			<a href="https://github.com/tankbottoms/tiles-on-chain/blob/main/contracts/TileNFT.sol#L171"
+				>"seizing"</a
+			>.
+		</li>
+	</ol>
+	<br/><h1>what are the license terms of the source code for the contracts and the website?</h1>
+	<p>
+		tiles.wtf and its source code are under the <a
+			href="https://github.com/tankbottoms/tiles-wtf-gallery/blob/main/LICENSE.md"
+			target="_blank">we-party license</a
+		>. use of the source code is solely for projects which route their proceeds through a juicebox
+		protocol treasury.
 	</p>
+	<p />
+	<p />
 </section>
 
 <style>
@@ -74,9 +80,8 @@
 		color: rgb(51, 128, 160);
 	}
 
-
-	ul,p {
+	ul,
+	p {
 		font-size: 14px;
 	}
-
 </style>
