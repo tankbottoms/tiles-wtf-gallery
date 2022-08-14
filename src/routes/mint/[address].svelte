@@ -2,6 +2,7 @@
 	import { onMount } from 'svelte';
 	import { BigNumber, utils } from 'ethers';
 	import { page } from '$app/stores';
+	import { modal } from '$stores';
 	import { generateTile } from '$tiles/tilesStandalone';
 	import { connectedAccount, provider, readNetwork, web3Connect } from '$stores/web3';
 	import { readContract, writeContract } from '$utils/web3/contractReader';
@@ -12,6 +13,7 @@
 	import { errorMessage } from '$components/ErrorModal.svelte';
 	import { parseEther } from 'ethers/lib/utils.js';
 	import { createCustomNotification } from '$utils/notification';
+	import Modal from '$juicebox/components/Modal.svelte';
 
 	enum Available {
 		IS_AVAILABLE = 0,
@@ -157,6 +159,8 @@
 <button class="download" on:click={() => downloadFile(tile, 'tile.svg', 'image/svg')}>
 	Download SVG
 </button>
+
+<Modal show={$modal} />
 
 <style>
 	button {

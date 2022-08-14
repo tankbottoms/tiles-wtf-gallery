@@ -1,13 +1,11 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import Notify from 'bnc-notify';
-	import { modal } from '$stores';
 	import ErrorModal from '$components/ErrorModal.svelte';
 	import Header from '$components/Header.svelte';
 	import Intl from '$juicebox/provider/Intl.svelte';
 	import { notify } from '$utils/notification';
 	import { loadLocale } from '$utils/LanguageProvider';
-	import Modal from '$juicebox/components/Modal.svelte';
 
 	onMount(async () => {
 		await loadLocale();
@@ -19,7 +17,6 @@
 	<Header />
 	<slot />
 	<ErrorModal />
-	<Modal show={$modal} />
 </Intl>
 
 <style>
