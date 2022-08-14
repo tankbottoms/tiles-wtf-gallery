@@ -109,13 +109,14 @@
 	</div>
 </header>
 
-<style lang="scss">	
+<style lang="scss">
 	.dropdown {
 		position: absolute;
-		right: 0;
-		top: 70%;
+		left: 0;
+		top: 100%;
 		list-style: none;
 		padding: 0;
+		box-shadow: 0 0 5px #eee;
 	}
 
 	.dropdown li {
@@ -130,7 +131,7 @@
 	.right,
 	.left {
 		display: flex;
-		padding: 5px 5px;
+		padding: 5px 7px;
 	}
 
 	header {
@@ -150,9 +151,11 @@
 		text-decoration: none;
 		position: relative;
 		border-bottom: 3px solid gold;
-		margin: 0px 10px;
+		&.primary-text {
+			transform: translateY(1px);
+			margin: 0px 10px;
+		}
 		&:hover {
-			text-decoration: underline;
 			border-bottom: 3px solid black;
 		}
 	}
@@ -168,6 +171,7 @@
 
 	button,
 	p {
+		margin: 0;
 		margin-left: auto;
 	}
 
@@ -175,17 +179,16 @@
 		border: none;
 		background: none;
 		cursor: pointer;
+		padding: 0px 0px 0px 0px;
+		transform: translateY(1px);
 		border-bottom: 3px solid gold;
-		padding: 0px 0px 8px;
-	}
-
-	button:hover {
-		border-bottom: 3px solid black;
-	}
-
-	.disconnect {
-		/*padding: 0;*/
-		position: relative;
-		justify-content: flex-end;
+		&:hover {
+			border-bottom: 3px solid black;
+		}
+		&.disconnect {
+			/*padding: 0;*/
+			position: relative;
+			justify-content: flex-end;
+		}
 	}
 </style>
