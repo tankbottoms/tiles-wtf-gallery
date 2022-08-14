@@ -177,7 +177,7 @@
 													<Icon name="copy" style="transform: translateY(3px)" />
 												</span>
 											{:else if asset.type === 'project'}
-												<a href="/projects/{asset.id}">
+												<a href="/projects/{asset.id}?{$readNetwork ? `network=${$readNetwork?.alias}` : ''}">
 													Project ID: {asset.id}
 												</a>
 											{/if}
@@ -207,7 +207,7 @@
 												<span>{asset.symbol ?? 'TOKENs'}</span>
 											</a>
 										{:else if asset.type === 'project'}
-											<a style="color: var(--text-primary);" href="/projects/{asset.id}">
+											<a style="color: var(--text-primary);" href="/projects/{asset.id}?{$readNetwork ? `network=${$readNetwork?.alias}` : ''}">
 												{#if asset.symbol}
 													<span>{asset.symbol}</span>
 												{:else}

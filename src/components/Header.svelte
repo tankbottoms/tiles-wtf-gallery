@@ -67,7 +67,7 @@
 
 <header>
 	<div class="left">
-		<a href="/">
+		<a class="logo-wrapper" href="/?{$readNetwork ? `network=${$readNetwork?.alias}` : ''}">
 			<img src="/favicon.svg" alt="Logo" />
 		</a>
 		<a class="primary-text" href="/history?{$readNetwork ? `network=${$readNetwork?.alias}` : ''}">
@@ -150,8 +150,8 @@
 		color: black;
 		text-decoration: none;
 		position: relative;
-		border-bottom: 3px solid gold;
 		&.primary-text {
+			border-bottom: 3px solid gold;
 			transform: translateY(1px);
 			margin: 0px 10px;
 			&:hover {

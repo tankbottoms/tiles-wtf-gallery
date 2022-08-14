@@ -39,12 +39,12 @@
 			>
 		</p>
 		<p>each is unique & objectively rare</p>
-		<a href="/wtf">wtf</a>
+		<a href="/wtf?{$readNetwork ? `network=${$readNetwork?.alias}` : ''}">wtf</a>
 		<a href="/dao?{$readNetwork ? `network=${$readNetwork?.alias}` : ''}">treasury</a>
-		<a href="/faq">faq</a>
+		<a href="/faq?{$readNetwork ? `network=${$readNetwork?.alias}` : ''}">faq</a>
 		<div class="group">
 			<div>
-				<a href="/mint">mint a tile</a>
+				<a href="/mint?{$readNetwork ? `network=${$readNetwork?.alias}` : ''}">mint a tile</a>
 			</div>
 		</div>
 	</section>
@@ -53,7 +53,7 @@
 <footer>
 	<div class="center">
 		<div class="link">
-			<a href="/tos">terms of sale</a>
+			<a href="/tos?{$readNetwork ? `network=${$readNetwork?.alias}` : ''}">terms of sale</a>
 		</div>
 	</div>
 </footer>
