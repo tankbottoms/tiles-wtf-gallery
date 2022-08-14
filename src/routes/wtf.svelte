@@ -46,7 +46,7 @@
 		the v2 <a href="https://github.com/tankbottoms/tiles-on-chain/blob/main/contracts/TileNFT.sol">
 			nft source</a
 		>, may shorten development time for similiarly styled designs. the specific tile design
-		huerestic may be found
+		heuristic may be found
 		<a
 			href="https://github.com/tankbottoms/tiles-on-chain/blob/main/contracts/components/TileContentProvider.sol"
 			>here</a
