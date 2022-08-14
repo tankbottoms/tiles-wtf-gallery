@@ -26,6 +26,7 @@ const config = ({ mode }) => {
 
 				$juicebox: path.resolve('./src/juicebox'),
 				$components: path.resolve('./src/components'),
+				$markdown: path.resolve('./src/markdown'),
 				$tiles: path.resolve('./src/tiles'),
 				$deployments: path.resolve('./src/deployments'),
 

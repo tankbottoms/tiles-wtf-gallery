@@ -33,6 +33,8 @@
 			"$data/*": ["src/data/*"],
 			"$components": ["src/components"],
 			"$components/*": ["src/components/*"],
+			"$markdown": ["src/markdown"],
+			"$markdown/*": ["src/markdown/*"],
 			"$juicebox": ["src/juicebox"],
 			"$juicebox/*": ["src/juicebox/*"],
 			"$tiles": ["src/tiles"],
