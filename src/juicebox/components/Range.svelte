@@ -9,7 +9,7 @@
 </script>
 
 <div>
-	<RangeSlider range="min" {min} {max} {step} bind:values {...$$props} />
+	<RangeSlider range="min" {min} {max} {step} bind:values {...$$restProps} />
 	{#if showValueBox}
 		<section class="value-box">
 			<input type="number" bind:value={values[0]} {step} />
