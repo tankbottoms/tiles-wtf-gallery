@@ -198,12 +198,15 @@ export async function switchNetwork(_chainId: number | string) {
 export const readNetwork = new Store(getDefaultProvider());
 
 export function getProvider() {
-	return provider.get() || new ethers.providers.JsonRpcProvider(get(readNetwork).rpcUrl);
+	return provider.get() || new ethers.providers.JsonRpcProvider(readNetwork.get().rpcUrl);
 }
 
 export function getDefaultProvider() {
 	if (browser) {
-		const defaultNetworkAlias = new URLSearchParams(location.search).get('network');
+		const defaultNetworkAlias =
+			connectedAccount.get() && readNetwork.get()
+				? readNetwork.get().alias
+				: new URLSearchParams(location.search).get('network');
 		return (
 			blocknativeNetworks.find((net) => net.alias === defaultNetworkAlias) || blocknativeNetworks[0]
 		);
