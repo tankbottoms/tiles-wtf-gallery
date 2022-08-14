@@ -50,6 +50,10 @@ export function getProjectEvents(where: WhereConfig<'projectEvent'>[], skip = 0,
 					'beneficiaryTokenCount',
 					'tokenCount'
 				]
+			},
+			{
+				entity: 'deployETHERC20ProjectPayerEvent',
+				keys: ['id', 'timestamp', 'txHash', 'caller', 'address', 'memo']
 			}
 		],
 		orderDirection: 'desc',
@@ -105,6 +109,10 @@ export function getAllProjectEvents(where: WhereConfig<'projectEvent'>[]) {
 					'beneficiaryTokenCount',
 					'tokenCount'
 				]
+			},
+			{
+				entity: 'deployETHERC20ProjectPayerEvent',
+				keys: ['id', 'timestamp', 'txHash', 'caller', 'address', 'memo']
 			}
 		],
 		orderDirection: 'desc',

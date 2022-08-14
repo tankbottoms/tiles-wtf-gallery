@@ -6,6 +6,7 @@
 	import DistributePayouts from './DistributePayouts.svelte';
 	import DistributedReservedTokens from './DistributedReservedTokens.svelte';
 	import RedeemEvent from './RedeemEvent.svelte';
+	import DeployProjectPayerEvent from './DeployProjectPayerEvent.svelte';
 
 	export let event: ProjectEvent;
 </script>
@@ -26,6 +27,10 @@
 	</div>
 {:else if event.redeemEvent}
 	<div class="projectEvent"><RedeemEvent event={event.redeemEvent} /></div>
+{:else if event.deployETHERC20ProjectPayerEvent}
+	<div class="projectEvent">
+		<DeployProjectPayerEvent event={event.deployETHERC20ProjectPayerEvent} />
+	</div>
 {/if}
 
 <style>

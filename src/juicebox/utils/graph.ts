@@ -91,6 +91,8 @@ import {
 } from '$juicebox/models/subgraph-entities/vX/redeem-event';
 import { readNetwork } from '$stores/web3';
 import { get } from 'svelte/store';
+import type { DeployETHERC20ProjectPayerEvent, DeployETHERC20ProjectPayerEventJson } from '$juicebox/models/subgraph-entities/v2/deploy-eth-erc20-project-payer-event';
+import type { ETHERC20ProjectPayer, ETHERC20ProjectPayerJson } from '$juicebox/models/subgraph-entities/v2/eth-erc20-project-payer';
 export interface SubgraphEntities {
 	protocolLog: ProtocolLog;
 	projectEvent: ProjectEvent;
@@ -111,6 +113,8 @@ export interface SubgraphEntities {
 	distributeToReservedTokenSplitEvent: DistributeToReservedTokenSplitEvent;
 	distributeToPayoutSplitEvent: DistributeToPayoutSplitEvent;
 	useAllowanceEvent: UseAllowanceEvent;
+	ethERC20ProjectPayer: ETHERC20ProjectPayer;
+	deployETHERC20ProjectPayerEvent: DeployETHERC20ProjectPayerEvent;
 }
 
 export interface SubgraphQueryReturnTypes {
@@ -147,6 +151,11 @@ export interface SubgraphQueryReturnTypes {
 	};
 	useAllowanceEvent: { useAllowanceEvents: UseAllowanceEventJson[] };
 	mintTokensEvent: { mintTokensEvent: MintTokensEventJson[] };
+
+	ethERC20ProjectPayer: { ethERC20ProjectPayers: ETHERC20ProjectPayerJson[] };
+	deployETHERC20ProjectPayerEvent: {
+		deployETHERC20ProjectPayerEvents: DeployETHERC20ProjectPayerEventJson[];
+	};
 }
 
 export type EntityKey = keyof SubgraphEntities;
@@ -409,6 +418,12 @@ export function formatGraphResponse<E extends EntityKey>(
 			if ('useAllowanceEvents' in response) {
 				// @ts-ignore
 				return response.useAllowanceEvents.map(parseUseAllowanceEventJson);
+			}
+			break;
+		case 'deployETHERC20ProjectPayerEvent':
+			if ('deployETHERC20ProjectPayerEvents' in response) {
+				// @ts-ignore
+				return response.useAllowanceEvents.map(parseDeployETHERC20ProjectPayerEventJson);
 			}
 			break;
 	}

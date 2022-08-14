@@ -20,6 +20,7 @@
 	import HeavyBorderBox from '../HeavyBorderBox.svelte';
 	import { uploadProjectMetadata } from '$juicebox/utils/ipfs';
 	import { JUICEBOX_MONEY_METADATA_DOMAIN } from '$juicebox/constants/v2/metadataDomain';
+	import EnsOrAddress from '$juicebox/components/EnsOrAddress.svelte';
 
 	export let balance = 0;
 	export let token = '';
@@ -34,9 +35,6 @@
 		$project.projectOwnerAddress.toLowerCase() === $connectedAccount.toLowerCase()
 			? [
 					'General',
-					// 'Ownership'
-					// 'Roles'
-					// 'Landing Page'
 			  ]
 			: ['General'];
 
@@ -54,7 +52,8 @@
 		]);
 		openModal(
 			bind(PendingTransaction, {
-				txnResponse
+				txnResponse,
+				functionName: 'transferFrom'
 			})
 		);
 		const txnResult = await txnResponse.wait();
@@ -85,7 +84,8 @@
 
 		openModal(
 			bind(PendingTransaction, {
-				txnResponse
+				txnResponse,
+				functionName: 'addToBalanceOf'
 			})
 		);
 		const txnResult = await txnResponse.wait();
@@ -152,13 +152,24 @@
 		]);
 		openModal(
 			bind(PendingTransaction, {
-				txnResponse
+				txnResponse,
+				functionName: 'setMetadataOf'
 			})
 		);
 		await txnResponse.wait();
 		archiving = false;
 		location.reload();
 	}
+	function addRole() {
+		// TODO:
+	}
+	function createLandingPage() {
+		// TODO:
+	}
+
+	$: alreadyDeployedProjectPayer = $project.events?.find(
+		(event) => event?.deployETHERC20ProjectPayerEvent?.caller === $connectedAccount
+	);
 </script>
 
 <section>
@@ -174,19 +185,22 @@
 				</p>
 
 				<div class="button">
-					<Button type="primary" size="md" on:click={() => openModal(CreatePayableAddress)}
-						>Deploy project payer contract</Button
+					<Button
+						type="primary"
+						size="md"
+						on:click={() => openModal(CreatePayableAddress)}
+						disabled={Boolean(alreadyDeployedProjectPayer) || !$connectedAccount}
 					>
+						Deploy project payer contract
+					</Button>
 				</div>
-				<p>
-					<!-- TODO: Discord link -->
-					<Icon name="exclamationCircle" />
-					<Trans>
-						If you have already deployed a payable address and have lost it, please contact the
-						Juicebox team through
-					</Trans>
-					<a href="TODO" class="link">Discord.</a>
-				</p>
+				{#if alreadyDeployedProjectPayer?.deployETHERC20ProjectPayerEvent?.address}
+					<span>
+						Project Payer: <EnsOrAddress
+							address={alreadyDeployedProjectPayer?.deployETHERC20ProjectPayerEvent?.address}
+						/>
+					</span>
+				{/if}
 			</div>
 		</HeavyBorderBox>
 
@@ -237,53 +251,6 @@
 				</div>
 			</div>
 		</HeavyBorderBox>
-	<!-- {:else if currentTab === 1} -->
-		<!-- <HeavyBorderBox margin="32px" padding="16px 32px">
-			<div class="box">
-				<h4><Trans>Transfer ownership</Trans></h4>
-				<p>
-					<Trans>Current owner: {$project.projectOwnerAddress}</Trans>
-				</p>
-				<label for="to">Recipient address</label>
-				<div class="input">
-					<Input
-						id="to"
-						bind:value={transferTokenTo}
-						type="address"
-						placeholder="juicebox.eth / 0x0000000000000000000000000000000000000000"
-					/>
-				</div>
-				<div class="button">
-					<Button type="primary" size="md" on:click={transferOwnership}>Transfer ownership</Button>
-				</div>
-			</div>
-		</HeavyBorderBox>
-		<HeavyBorderBox margin="32px" padding="16px 32px">
-			<div class="box">
-				<h4><Trans>Archive project</Trans></h4>
-				<p>
-					<Trans
-						>Your project will appear archived, and won't be able to receive payments through the
-						juicebox.money app. You can unarchive a project at any time. Allow a few days for your
-						project to appear under the "archived" filter on the Projects page.</Trans
-					>
-				</p>
-				<p>
-					TODO: discord link
-					<Icon name="exclamationCircle" />
-					<Trans>
-						If you have already deployed a payable address and have lost it, please contact the
-						Juicebox team through
-					</Trans>
-				</p>
-
-				<div class="button">
-					<Button type="primary" size="md" on:click={archiveProject} disabled={archiving}
-						>{archiving ? 'Archiving project...' : 'Archive project'}</Button
-					>
-				</div>
-			</div>
-		</HeavyBorderBox> -->
 	{/if}
 </section>
 
@@ -320,6 +287,15 @@
 			background-color: var(--background-l0);
 			width: 100%;
 		}
+		// .inputs {
+		// 	display: flex;
+		// 	gap: 16px;
+
+		// 	.dropdown {
+		// 		min-width: 100px;
+		// 		flex-shrink: 1;
+		// 	}
+		// }
 
 		.button {
 			display: flex;
