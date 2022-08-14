@@ -21,7 +21,7 @@ export async function readContractByAddress(
 	verbose = true
 ) {
 	if (verbose) {
-		console.warn(get(readNetwork).alias?.toUpperCase(), contractAddress, functionName, args);
+		console.log(get(readNetwork).alias?.toUpperCase(), contractAddress, functionName, args);
 	}
 	const network = getDefaultProvider();
 	const contract = new ethers.Contract(
@@ -42,7 +42,7 @@ export async function readContract(
 	args = [],
 	cached = false
 ) {
-	console.warn(contractName, functionName, args);
+	console.log(contractName, functionName, args);
 	const cache = await caches.open('CONTRACT_RESPONSE');
 
 	if (contracts[contractName][get(readNetwork).alias]) {

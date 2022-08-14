@@ -29,7 +29,7 @@
 				if (wasAdded) {
 					console.info('Added to MetaMask');
 				} else {
-					console.warning('Not added to MetaMask');
+					console.warn('Not added to MetaMask');
 				}
 			} catch (error) {
 				console.error(error);
