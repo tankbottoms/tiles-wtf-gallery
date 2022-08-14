@@ -45,8 +45,10 @@
 <section class:grid>
 	{#if tile}
 		<div class="tileContainer" on:click={() => goto(`mint/${input}`)}>
-			{@html tile}
-			<span class="address">{input}</span>
+			<div>
+				{@html tile}
+			</div>
+			<div><span class="address">{input}</span></div>
 		</div>
 	{:else if showInvalidAddress}
 		<p>not a valid ethereum address</p>
