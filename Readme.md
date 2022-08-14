@@ -11,9 +11,16 @@ Original Tiles v1 token holders may mint their token for free (sans gas), if som
 ### Build
 
 ```bash
-npm install
-npm run build
-npm run preview
+yarn install
+yarn build
+yarn preview
+```
+
+### Develop
+
+```bash
+yarn install
+yarn dev
 ```
 
 ### License
