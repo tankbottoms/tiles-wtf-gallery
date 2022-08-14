@@ -27,12 +27,15 @@
 		<a href="https://github.com/tankbottoms/tiles-wtf-gallery">wtf-gallery</a> repos were built to enable
 		a highly curated experience and to decentralize the Juicebox frontend.
 	</p>
-        <h1>wtf?</h1>
-        <p><b>
-                this project is an homage to the venerable @peripheralist:
-                the genius artist, designer, developer, grapher, person:<br/><br/>
-                <i>"all hail @peripheralist,"</i> thought everyone, <i>"we worship the ground you walk on."</i>
-        </b></p>
+	<h1>wtf?</h1>
+	<p>
+		<b>
+			this project is an homage to the venerable @peripheralist: the genius artist, designer,
+			developer, grapher, person:<br /><br />
+			<i>"all hail @peripheralist,"</i> thought everyone,
+			<i>"we worship the ground you walk on."</i>
+		</b>
+	</p>
 </section>
 
 <style>
