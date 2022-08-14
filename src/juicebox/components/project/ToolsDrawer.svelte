@@ -24,6 +24,8 @@
 
 	export let balance = 0;
 	export let token = '';
+	export let close = () => {};
+	close;
 
 	const project = getContext('PROJECT') as Store<V2ProjectContextType>;
 
@@ -33,9 +35,7 @@
 	let currentTab = 0;
 	let tabs =
 		$project.projectOwnerAddress.toLowerCase() === $connectedAccount.toLowerCase()
-			? [
-					'General',
-			  ]
+			? ['General']
 			: ['General'];
 
 	// NOTE this will be a big number due to CurrencyInput
