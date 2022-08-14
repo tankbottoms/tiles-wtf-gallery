@@ -109,7 +109,7 @@
 	</div>
 </header>
 
-<style lang="scss">
+<style lang="scss">	
 	.dropdown {
 		position: absolute;
 		right: 0;
@@ -144,9 +144,16 @@
 	}
 
 	.left a {
-		color: inherit;
+		/* color: inherit; */
+		font-size: 14px;
+		color: black;
+		text-decoration: none;
+		position: relative;
+		border-bottom: 3px solid gold;
+		margin: 0px 10px;
 		&:hover {
 			text-decoration: underline;
+			border-bottom: 3px solid black;
 		}
 	}
 
