@@ -3,7 +3,7 @@
 	import type { V2ProjectContextType } from '$juicebox/models/project-type';
 	import { V2ContractName } from '$juicebox/models/v2/contracts';
 
-	import { getProvider, connectedAccount, readNetwork } from '$stores/web3';
+	import { getProvider, readNetwork } from '$stores/web3';
 	import { copyToClipboard } from '$juicebox/utils/clipboard';
 	import { formatWad } from '$juicebox/utils/formatNumber';
 	import type Store from '$utils/Store';
@@ -11,12 +11,10 @@
 	import { BigNumber } from 'ethers';
 
 	import { getContext, onMount } from 'svelte';
-	import EditAssetsModal from './EditAssetsModal.svelte';
 	import EnsOrAddress from './EnsOrAddress.svelte';
 	import Icon from './Icon.svelte';
 	import Loading from './Loading.svelte';
-	import { bind, closeModal, openModal } from './Modal.svelte';
-	import PopInfo from './PopInfo.svelte';
+	import { closeModal } from './Modal.svelte';
 	import Popover from './Popover.svelte';
 
 	const project = getContext('PROJECT') as Store<V2ProjectContextType>;
