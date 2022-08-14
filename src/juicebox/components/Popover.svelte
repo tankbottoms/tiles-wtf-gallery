@@ -6,6 +6,8 @@
 	export let placement: 'left' | 'right' | 'top' | 'bottom' = undefined;
 	export let maxWidth = '200px';
 	export let nowrap = false;
+	export let close: Function;
+	close;
 
 	let popoverShow = false;
 	let popoverRef: HTMLElement;
