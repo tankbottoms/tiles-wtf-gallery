@@ -9,4 +9,4 @@ node_modules
 .vercel
 .output
 *.log
-yarn.lock
+package-lock.json
