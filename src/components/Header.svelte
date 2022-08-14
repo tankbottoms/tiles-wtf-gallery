@@ -154,9 +154,9 @@
 		&.primary-text {
 			transform: translateY(1px);
 			margin: 0px 10px;
-		}
-		&:hover {
-			border-bottom: 3px solid black;
+			&:hover {
+				border-bottom: 3px solid black;
+			}
 		}
 	}
 
