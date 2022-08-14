@@ -65,7 +65,10 @@
 						message="Some funding cycle properties may indicate risk for
     project contributors."
 					>
-						<Icon name="exclamationCircle" style="transform: translateY(3px);color: var(--text-warn)" />
+						<Icon
+							name="exclamationCircle"
+							style="transform: translateY(3px);color: var(--text-warn)"
+						/>
 					</Popover>
 				{/if}
 			</span>

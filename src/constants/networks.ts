@@ -15,7 +15,7 @@ export enum NetworkName {
 	// localhost = 'localhost',
 	// ropsten = 'ropsten',
 	mainnet = 'mainnet',
-	rinkeby = 'rinkeby',
+	rinkeby = 'rinkeby'
 	// kovan = 'kovan',
 	// goerli = 'goerli',
 	// xdai = 'xdai',

@@ -91,8 +91,14 @@ import {
 } from '$juicebox/models/subgraph-entities/vX/redeem-event';
 import { readNetwork } from '$stores/web3';
 import { get } from 'svelte/store';
-import type { DeployETHERC20ProjectPayerEvent, DeployETHERC20ProjectPayerEventJson } from '$juicebox/models/subgraph-entities/v2/deploy-eth-erc20-project-payer-event';
-import type { ETHERC20ProjectPayer, ETHERC20ProjectPayerJson } from '$juicebox/models/subgraph-entities/v2/eth-erc20-project-payer';
+import type {
+	DeployETHERC20ProjectPayerEvent,
+	DeployETHERC20ProjectPayerEventJson
+} from '$juicebox/models/subgraph-entities/v2/deploy-eth-erc20-project-payer-event';
+import type {
+	ETHERC20ProjectPayer,
+	ETHERC20ProjectPayerJson
+} from '$juicebox/models/subgraph-entities/v2/eth-erc20-project-payer';
 export interface SubgraphEntities {
 	protocolLog: ProtocolLog;
 	projectEvent: ProjectEvent;

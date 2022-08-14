@@ -12,20 +12,20 @@
 	<h1>wtf?</h1>
 	<p>
 		as the name suggests,
-                <a href="https://github.com/tankbottoms/tiles-on-chain">infinite tiles v2 (on-chain)</a> is
-		a reverse-engineered, onchain re-implementation of
-		@peripheralist’s <a href="https://github.com/TileDAO">Tiles</a>. 
-        </p>
+		<a href="https://github.com/tankbottoms/tiles-on-chain">infinite tiles v2 (on-chain)</a> is a
+		reverse-engineered, onchain re-implementation of @peripheralist’s
+		<a href="https://github.com/TileDAO">Tiles</a>.
+	</p>
 	<p>
-		the website implements an nft minting page and a fully featured treasury interface for 
-                contributions, token emissions, and funding cycle 
-                configuration. this makes infinite tiles v2 an attractive dao solution; 
-                offering a completely on-chain nft coupled with advanced treasury management.
+		the website implements an nft minting page and a fully featured treasury interface for
+		contributions, token emissions, and funding cycle configuration. this makes infinite tiles v2 an
+		attractive dao solution; offering a completely on-chain nft coupled with advanced treasury
+		management.
 	</p>
 	<p>
 		the <a href="https://github.com/tankbottoms/tiles-on-chain">wtf-nft</a> and
-		<a href="https://github.com/tankbottoms/tiles-wtf-gallery">wtf-gallery</a> repos 
-                were built to enable a highly curated experience and to decentralize the Juicebox frontend.
+		<a href="https://github.com/tankbottoms/tiles-wtf-gallery">wtf-gallery</a> repos were built to enable
+		a highly curated experience and to decentralize the Juicebox frontend.
 	</p>
         <h1>wtf?</h1>
         <p><b>

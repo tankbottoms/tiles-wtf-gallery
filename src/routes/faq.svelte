@@ -1,7 +1,6 @@
 <section>
 	<h1>wtf?</h1>
 	<p>see <a href="/wtf" target="_blank">wtf</a></p>
-	
 	<h1>purpose?</h1>
 	<ul>
 		<li>implement <a href="https://tiles.art">tiles'</a> visual rendering algorithm in solidity;</li> 
@@ -45,6 +44,7 @@
 	<p>
 
 	</p>
+	<p />
 </section>
 
 <style>
@@ -63,9 +63,8 @@
 		color: rgb(51, 128, 160);
 	}
 
-
-	ul,p {
+	ul,
+	p {
 		font-size: 14px;
 	}
-
 </style>
