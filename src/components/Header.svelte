@@ -165,6 +165,7 @@
 		justify-content: flex-end;
 		span.address {
 			cursor: pointer;
+			color: var(--text-primary);
 		}
 	}
 

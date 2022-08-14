@@ -116,6 +116,10 @@
 		grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
 	}
 
+	h1 {
+		text-align: center;
+	}
+
 	input {
 		text-align: center;
 		display: block;
@@ -170,5 +174,8 @@
 		color: #222;
 		margin-bottom: 80px;
 		text-align: center;
+	}
+	.address {
+		color: var(--text-primary);
 	}
 </style>
