@@ -28,11 +28,6 @@
                 were built to enable a highly curated experience and to decentralize the Juicebox frontend.
 	</p>
         <h1>wtf?</h1>
-	<p>
-		og <a href="https://tiles.art">tiles</a> owners mint for free. in the entertaining
-		event that someone has minted your addresses' tile, you may repossess the tile
-                by minting it anew (affectionately referred to as "seizing").
-	</p>
         <p><b>
                 this project is an homage to the venerable @peripheralist:
                 the genius artist, designer, developer, grapher, person:<br/><br/>
