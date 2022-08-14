@@ -1,7 +1,7 @@
 <section>
 	<h1>wtf?</h1>
 	<p>see <a href="/wtf" target="_blank">wtf</a></p>
-	<h1>purpose?</h1>
+	<br/><h1>purpose?</h1>
 	<ul>
 		<li>
 			implement <a href="https://tiles.art">tiles'</a> visual rendering algorithm in solidity;
@@ -11,11 +11,10 @@
 			self-host a <a href="https://juicebox.money/v2/p/41" target="_blank">juicebox treasury</a>.
 		</li>
 	</ul>
-	<br />
-	<h1>where does the money go?</h1>
+	<br/><h1>where does the money go?</h1>
 	<p>to encourage and reward early juicebox community members, projects, and builders.</p>
 
-	<h1>
+	<br/><h1>
 		do owners of <a href="https://twitter.com/peripheralist">@Peripheralist's</a> original
 		<a
 			href="https://etherscan.io/address/0x64931F06d3266049Bf0195346973762E6996D764"
@@ -30,9 +29,9 @@
 	</h1>
 	<p>Yes, very astute question.</p>
 
-	<h1>how are v2 tiles priced?</h1>
+	<br/><h1>how are v2 tiles priced?</h1>
 	<p>mints start at 0.0001 ETH. every 512 mints, the price doubles.</p>
-	<h1>any fun facts?</h1>
+	<br/><h1>any fun facts?</h1>
 	<p>yes.</p>
 	<ol>
 		<li>
@@ -53,7 +52,7 @@
 			>.
 		</li>
 	</ol>
-	<h1>what are the license terms of the source code for the contracts and the website?</h1>
+	<br/><h1>what are the license terms of the source code for the contracts and the website?</h1>
 	<p>
 		tiles.wtf and its source code are under the <a
 			href="https://github.com/tankbottoms/tiles-wtf-gallery/blob/main/LICENSE.md"
