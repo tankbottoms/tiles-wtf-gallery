@@ -6,31 +6,33 @@
 	import { querySubgraph } from '$juicebox/utils/graph';
 	import { onMount } from 'svelte';
 	import type { DistributeReservedTokensEvent } from '$juicebox/models/subgraph-entities/v2/distribute-reserved-tokens-event';
-	import { formatWad } from '$juicebox/utils/formatNumber';
 	import EnsOrAddress from '../EnsOrAddress.svelte';
 	import Popover from '../Popover.svelte';
+	import EthAmount from '../ETHAmount.svelte';
+	import { formatWad } from '$juicebox/utils/formatNumber';
 
 	export let event: Partial<DistributeReservedTokensEvent>;
 
 	let events = [];
 
+	// TODO: come back here after feedback from Peel.
 	async function loadData() {
 		events = await querySubgraph({
-			entity: 'distributeToReservedTokenSplitEvent',
-			keys: ['id', 'timestamp', 'txHash', 'beneficiary', 'tokenCount', 'projectId'],
+			entity: 'distributeToPayoutSplitEvent',
+			keys: ['id', 'timestamp', 'txHash', 'amount', 'beneficiary', 'splitProjectId'],
 			orderDirection: 'desc',
-			orderBy: 'tokenCount',
+			orderBy: 'amount',
 			where: event?.id
 				? {
-						key: 'distributeReservedTokensEvent',
+						key: 'distributePayoutsEvent',
 						value: event.id
 				  }
 				: undefined
 		});
 	}
 
-	onMount(async () => {
-		await loadData();
+	onMount(() => {
+		loadData();
 	});
 </script>
 
@@ -47,30 +49,33 @@
 					</p>
 				{/if}
 			{/each}
-			{#if event.beneficiaryTokenCount}
-				<EnsOrAddress address={event.beneficiary} />
-			{/if}
+			<div class="">
+				{#if event.beneficiary}
+					<EnsOrAddress address={event.beneficiary} />
+				{/if}
+			</div>
 		</div>
 	</div>
 	<div slot="right">
-		{#if event.timestamp}
-			<Popover>
-				<span slot="content" class="utc">{timestampToUTC(event.timestamp * 1000)}</span>
-				{formatHistoricalDate(event.timestamp * 1000)}
-			</Popover>
-		{/if}
-		<p>
+		<p class="timestamp">
+			{#if event.timestamp}
+				<Popover>
+					<span slot="content" class="utc">{timestampToUTC(event.timestamp * 1000)}</span>
+					{formatHistoricalDate(event.timestamp * 1000)}
+				</Popover>
+			{/if}
 			<EtherscanLink value={event.txHash} type="tx" />
 		</p>
 		<p class="timestamp">called by <EnsOrAddress address={event.caller} /></p>
+		<!-- TODO: give a little more space -->
 		{#each events as e}
 			<p>
-				{formatWad(e.tokenCount, { precision: 2 })}
+				<EthAmount amount={e.amount} precision={4} />
 			</p>
 		{/each}
 		{#if event.beneficiaryTokenCount}
 			<p>
-				{formatWad(event.beneficiaryTokenCount)}
+				{formatWad(event.beneficiaryTokenCount)} tokens
 			</p>
 		{/if}
 	</div>

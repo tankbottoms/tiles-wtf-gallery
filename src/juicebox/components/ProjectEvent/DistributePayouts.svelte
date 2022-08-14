@@ -31,19 +31,7 @@
 	}
 
 	onMount(() => {
-		// TODO: this is mock data to work with the ui towards, don't forget to remove
-		// events = loadData()
-		// TODO: move all mock data to data/mock
-		events = [
-			{
-				id: '2-17-0xd9e9046f56adbaea501df993577148d2b259fb1f219eb43826a92b848662f931-37',
-				timestamp: 1652133874,
-				txHash: '0xd9e9046f56adbaea501df993577148d2b259fb1f219eb43826a92b848662f931',
-				amount: '204878048780487804',
-				beneficiary: '0x7a9ee64f2cd9c215bd0f46ef2a11b4d0dd60a890',
-				splitProjectId: 0
-			}
-		];
+		loadData();
 	});
 </script>
 
@@ -76,6 +64,7 @@
 			<EtherscanLink value={event.txHash} type="tx" />
 		</p>
 		<p class="timestamp">called by <EnsOrAddress address={event.caller} /></p>
+		<!-- TODO: give a little more space -->
 		{#each events as e}
 			<p>
 				<ETHAmount amount={e.amount} precision={4} />
