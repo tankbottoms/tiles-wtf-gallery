@@ -53,7 +53,7 @@
 <footer>
 	<div class="center">
 		<div class="link">
-			<!--<a href="https://info.juicebox.money/tos">Terms of service</a>				-->
+			<a href="/tos">Terms of service</a>			
 		</div>
 	</div>
 </footer>
