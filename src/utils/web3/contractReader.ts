@@ -3,6 +3,8 @@ import { provider } from '$stores/web3';
 import { ethers, type ContractInterface, type ContractTransaction } from 'ethers';
 import Tiles from '$deployments/Tiles';
 import { parseCachedData, parseContractResponse } from '../cache';
+import { bind, openModal } from '$juicebox/components/Modal.svelte';
+import PendingTransaction from '$juicebox/components/PendingTransaction.svelte';
 
 const etherscanKey = import.meta.env.VITE_ETHERSCAN_API_KEY;
 
@@ -78,7 +80,8 @@ export async function writeContract(
 	contractName: keyof typeof contracts,
 	functionName: string,
 	args = [],
-	opts = {}
+	opts = {},
+	shouldOpenModal = true
 ): Promise<ContractTransaction> {
 	const _provider = provider.get();
 	if (contracts[contractName][readNetwork.get().alias]) {
@@ -87,7 +90,16 @@ export async function writeContract(
 			contracts[contractName].abi,
 			_provider.getSigner()
 		);
-		return await contract[functionName](...args, opts);
+		const txnResponse = await contract[functionName](...args, opts);
+		if (shouldOpenModal) {
+			openModal(
+				bind(PendingTransaction, {
+					txnResponse,
+					functionName
+				})
+			);
+		}
+		return txnResponse;
 	} else {
 		throw Error(`${contractName}: deployment not found on ${readNetwork.get().alias}`);
 	}

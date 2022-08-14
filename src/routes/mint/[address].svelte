@@ -9,7 +9,6 @@
 	import { downloadFile } from '$utils/file';
 	import { TILE_BASE_PRICE, TILE_MULTIPLIER, TILE_TIER_SIZE } from '$constants/tile';
 	import { pageReady, whenPageReady } from '$stores';
-	import { txnResponse, methodName } from '$components/PendingTxn.svelte';
 	import { errorMessage } from '$components/ErrorModal.svelte';
 	import { parseEther } from 'ethers/lib/utils.js';
 	import { createCustomNotification } from '$utils/notification';
@@ -53,20 +52,17 @@
 		try {
 			if (isAvailable === Available.IS_AVAILABLE) {
 				if ($page.params.address === $connectedAccount) {
-					$methodName = 'Mint';
-					$txnResponse = await writeContract('Tiles', 'mint', [], { value: price });
-					await $txnResponse?.wait();
+					const txnResponse = await writeContract('Tiles', 'mint', [], { value: price });
+					await txnResponse?.wait();
 				} else {
-					$methodName = 'Grab';
-					$txnResponse = await writeContract('Tiles', 'grab', [address], {
+					const txnResponse = await writeContract('Tiles', 'grab', [address], {
 						value: price
 					});
-					await $txnResponse?.wait();
+					await txnResponse?.wait();
 				}
 			} else if (isAvailable === Available.CAN_SEIZE) {
-				$methodName = 'Seize';
-				$txnResponse = await writeContract('Tiles', 'seize', [], { value: price });
-				await $txnResponse?.wait();
+				const txnResponse = await writeContract('Tiles', 'seize', [], { value: price });
+				await txnResponse?.wait();
 			}
 			isAvailable = Available.NOT_AVAILABLE;
 			isAvailable = await checkAvailability(address);
