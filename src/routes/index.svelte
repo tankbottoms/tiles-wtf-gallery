@@ -53,7 +53,7 @@
 <footer>
 	<div class="center">
 		<div class="link">
-			<a href="/tos">terms of sale</a>			
+			<a href="/tos">terms of sale</a>
 		</div>
 	</div>
 </footer>
