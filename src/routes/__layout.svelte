@@ -6,7 +6,9 @@
 	import Intl from '$juicebox/provider/Intl.svelte';
 	import { notify } from '$utils/notification';
 	import { loadLocale } from '$utils/LanguageProvider';
+	import { logInfiteTilesAscii } from '$utils/log';
 
+	onMount(logInfiteTilesAscii);
 	onMount(async () => {
 		await loadLocale();
 		notify.set(Notify({}));
