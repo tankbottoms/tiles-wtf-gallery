@@ -91,7 +91,7 @@ ownership of such entity.
 
 2.1. Grants
 
-Each Contributor hereby grants You a **limited world-wide, royalty-free,
+Each Contributor hereby grants You a **limited, world-wide, royalty-free,
 non-exclusive license**:
 
 **(a) under intellectual property rights (other than patent or trademark)
@@ -99,25 +99,22 @@ Licensable by such Contributor to use, reproduce, make available,
 modify, display, perform, distribute, and otherwise exploit its
 Contributions, with Modifications, as part of a Larger Work; provided you:**
 
-> **(i) do not compete with**
-
-> > - juicebox.money,
-> > - juicebox.wtf,
-> > - affiliates of the above,
-
-or any development activities affiliated with
-
-> > - movedao.eth; and\*\*
-
-> **(ii) do not make any modifications and/or enhancements unless it is for a public good, or non-profit, or for profit for an individual artist, (any special configuration which is not explicitly stated, you may contact m@tankbottoms.xyz), however, this license does not extend to parties seeking to commercially exploit; generally,**
-
-> **(iii) this license is not granted to any party for any commercial purpose within the most liberal interpretation of following field of use - a decentralized application, or application of any shape or platform, or website site which a) transacts cryptocurrency payments for the purposes of fundraising, b) pooling contributions; and**
-
-> **(iii) use of this codebase requires the any proceeds cryptocurrency to be routed to a https://juicebox.money or https://juicebox.wtf treasury; and**
-
-> **(iv) you agree to the [terms of services](https://gov.move.xyz/tos) in its entirety, and specifically Sections titled Security Law Matters, OFAC Compliance; and**
-
-> **(v) you affirm you are not mean; and**
+> **(i) do not use the Contributions to engage in, directly or indirectly, or participate in the operation of, any business which is competing with**
+> - juicebox.money,
+> - juicebox.wtf,
+> - affiliates of the above,
+> or any development activities affiliated with
+> - movedao.eth; and
+>
+> **(ii) do not make any modifications and/or enhancements unless it is for a public good, a non-profit purpose, or a for-profit purpose for an individual artist, (for any special configuration which is not explicitly stated, you may contact m@tankbottoms.xyz, who, notwithstanding any provision in the License to the contrary, which are hereby pro tanto superseded and modified or replaced mutatis mutandis to the extent of any inconsistency, may grant written exemptions to section 2.1.ii of the License); however, this license does not extend to parties seeking to commercially exploit; generally,**
+>
+> **(iii) this license is not granted to any party for any commercial purpose within the most liberal interpretation of the following field of use - a decentralized application, or application of any shape or platform, or website site which a) transacts cryptocurrency payments for the purposes of fundraising; or b) pools contributions; and**
+>
+> **(iv) use of this codebase requires that any cryptocurrency proceeds must be routed to a https://juicebox.money or https://juicebox.wtf treasury; and**
+>
+> **(iv) you agree to the terms of service currently available at https://gov.move.xyz/tos in their entirety, including Sections titled "Security Law Matters", "OFAC Compliance"; and**
+>
+> **(v) you affirm you are not mean.**
 
 (b) under Patent Claims of such Contributor to make, use, sell, offer
 for sale, have made, import, and otherwise transfer either its
