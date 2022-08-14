@@ -69,8 +69,6 @@
 	}
 
 	$: $project.events = events;
-
-	$: console.log(events);
 </script>
 
 <section>
