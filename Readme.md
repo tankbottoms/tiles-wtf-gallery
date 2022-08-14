@@ -18,4 +18,4 @@ npm run preview
 
 ### License
 
-For project which use the Juicebox Protocol to route payments. See the [fine print.](./LICENSE)
+For projects which route payments to the juicebox protocol. See the [fine print.](./LICENSE)
