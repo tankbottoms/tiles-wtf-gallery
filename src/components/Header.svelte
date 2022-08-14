@@ -83,7 +83,7 @@
 				style="user-select: none"
 				bind:this={buttonElement}
 			>
-				{getTruncatedAddress($connectedAccount)}({$readNetwork.alias})
+				<span class="address">{getTruncatedAddress($connectedAccount)}({$readNetwork.alias})</span>
 				{#if dropdownOpened}
 					<ul class="dropdown">
 						<li>{getTruncatedAddress($connectedAccount)}</li>
@@ -163,6 +163,9 @@
 	.right {
 		position: relative;
 		justify-content: flex-end;
+		span.address {
+			cursor: pointer;
+		}
 	}
 
 	img {
