@@ -111,9 +111,9 @@ Contributions, with Modifications, as part of a Larger Work; provided you:**
 > **(iii) this license is not granted to any party for any commercial purpose within the most liberal interpretation of the following field of use - a decentralized application, or application of any shape or platform, or website site which a) transacts cryptocurrency payments for the purposes of fundraising; or b) pools contributions; and**
 >
 > **(iv) use of this codebase requires that any cryptocurrency proceeds must be routed to a https://juicebox.money or https://juicebox.wtf treasury; and**
-
+>
 > **(iv) you agree to the terms of service currently available at https://gov.move.xyz/tos in their entirety, including Sections titled "Security Law Matters", "OFAC Compliance"; and**
-
+>
 > **(v) you affirm you are not mean.**
 
 (b) under Patent Claims of such Contributor to make, use, sell, offer
