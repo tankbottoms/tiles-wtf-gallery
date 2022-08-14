@@ -287,23 +287,10 @@
 			background-color: var(--background-l0);
 			width: 100%;
 		}
-		// .inputs {
-		// 	display: flex;
-		// 	gap: 16px;
-
-		// 	.dropdown {
-		// 		min-width: 100px;
-		// 		flex-shrink: 1;
-		// 	}
-		// }
 
 		.button {
 			display: flex;
 			justify-content: flex-end;
-		}
-
-		.link {
-			color: var(--text-action-primary);
 		}
 
 		div[slot='addon'] {
