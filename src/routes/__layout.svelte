@@ -30,7 +30,7 @@
 	}
 
 	:root {
-		--background-l0: #fefdfb;
+		--background-l0: #ffffff;
 		--background-l1: #e7e3dc;
 		--background-l2: #f3f1ec;
 		--background-disabled: #00000018;
