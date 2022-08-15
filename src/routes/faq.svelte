@@ -75,7 +75,7 @@
 		margin: 10vh auto;
 	}
 	h1 {
-		font-size: 20px;
+		font-size: 18px;
 	}
 
 	h2 {
@@ -85,6 +85,6 @@
 
 	ul,
 	p {
-		font-size: 14px;
+		font-size: 12px;
 	}
 </style>

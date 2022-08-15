@@ -13,25 +13,20 @@
 	<p>
 		as the name suggests,
 		<a href="https://github.com/tankbottoms/tiles-on-chain">infinite tiles v2</a> is a
-		reverse-engineered, on-chain re-implementation of @peripheralist’s
-		<a href="https://github.com/TileDAO">Tiles</a>.
+		reversed-engineered re-implementation of @peripheralist’s
+		<a href="https://github.com/TileDAO">Tiles</a> in solidity.
 	</p>
 	<p>
-		the website implements an nft minting page and a fully featured treasury interface. this makes infinite tiles v2 an
-		attractive dao solution; offering an nft minting experience coupled with advanced treasury
-		management.
+		the website faciliates the on-chain nft minting operation as well as management of the Tiles v2 Juicebox treasury. the website was implemented with svelte in typescript.		
 	</p>
 	<p>
-		the <a href="https://github.com/tankbottoms/tiles-on-chain">wtf-nft</a> and
-		<a href="https://github.com/tankbottoms/tiles-wtf-gallery">wtf-gallery</a> github repos were built to enable
-		a highly curated experience and to decentralize the <a href="https://snapshot.org/#/jbdao.eth/proposal/0x122ec83036d4ed2379c98ed6c566666256169aac1ee4316f60da24bd768c7ff6" target="_blank">Juicebox frontend</a>.
+		the <a href="https://github.com/tankbottoms/tiles-on-chain">tiles-v2-nft</a> and
+		<a href="https://github.com/tankbottoms/tiles-wtf-gallery">tiles-v2-gallery</a> github repos together provide an example solution for a typical decentralized <a href="https://snapshot.org/#/jbdao.eth/proposal/0x122ec83036d4ed2379c98ed6c566666256169aac1ee4316f60da24bd768c7ff6" target="_blank">juicebox application</a>.  they are intended to starting points for anyone seeking to deploy an algorithmic nft solution with a community treasury management.
 	</p>
-	<h1>wtf?</h1>
+	<h1>wtf, more nipple!</h1>
 	<p>
 		<b>
-			this project is an homage to the venerable @peripheralist: the genius artist, designer,
-			developer, grapher, person:<br /><br />
-			<i>"all hail @peripheralist,"</i> thought everyone,
+			this project is an homage to the venerable @peripheralist: the genius artist, designer, developer, grapher, person:<br /><i>"all hail @peripheralist,"</i> thought everyone,
 			<i>"we worship the ground you walk on."</i>
 		</b>
 	</p>
