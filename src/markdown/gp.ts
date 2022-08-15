@@ -4,7 +4,7 @@ export default `
 
 ## Definitions.
 
--   The [definitions](./definitions) section of the associated document is included in its entirety herein. Any terms which are contained herein supersede any definition contained in the associated document.
+-   The [definitions](definitions) section of the associated document is included in its entirety herein. Any terms which are contained herein supersede any definition contained in the associated document.
 
 -   **"Service Provider"** means the Person or Persons appointed by the DAO to perform administrative services, responsibilities, and duties to carry on the DAO's operations. The initial Service Provider shall be [dao-lawfirm.eth](https://etherscan.io/address/0x752515a3a1091b9f1c04416cf79d1f14d2340085), its predecessor entities, or any future entity of [dao-lawfirm.eth](https://etherscan.io/address/0x752515a3a1091b9f1c04416cf79d1f14d2340085).
 

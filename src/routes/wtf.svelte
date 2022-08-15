@@ -22,13 +22,16 @@
 	<p>
 		the <a href="https://github.com/tankbottoms/tiles-on-chain">tiles-v2-nft</a> and
 		<a href="https://github.com/tankbottoms/tiles-wtf-gallery">tiles-v2-gallery</a> github repos together provide an example solution for a typical decentralized <a href="https://snapshot.org/#/jbdao.eth/proposal/0x122ec83036d4ed2379c98ed6c566666256169aac1ee4316f60da24bd768c7ff6" target="_blank">juicebox application</a>.  they are intended to starting points for anyone seeking to deploy an algorithmic nft solution with a community treasury management.
-	</p>
-	<h1>wtf, more nipple!</h1>
+	</p>	
 	<p>
 		<b>
 			this project is an homage to the venerable @peripheralist: the genius artist, designer, developer, grapher, person:<br /><i>"all hail @peripheralist,"</i> thought everyone,
 			<i>"we worship the ground you walk on."</i>
 		</b>
+	</p>
+	<h1>unincorporated nonprofit</h1>
+	<p>
+		infinite tiles v2 operates as a DAO using the juicebox protocol as its treasury. in meatspace, the dao is considered an unincorporated nonprofit, thus we have the associated guiding principals and have registered, and intend to open a bank account.	
 	</p>
 	<a href="/gp">guiding principals</a>
 </section>
