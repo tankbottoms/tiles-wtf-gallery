@@ -61,9 +61,10 @@
 			}
 		}
 	}
+	let innerWidth = 0;
 </script>
 
-<svelte:window on:click={handleWindowClick} />
+<svelte:window on:click={handleWindowClick} bind:innerWidth />
 
 <header>
 	<div class="left">
@@ -71,9 +72,17 @@
 			<img src="/favicon.svg" alt="Logo" />
 		</a>
 		<a class="primary-text" href="/history?{$readNetwork ? `network=${$readNetwork?.alias}` : ''}">
-			{count} minted
+			{#if innerWidth < 650}
+				{count}
+			{:else}
+				{count} minted
+			{/if}
 		</a>
-		// current price: {price} ETH
+		{#if innerWidth < 650}
+			// {price}
+		{:else}
+			// current price: {price} ETH
+		{/if}
 	</div>
 
 	<div class="right">
@@ -83,7 +92,10 @@
 				style="user-select: none"
 				bind:this={buttonElement}
 			>
-				<span class="address">{getTruncatedAddress($connectedAccount)}({$readNetwork.alias})</span>
+				<span class="address">
+					<span>{getTruncatedAddress($connectedAccount)}</span>
+					{#if innerWidth >= 650}<span>({$readNetwork.alias})</span>{/if}
+				</span>
 				{#if dropdownOpened}
 					<ul class="dropdown">
 						<li>{getTruncatedAddress($connectedAccount)}</li>
@@ -117,6 +129,7 @@
 		list-style: none;
 		padding: 0;
 		box-shadow: 0 0 5px #eee;
+		background: var(--background-l0);
 	}
 
 	.dropdown li {
@@ -166,6 +179,7 @@
 		span.address {
 			cursor: pointer;
 			color: var(--text-primary);
+			display: inline-flex;
 		}
 	}
 
