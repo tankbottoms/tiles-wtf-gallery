@@ -30,6 +30,7 @@
 			<i>"we worship the ground you walk on."</i>
 		</b>
 	</p>
+	<a href="/gp">guiding principals</a>
 </section>
 
 <style>

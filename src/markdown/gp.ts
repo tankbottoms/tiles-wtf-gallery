@@ -34,38 +34,66 @@ The DAO is not intended to be or become an entity required to register as an “
 
 ## 2. Membership; Governance Rights and Tokens; Limitations.
 
+This section is intentionally blank.
+
 ## 3. Liability.
+
+This section is intentionally blank.
 
 ## 4. Admission of Additional Members.
 
+This section is intentionally blank.
+
 ## 5. Management.
+
+This section is intentionally blank.
 
 ## 6. Withdrawal Rights; Compulsory Withdrawal; Non-Disparagement.
 
+This section is intentionally blank.
+
 ## 7. Fees and Expenses.
+
+This section is intentionally blank.
 
 ## 8. Distributions; Dividends; Compensation.
 
+This section is intentionally blank.
+
 ## 9. Dissolution.
+
+This section is intentionally blank.
 
 ## 10. Limitations on Transfers.
 
+This section is intentionally blank.
+
 ## 11. Books and Records; Accounting and Tax Matters.
+
+This section is intentionally blank.
 
 ## 12. Waiver of Fiduciary Duties.
 
+This section is intentionally blank.
+
 ## 13. Intellectual Property Rights.
+
+This section is intentionally blank.
 
 ## 14. Derivative Matters.
 
+This section is intentionally blank.
+
 ## 15. Amendments.
+
+This section is intentionally blank.
 
 ## 16. Service Providers.
 
+This section is intentionally blank.
+
 ## 17. General Provisions.
 
-[^1]: The maximum number of 115792089237316195423570985008687907853269984665640564039457584007913129639935
-[^2]: Gnosis Multi-Signature Wallet, eth:0x4493287882f75dFFcdB40FD41d38d6308Fb8c181
-[^3]: The DAO is an unincorporated nonprofit association in the state of Delaware.
+This section is intentionally blank.
 
 `;
