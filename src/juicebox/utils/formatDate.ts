@@ -3,7 +3,7 @@ import type { BigNumberish } from 'ethers';
 // TODO can't get macro to work outside of svelte components
 // import { t } from '@lingui/macro'
 
-import { format, formatDistanceToNow, parseISO } from 'date-fns';
+import { format, formatDistanceToNow } from 'date-fns';
 
 // TODO: remove moment from dependancies
 import moment from 'moment';
