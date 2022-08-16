@@ -15,6 +15,7 @@
 	import { connectedAccount } from '$stores/web3';
 	import { bind, openModal } from '../Modal.svelte';
 	import PendingTransaction from '../PendingTransaction.svelte';
+	import { startConfetti } from '$utils/confetti';
 
 	const project = getContext('PROJECT') as Store<V2ProjectContextType>;
 
@@ -57,6 +58,7 @@
 			);
 			const txnResult = await txnResponse.wait();
 			console.log(txnResult);
+			startConfetti();
 		}
 	}
 

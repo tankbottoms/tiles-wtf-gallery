@@ -21,6 +21,7 @@
 	import { uploadProjectMetadata } from '$juicebox/utils/ipfs';
 	import { JUICEBOX_MONEY_METADATA_DOMAIN } from '$juicebox/constants/v2/metadataDomain';
 	import EnsOrAddress from '$juicebox/components/EnsOrAddress.svelte';
+	import { startConfetti } from '$utils/confetti';
 
 	export let balance = 0;
 	export let token = '';
@@ -58,6 +59,7 @@
 		);
 		const txnResult = await txnResponse.wait();
 		console.log(txnResult);
+		startConfetti();
 	}
 
 	async function addToBalance() {
@@ -90,6 +92,7 @@
 		);
 		const txnResult = await txnResponse.wait();
 		console.log(txnResult);
+		startConfetti();
 	}
 
 	function setMax() {

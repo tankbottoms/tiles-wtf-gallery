@@ -28,6 +28,7 @@
 	import PendingTransaction from '../PendingTransaction.svelte';
 	import { connectedAccount } from '$stores/web3';
 	import EnsOrAddress from '../EnsOrAddress.svelte';
+	import { startConfetti } from '$utils/confetti';
 
 	export let close: () => {};
 	let amount: number = 0;
@@ -92,6 +93,9 @@
 				txnResponse
 			})
 		);
+
+		await txnResponse.wait();
+		startConfetti();
 	}
 </script>
 

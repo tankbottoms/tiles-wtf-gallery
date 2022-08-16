@@ -111,8 +111,8 @@ export async function readContract(
 ) {
 	console.log(contractName, functionName, args);
 
-	const contractAddress = contracts[get(readNetwork).alias][contractName].address;
-	const abi = contracts[get(readNetwork).alias][contractName].abi;
+	const contractAddress = contracts[readNetwork.get().alias][contractName].address;
+	const abi = contracts[readNetwork.get().alias][contractName].abi;
 	return await readContractByAddress(contractAddress, abi, functionName, args, cached);
 }
 
@@ -124,8 +124,8 @@ export async function writeContract(
 ): Promise<ContractTransaction> {
 	const _provider = provider.get();
 	const contract = new ethers.Contract(
-		contracts[get(readNetwork).alias][contractName].address,
-		contracts[get(readNetwork).alias][contractName].abi,
+		contracts[readNetwork.get().alias][contractName].address,
+		contracts[readNetwork.get().alias][contractName].abi,
 		_provider.getSigner()
 	);
 	return await contract[functionName](...args, opts);

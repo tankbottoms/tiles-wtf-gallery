@@ -23,6 +23,7 @@
 	import { randomBytes } from 'ethers/lib/utils.js';
 	import { bind, openModal } from '../Modal.svelte';
 	import PendingTransaction from '../PendingTransaction.svelte';
+	import { startConfetti } from '$utils/confetti';
 
 	const project = getContext('PROJECT') as Store<V2ProjectContextType>;
 	const userTokenBalance = getContext('USER_TOKEN_BALANCE') as Store<UserTokenBalanceContext>;
@@ -73,6 +74,7 @@
 		);
 		const txnResult = await txnResponse.wait();
 		console.log(txnResult);
+		startConfetti();
 	}
 	function setMax() {
 		amount = Number(fromWad(totalBalance));

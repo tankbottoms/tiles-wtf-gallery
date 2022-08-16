@@ -26,6 +26,7 @@
 	import { V2ContractName } from '$juicebox/models/v2/contracts';
 	import Textarea from './Textarea.svelte';
 	import Expandable from './Expandable.svelte';
+	import { startConfetti } from '$utils/confetti';
 
 	const projectContext = getContext('PROJECT') as Store<V2ProjectContextType>;
 
@@ -85,6 +86,8 @@
 					functionName: 'pay'
 				})
 			);
+			await txnResponse.wait();
+			startConfetti();
 		} catch (error) {
 			console.error(error);
 		}

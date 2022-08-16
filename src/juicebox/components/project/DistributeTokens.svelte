@@ -15,6 +15,7 @@
 	import PendingTransaction from '../PendingTransaction.svelte';
 	import { connectedAccount } from '$stores/web3';
 	import EnsOrAddress from '../EnsOrAddress.svelte';
+	import { startConfetti } from '$utils/confetti';
 
 	export let close: () => {};
 	export const isPreview = !!getContext('IS_PREVIEW') as boolean;
@@ -39,6 +40,9 @@
 				txnResponse
 			})
 		);
+
+		await txnResponse.wait();
+		startConfetti();
 	}
 </script>
 

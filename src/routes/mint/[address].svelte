@@ -14,6 +14,7 @@
 	import { parseEther } from 'ethers/lib/utils.js';
 	import { createCustomNotification } from '$utils/notification';
 	import Modal from '$juicebox/components/Modal.svelte';
+	import { startConfetti } from '$utils/confetti';
 
 	enum Available {
 		IS_AVAILABLE = 0,
@@ -68,6 +69,7 @@
 			}
 			isAvailable = Available.NOT_AVAILABLE;
 			isAvailable = await checkAvailability(address);
+			startConfetti();
 		} catch (error) {
 			createCustomNotification({
 				type: 'error',
@@ -94,7 +96,7 @@
 	async function init() {
 		loading = true;
 		await whenPageReady();
-		tile = generateTile(address);		
+		tile = generateTile(address);
 		console.log('Init subscribing...');
 		// Returning so it gets unsubscribed when component is destroyed
 		return readNetwork.subscribe(async () => {
@@ -148,7 +150,7 @@
 		{/if}
 	{/if}
 </section>
-	
+
 <button class="download" on:click={() => downloadFile(tile, `${address}.svg`, 'image/svg')}>
 	Download SVG
 </button>
@@ -183,5 +185,4 @@
 		bottom: 20px;
 		right: 20px;
 	}
-	
 </style>
