@@ -113,7 +113,8 @@
 			display: flex;
 			flex-direction: column;
 			max-width: 100vw;
-			h1 {
+			h1,
+			.heading {
 				font-size: 15px;
 			}
 			p {
