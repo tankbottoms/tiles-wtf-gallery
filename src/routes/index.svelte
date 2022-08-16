@@ -3,6 +3,7 @@
 	import { onMount } from 'svelte';
 	import { goto } from '$app/navigation';
 	import { readNetwork } from '$stores/web3';
+	import { getTruncatedAddress } from '$juicebox/components/Address.svelte';
 
 	let tile = '';
 	let address = '';
@@ -19,13 +20,24 @@
 			current++;
 		}, 1500);
 	});
+	let innerWidth = 0;
 </script>
 
-<main>
-	<div class="tiles-container" on:click={() => goto(`mint/${address}`)}>
+<svelte:window bind:innerWidth />
+
+<main class:mobile={innerWidth < 650}>
+	<div
+		class="tiles-container"
+		on:click={() => goto(`mint/${address}`)}
+		style="transform: scale({Math.min(1, (innerWidth - 50) / 360)});"
+	>
 		<div id="tiles">
-			{@html tile}
-			{address}
+			<div class="tile">
+				{@html tile}
+			</div>
+			<div>
+				{address}
+			</div>
 		</div>
 		<p id="address" />
 	</div>
@@ -50,7 +62,7 @@
 	</section>
 </main>
 
-<style>
+<style lang="scss">
 	main {
 		background: white;
 		display: grid;
@@ -61,36 +73,51 @@
 		max-width: 1000px;
 		margin: 0 auto;
 		text-align: center;
-	}
-	h1 {
-		font-size: 20px;
-	}
+		h1 {
+			font-size: 20px;
+		}
 
-	a {
-		font-size: 14px;
-		color: black;
-		text-decoration: none;
-		position: relative;
-		border-bottom: 3px solid gold;
-		margin: 0px 10px;
-	}
+		a {
+			font-size: 14px;
+			color: black;
+			text-decoration: none;
+			position: relative;
+			border-bottom: 3px solid gold;
+			margin: 0px 10px;
+		}
 
-	a:hover {
-		border-bottom: 3px solid black;
-	}
+		a:hover {
+			border-bottom: 3px solid black;
+		}
 
-	p {
-		font-size: 16px;
-		margin: 30px;
-	}
+		p {
+			font-size: 16px;
+			margin: 30px 0;
+		}
 
-	.group {
-		margin-top: 30px;
-		height: 60px;
-		display: flex;
-		flex-direction: column;
-		justify-content: space-between;
-		margin-bottom: 20px;
-		font-weight: 600;
+		.group {
+			margin-top: 30px;
+			height: 60px;
+			display: flex;
+			flex-direction: column;
+			justify-content: space-between;
+			margin-bottom: 20px;
+			font-weight: 600;
+		}
+		&.mobile {
+			display: flex;
+			flex-direction: column;
+			max-width: 100vw;
+			h1 {
+				font-size: 15px;
+			}
+			p {
+				font-size: 10px;
+				margin: 16px 0;
+			}
+			a {
+				font-size: 10px;
+			}
+		}
 	}
 </style>

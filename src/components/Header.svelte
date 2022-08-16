@@ -93,7 +93,7 @@
 				bind:this={buttonElement}
 			>
 				<span class="address">
-					<span>{getTruncatedAddress($connectedAccount)}</span>
+					<span>{getTruncatedAddress($connectedAccount, 5, 2)}</span>
 					{#if innerWidth >= 650}<span>({$readNetwork.alias})</span>{/if}
 				</span>
 				{#if dropdownOpened}
@@ -124,7 +124,7 @@
 <style lang="scss">
 	.dropdown {
 		position: absolute;
-		left: 0;
+		right: 2rem;
 		top: 100%;
 		list-style: none;
 		padding: 0;
