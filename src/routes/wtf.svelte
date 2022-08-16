@@ -45,11 +45,11 @@
 	<p>
 		<a href="https://github.com/tankbottoms/tiles-on-chain">infinite tiles v2</a> is a
 		reversed-engineered implementation of @peripheralist’s
-		<a href="https://github.com/TileDAO">Tiles</a>, but without the api-service. the entire tile is
+		<a href="https://github.com/TileDAO">Tiles</a>, without any api-service. the entire svg tile is
 		created in solidity. 
 	</p>
 	<p>
-		the tile mint website and the <a href="/dao">tiles v2 juicebox treasury</a> were implemented with
+		this minting and <a href="/dao">tiles juicebox treasury</a> experience were implemented with
 		svelte in typescript.
 	</p>
 	<p>
@@ -61,31 +61,29 @@
 			target="_blank">juicebox application</a
 		>.
 	</p>
-	<p>
-		<b>
+	<p>		
 			this project is an homage to the venerable @peripheralist: the genius artist, designer,
-			developer, grapher, person. <i>"all hail @peripheralist,"</i> <br />
-		</b>
+			developer, grapher, person. <i>"all hail @peripheralist,"</i> <br />		
 	</p>
 	<br />
 	<hr />
 	<br />
-	<h1>unincorporated nonprofit (una)</h1>
+	<h1>unincorporated nonprofit - una</h1>
 	<p>
-		there are enough unique tiles for every eth address; thus it is possible that the una
+		there are enough unique tiles for every ethereum address; thus it is possible that the una
 		recieves funding perpetually.
 	</p>
 	<p>
 		therefore infinite tiles v2 will operates as a DAO using the juicebox protocol. the decision to
-		wrap the DAO with an unincorporated nonprofit was to afford the entity a bank
-		account.
-	</p>
-	<p><a href="/gp">guiding principals</a></p>
+		wrap the DAO with an unincorporated nonprofit was to afford the community a meatspace bank
+		account. the initial <a href="/gp">guiding principals</a> sets forth the terms.
+	</p>	
 	<br />
 	<hr />
 	<br />
-	<h1>gnosis</h1>
-	<p>following signers (of the gnosis 0x4493287882f75dFFcdB40FD41d38d6308Fb8c181) will manage the tiles v2 juicebox project and in turn its treasury.</p>
+	<h1>gnosis </h1>
+	<a href="https://etherscan.io/address/0x4493287882f75dFFcdB40FD41d38d6308Fb8c181">0x4493287882f75dFFcdB40FD41d38d6308Fb8c181</a>
+	<p>following initial gnosis signers will steward the tiles v2 juicebox project, and in turn its treasury</p>
 	<br />
 	<main class:mobile={innerWidth < 650}>
 		<div

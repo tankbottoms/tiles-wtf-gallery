@@ -27,7 +27,7 @@
 	let tile: string;
 	let tileComponent: any;
 	let isAvailable: Available = 0;
-	let availability: 'Available' | 'Not available' = 'Available';
+	let availability: 'available' | 'not available' = 'available';
 	let showInvalidAddress = false;
 
 	let loading = false;
@@ -122,7 +122,6 @@
 
 			pieces.forEach((piece, index) => {
 				const randomSeconds = Math.random() + 2 * 15;
-
 				piece.style.animation = `fade ${randomSeconds}s ease-in-out ${
 					Math.random() * 20
 				}s infinite`;
@@ -177,8 +176,8 @@
 	});
 
 	$: availability = [Available.IS_AVAILABLE, Available.CAN_SEIZE].includes(isAvailable)
-		? 'Available'
-		: 'Not available';
+		? 'available'
+		: 'not available';
 	$: formattedPrice = Number(utils.formatEther(price));
 
 	$: {
@@ -197,7 +196,11 @@
 		</div>
 		<br />
 		<p>{$page.params.address}</p>
-		<p>{loading ? 'Checking availablity...' : availability}</p>
+		<p>{loading ? 'checking availablity...' : availability}
+		{#if availability == 'not available'}
+			- <a href="/mint?{$readNetwork ? `network=${$readNetwork?.alias}` : ''}">generate tiles</a>
+		{/if}
+		</p>
 		{#if $connectedAccount}
 			<button
 				class="mint"
@@ -207,20 +210,20 @@
 					![Available.IS_AVAILABLE, Available.CAN_SEIZE].includes(isAvailable) ||
 					!hasEnoughBalance}
 			>
-				MINT ({formattedPrice} ETH)
+				mint ({formattedPrice} ETH)
 			</button>
 		{:else}
-			<button on:click={() => web3Connect()}>CONNECT WALLET</button>
+			<button on:click={() => web3Connect()}>connect wallet</button>
 		{/if}
 		<br />
 		{#if !hasEnoughBalance}
-			<p>Insufficient balance</p>
+			<p>insufficient balance</p>
 		{/if}
 	{/if}
 </section>
 
 <button class="download" on:click={() => downloadFile(tile, `${address}.svg`, 'image/svg')}>
-	Download SVG
+	download svg
 </button>
 
 <Modal show={$modal} />

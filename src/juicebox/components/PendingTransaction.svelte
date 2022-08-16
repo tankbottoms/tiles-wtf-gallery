@@ -67,18 +67,19 @@
 			{#if tile}
 				<div class="tile">
 					<div>
-						{@html tile}
+						{@html tile}						
 					</div>
-				</div>
+				</div>				
 			{/if}
+			<br />			
 			<div class="row">
-				<Loading size={16} width={20} style="transform: translateY(-5px);margin-left: calc(-20px - 1rem)" />
+				<Loading size={16} width={20} style="transform: translateY(-5px);margin-left: calc(-20px - 1rem)" />				
 				{#if functionName}
 					<h2>
-						<span style="text-transform: capitalize;">
-							{functionName}
+						<span style="text-transform: lowercase;">
+							function:{functionName}
 						</span>
-					</h2>
+					</h2>					
 				{/if}
 			</div>
 			<p><Trans>your transaction has been submitted and is awaiting confirmation.</Trans></p>
