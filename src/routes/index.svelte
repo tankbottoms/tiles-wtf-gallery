@@ -46,7 +46,7 @@
 				infinite (∞) tiles v2
 			</a>
 		</h1>
-		<p>generated from any eth address</p>
+		<p>generated from any ethereum address</p>
 		<p>
 			<a
 				href="https://github.com/tankbottoms/tiles-on-chain/blob/main/contracts/components/TileContentProvider.sol"

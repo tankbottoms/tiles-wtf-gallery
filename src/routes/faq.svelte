@@ -1,20 +1,8 @@
 <section>
-	<h1>wtf?</h1>
-	<p>see <a href="/wtf" target="_blank">wtf</a></p>
-	<br/><h1>overall purpose?</h1>
-	<ol>
-		<li>
-			implement <a href="https://tiles.art">tiles'</a> visual rendering algorithm in solidity;
-		</li>
-		<li>reset and reduce the cost of tiles; and</li>
-		<li>
-			self-host a <a href="https://juicebox.money/v2/p/41" target="_blank">juicebox treasury</a>.
-		</li>
-	</ol>
-	<br/><h1>where does the ETH go?</h1>
-	<p>all proceeds from the tiles v2 purchase are routed to the juicebox treasury. see <a href="/dao">treasury.</a></p>
-	<p>the mechanism of how this operatees is currently under discussion, suggestions welcome.</p>
-	<p>to encourage and reward early juicebox community members, projects, and builders.</p>	
+	<h1>faq</h1>
+
+	<h1>what is the ongoing purpose of the dao?</h1>
+	<p>tbd, however to encourage and reward early juicebox community members, projects, and builders, sounds pretty cool.</p>	
 
 	<br/><h1>what does "grabbing" mean wrt tiles v2?</h1>
 	<p>
@@ -24,7 +12,7 @@
 			target="_blank"
 			>infinite tiles
 		</a>
-		owners mint for free, the contract function is called 
+		owners mint for free; the contract function is called 
 		<a
 			href="https://github.com/tankbottoms/tiles-on-chain/blob/main/contracts/TileNFT.sol#L124"
 			target="_blank">"grabbing"</a
@@ -51,32 +39,31 @@
 				>"seizing"</a
 			>.
 		</li>
-	</ol>
-	<br/>
-	
-		
+	</ol>	
+
+	<br/><h1>how will the treasury be managed?</h1>
+	<p>all proceeds will be transparently managed on <a href="/dao">juicebox.</a>  the gnosis <b>0x4493287882f75dFFcdB40FD41d38d6308Fb8c181</b> will recieve the 
+		juicebox project token. the initial signers are listed in <a href="/wtf">wtf</a>, while membership to the DAO is offerred to anyone who holds tiles2 nft or erc20, the specifics of governance, if any, has not been decided.</p>
+
 	<br/><h1>what are the license terms of the source code for the contracts and the website?</h1>
 	<p>
 		tiles.wtf and its source code are under the <a
 			href="https://github.com/tankbottoms/tiles-wtf-gallery/blob/main/LICENSE.md"
 			target="_blank">we-party license</a
-		>. use of the source code is solely for projects which route their proceeds through a juicebox
+		>. use of the source code is solely for projects which route their proceeds through the juicebox
 		protocol treasury.
-	</p>
-	<p />
-	<p />
+	</p>	
 </section>
 
 <style>
 	section {
-		max-width: 540px;
+		max-width: 600px;
 		padding: 20px 20px 100px;
 		line-height: 1.3;
 		margin: 10vh auto;
 	}
 	h1 {
-		font-size: 18px;
-		color: rgb(51, 128, 160);
+		font-size: 18px;		
 	}
 	
 	p {

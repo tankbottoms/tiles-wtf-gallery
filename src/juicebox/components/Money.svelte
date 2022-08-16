@@ -11,8 +11,8 @@
 	export let formatWad = true;
 	export let precision = 0;
 
-	$: if (typeof amount === 'number') {
-		console.log(amount);
+	$: if (typeof amount === 'number') {		
+		console.log(`amount:${amount}`);
 	}
 </script>
 

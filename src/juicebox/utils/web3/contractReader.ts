@@ -94,7 +94,7 @@ export async function readContractByAddress(
 			if (typeof data !== 'undefined' && data !== null) {
 				return data;
 			}
-		} else console.log('cache miss');
+		} else console.log('readContractByAddr: cache miss');
 	}
 
 	const contract = new ethers.Contract(contractAddress, ABI, getProvider());

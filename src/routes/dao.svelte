@@ -65,7 +65,7 @@
 
 	function checkNetworkId(_chainId: number) {
 		if (Number($readNetwork.id) !== _chainId) {
-			console.log('Network changed', $chainId, 'from', _chainId);
+			console.log('network changed', $chainId, 'from', _chainId);
 			throw {
 				message: `aborting: network was changed (from: ${_chainId} to: ${$chainId})`,
 				errorCode: 'networkChanged'

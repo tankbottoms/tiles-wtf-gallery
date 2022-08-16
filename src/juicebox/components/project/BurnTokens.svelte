@@ -73,7 +73,7 @@
 			})
 		);
 		const txnResult = await txnResponse.wait();
-		console.log(txnResult);
+		console.log(`redeem tokens for eth: ${txnResult}`);
 		startConfetti();
 	}
 	function setMax() {

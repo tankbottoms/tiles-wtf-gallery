@@ -1,7 +1,7 @@
 import confetti from 'canvas-confetti';
 
 export function startConfetti() {
-	const end = Date.now() + 3000;
+	const end = Date.now() + 5000;
 	(function frame() {
 		confetti({
 			particleCount: 5,

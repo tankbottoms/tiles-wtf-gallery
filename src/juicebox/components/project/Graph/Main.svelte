@@ -116,7 +116,7 @@
 			console.log(error);
 			if (loading || !events.length) {
 				loading = false;
-				errorMessage = 'Cannot load data at the moment';
+				errorMessage = 'cannot load data at the moment';
 			} else {
 				console.error(errorMessage);
 			}
