@@ -175,13 +175,13 @@
 		cursor: not-allowed;
 	}
 
-	.fineprint {
+	/* .fineprint {
 		align-items: bottom;
 		justify-content: center;
 		line-height: 1.3;
 		margin: 1vh 1vw;
 		font-size: 12px;
-	}
+	} */
 
 	section {
 		display: flex;
