@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { getTruncatedAddress } from '$juicebox/components/Address.svelte';
+
 	import Loading from '$juicebox/components/Loading.svelte';
 	import { readNetwork } from '$stores/web3';
 	import { generateTile } from '$tiles/tilesStandalone';
@@ -31,34 +33,45 @@
 			}
 		});
 	});
+	let innerWidth = 0;
 </script>
 
-<section>
-	<h3>mint history</h3>
-</section>
+<svelte:window bind:innerWidth />
 
-<section class:grid>
-	{#each tiles as item}
-		<div class="tileContainer">
-			<div class="image">
-				{@html item.tile}
+<main>
+	<section>
+		<h3>mint history</h3>
+	</section>
+
+	<section class:grid>
+		{#each tiles as item}
+			<div class="tileContainer">
+				<div class="image">
+					{@html item.tile}
+				</div>
+
+				<span class="address">
+					{#if innerWidth < 370}
+						{getTruncatedAddress(item.address)}
+					{:else}
+						{item.address}
+					{/if}
+				</span>
+				{#if item.timestamp}
+					{#await moment(item.timestamp * 1000) then date}
+						<div class="timestamp">{date.format('LLL')}</div>
+					{/await}
+				{/if}
 			</div>
-
-			<div class="address">{item.address}</div>
-			{#if item.timestamp}
-				{#await moment(item.timestamp * 1000) then date}
-					<div class="timestamp">{date.format('LLL')}</div>
-				{/await}
-			{/if}
-		</div>
-	{:else}
-		{#if loading}
-			<Loading />
 		{:else}
-			shockingly nothing has been minted, or something is wrong.
-		{/if}
-	{/each}
-</section>
+			{#if loading}
+				<Loading />
+			{:else}
+				shockingly nothing has been minted, or something is wrong.
+			{/if}
+		{/each}
+	</section>
+</main>
 
 <div class="menu">
 	<div
@@ -91,6 +104,10 @@
 </div>
 
 <style lang="scss">
+	main {
+		max-width: 100vw;
+		overflow-x: hidden;
+	}
 	section {
 		margin: 0 auto;
 		max-width: 360px;
@@ -111,6 +128,22 @@
 		color: #222;
 		margin-bottom: 80px;
 		text-align: center;
+		display: flex;
+		max-width: 100vw;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+	}
+
+	.image {
+		aspect-ratio: 1/1;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		max-width: calc(100vw - 20px);
+		> :global(svg) {
+			max-width: 100%;
+		}
 	}
 
 	.menu {

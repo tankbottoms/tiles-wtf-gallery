@@ -24,6 +24,9 @@
 <style>
 	:global(body) {
 		cursor: crosshair;
+		max-width: 100vw;
+		overflow-x: hidden;
+		overflow-y: auto;
 	}
 	:global(body, button) {
 		font-family: monospace;
