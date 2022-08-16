@@ -46,11 +46,10 @@
 		<a href="https://github.com/tankbottoms/tiles-on-chain">infinite tiles v2</a> is a
 		reversed-engineered implementation of @peripheralist’s
 		<a href="https://github.com/TileDAO">Tiles</a>, but without the api-service. the entire tile is
-		created in solidity. it is possible to generate tile forever, so long as the ethereum blockchain
-		is operating.
+		created in solidity. 
 	</p>
 	<p>
-		this tile mint website and the <a href="/dao">tiles v2 juicebox treasury</a> were implemented with
+		the tile mint website and the <a href="/dao">tiles v2 juicebox treasury</a> were implemented with
 		svelte in typescript.
 	</p>
 	<p>
@@ -73,19 +72,20 @@
 	<br />
 	<h1>unincorporated nonprofit (una)</h1>
 	<p>
-		given there are enough unique tiles for every eth address forever, it is possible that the una
+		there are enough unique tiles for every eth address; thus it is possible that the una
 		recieves funding perpetually.
 	</p>
 	<p>
 		therefore infinite tiles v2 will operates as a DAO using the juicebox protocol. the decision to
-		wrap the DAO with an unincorporated nonprofit in Delaware was to afford the entity a bank
+		wrap the DAO with an unincorporated nonprofit was to afford the entity a bank
 		account.
 	</p>
 	<p><a href="/gp">guiding principals</a></p>
 	<br />
 	<hr />
 	<br />
-	<h1>initial gnosis signers</h1>
+	<h1>gnosis</h1>
+	<p>following signers (of the gnosis 0x4493287882f75dFFcdB40FD41d38d6308Fb8c181) will manage the tiles v2 juicebox project and in turn its treasury.</p>
 	<br />
 	<main class:mobile={innerWidth < 650}>
 		<div

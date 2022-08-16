@@ -4,7 +4,7 @@
 	<h1>what is the ongoing purpose of the dao?</h1>
 	<p>tbd, however to encourage and reward early juicebox community members, projects, and builders, sounds pretty cool.</p>	
 
-	<br/><h1>what does "grabbing" mean wrt tiles v2?</h1>
+	<br/><h1>what does "grabbing" mean wrt tiles?</h1>
 	<p>
 		original
 		<a
@@ -15,11 +15,11 @@
 		owners mint for free; the contract function is called 
 		<a
 			href="https://github.com/tankbottoms/tiles-on-chain/blob/main/contracts/TileNFT.sol#L124"
-			target="_blank">"grabbing"</a
+			target="_blank">...</a
 		>	
 	</p>
 
-	<br/><h1>how are v2 tiles priced?</h1>	
+	<br/><h1>how are tiles priced?</h1>	
 	<ol>
 		<li>mints start at 0.0001 ETH. every 512 mints, the price doubles.</li>
 		<li>
@@ -50,8 +50,8 @@
 		tiles.wtf and its source code are under the <a
 			href="https://github.com/tankbottoms/tiles-wtf-gallery/blob/main/LICENSE.md"
 			target="_blank">we-party license</a
-		>. use of the source code is solely for projects which route their proceeds through the juicebox
-		protocol treasury.
+		>. use of the source code is solely for projects which route their proceeds through the juicebox treasury
+		protocol.
 	</p>	
 </section>
 

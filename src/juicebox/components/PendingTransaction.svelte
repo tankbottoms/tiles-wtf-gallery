@@ -22,7 +22,7 @@
 			let i = 0;
 			setInterval(() => {
 				tile = generateTile(addresses[i++ % addresses.length]);
-			}, 200);
+			}, 750);
 
 			let update: UpdateNotification;
 			try {
@@ -71,18 +71,14 @@
 			{/if}
 			{#if functionName}
 				<h2>
-					Method:
+					method:
 					<span style="text-transform: capitalize;">
 						{functionName}
 					</span>
 				</h2>
 			{/if}
-			<h2>
-				<Trans>Transaction pending...</Trans>
-			</h2>
-			<p>
-				<Trans>Your transaction has been submitted and is awaiting confirmation.</Trans>
-			</p>
+			<p><Trans>transaction pending...</Trans></p>
+			<p><Trans>your transaction has been submitted and is awaiting confirmation.</Trans></p>
 		{/if}
 	</div>
 </section>
