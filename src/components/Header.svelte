@@ -124,6 +124,7 @@
 <style lang="scss">
 	.dropdown {
 		position: absolute;
+		z-index: 10;
 		right: 2rem;
 		top: 100%;
 		list-style: none;
