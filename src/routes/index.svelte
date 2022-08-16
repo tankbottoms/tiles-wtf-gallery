@@ -3,6 +3,7 @@
 	import { onMount } from 'svelte';
 	import { goto } from '$app/navigation';
 	import { readNetwork } from '$stores/web3';
+	import { browser } from '$app/env';
 
 	let tile = '';
 	let address = '';
@@ -19,7 +20,8 @@
 			current++;
 		}, 1500);
 	});
-	let innerWidth = 0;
+
+	let innerWidth = browser ? window.innerWidth : 0;
 </script>
 
 <svelte:window bind:innerWidth />
@@ -98,6 +100,11 @@
 		p {
 			font-size: 16px;
 			margin: 30px 0;
+		}
+
+		.tile {
+			display: block;
+			min-width: 100px;
 		}
 
 		.group {

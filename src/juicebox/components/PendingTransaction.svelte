@@ -6,6 +6,7 @@
 	import { generateRandomAddresses, generateTile } from '$tiles/tilesStandalone';
 	import type { UpdateNotification } from 'bnc-notify';
 	import { createCustomNotification } from '$utils/notification';
+	import Loading from './Loading.svelte';
 
 	export let txnResponse: ContractTransaction;
 	export let functionName = '';
@@ -20,6 +21,7 @@
 		try {
 			const addresses = generateRandomAddresses(25);
 			let i = 0;
+			tile = generateTile(addresses[i++ % addresses.length]);
 			setInterval(() => {
 				tile = generateTile(addresses[i++ % addresses.length]);
 			}, 750);
@@ -69,15 +71,16 @@
 					</div>
 				</div>
 			{/if}
-			{#if functionName}
-				<h2>
-					method:
-					<span style="text-transform: capitalize;">
-						{functionName}
-					</span>
-				</h2>
-			{/if}
-			<p><Trans>transaction pending...</Trans></p>
+			<div class="row">
+				<Loading size={16} width={20} style="transform: translateY(-5px);margin-left: calc(-20px - 1rem)" />
+				{#if functionName}
+					<h2>
+						<span style="text-transform: capitalize;">
+							{functionName}
+						</span>
+					</h2>
+				{/if}
+			</div>
 			<p><Trans>your transaction has been submitted and is awaiting confirmation.</Trans></p>
 		{/if}
 	</div>
@@ -88,18 +91,25 @@
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		margin: 2rem 0;
+		margin: 0rem 0;
 	}
 
 	div {
-		max-width: 400px;
+		max-width: 250px;
 		text-align: center;
 	}
 	.tile {
-		width: 200px;
-		height: 200px;
+		display: flex;
+		justify-content: center;
 	}
-	.tile > :global(div) {
-		transform: translate(30%, -27%) scale(0.6);
+	.tile :global(svg) {
+		max-width: 200px;
+		max-height: 200px;
+		aspect-ratio: 1 / 1;
+	}
+	.row {
+		display: flex;
+		justify-content: center;
+		gap: 1rem;
 	}
 </style>
