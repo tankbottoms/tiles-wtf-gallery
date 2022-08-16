@@ -201,7 +201,7 @@ export function getProvider() {
 	return provider.get() || new ethers.providers.JsonRpcProvider(readNetwork.get().rpcUrl);
 }
 
-export function getDefaultProvider() {
+export function getDefaultProvider(): typeof blocknativeNetworks[0] {
 	if (browser) {
 		const defaultNetworkAlias =
 			connectedAccount.get() && readNetwork.get()

@@ -16,6 +16,13 @@ export declare global {
 		abi: ContractInterface;
 	}
 
+	interface GrabHistoryItem {
+		caller: string;
+		address: string;
+		timestamp: number;
+		blockNumber: number;
+	}
+
 	enum NetworkName {
 		localhost = 'localhost',
 		ropsten = 'ropsten',

@@ -1,53 +1,57 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
+	import { getContext, onMount } from 'svelte';
 	import {
 		web3Connect,
 		web3Disconnect,
-		provider,
 		connectedAccount,
 		readNetwork,
 		switchNetwork
 	} from '$stores/web3';
 	import { getTruncatedAddress } from '$juicebox/components/Address.svelte';
 	import { blocknativeNetworks } from '$juicebox/constants/networks';
-	import { readContract } from '$utils/web3/contractReader';
 	import { getTilePrice } from '$utils/tiles';
 	import { TILE_BASE_PRICE, TILE_MULTIPLIER, TILE_TIER_SIZE } from '$constants/tile';
 	import { formatEther } from 'ethers/lib/utils.js';
+	import type Store from '$utils/Store';
+	import type { ethers } from 'ethers';
+
+	const grabHistory = getContext('GRAB_HISTORY_STORE') as Store<{
+		loading: boolean;
+		transactions: ethers.providers.TransactionResponse[];
+		grabHistory: GrabHistoryItem[];
+	}>;
 
 	let count = '0';
 	let price = '0.0000';
 
 	onMount(async () => {
-		readNetwork.subscribe(async (net) => {
-			console.error(`onMount readNetwork`);
+		grabHistory.subscribe(async ({ grabHistory }) => {
 			try {
-				count = (await readContract('Tiles', 'totalSupply'))?.toString() || '0';
+				count = grabHistory
+					.filter((item) => item.caller?.toLowerCase() === $connectedAccount?.toLowerCase())
+					?.length?.toString();
+
 				console.log(`subscription returned.`);
 				console.log(`totalSupply count: ${count}`);
-			} catch (e: any) {				
+			} catch (e: any) {
 				console.error(`subscription error: ${e}`);
 				console.error(e.message);
 			}
+		});
+
+		readNetwork.subscribe(async () => {
+			console.error(`onMount readNetwork`);
+
 			try {
 				price = formatEther(
 					(await getTilePrice(TILE_BASE_PRICE, TILE_MULTIPLIER, TILE_TIER_SIZE))?.toString() || '0'
 				);
-				console.log(`ile base price: ${TILE_BASE_PRICE}`);
+				console.log(`tile base price: ${TILE_BASE_PRICE}`);
 				console.log(`tile multiplier: ${TILE_MULTIPLIER}`);
 				console.log(`tile tier size: ${TILE_TIER_SIZE}`);
 				console.log(`tile price:`, price);
 			} catch (e: any) {
 				console.error(e.message);
-			}
-		});
-
-		connectedAccount.subscribe(async ($connectedAccount) => {
-			if ($connectedAccount) {
-				const ens = $provider && (await $provider.lookupAddress($connectedAccount));
-				if (ens) {
-					$connectedAccount = ens;
-				}
 			}
 		});
 	});

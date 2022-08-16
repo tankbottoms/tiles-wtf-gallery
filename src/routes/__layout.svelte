@@ -7,6 +7,7 @@
 	import { notify } from '$utils/notification';
 	import { loadLocale } from '$utils/LanguageProvider';
 	import { logInfiteTilesAscii } from '$utils/log';
+	import GrabHistoryProvider from '$components/GrabHistoryProvider.svelte';
 
 	onMount(logInfiteTilesAscii);
 	onMount(async () => {
@@ -16,9 +17,11 @@
 </script>
 
 <Intl config={{}}>
-	<Header />
-	<slot />
-	<ErrorModal />
+	<GrabHistoryProvider>
+		<Header />
+		<slot />
+		<ErrorModal />
+	</GrabHistoryProvider>
 </Intl>
 
 <style>

@@ -2,11 +2,13 @@
 	import { getTruncatedAddress } from '$juicebox/components/Address.svelte';
 
 	import Loading from '$juicebox/components/Loading.svelte';
-	import { readNetwork } from '$stores/web3';
+	import { connectedAccount, readNetwork, web3Connect } from '$stores/web3';
 	import { generateTile } from '$tiles/tilesStandalone';
+	import type Store from '$utils/Store';
 	import { getTilesHistory } from '$utils/tiles';
+	import type { ethers } from 'ethers';
 	import moment from 'moment';
-	import { onMount } from 'svelte';
+	import { getContext, onMount } from 'svelte';
 
 	let grid = true;
 	let tiles: {
@@ -15,22 +17,22 @@
 		timestamp: number;
 		blockNumber: number;
 	}[] = [];
-	let loading = false;
+
+	const grabHistory = getContext('GRAB_HISTORY_STORE') as Store<{
+		loading: boolean;
+		transactions: ethers.providers.TransactionResponse[];
+		grabHistory: GrabHistoryItem[];
+	}>;
 
 	onMount(async () => {
-		readNetwork.subscribe(async (net) => {
-			try {
-				loading = true;
-				const history = await getTilesHistory();
-				tiles = history.map(({ address, ...rest }) => ({
+		grabHistory.subscribe(({ grabHistory }) => {
+			tiles = grabHistory
+				.filter(({ caller }) => caller?.toLowerCase() === $connectedAccount?.toLowerCase())
+				.map(({ address, ...rest }) => ({
 					address,
 					tile: generateTile(address),
 					...rest
 				}));
-				loading = false;
-			} catch (e: any) {
-				console.error(e.message);
-			}
 		});
 	});
 	let innerWidth = 0;
@@ -44,32 +46,37 @@
 	</section>
 
 	<section class:grid>
-		{#each tiles as item}
-			<div class="tileContainer">
-				<div class="image">
-					{@html item.tile}
-				</div>
-
-				<span class="address">
-					{#if innerWidth < 370}
-						{getTruncatedAddress(item.address)}
-					{:else}
-						{item.address}
-					{/if}
-				</span>
-				{#if item.timestamp}
-					{#await moment(item.timestamp * 1000) then date}
-						<div class="timestamp">{date.format('LLL')}</div>
-					{/await}
-				{/if}
-			</div>
-		{:else}
-			{#if loading}
+		{#if $connectedAccount}
+			{#if $grabHistory.loading}
 				<Loading />
+			{:else if tiles?.length}
+				{#each tiles as item}
+					<div class="tileContainer">
+						<div class="image">
+							{@html item.tile}
+						</div>
+						<span class="address">
+							{#if innerWidth < 370}
+								{getTruncatedAddress(item.address)}
+							{:else}
+								{item.address}
+							{/if}
+						</span>
+						{#if item.timestamp}
+							{#await moment(item.timestamp * 1000) then date}
+								<div class="timestamp">{date.format('LLL')}</div>
+							{/await}
+						{/if}
+					</div>
+				{/each}
 			{:else}
-				shockingly nothing has been minted, or something is wrong.
+				<p>shockingly nothing has been minted, or something is wrong.</p>
 			{/if}
-		{/each}
+		{:else}
+			<p>
+				connect to a wallet to see history <a href={null} on:click={web3Connect}>connect wallet</a>
+			</p>
+		{/if}
 	</section>
 </main>
 
@@ -144,6 +151,11 @@
 		> :global(svg) {
 			max-width: 100%;
 		}
+	}
+	p {
+		width: 100%;
+		max-width: 1000px;
+		margin: 0 auto;
 	}
 
 	.menu {
