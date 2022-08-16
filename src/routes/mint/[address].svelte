@@ -140,7 +140,7 @@
 					!hasEnoughBalance}
 			>
 				MINT ({formattedPrice} ETH)
-			</button>							
+			</button>
 		{:else}
 			<button on:click={() => web3Connect()}>CONNECT WALLET</button>
 		{/if}
@@ -170,7 +170,6 @@
 	button.mint:disabled {
 		cursor: not-allowed;
 	}
-
 	section {
 		display: flex;
 		flex-direction: column;
