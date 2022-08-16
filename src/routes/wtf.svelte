@@ -136,7 +136,7 @@
 		max-width: 540px;
 		padding: 20px 20px 100px;
 		line-height: 1.3;
-		margin: 10vh auto;
+		margin-top: 10vh;
 		.peri-profile {
 			display: block;
 			margin: 0 auto;
@@ -150,6 +150,7 @@
 	.wrapper {
 		display: flex;
 		align-items: center;
+		justify-content: center;
 	}
 	main {
 		display: flex;
