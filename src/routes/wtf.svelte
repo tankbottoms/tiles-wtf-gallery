@@ -1,4 +1,6 @@
 <script>
+	import { goto } from '$app/navigation';
+
 	import { generateTile, generateRandomAddresses } from '$tiles/tilesStandalone';
 	import { onMount } from 'svelte';
 
@@ -10,10 +12,10 @@
 		'0x823b92d6a4b2aed4b15675c7917c9f922ea8adad',
 		'0xe7879a2d05dba966fcca34ee9c3f99eee7edefd1',
 		'0x4823e65c10daa3ef320e5e262cfa8d0a059e02a6',
-		'0x5566b7cb1cccb3e147084cf971d6dda770a3c90f',
+		'0x5566b7cb1cccb3e147084cf971d6dda770a3c90f'
 	];
 
-	onMount(() => {		
+	onMount(() => {
 		tile = generateTile(initialSigners[0]);
 
 		let current = 1;
@@ -28,7 +30,8 @@
 
 <svelte:window bind:innerWidth />
 <section>
-	<img		
+	<img
+		class="peri-profile"
 		width="400"
 		src="https://cloudflare-ipfs.com/ipfs/QmaM1m53J2qwEa5Gu3XNW8xryPbkNpMp42Wc984WtZj9iU"
 		alt="@peri profile with Tile background with nipple"
@@ -39,52 +42,68 @@
 	>
 	<br />
 	<h1>wtf?</h1>
-	<p>		
+	<p>
 		<a href="https://github.com/tankbottoms/tiles-on-chain">infinite tiles v2</a> is a
 		reversed-engineered implementation of @peripheralist’s
-		<a href="https://github.com/TileDAO">Tiles</a>, but without the api-service.  the entire tile is created in solidity.  it is possible to generate tile forever, so long as the ethereum blockchain is operating.
+		<a href="https://github.com/TileDAO">Tiles</a>, but without the api-service. the entire tile is
+		created in solidity. it is possible to generate tile forever, so long as the ethereum blockchain
+		is operating.
 	</p>
 	<p>
-		this tile mint website and the <a href="/dao">tiles v2 juicebox treasury</a> were implemented with svelte in typescript.		
+		this tile mint website and the <a href="/dao">tiles v2 juicebox treasury</a> were implemented with
+		svelte in typescript.
 	</p>
 	<p>
 		the <a href="https://github.com/tankbottoms/tiles-on-chain">tiles-v2-nft</a> and
-		<a href="https://github.com/tankbottoms/tiles-wtf-gallery">tiles-v2-gallery</a> github repos together seek to further decentralize the <a href="https://snapshot.org/#/jbdao.eth/proposal/0x122ec83036d4ed2379c98ed6c566666256169aac1ee4316f60da24bd768c7ff6" target="_blank">juicebox application</a>. 
-	</p>	
+		<a href="https://github.com/tankbottoms/tiles-wtf-gallery">tiles-v2-gallery</a> github repos
+		together seek to further decentralize the
+		<a
+			href="https://snapshot.org/#/jbdao.eth/proposal/0x122ec83036d4ed2379c98ed6c566666256169aac1ee4316f60da24bd768c7ff6"
+			target="_blank">juicebox application</a
+		>.
+	</p>
 	<p>
 		<b>
-			this project is an homage to the venerable @peripheralist: the genius artist, designer, developer, grapher, person. <i>"all hail @peripheralist,"</i> <br />
+			this project is an homage to the venerable @peripheralist: the genius artist, designer,
+			developer, grapher, person. <i>"all hail @peripheralist,"</i> <br />
 		</b>
 	</p>
-	<br>
-	<hr>
-	<br>
+	<br />
+	<hr />
+	<br />
 	<h1>unincorporated nonprofit (una)</h1>
-	<p>given there are enough unique tiles for every eth address forever, it is possible that the una recieves funding perpetually.</p>
-	<p>therefore infinite tiles v2 will operates as a DAO using the juicebox protocol. the decision to wrap the DAO with an unincorporated nonprofit in Delaware was to afford the entity a bank account.</p>	
+	<p>
+		given there are enough unique tiles for every eth address forever, it is possible that the una
+		recieves funding perpetually.
+	</p>
+	<p>
+		therefore infinite tiles v2 will operates as a DAO using the juicebox protocol. the decision to
+		wrap the DAO with an unincorporated nonprofit in Delaware was to afford the entity a bank
+		account.
+	</p>
 	<p><a href="/gp">guiding principals</a></p>
-	<br>
-	<hr>
-	<br>
+	<br />
+	<hr />
+	<br />
 	<h1>initial gnosis signers</h1>
-	<br>
-	<main class:mobile={innerWidth < 650}>	
-	<div
-		class="tiles-container"
-		on:click={() => goto(`mint/${address}`)}
-		style="transform: scale({Math.min(1, (innerWidth - 50) / 560)});"
-	>
-		<div id="tiles">
-			<div class="tile">
-				{@html tile}
+	<br />
+	<main class:mobile={innerWidth < 650}>
+		<div
+			class="tiles-container"
+			on:click={() => goto(`mint/${address}`)}
+			style="transform: scale({Math.min(1, (innerWidth - 50) / 560)});"
+		>
+			<div id="tiles">
+				<div class="tile">
+					{@html tile}
+				</div>
+				<div>
+					{address}
+				</div>
 			</div>
-			<div>
-				{address}
-			</div>			
+			<p id="address" />
 		</div>
-		<p id="address" />		
-	</div>		
-</main>
+	</main>
 </section>
 
 <style lang="scss">
@@ -93,6 +112,14 @@
 		padding: 20px 20px 100px;
 		line-height: 1.3;
 		margin: 10vh auto;
+		.peri-profile {
+			display: block;
+			margin: 0 auto;
+		}
+		caption {
+			display: block;
+			text-align: center;
+		}
 	}
 	main {
 		background: white;
@@ -100,7 +127,7 @@
 		grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
 		height: 100vh;
 		align-items: left;
-		justify-items: left;
+		justify-items: center;
 		max-width: 1000px;
 		margin: 0 auto;
 		text-align: center;
