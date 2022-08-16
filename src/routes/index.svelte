@@ -41,7 +41,11 @@
 		<p id="address" />
 	</div>
 	<section>
-		<h1>infinite (∞) tiles v2</h1>
+		<h1>
+			<a class="heading" href="/history?{$readNetwork ? `network=${$readNetwork?.alias}` : ''}">
+				infinite (∞) tiles v2
+			</a>
+		</h1>
 		<p>generated from any eth address</p>
 		<p>
 			<a
@@ -72,8 +76,10 @@
 		max-width: 1000px;
 		margin: 0 auto;
 		text-align: center;
-		h1 {
+		h1,
+		.heading {
 			font-size: 20px;
+			border: 0;
 		}
 
 		a {
