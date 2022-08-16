@@ -8,6 +8,8 @@
 	import { loadLocale } from '$utils/LanguageProvider';
 	import { logInfiteTilesAscii } from '$utils/log';
 	import GrabHistoryProvider from '$components/GrabHistoryProvider.svelte';
+	import Loading from '$juicebox/components/Loading.svelte';
+	import { pageReady } from '$stores';
 
 	onMount(logInfiteTilesAscii);
 	onMount(async () => {
@@ -18,9 +20,13 @@
 
 <Intl config={{}}>
 	<GrabHistoryProvider>
-		<Header />
-		<slot />
-		<ErrorModal />
+		{#if !$pageReady.web3}
+			<Loading fullHeight />
+		{:else}
+			<Header />
+			<slot />
+			<ErrorModal />
+		{/if}
 	</GrabHistoryProvider>
 </Intl>
 
