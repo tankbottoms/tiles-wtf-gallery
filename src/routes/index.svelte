@@ -3,7 +3,6 @@
 	import { onMount } from 'svelte';
 	import { goto } from '$app/navigation';
 	import { readNetwork } from '$stores/web3';
-	import { getTruncatedAddress } from '$juicebox/components/Address.svelte';
 
 	let tile = '';
 	let address = '';
