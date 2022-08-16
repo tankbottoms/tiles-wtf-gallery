@@ -29,80 +29,107 @@
 </script>
 
 <svelte:window bind:innerWidth />
-<section>
-	<img
-		class="peri-profile"
-		width="400"
-		src="https://cloudflare-ipfs.com/ipfs/QmaM1m53J2qwEa5Gu3XNW8xryPbkNpMp42Wc984WtZj9iU"
-		alt="@peri profile with Tile background with nipple"
-	/>
-	<caption
-		><a href="https://twitter.com/peripheralist">@peripheralist</a>, presumably on a warm relaxing
-		day, contemplating life, the universe, ∞ and everything</caption
-	>
-	<br />
-	<h1>wtf?</h1>
-	<p>
-		<a href="https://github.com/tankbottoms/tiles-on-chain">infinite tiles v2</a> is a
-		reversed-engineered implementation of @peripheralist’s
-		<a href="https://github.com/TileDAO">Tiles</a>, without any api-service. the entire svg tile is
-		created in solidity. 
-	</p>
-	<p>
-		this minting and <a href="/dao">tiles juicebox treasury</a> experience were implemented with
-		svelte in typescript.
-	</p>
-	<p>
-		the <a href="https://github.com/tankbottoms/tiles-on-chain">tiles-v2-nft</a> and
-		<a href="https://github.com/tankbottoms/tiles-wtf-gallery">tiles-v2-gallery</a> github repos
-		together seek to further decentralize the
-		<a
-			href="https://snapshot.org/#/jbdao.eth/proposal/0x122ec83036d4ed2379c98ed6c566666256169aac1ee4316f60da24bd768c7ff6"
-			target="_blank">juicebox application</a
-		>.
-	</p>
-	<p>		
-			this project is an homage to the venerable @peripheralist: the genius artist, designer,
-			developer, grapher, person. <i>"all hail @peripheralist,"</i> <br />		
-	</p>
-	<br />
-	<hr />
-	<br />
-	<h1>unincorporated nonprofit - una</h1>
-	<p>
-		there are enough unique tiles for every ethereum address; thus it is possible that the una
-		recieves funding perpetually.
-	</p>
-	<p>
-		therefore infinite tiles v2 will operates as a DAO using the juicebox protocol. the decision to
-		wrap the DAO with an unincorporated nonprofit was to afford the community a meatspace bank
-		account. the initial <a href="/gp">guiding principals</a> sets forth the terms.
-	</p>	
-	<br />
-	<hr />
-	<br />
-	<h1>gnosis </h1>
-	<a href="https://etherscan.io/address/0x4493287882f75dFFcdB40FD41d38d6308Fb8c181">0x4493287882f75dFFcdB40FD41d38d6308Fb8c181</a>
-	<p>following initial gnosis signers will steward the tiles v2 juicebox project, and in turn its treasury</p>
-	<br />
-	<main class:mobile={innerWidth < 650}>
-		<div
-			class="tiles-container"
-			on:click={() => goto(`mint/${address}`)}
-			style="transform: scale({Math.min(1, (innerWidth - 50) / 560)});"
+<div class="wrapper">
+	<section>
+		<img
+			class="peri-profile"
+			width="360"
+			src="https://cloudflare-ipfs.com/ipfs/QmaM1m53J2qwEa5Gu3XNW8xryPbkNpMp42Wc984WtZj9iU"
+			alt="@peri profile with Tile background with nipple"
+		/>
+		<caption
+			><a href="https://twitter.com/peripheralist">@peripheralist</a>, presumably on a warm relaxing
+			day, contemplating life, the universe, ∞ and everything</caption
 		>
-			<div id="tiles">
-				<div class="tile">
-					{@html tile}
+		<br />
+		<br />
+		<main class:hide={innerWidth < 650}>
+			<div
+				class="tiles-container"
+				on:click={() => goto(`mint/${address}`)}
+				style="transform: scale({Math.min(1, (innerWidth - 50) / 560)});"
+			>
+				<div id="tiles">
+					<div class="tile">
+						{@html tile}
+					</div>
+					<div>
+						{address}
+					</div>
 				</div>
-				<div>
-					{address}
-				</div>
+				<p id="address" />
 			</div>
-			<p id="address" />
-		</div>
-	</main>
-</section>
+		</main>
+	</section>
+	<section>
+		<h1>wtf?</h1>
+		<p>
+			<a href="https://github.com/tankbottoms/tiles-on-chain">infinite tiles v2</a> is a
+			reversed-engineered implementation of @peripheralist’s
+			<a href="https://github.com/TileDAO">Tiles</a>, without any api-service. the entire svg tile
+			is created in solidity.
+		</p>
+		<p>
+			this minting and <a href="/dao">tiles juicebox treasury</a> experience were implemented with svelte
+			in typescript.
+		</p>
+		<p>
+			the <a href="https://github.com/tankbottoms/tiles-on-chain">tiles-v2-nft</a> and
+			<a href="https://github.com/tankbottoms/tiles-wtf-gallery">tiles-v2-gallery</a> github repos
+			together seek to further decentralize the
+			<a
+				href="https://snapshot.org/#/jbdao.eth/proposal/0x122ec83036d4ed2379c98ed6c566666256169aac1ee4316f60da24bd768c7ff6"
+				target="_blank">juicebox application</a
+			>.
+		</p>
+		<p>
+			this project is an homage to the venerable @peripheralist: the genius artist, designer,
+			developer, grapher, person. <i>"all hail @peripheralist,"</i> <br />
+		</p>
+		<br />
+		<hr />
+		<br />
+		<h1>unincorporated nonprofit - una</h1>
+		<p>
+			there are enough unique tiles for every ethereum address; thus it is possible that the una
+			recieves funding perpetually.
+		</p>
+		<p>
+			therefore infinite tiles v2 will operates as a DAO using the juicebox protocol. the decision
+			to wrap the DAO with an unincorporated nonprofit was to afford the community a meatspace bank
+			account. the initial <a href="/gp">guiding principals</a> sets forth the terms.
+		</p>
+		<br />
+		<hr />
+		<br />
+		<h1>gnosis</h1>
+		<a href="https://etherscan.io/address/0x4493287882f75dFFcdB40FD41d38d6308Fb8c181"
+			>0x4493287882f75dFFcdB40FD41d38d6308Fb8c181</a
+		>
+		<p>
+			following initial gnosis signers will steward the tiles v2 juicebox project, and in turn its
+			treasury
+		</p>
+		<br />
+		<main class:hide={innerWidth > 650}>
+			<div
+				class="tiles-container"
+				on:click={() => goto(`mint/${address}`)}
+				style="transform: scale({Math.min(1, (innerWidth - 50) / 560)});"
+			>
+				<div id="tiles">
+					<div class="tile">
+						{@html tile}
+					</div>
+					<div>
+						{address}
+					</div>
+				</div>
+				<p id="address" />
+			</div>
+		</main>
+	</section>
+</div>
 
 <style lang="scss">
 	section {
@@ -119,64 +146,35 @@
 			text-align: center;
 		}
 	}
+
+	.wrapper {
+		display: flex;
+		align-items: center;
+	}
 	main {
-		background: white;
-		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
-		height: 100vh;
-		align-items: left;
-		justify-items: center;
-		max-width: 1000px;
-		margin: 0 auto;
-		text-align: center;
-		h1,
-		.heading {
-			font-size: 20px;
-			border: 0;
-		}
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+	}
 
-		a {
-			font-size: 14px;
-			color: black;
-			text-decoration: none;
-			position: relative;
-			border-bottom: 3px solid gold;
-			margin: 0px 10px;
-		}
+	.hide {
+		display: none;
+	}
 
-		a:hover {
-			border-bottom: 3px solid black;
-		}
-
-		p {
-			font-size: 16px;
-			margin: 30px 0;
-		}
-
-		.group {
-			margin-top: 30px;
-			height: 60px;
-			display: flex;
+	/* If innerwidth less than 650, stack the flex */
+	@media (max-width: 650px) {
+		.wrapper {
 			flex-direction: column;
-			justify-content: space-between;
-			margin-bottom: 20px;
-			font-weight: 600;
 		}
-		&.mobile {
-			display: flex;
-			flex-direction: column;
-			max-width: 100vw;
-			h1,
-			.heading {
-				font-size: 15px;
-			}
-			p {
-				font-size: 10px;
-				margin: 16px 0;
-			}
-			a {
-				font-size: 10px;
-			}
+
+		section:first-of-type {
+			margin-bottom: 0px;
+			padding-bottom: 0px;
+		}
+
+		section:last-of-type {
+			margin-top: 0px;
+			padding-top: 0px;
 		}
 	}
 </style>
