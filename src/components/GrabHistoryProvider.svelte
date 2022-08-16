@@ -38,10 +38,14 @@
 					}
 				} catch {}
 			});
+
 			$grabHistoryStore = {
 				loading: false,
 				transactions,
-				grabHistory: history
+				grabHistory: history.reduce((acc, item) => {
+					if (!acc.find((_item) => _item.address === item.address)) acc.push(item);
+					return acc;
+				}, [])
 			};
 		} catch (error) {
 			console.log('Error: could not fetch history transactions');
