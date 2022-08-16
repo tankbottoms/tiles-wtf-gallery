@@ -4,27 +4,64 @@
 	import { goto } from '$app/navigation';
 	import { readNetwork } from '$stores/web3';
 	import { browser } from '$app/env';
+	import { getTileAnimationStyleString } from '$tiles/utils';
 
 	let tile = '';
 	let address = '';
+	let animate = false;
+	let mouseLastMoved = Date.now();
+	let tileComponent;
+
+	let currentTile = 1;
+	let timer;
+	const randomAddresses = generateRandomAddresses(25);
+
+	function setAddressCarousel() {
+		timer = setInterval(() => {
+			address = randomAddresses[currentTile % 10];
+			tile = generateTile(address);
+			currentTile++;
+		}, 1500);
+	}
+
+	function handleMove() {
+		if (animate) {
+			setAddressCarousel();
+		}
+		animate = false;
+		mouseLastMoved = Date.now();
+	}
+
+	function checkAnimationState() {
+		if (mouseLastMoved + 4000 < Date.now()) {
+			animate = true;
+			clearTimeout(timer);
+		}
+	}
+
+	function animateTile() {
+		const styles = getTileAnimationStyleString(tileComponent);
+		document.head.appendChild(document.createElement('style')).innerHTML = styles;
+	}
 
 	onMount(() => {
-		const randomAddresses = generateRandomAddresses(25);
 		address = randomAddresses[0];
 		tile = generateTile(address);
-
-		let current = 1;
-		setInterval(() => {
-			address = randomAddresses[current % 10];
-			tile = generateTile(address);
-			current++;
-		}, 1500);
+		setAddressCarousel();
+		// Check if it's been 4s since the last move
+		setInterval(() => checkAnimationState(), 1000);
 	});
 
 	let innerWidth = browser ? window.innerWidth : 0;
+
+	$: {
+		if (tileComponent) {
+			animateTile();
+		}
+	}
 </script>
 
-<svelte:window bind:innerWidth />
+<svelte:window bind:innerWidth on:mousemove={handleMove} />
 
 <main class:mobile={innerWidth < 650}>
 	<div
@@ -33,9 +70,15 @@
 		style="transform: scale({Math.min(1, (innerWidth - 50) / 360)});"
 	>
 		<div id="tiles">
-			<div class="tile">
-				{@html tile}
-			</div>
+			{#if animate}
+				<div class="tile" bind:this={tileComponent}>
+					{@html tile}
+				</div>
+			{:else}
+				<div class="title">
+					{@html tile}
+				</div>
+			{/if}
 			<div>
 				{address}
 			</div>
