@@ -23,16 +23,18 @@
 		NOT_AVAILABLE = 2
 	}
 
+	let mouseLastMoved = Date.now();
+
 	let price = BigNumber.from(0);
 	let tile: string;
 	let tileComponent: any;
 	let isAvailable: Available = 0;
-	let availability: 'available' | 'not available' = 'available';
+	let availability: 'Available' | 'Not available' = 'Available';
 	let showInvalidAddress = false;
+	let animate = false;
 
 	let loading = false;
 	$: address = $page.params.address?.padEnd(24, '0');
-	$: animate = $page.url.searchParams.has('animate');
 
 	let balance = BigNumber.from(parseEther('10000'));
 	let hasEnoughBalance = true;
@@ -99,7 +101,7 @@
 	}
 
 	function animateTile() {
-		if (animate && browser) {
+		if (browser) {
 			const numberOfG = 29;
 			// Pick, randomly, numbers from 0 to numberOfG to spin
 			const nSpinPieces = Array.from({ length: 7 }, () => Math.floor(Math.random() * numberOfG));
@@ -122,12 +124,15 @@
 
 			pieces.forEach((piece, index) => {
 				const randomSeconds = Math.random() + 2 * 15;
-				piece.style.animation = `fade ${randomSeconds}s ease-in-out ${
-					Math.random() * 20
-				}s infinite`;
+
+				const styleClass = `piece${index}`;
+				let classValue = `
+				animation: fade ${randomSeconds}s ease-in-out ${Math.random() * 20}s infinite
+				`;
+
 				if (nSpinPieces.includes(index)) {
 					const randomSpinSeconds = Math.random() * 2 + 5;
-					piece.style.animation = `spin${index} ${randomSpinSeconds}s ease-in-out ${
+					classValue = `animation: spin${index} ${randomSpinSeconds}s ease-in-out ${
 						Math.random() * 10
 					}s infinite, fade ${randomSeconds}s ease-in-out ${Math.random() * 15}s infinite`;
 					// Knowing the piece has a single transform of matrix(...)
@@ -149,8 +154,22 @@
 
 					styles += keyframes;
 				}
+
+				piece.classList.add(styleClass);
+				styles += `.${styleClass}{${classValue}}`;
 			});
 			document.head.appendChild(document.createElement('style')).innerHTML = styles;
+		}
+	}
+
+	function handleMove() {
+		animate = false;
+		mouseLastMoved = Date.now();
+	}
+
+	function checkAnimationState() {
+		if (mouseLastMoved + 4000 < Date.now()) {
+			animate = true;
 		}
 	}
 
@@ -159,6 +178,10 @@
 		await whenPageReady();
 		tile = generateTile(address);
 		console.log('Init subscribing...');
+
+		// Check if it's been 4s since the last move
+		setInterval(checkAnimationState, 1000);
+
 		// Returning so it gets unsubscribed when component is destroyed
 		return readNetwork.subscribe(async () => {
 			loading = true;
@@ -176,8 +199,8 @@
 	});
 
 	$: availability = [Available.IS_AVAILABLE, Available.CAN_SEIZE].includes(isAvailable)
-		? 'available'
-		: 'not available';
+		? 'Available'
+		: 'Not available';
 	$: formattedPrice = Number(utils.formatEther(price));
 
 	$: {
@@ -187,20 +210,24 @@
 	}
 </script>
 
+<svelte:window on:mousemove={handleMove} />
+
 <section>
 	{#if showInvalidAddress}
 		<h1>Not a valid address</h1>
 	{:else if tile}
-		<div bind:this={tileComponent}>
-			{@html tile}
-		</div>
+		{#if animate}
+			<span bind:this={tileComponent}>
+				{@html tile}
+			</span>
+		{:else}
+			<span>
+				{@html tile}
+			</span>
+		{/if}
 		<br />
 		<p>{$page.params.address}</p>
-		<p>{loading ? 'checking availablity...' : availability}
-		{#if availability == 'not available'}
-			- <a href="/mint?{$readNetwork ? `network=${$readNetwork?.alias}` : ''}">generate tiles</a>
-		{/if}
-		</p>
+		<p>{loading ? 'Checking availablity...' : availability}</p>
 		{#if $connectedAccount}
 			<button
 				class="mint"
@@ -210,20 +237,20 @@
 					![Available.IS_AVAILABLE, Available.CAN_SEIZE].includes(isAvailable) ||
 					!hasEnoughBalance}
 			>
-				mint ({formattedPrice} ETH)
+				MINT ({formattedPrice} ETH)
 			</button>
 		{:else}
-			<button on:click={() => web3Connect()}>connect wallet</button>
+			<button on:click={() => web3Connect()}>CONNECT WALLET</button>
 		{/if}
 		<br />
 		{#if !hasEnoughBalance}
-			<p>insufficient balance</p>
+			<p>Insufficient balance</p>
 		{/if}
 	{/if}
 </section>
 
 <button class="download" on:click={() => downloadFile(tile, `${address}.svg`, 'image/svg')}>
-	download svg
+	Download SVG
 </button>
 
 <Modal show={$modal} />
