@@ -77,7 +77,12 @@
 		<a class="logo-wrapper" href="/?{$readNetwork ? `network=${$readNetwork?.alias}` : ''}">
 			<img src="/favicon.svg" alt="Logo" />
 		</a>
-		<a class="primary-text" href="/history?{$readNetwork ? `network=${$readNetwork?.alias}` : ''}">
+		<a
+			class="primary-text"
+			href="/history/{$connectedAccount || ''}?{$readNetwork
+				? `network=${$readNetwork?.alias}`
+				: ''}"
+		>
 			{#if innerWidth < 650}
 				{count}
 			{:else}

@@ -9,6 +9,9 @@
 	import type { ethers } from 'ethers';
 	import moment from 'moment';
 	import { getContext, onMount } from 'svelte';
+	import { page } from '$app/stores';
+
+	$: userAddress = $page.params.address;
 
 	let grid = true;
 	let tiles: {
@@ -24,17 +27,23 @@
 		grabHistory: GrabHistoryItem[];
 	}>;
 
-	onMount(async () => {
+	function update(userAddress: string) {
 		grabHistory.subscribe(({ grabHistory }) => {
-			tiles = grabHistory
-				.filter(({ caller }) => caller?.toLowerCase() === $connectedAccount?.toLowerCase())
-				.map(({ address, ...rest }) => ({
-					address,
-					tile: generateTile(address),
-					...rest
-				}));
+			let _tiles = grabHistory.map(({ address, ...rest }) => ({
+				address,
+				tile: generateTile(address),
+				...rest
+			}));
+			if (userAddress) {
+				_tiles = _tiles.filter(
+					({ caller }) => caller?.toLowerCase() === userAddress?.toLowerCase()
+				);
+			}
+			tiles = _tiles;
 		});
-	});
+	}
+	$: update(userAddress);
+
 	let innerWidth = 0;
 </script>
 
