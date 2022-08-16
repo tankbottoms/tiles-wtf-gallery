@@ -16,6 +16,7 @@
 	import { constants } from 'ethers';
 	import { isAddress } from 'ethers/lib/utils.js';
 	import { getContext } from 'svelte';
+	import { startConfetti } from '$utils/confetti';
 
 	export let close: () => void;
 	export const onSuccess: () => void = () => {};
@@ -69,6 +70,7 @@
 			);
 
 			await txnResponse.wait();
+			startConfetti();
 		} catch (error) {
 			isDeploying = false;
 		}
