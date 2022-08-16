@@ -29,7 +29,7 @@
 	let tile: string;
 	let tileComponent: any;
 	let isAvailable: Available = 0;
-	let availability: 'Available' | 'Not available' = 'Available';
+	let availability: 'available' | 'not available' = 'available';
 	let showInvalidAddress = false;
 	let animate = false;
 
@@ -52,7 +52,7 @@
 
 	async function mint() {
 		if (!$connectedAccount) {
-			console.log('Account not connected');
+			console.log('mint: account not connected');
 			return await web3Connect();
 		}
 		try {
@@ -177,7 +177,7 @@
 		loading = true;
 		await whenPageReady();
 		tile = generateTile(address);
-		console.log('Init subscribing...');
+		console.log('mint, init subscribing...');
 
 		// Check if it's been 4s since the last move
 		setInterval(checkAnimationState, 1000);
@@ -199,8 +199,8 @@
 	});
 
 	$: availability = [Available.IS_AVAILABLE, Available.CAN_SEIZE].includes(isAvailable)
-		? 'Available'
-		: 'Not available';
+		? 'available'
+		: 'not available';
 	$: formattedPrice = Number(utils.formatEther(price));
 
 	$: {
@@ -227,7 +227,11 @@
 		{/if}
 		<br />
 		<p>{$page.params.address}</p>
-		<p>{loading ? 'Checking availablity...' : availability}</p>
+		<p>{loading ? 'checking availablity...' : availability}
+		{#if availability == 'not available'}
+			- <a href="/mint?{$readNetwork ? `network=${$readNetwork?.alias}` : ''}">generate tiles</a>
+		{/if}
+		</p>
 		{#if $connectedAccount}
 			<button
 				class="mint"
@@ -237,20 +241,20 @@
 					![Available.IS_AVAILABLE, Available.CAN_SEIZE].includes(isAvailable) ||
 					!hasEnoughBalance}
 			>
-				MINT ({formattedPrice} ETH)
+				mint ({formattedPrice} ETH)
 			</button>
 		{:else}
-			<button on:click={() => web3Connect()}>CONNECT WALLET</button>
+			<button on:click={() => web3Connect()}>connect wallet</button>
 		{/if}
 		<br />
 		{#if !hasEnoughBalance}
-			<p>Insufficient balance</p>
+			<p>insufficient balance</p>
 		{/if}
 	{/if}
 </section>
 
 <button class="download" on:click={() => downloadFile(tile, `${address}.svg`, 'image/svg')}>
-	Download SVG
+	download svg
 </button>
 
 <Modal show={$modal} />
