@@ -125,6 +125,7 @@
 		<h1>Not a valid address</h1>
 	{:else if tile}
 		{@html tile}
+		<br />
 		<p>{$page.params.address}</p>
 		<p>{loading ? 'Checking availablity...' : availability}</p>
 		{#if $connectedAccount}
@@ -137,12 +138,7 @@
 					!hasEnoughBalance}
 			>
 				MINT ({formattedPrice} ETH)
-			</button>		
-			<!--
-			<div class="link">
-				<a href="/tos?{$readNetwork ? `network=${$readNetwork?.alias}` : ''}">*terms of sale</a>
-			</div>	
-			-->				
+			</button>							
 		{:else}
 			<button on:click={() => web3Connect()}>CONNECT WALLET</button>
 		{/if}
@@ -171,14 +167,6 @@
 
 	button.mint:disabled {
 		cursor: not-allowed;
-	}
-
-	.fineprint {		
-		align-items: bottom;
-		justify-content: center;		
-		line-height: 1.3;
-		margin: 1vh 1vw;
-		font-size: 12px;
 	}
 
 	section {

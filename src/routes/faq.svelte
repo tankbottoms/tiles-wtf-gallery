@@ -76,14 +76,9 @@
 	}
 	h1 {
 		font-size: 18px;
-	}
-
-	h2 {
-		font-size: 16px;
 		color: rgb(51, 128, 160);
 	}
-
-	ul,
+	
 	p {
 		font-size: 12px;
 	}

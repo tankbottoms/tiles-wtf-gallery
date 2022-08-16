@@ -11,7 +11,8 @@ i18n.loadLocaleData({
 	tr: { plurals: tr },
 	pt: { plurals: pt },
 	es: { plurals: es },
-	fr: { plurals: fr }
+	fr: { plurals: fr },
+	zh: { plurals: zh }
 });
 
 const getLocale = (): string => {
