@@ -27,7 +27,6 @@
 	let isAvailable: Available = 0;
 	let availability: 'Available' | 'Not available' = 'Available';
 	let showInvalidAddress = false;
-	let showInsufficientBalance = false;
 
 	let loading = false;
 	$: address = $page.params.address?.padEnd(24, '0');
@@ -39,7 +38,6 @@
 		(async () => {
 			balance = BigNumber.from(await $provider?.getBalance($connectedAccount));
 			if (balance.lt(price)) {
-				showInsufficientBalance = true;
 				hasEnoughBalance = false;
 			} else {
 				hasEnoughBalance = true;
