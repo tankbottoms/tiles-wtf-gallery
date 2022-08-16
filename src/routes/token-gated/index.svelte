@@ -1,20 +1,18 @@
 <script lang="ts">
-	import TokenGated from '$components/TokenGated.svelte';
-	//
-
+	import TokenGated from '$components/TokenGated.svelte';	
 	function handleAccessDenied() {
-		console.log('handle access denied');
+		console.log('token gated handle access denied');
 	}
 </script>
 
 <section>
 	<TokenGated on:denied={handleAccessDenied}>
-		<p>This page is supposed to be token gated.</p>
+		<p>this page is supposed to be token gated</p>
 		<p slot="denied" let:account>
 			{#if account}
-				Sorry, you do not have access to this page
+				sorry, you do not have access to this page
 			{:else}
-				Please connect to a wallet
+				please connect to the ethereum wallet with a tile to access this page
 			{/if}
 		</p>
 		<p slot="checking">loading...</p>

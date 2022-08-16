@@ -55,7 +55,7 @@
 		<p>not a valid ethereum address</p>
 	{:else}
 		{#each randomTiles as item}
-			<div class="tileContainer" on:click={() => goto(`mint/${item.address}`)}>
+			<div class="tileContainer" on:click={() => goto(`mint/${item.address}?animate`)}>
 				{@html item.tile}
 				<span class="address">{item.address}</span>
 			</div>
