@@ -4,10 +4,19 @@
 	export let fullWidth = false;
 	export let fullScreen = false;
 	export let height: number = '' as any;
+	export let width: number = '' as any;
+	export let size: number = '' as any;
+	export let style = '';
 </script>
 
-<div class="loading" class:fullHeight class:fullWidth class:fullScreen style="height: {height}px;">
-	<Icon name="loading" spin />
+<div
+	class="loading"
+	class:fullHeight
+	class:fullWidth
+	class:fullScreen
+	style="width: {width}px !important;height: {height}px !important;{style}"
+>
+	<Icon name="loading" spin style="width: {size}px;" />
 </div>
 
 <style>
