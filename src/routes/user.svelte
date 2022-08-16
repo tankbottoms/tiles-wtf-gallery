@@ -1,10 +1,34 @@
 <script lang="ts">
+	import TokenGated from '$components/TokenGated.svelte';
 	//
+
+	function handleAccessDenied() {
+		console.log('handle access denied');
+	}
 </script>
 
 <section>
-	<p>
-		This page is an example of how you would token gate your website with the newly minted nft or
-		the juicebox token.
-	</p>
+	<TokenGated on:denied={handleAccessDenied}>
+		<p>
+			This page is an example of how you would token gate your website with the newly minted nft or
+			the juicebox token.
+		</p>
+		<p slot="denied" let:account>
+			{#if account}
+				Sorry, you do not have access to this page
+			{:else}
+				Please connect to a wallet
+			{/if}
+		</p>
+		<p slot="checking">loading...</p>
+	</TokenGated>
 </section>
+
+<style>
+	section {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		height: 100%;
+	}
+</style>
