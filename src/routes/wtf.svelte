@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { browser } from '$app/env';
 	import { goto } from '$app/navigation';
+	import SplitPane from '$components/SplitPane.svelte';
 	import { generateTile } from '$tiles/tilesStandalone';
 	import { getTileAnimationStyleString } from '$tiles/utils';
 	import { onMount } from 'svelte';
@@ -12,7 +13,7 @@
 	let tileComponent: HTMLElement;
 
 	let currentTile = 1;
-	let timer;
+	let timer: number;
 
 	const initialSigners = [
 		'0x5d95baEBB8412AD827287240A5c281E3bB30d27E',
@@ -70,8 +71,8 @@
 
 <svelte:window bind:innerWidth on:mousemove={handleMove} />
 
-<div class="wrapper">
-	<section>
+<SplitPane>
+	<section slot="left">
 		<img
 			class="peri-profile"
 			width="360"
@@ -108,7 +109,7 @@
 			</div>
 		</main>
 	</section>
-	<section>
+	<section slot="right">
 		<h1>Wtf?</h1>
 		<p>
 			<a href="https://github.com/tankbottoms/tiles-on-chain">Infinite Tiles v2</a> is a
@@ -150,15 +151,16 @@
 		</p>
 		<p>
 			Therefore Infinite Tiles v2 will operates as a DAO, on the Juicebox protocol wrapped as an
-			Unincorporated Nonprofit. This will enable the DAO a number of meatspace benefits
-			including banking services, ownership of property, and engagement of services with other entities. The <a
+			Unincorporated Nonprofit. This will enable the DAO a number of meatspace benefits including
+			banking services, ownership of property, and engagement of services with other entities. The <a
 				href="/gp">Guiding Principals</a
-			> sets forth the initial governance and membership structure, for the Tile community to mold as they
-			see fit.
+			> sets forth the initial governance and membership structure, for the Tile community to mold as
+			they see fit.
 		</p>
 		<p>
 			As there are enough unique Tiles for each Ethereum address; it may be possible that the UNA
-			recieves funding perpetually. Conveniently, the entity structure, UUNAA, supports perpetual durations.
+			recieves funding perpetually. Conveniently, the entity structure, UUNAA, supports perpetual
+			durations.
 		</p>
 
 		<br />
@@ -173,8 +175,9 @@
 		</p>
 		<p>
 			The initial Gnosis signers, listed to the left with their corresponding Tile, will act as
-			stewards to the Tiles v2 Juicebox Project, through its NFT, and in turn its treasury. Additionally, the
-			Gnosis is able to mint new Tiles as well as add additional minters to the Tiles v2 contract.
+			stewards to the Tiles v2 Juicebox Project, through its NFT, and in turn its treasury.
+			Additionally, the Gnosis is able to mint new Tiles as well as add additional minters to the
+			Tiles v2 contract.
 		</p>
 		<br />
 		<main class:hide={innerWidth > 650}>
@@ -195,14 +198,10 @@
 			</div>
 		</main>
 	</section>
-</div>
+</SplitPane>
 
 <style lang="scss">
 	section {
-		max-width: 540px;
-		padding: 20px 20px 100px;
-		line-height: 1.3;
-		margin-top: 10vh;
 		.peri-profile {
 			display: block;
 			margin: 0 auto;
@@ -211,12 +210,6 @@
 			display: block;
 			text-align: center;
 		}
-	}
-
-	.wrapper {
-		display: flex;
-		align-items: center;
-		justify-content: center;
 	}
 	main {
 		display: flex;
@@ -230,10 +223,6 @@
 
 	/* If innerwidth less than 650, stack the flex */
 	@media (max-width: 650px) {
-		.wrapper {
-			flex-direction: column;
-		}
-
 		section:first-of-type {
 			margin-bottom: 0px;
 			padding-bottom: 0px;

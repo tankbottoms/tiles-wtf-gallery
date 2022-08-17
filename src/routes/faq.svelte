@@ -2,6 +2,7 @@
 	import { generateTile, generateRandomAddresses } from '$tiles/tilesStandalone';
 	import { onMount } from 'svelte';
 	import { getTileAnimationStyleString } from '$tiles/utils';
+	import SplitPane from '$components/SplitPane.svelte';
 
 	const randomAddresses = generateRandomAddresses(10);
 
@@ -33,8 +34,8 @@
 	}
 </script>
 
-<main>
-	<section>
+<SplitPane>
+	<section slot="left">
 		{#if tile}
 			<div class="tile" bind:this={tileComponent}>
 				{@html tile}
@@ -42,16 +43,16 @@
 			</div>
 		{/if}
 	</section>
-	<section>
+	<section slot="right">
 		<h1>Faq</h1>
-		<div class="space"></div>
+		<div class="space" />
 		<h1>What is the ongoing purpose of the DAO?</h1>
 		<p>
 			TBD, however, "to encourage and reward early Juicebox community members, projects, and
 			builders", sounds pretty cool.
 		</p>
 
-		<div class="space"></div>
+		<div class="space" />
 		<h1>What is Tiles "grabbing"?</h1>
 		<p>
 			The original
@@ -67,7 +68,7 @@
 			>
 		</p>
 
-		<div class="space"></div>
+		<div class="space" />
 		<h1>How are Tiles priced?</h1>
 		<p>Initial mints start at 0.0001 ETH, and every 512 mints, the price doubles.</p>
 		<p>
@@ -82,13 +83,14 @@
 		</p>
 		<p>
 			If somebody preemptively minted your address' Tile, you can reclaim it by transfering the
-			current Tile rate. The smart contract calls this operation 
-			<a href="https://github.com/tankbottoms/tiles-on-chain/blob/main/contracts/InfiniteTiles.sol#L219"
+			current Tile rate. The smart contract calls this operation
+			<a
+				href="https://github.com/tankbottoms/tiles-on-chain/blob/main/contracts/InfiniteTiles.sol#L219"
 				>"seizing"</a
 			>.
 		</p>
 
-		<div class="space"></div>
+		<div class="space" />
 		<h1>How will the treasury be managed?</h1>
 		<p>
 			All proceeds will be transparently managed on <a href="/dao">Juicebox.</a> The Gnosis
@@ -98,7 +100,7 @@
 			or the project ERC-20, the specifics of governance, if any, has not been decided.
 		</p>
 
-		<div class="space"></div>
+		<div class="space" />
 		<h1>What are the Terms of Use or Licensing?</h1>
 		<p>
 			Tiles.wtf and its source code are under the <a
@@ -108,7 +110,7 @@
 			Juicebox v2 Treasury protocol.
 		</p>
 
-		<div class="space"></div>
+		<div class="space" />
 		<h1>How can I use Tiles for token-gating?</h1>
 		<p>
 			An example of how to use Tiles to token-gate is available <a href="/token-gated">here</a> and
@@ -118,25 +120,11 @@
 			>.
 		</p>
 
-		<div class="space"></div>
+		<div class="space" />
 	</section>
-</main>
+</SplitPane>
 
 <style>
-	main {
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		/* max-width: 1000px; */
-	}
-	section {
-		max-width: 540px;
-		line-height: 1.3;
-		padding: 0px 20px;
-		padding-bottom: 100px;
-		margin-top: 10vh;
-	}
-
 	.space {
 		display: block;
 		height: 0.25em;
@@ -149,21 +137,6 @@
 	.tile {
 		display: flex;
 		flex-direction: column;
-	}
-
-	@media (max-width: 650px) {
-		main {
-			flex-direction: column;
-		}
-
-		section:first-of-type {
-			margin-bottom: 0px;
-			padding-bottom: 0px;
-		}
-
-		section:last-of-type {
-			margin-top: 40px;
-			padding-top: 0px;
-		}
+		align-items: center;
 	}
 </style>
