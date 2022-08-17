@@ -38,7 +38,11 @@
 	import { V2OperatorPermission } from '$juicebox/constants/v2/operatorPermission';
 	import { blocknativeNetworks } from '$constants/networks';
 
-	let projectId = BigNumber.from(Number(getDefaultProvider().id) === 4 ? 98 : 174);
+	function getProjectId() {
+		return BigNumber.from(Number(getDefaultProvider().id) === 4 ? 98 : 174);
+	}
+
+	let projectId = getProjectId();
 
 	let project = new Store<V2ProjectContextType>({
 		projectId: projectId
@@ -89,7 +93,7 @@
 			issue = 'Current network is not supported';
 			return;
 		}
-		projectId = BigNumber.from(Number(getDefaultProvider().id) === 4 ? 98 : 41);
+		projectId = getProjectId();
 		$project.projectId = projectId;
 
 		try {
