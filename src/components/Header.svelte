@@ -40,7 +40,7 @@
 		});
 
 		readNetwork.subscribe(async () => {
-			console.error(`onMount readNetwork`);
+			console.log(`%conMount readNetwork`, 'background: #222; color: #bada55');
 
 			try {
 				price = formatEther((await getTilePrice())?.toString() || '0');
