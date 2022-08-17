@@ -5,11 +5,16 @@
 	$: address = $page.params.address;
 	$: tile = generateTile(address);
 	$: tileBase64 = `data:image/svg+xml;base64,${btoa(tile)}`;
-	
 </script>
 
 <main>
-	<img src="{tileBase64}" alt="{address}"/>
+	<iframe
+		src="https://cloudflare-ipfs.com/ipfs/bafybeifkqnc5d2jqrotfx4dz3ye3lxgtaasqfh2exnar5incy35nbwlbrm/?resolution=low&tile={tileBase64}"
+		title="Tiles Animation"
+		frameborder="0"
+		width="360"
+		height="360"
+	/>
 </main>
 
 <style>

@@ -4,18 +4,13 @@
 
 	$: address = $page.params.address;
 	$: tile = generateTile(address);
+	$: tileBase64 = `data:image/svg+xml;base64,${btoa(tile)}`;
 	
-    /*
-        No terms of sales here
-    */
-   
 </script>
 
-
-<div class="main" >
-		{@html tile}
-</div>	
-
+<main>
+	<img src="{tileBase64}" alt="{address}"/>
+</main>
 
 <style>
 	:global(body) {
@@ -28,5 +23,8 @@
 		background: #ffffff;
 		width: 100vw;
 		height: 100vh;
+		display: flex;
+		justify-content: center;
+		align-items: center;
 	}
 </style>
