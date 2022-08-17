@@ -3,6 +3,7 @@
 	import { generateTile } from '$tiles/tilesStandalone';
 
 	$: address = $page.params.address;
+    $: darkMode = $page.params.darkMode;
 	$: tile = generateTile(address);
 
 	$: tileBase64 = `data:image/svg+xml;base64,${btoa(tile)}`;
