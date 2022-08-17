@@ -1,5 +1,5 @@
 export function logInfiteTilesAscii() {
-	console.log(`
+	console.log(`%c\
 ...........................................................................        
 :++++++++++++++++++++++=::++++++++++++++++++++++=::++++++++++++++++++++++=:        
 :++++++++++++++++++++=.  :++++++++++++++++++++=.  :++++++++++++++++++++=:          
@@ -42,6 +42,5 @@ export function logInfiteTilesAscii() {
 
 Infinite Tiles v2
 Brought to you by tankbottoms.eth, sveltedev.eth, dsintermediatd.eth, cookieslayer.eth
-
-    `);
+    `, 'color: yellow;');
 }

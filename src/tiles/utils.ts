@@ -2,8 +2,7 @@ function getMatrixString(SVGMatrix) {
 	return `matrix(${SVGMatrix.a},${SVGMatrix.b},${SVGMatrix.c},${SVGMatrix.d},${SVGMatrix.e},${SVGMatrix.f})`;
 }
 
-export function getTileAnimationStyleString(tileComponent) {
-	console.log(tileComponent);
+export function getTileAnimationStyleString(tileComponent: HTMLElement) {
 	const numberOfG = 29;
 	// Pick, randomly, numbers from 0 to numberOfG to spin
 	const nSpinPieces = Array.from({ length: 7 }, () => Math.floor(Math.random() * numberOfG));
@@ -24,7 +23,7 @@ export function getTileAnimationStyleString(tileComponent) {
 					}
 				`;
 
-	pieces.forEach((piece, index) => {
+	pieces.forEach((piece: SVGPathElement, index) => {
 		const randomSeconds = Math.random() + 2 * 15;
 
 		const styleClass = `piece${index}`;

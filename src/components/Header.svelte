@@ -30,9 +30,7 @@
 				count = grabHistory
 					.filter((item) => item.caller?.toLowerCase() === $connectedAccount?.toLowerCase())
 					?.length?.toString();
-
-				console.log(`subscription returned.`);
-				console.log(`totalSupply count: ${count}`);
+				console.log(`%ctotalSupply count: ${count}`, 'color: yellow;');
 			} catch (e: any) {
 				console.error(`subscription error: ${e}`);
 				console.error(e.message);
@@ -40,8 +38,6 @@
 		});
 
 		readNetwork.subscribe(async () => {
-			console.error(`onMount readNetwork`);
-
 			try {
 				price = formatEther((await getTilePrice())?.toString() || '0');
 				console.log(`tile base price: ${TILE_BASE_PRICE}`);
