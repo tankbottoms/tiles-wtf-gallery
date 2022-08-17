@@ -21,6 +21,15 @@ function _payTreasury() private {
 
 The Original Tiles visual algorithm can be found [here](https://github.com/tankbottoms/tiles-wtf-gallery/blob/main/src/tiles/tilesStandalone.ts).
 
+#### Tiles Rendering
+
+The repository uses the native SVG tiles however there are other rendering routes available.
+
+- `/render/:address` - renders the tile and returns Base64 encoded SVG.
+- `/render/png/:address` - renders the tile and returns PNG.
+- `/render/svg/:address` - renders the tile and returns SVG.
+- `/render/particle/:address` - renders the tile and returns a particle animation, resolution high or low, and dark mode are optional parameters. By default light and low resolution modes are used.
+
 #### Minting
 
 Original Tiles v1 token holders may mint their token for free (sans gas), if someone has preemptively minted another individual's address, price will be determined by the would be required to seize the token. Selling your Tile which is based on your address for large sums of ETH and then seizing it back for the currently available price is a side effect.
