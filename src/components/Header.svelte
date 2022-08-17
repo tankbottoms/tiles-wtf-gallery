@@ -106,7 +106,7 @@
 				</span>
 				{#if dropdownOpened}
 					<ul class="dropdown">
-						<li>{getTruncatedAddress($connectedAccount)}</li>
+						<li><a href="/mint/{$connectedAccount}">{getTruncatedAddress($connectedAccount)}</a></li>
 						{#each blocknativeNetworks as network}
 							<li
 								on:click={async () => {
@@ -200,6 +200,10 @@
 	p {
 		margin: 0;
 		margin-left: auto;
+	}
+
+	li a {
+		color: var(--text-primary);
 	}
 
 	button {
