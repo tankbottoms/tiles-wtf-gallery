@@ -14,6 +14,7 @@
 	import { formatEther } from 'ethers/lib/utils.js';
 	import type Store from '$utils/Store';
 	import type { ethers } from 'ethers';
+	import EnsOrAddress from '$juicebox/components/EnsOrAddress.svelte';
 
 	const grabHistory = getContext('GRAB_HISTORY_STORE') as Store<{
 		loading: boolean;
@@ -98,7 +99,9 @@
 				bind:this={buttonElement}
 			>
 				<span class="address">
-					<span>{getTruncatedAddress($connectedAccount, 5, 2)}</span>
+					<span>
+						<EnsOrAddress address={$connectedAccount} showTooltip={false} />
+					</span>
 					{#if innerWidth >= 650}<span>({$readNetwork.alias})</span>{/if}
 				</span>
 				{#if dropdownOpened}
