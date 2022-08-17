@@ -43,7 +43,7 @@
 		{/if}
 	</section>
 	<section>
-		<h1>faq</h1>
+		<h1>Faq</h1>
 		<br />
 		<h1>What is the ongoing purpose of the dao?</h1>
 		<p>
