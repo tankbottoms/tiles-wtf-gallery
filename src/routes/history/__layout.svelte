@@ -51,7 +51,7 @@
 
 <main>
 	<section>
-		<h3>mint history</h3>
+		<h3>Tiles mint history</h3>
 	</section>
 
 	<section class:grid>

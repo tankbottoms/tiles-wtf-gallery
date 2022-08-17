@@ -3,7 +3,7 @@ function getMatrixString(SVGMatrix) {
 }
 
 export function getTileAnimationStyleString(tileComponent) {
-    console.log(tileComponent);
+	console.log(tileComponent);
 	const numberOfG = 29;
 	// Pick, randomly, numbers from 0 to numberOfG to spin
 	const nSpinPieces = Array.from({ length: 7 }, () => Math.floor(Math.random() * numberOfG));
@@ -34,8 +34,9 @@ export function getTileAnimationStyleString(tileComponent) {
 
 		if (nSpinPieces.includes(index)) {
 			const randomSpinSeconds = Math.random() * 2 + 5;
-			classValue = `animation: spin${index} ${randomSpinSeconds}s ease-in-out ${Math.random() *
-				10}s infinite, fade ${randomSeconds}s ease-in-out ${Math.random() * 15}s infinite`;
+			classValue = `animation: spin${index} ${randomSpinSeconds}s ease-in-out ${
+				Math.random() * 10
+			}s infinite, fade ${randomSeconds}s ease-in-out ${Math.random() * 15}s infinite`;
 			// Knowing the piece has a single transform of matrix(...)
 			// we can get the matrix and create the animation with it
 			const SVGMatrix = piece.transform.baseVal.getItem(0).matrix;

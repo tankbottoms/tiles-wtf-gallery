@@ -1,8 +1,6 @@
 <script lang="ts">
 	import { browser } from '$app/env';
-
 	import { goto } from '$app/navigation';
-
 	import { generateTile } from '$tiles/tilesStandalone';
 	import { getTileAnimationStyleString } from '$tiles/utils';
 	import { onMount } from 'svelte';
@@ -81,8 +79,8 @@
 			alt="@peri profile with Tile background with nipple"
 		/>
 		<caption
-			><a href="https://twitter.com/peripheralist">@peripheralist</a>, presumably on a warm relaxing
-			day, contemplating life, the universe, ∞ and everything</caption
+			><a href="https://twitter.com/peripheralist">@peripheralist</a>, Presumably on a warm relaxing
+			day, contemplating life, the universe, ∞ and everything.</caption
 		>
 		<br />
 		<br />
@@ -111,35 +109,36 @@
 		</main>
 	</section>
 	<section>
-		<h1>wtf?</h1>
+		<h1>Wtf?</h1>
 		<p>
-			<a href="https://github.com/tankbottoms/tiles-on-chain">infinite tiles v2</a> is a
+			<a href="https://github.com/tankbottoms/tiles-on-chain">Infinite Tiles v2</a> is a
 			reversed-engineered implementation of @peripheralist’s
-			<a href="https://github.com/TileDAO">Tiles</a>, without any api-service. the entire svg tile
-			is created and served from the ethereum blockchain in solidity.
+			<a href="https://github.com/TileDAO">Tiles</a>, without any api-service support. The SVG tile,
+			metadata including attributes, are generated and served from the Ethereum blockchain from
+			Solidity.
 		</p>
 		<p>
-			the minting and <a href="/dao">tiles juicebox treasury</a> experience here were implemented
-			with svelte in typescript. the
+			The minting and <a href="/dao">Tiles Juicebox Treasury</a> experience here were implemented
+			with Svelte in Typescript. The
 			<a href="https://github.com/tankbottoms/tiles-on-chain">tiles-v2-nft</a>
 			and
-			<a href="https://github.com/tankbottoms/tiles-wtf-gallery">tiles-v2-gallery</a> github repos
+			<a href="https://github.com/tankbottoms/tiles-wtf-gallery">tiles-v2-gallery</a> Github repos
 			together seek to further decentralize the
 			<a
 				href="https://snapshot.org/#/jbdao.eth/proposal/0x122ec83036d4ed2379c98ed6c566666256169aac1ee4316f60da24bd768c7ff6"
-				target="_blank">juicebox protocol</a
+				target="_blank">Juicebox v2 protocol</a
 			>.
 		</p>
 		<p>
-			this project is an homage to the venerable @peripheralist: the genius artist, designer,
+			This project is an homage to the venerable @peripheralist: the genius artist, designer,
 			developer, grapher, person. <i>"all hail @peripheralist,"</i> <br />
 		</p>
 		<br />
 		<hr />
 		<br />
-		<h1>unincorporated nonprofit</h1>
+		<h1>Unincorporated Nonprofit</h1>
 		<p>
-			in the United States, unincorporated nonprofit associations are governed by a hodgepodge of
+			In the United States, Unincorporated Nonprofit Associations are governed by a hodgepodge of
 			common law principles and statutes governing some of their legal aspects. the Uniform
 			Unincorporated Nonprofit Association Act (UUNAA) addresses the most significant legal problems
 			that arose under the common law's treatment of such associations.<sup
@@ -150,29 +149,32 @@
 			>
 		</p>
 		<p>
-			therefore infinite tiles v2 will operates as a dao, on the juicebox protocol wrapped as an
-			unincorporated nonprofit. this will enable the community a number of meatspace benefits
-			including banking services, ownership of property, and engagement of services. the <a
-				href="/gp">guiding principals</a
+			Therefore Infinite Tiles v2 will operates as a DAO, on the Juicebox protocol wrapped as an
+			Unincorporated Nonprofit. This will enable the community a number of meatspace benefits
+			including banking services, ownership of property, and engagement of services. The <a
+				href="/gp">Guiding Principals</a
 			> sets forth the initial governance and membership structure, for the community to mold as they
 			see fit.
 		</p>
 		<p>
-			as there are enough unique tiles for each ethereum address; it may be possible that the una
-			recieves funding perpetually. conveniently this entity structure supports perpetual durations.
+			As there are enough unique tiles for each Ethereum address; it may be possible that the UNA
+			recieves funding perpetually. Conveniently this entity structure supports perpetual durations.
 		</p>
 
 		<br />
 		<hr />
 		<br />
-		<h1>gnosis</h1>
-		<a
-			href="https://etherscan.io/address/0x4493287882f75dFFcdB40FD41d38d6308Fb8c181"
-			target="_blank">0x4493287882f75dFFcdB40FD41d38d6308Fb8c181</a
-		>
+		<h1>Gnosis</h1>
 		<p>
-			following initial gnosis signers will steward the tiles v2 juicebox project, and in turn its
-			treasury
+			<a
+				href="https://etherscan.io/address/0x4493287882f75dFFcdB40FD41d38d6308Fb8c181"
+				target="_blank">0x4493287882f75dFFcdB40FD41d38d6308Fb8c181</a
+			>
+		</p>
+		<p>
+			The initial Gnosis signers, listed to the left with their corresponding Tile, will act as
+			stewards too the Tiles v2 Juicebox project token, and in turn its treasury. Additionally, the
+			Gnosis is able to mint new Tiles as well as add additional minters to the Tiles v2 contract.
 		</p>
 		<br />
 		<main class:hide={innerWidth > 650}>

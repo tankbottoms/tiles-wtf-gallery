@@ -1,3 +1,3 @@
 <script lang="ts">
-    // To reserve route /history
+	// To reserve route /history
 </script>

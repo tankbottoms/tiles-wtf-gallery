@@ -40,6 +40,8 @@ export function logInfiteTilesAscii() {
 :=:                      :=:                      :=:                              
 
 
-Infinite Tiles v2.0.0
+Infinite Tiles v2
+Brought to you by tankbottoms.eth, sveltedev.eth, dsintermediatd.eth, cookieslayer.eth
+
     `);
 }
