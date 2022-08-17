@@ -62,7 +62,7 @@
 			</a>
 			owners mint for free; the smart contract calls this operation 
 			<a
-				href="https://github.com/tankbottoms/tiles-on-chain/blob/main/contracts/TileNFT.sol#L124"
+				href="https://github.com/tankbottoms/tiles-on-chain/blob/main/contracts/InfiniteTiles.sol#L181"
 				target="_blank">"grabbing".</a
 			>
 		</p>
@@ -83,7 +83,7 @@
 		<p>
 			If somebody preemptively minted your address' Tile, you can reclaim it by transfering the
 			current Tile rate. The smart contract calls this operation 
-			<a href="https://github.com/tankbottoms/tiles-on-chain/blob/main/contracts/TileNFT.sol#L171"
+			<a href="https://github.com/tankbottoms/tiles-on-chain/blob/main/contracts/InfiniteTiles.sol#L219"
 				>"seizing"</a
 			>.
 		</p>
