@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { browser } from '$app/env';
+
 	import { goto } from '$app/navigation';
 
 	import { generateTile } from '$tiles/tilesStandalone';
@@ -25,7 +27,7 @@
 
 	function setAddressCarousel() {
 		timer = setInterval(() => {
-			address = initialSigners[currentTile % 6];
+			address = initialSigners[currentTile % initialSigners.length];
 			tile = generateTile(address);
 			currentTile++;
 		}, 1500);
@@ -52,20 +54,14 @@
 	}
 
 	onMount(() => {
-		tile = generateTile(initialSigners[0]);
-		// setAddressCarousel();
+		address = initialSigners[0];
+		tile = generateTile(address);
+		setAddressCarousel();
 		// Check if it's been 4s since the last move
-		// setInterval(() => checkAnimationState(), 1000);
-
-		let current = 1;
-		setInterval(() => {
-			address = initialSigners[current % 6];
-			tile = generateTile(address);
-			current++;
-		}, 1000);
+		setInterval(() => checkAnimationState(), 1000);
 	});
 
-	let innerWidth = 0;
+	let innerWidth = browser ? window.innerWidth : 0;
 
 	$: {
 		if (tileComponent) {
