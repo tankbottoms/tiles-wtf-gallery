@@ -67,20 +67,17 @@
 			<a href="https://github.com/tankbottoms/tiles-on-chain">infinite tiles v2</a> is a
 			reversed-engineered implementation of @peripheralist’s
 			<a href="https://github.com/TileDAO">Tiles</a>, without any api-service. the entire svg tile
-			is created in solidity.
+			is created and served from the ethereum blockchain in solidity.
 		</p>
 		<p>
-			this minting and <a href="/dao">tiles juicebox treasury</a> experience were implemented with svelte
-			in typescript.
-		</p>
-		<p>
-			the <a href="https://github.com/tankbottoms/tiles-on-chain">tiles-v2-nft</a> and
+			the minting and <a href="/dao">tiles juicebox treasury</a> experience here were implemented with svelte
+			in typescript.  the <a href="https://github.com/tankbottoms/tiles-on-chain">tiles-v2-nft</a> and
 			<a href="https://github.com/tankbottoms/tiles-wtf-gallery">tiles-v2-gallery</a> github repos
 			together seek to further decentralize the
 			<a
 				href="https://snapshot.org/#/jbdao.eth/proposal/0x122ec83036d4ed2379c98ed6c566666256169aac1ee4316f60da24bd768c7ff6"
-				target="_blank">juicebox application</a
-			>.
+				target="_blank">juicebox protocol</a
+			>. 
 		</p>
 		<p>
 			this project is an homage to the venerable @peripheralist: the genius artist, designer,
@@ -89,21 +86,28 @@
 		<br />
 		<hr />
 		<br />
-		<h1>unincorporated nonprofit - una</h1>
+		<h1>unincorporated nonprofit</h1>
 		<p>
-			there are enough unique tiles for every ethereum address; thus it is possible that the una
-			recieves funding perpetually.
+			in the United States, unincorporated nonprofit
+			associations are governed by a hodgepodge of common law principles and statutes governing some
+			of their legal aspects. the Uniform Unincorporated Nonprofit Association Act (UUNAA)
+			addresses the most significant legal problems that arose under the common law's treatment of such
+			associations.<sup><a href="https://www.uniformlaws.org/HigherLogic/System/DownloadDocumentFile.ashx?DocumentFileKey=a963568e-df25-c741-8ebc-e5d671789fac&forceDialog=0" target="_blank">1</a></sup>
 		</p>
 		<p>
-			therefore infinite tiles v2 will operates as a DAO using the juicebox protocol. the decision
-			to wrap the DAO with an unincorporated nonprofit was to afford the community a meatspace bank
-			account. the initial <a href="/gp">guiding principals</a> sets forth the terms.
+			therefore infinite tiles v2 will operates as a dao, on the juicebox protocol wrapped as an unincorporated nonprofit. 
+			this will enable the community a number of meatspace benefits including banking services, ownership of property, and engagement of services. 
+			the <a href="/gp">guiding principals</a> sets forth the initial governance and membership structure, for the community to mold as they see fit.
+		</p>		
+		<p>						
+			there are enough unique tiles for every ethereum address; thus it is possible that the una recieves funding perpetually. this entity structure supports perpetual durations.
 		</p>
+		
 		<br />
 		<hr />
 		<br />
 		<h1>gnosis</h1>
-		<a href="https://etherscan.io/address/0x4493287882f75dFFcdB40FD41d38d6308Fb8c181"
+		<a href="https://etherscan.io/address/0x4493287882f75dFFcdB40FD41d38d6308Fb8c181" target="_blank"
 			>0x4493287882f75dFFcdB40FD41d38d6308Fb8c181</a
 		>
 		<p>
