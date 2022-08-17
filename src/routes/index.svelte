@@ -88,23 +88,23 @@
 	<section>
 		<h1>
 			<a class="heading" href="/history?{$readNetwork ? `network=${$readNetwork?.alias}` : ''}">
-				infinite (∞) tiles v2
+				Infinite (∞) Tiles v2
 			</a>
 		</h1>
-		<p>generated from any ethereum address</p>
+		<p>Generated from any Ethereum address</p>
 		<p>
 			<a
 				href="https://github.com/tankbottoms/tiles-on-chain/blob/main/contracts/components/TileContentProvider.sol"
-				target="_blank">fully on-chain artwork in solidity</a
+				target="_blank">Fully on-chain Solidity generated artwork</a
 			>
 		</p>
-		<p>each is unique & objectively rare</p>
-		<a href="/wtf?{$readNetwork ? `network=${$readNetwork?.alias}` : ''}">wtf</a>
-		<a href="/dao?{$readNetwork ? `network=${$readNetwork?.alias}` : ''}">treasury</a>
-		<a href="/faq?{$readNetwork ? `network=${$readNetwork?.alias}` : ''}">faq</a>
+		<p>Each is unique & objectively rare</p>
+		<a href="/wtf?{$readNetwork ? `network=${$readNetwork?.alias}` : ''}">Wtf</a>
+		<a href="/dao?{$readNetwork ? `network=${$readNetwork?.alias}` : ''}">Treasury</a>
+		<a href="/faq?{$readNetwork ? `network=${$readNetwork?.alias}` : ''}">Faq</a>
 		<div class="group">
 			<div>
-				<a href="/mint?{$readNetwork ? `network=${$readNetwork?.alias}` : ''}">mint a tile(s)</a>
+				<a href="/mint?{$readNetwork ? `network=${$readNetwork?.alias}` : ''}">Mint a Tile(s)</a>
 			</div>
 		</div>
 	</section>

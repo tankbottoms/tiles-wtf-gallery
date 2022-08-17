@@ -38,8 +38,8 @@
 </script>
 
 <section>
-	<h1>mint a tile</h1>
-	<p>enter an 0x address to find its matching tile, or browse the randomly generated list below.</p>
+	<h1>Mint a tile</h1>
+	<p>Enter an 0x address to find its matching tile, or browse the randomly generated list below.</p>
 	<input placeholder={AddressZero} bind:value={input} />
 </section>
 
@@ -52,7 +52,7 @@
 			<div><span class="address">{input}</span></div>
 		</div>
 	{:else if showInvalidAddress}
-		<p>not a valid ethereum address</p>
+		<p>Not a valid ethereum address</p>
 	{:else}
 		{#each randomTiles as item}
 			<div class="tileContainer" on:click={() => goto(`mint/${item.address}?animate`)}>
@@ -108,7 +108,7 @@
 <footer>
 	<div class="footer">
 		<div class="link">
-			<a href="/tos?{$readNetwork ? `network=${$readNetwork?.alias}` : ''}">terms of sale</a>
+			<a href="/tos?{$readNetwork ? `network=${$readNetwork?.alias}` : ''}">Terms of sale</a>
 		</div>
 	</div>
 </footer>

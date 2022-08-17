@@ -86,13 +86,13 @@
 			{#if innerWidth < 650}
 				{count}
 			{:else}
-				{count} minted
+				{count} Minted
 			{/if}
 		</a>
 		{#if innerWidth < 650}
 			// {price}
 		{:else}
-			// current price: {price} ETH
+			// Current price: {price} ETH
 		{/if}
 	</div>
 
@@ -121,13 +121,13 @@
 								{network.alias}
 							</li>
 						{/each}
-						<li on:click={web3Disconnect}>disconnect</li>
+						<li on:click={web3Disconnect}>Disconnect</li>
 					</ul>
 				{/if}
 			</p>
 			<button class="disconnect" on:click={web3Disconnect}>X</button>
 		{:else}
-			<button on:click={web3Connect}>connect</button>
+			<button on:click={web3Connect}>Connect</button>
 		{/if}
 	</div>
 </header>

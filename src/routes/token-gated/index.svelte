@@ -7,15 +7,15 @@
 
 <section>
 	<TokenGated on:denied={handleAccessDenied}>
-		<p>this page is supposed to be token gated</p>
-		<p slot="denied" let:account>
+		<p>This page is supposed to be token gated.</p>
+		<p slot="Denied" let:account>
 			{#if account}
-				sorry, you do not have access to this page
+				Sorry, you do not have access to this page.
 			{:else}
-				please connect to the ethereum wallet with a tile to access this page
+				Please connect to your Ethereum wallet with a Tile to access this page.
 			{/if}
 		</p>
-		<p slot="checking">loading...</p>
+		<p slot="Checking">loading...</p>
 	</TokenGated>
 </section>
 

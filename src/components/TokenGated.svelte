@@ -7,30 +7,30 @@
 
 	const dispatch = createEventDispatcher();
 
-	let state: 'checking' | 'allowed' | 'denied' = 'checking';
+	let state: 'Checking' | 'Allowed' | 'Denied' = 'Checking';
 	let balance: BigNumber = BigNumber.from(0);
 
 	async function checkAccess(account: string) {
 		balance = await readContract('Tiles', 'balanceOf', [account]);
-		state = balance.gt(0) ? 'allowed' : 'denied';
+		state = balance.gt(0) ? 'Allowed' : 'Denied';
 	}
 
 	$: if ($connectedAccount) {
-		state = 'checking';
+		state = 'Checking';
 		checkAccess($connectedAccount);
 	} else {
-		state = 'denied';
-		dispatch('denied', { reason: 'wallet not connected' });
+		state = 'Denied';
+		dispatch('Denied', { reason: 'wallet not connected' });
 	}
 
 	$: console.log(state);
 </script>
 
-{#if state === 'checking'}
-	<slot {state} {balance} account={$connectedAccount} name="checking" />
-{:else if state === 'allowed'}
+{#if state === 'Checking'}
+	<slot {state} {balance} account={$connectedAccount} name="Checking" />
+{:else if state === 'Allowed'}
 	<slot {state} {balance} account={$connectedAccount} />
-	<slot {state} {balance} account={$connectedAccount} name="allowed" />
-{:else if state === 'denied'}
-	<slot {state} {balance} account={$connectedAccount} name="denied" />
+	<slot {state} {balance} account={$connectedAccount} name="Allowed" />
+{:else if state === 'Denied'}
+	<slot {state} {balance} account={$connectedAccount} name="Denied" />
 {/if}
