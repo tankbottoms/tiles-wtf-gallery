@@ -58,7 +58,9 @@
 			Tiles mint history
 			{#if userAddress}
 				for
-				<EnsOrAddress address={userAddress} />
+				<EtherscanLink type="address" value={userAddress} showTooltip={false}>
+					<EnsOrAddress address={userAddress} />
+				</EtherscanLink>
 			{/if}
 		</h3>
 	</section>
