@@ -45,22 +45,22 @@
 	<section>
 		<h1>Faq</h1>
 		<br />
-		<h1>What is the ongoing purpose of the dao?</h1>
+		<h1>What is the ongoing purpose of the DAO?</h1>
 		<p>
-			TBD, however to encourage and reward early juicebox community members, projects, and builders,
+			TBD, however, "to encourage and reward early Juicebox community members, projects, and builders",
 			sounds pretty cool.
 		</p>
 
 		<br />
 		<h1>What is Tiles "grabbing"?</h1>
 		<p>
-			Original
+			The original
 			<a
 				href="https://etherscan.io/address/0x64931F06d3266049Bf0195346973762E6996D764"
 				target="_blank"
 				>Infinite Tiles
 			</a>
-			owners mint for free; contract calls this
+			owners mint for free; the smart contract calls this operation 
 			<a
 				href="https://github.com/tankbottoms/tiles-on-chain/blob/main/contracts/TileNFT.sol#L124"
 				target="_blank">"grabbing".</a
@@ -69,12 +69,12 @@
 
 		<br />
 		<h1>How are Tiles priced?</h1>
-		<p>Mints start at 0.0001 ETH. every 512 mints, the price doubles.</p>
+		<p>Initial mints start at 0.0001 ETH, and every 512 mints, the price doubles.</p>
 		<p>
-			Parameters were set in the <a
+			The initial parameters were set in the <a
 				href="https://github.com/tankbottoms/tiles-on-chain/blob/main/scripts/mainnet.ts#L46"
 				target="_blank">deploy script</a
-			>, and pricing is governed by the contract:
+			>, and pricing is governed by a pricing contract - the 
 			<a
 				href="https://github.com/tankbottoms/tiles-on-chain/blob/main/contracts/LegacyOwnershipPriceResolver.sol"
 				>legacy ownership price resolver</a
@@ -82,7 +82,7 @@
 		</p>
 		<p>
 			If somebody preemptively minted your address' Tile, you can reclaim it by transfering the
-			current Tile rate. this is called
+			current Tile rate. The smart contract calls this operation 
 			<a href="https://github.com/tankbottoms/tiles-on-chain/blob/main/contracts/TileNFT.sol#L171"
 				>"seizing"</a
 			>.
@@ -93,13 +93,13 @@
 		<p>
 			All proceeds will be transparently managed on <a href="/dao">Juicebox.</a> The Gnosis
 			<b>0x4493287882f75dFFcdB40FD41d38d6308Fb8c181</b>
-			will recieve the Juicebox project token. The initial signers are listed in
-			<a href="/wtf">wtf</a>, while membership to the DAO is offerred to anyone who holds Tiles2 nft
-			or erc20, the specifics of governance, if any, has not been decided.
+			will recieve the Juicebox Project NFT. The initial signers are listed in
+			<a href="/wtf">wtf</a>, while membership to the DAO is offerred to anyone who holds Tiles2 NFT
+			or the project ERC-20, the specifics of governance, if any, has not been decided.
 		</p>
 
 		<br />
-		<h1>Contracts, website source code - licensing?</h1>
+		<h1>What are the Terms of Use or Licensing?</h1>
 		<p>
 			Tiles.wtf and its source code are under the <a
 				href="https://github.com/tankbottoms/tiles-wtf-gallery/blob/main/LICENSE.md"
@@ -109,7 +109,7 @@
 		</p>
 
 		<br />
-		<h1>How to use Tiles for token-gating?</h1>
+		<h1>How can I use Tiles for token-gating?</h1>
 		<p>
 			An example of how to use Tiles to token-gate is available <a href="/token-gated">here</a> and
 			<a
@@ -117,6 +117,8 @@
 				>here</a
 			>.
 		</p>
+
+	<br />	
 	</section>
 </main>
 

@@ -117,10 +117,7 @@
 		await whenPageReady();
 		tile = generateTile(address);
 		console.log('mint, init subscribing...');
-
-		// Check if it's been 4s since the last move
 		setInterval(checkAnimationState, 1000);
-
 		// Returning so it gets unsubscribed when component is destroyed
 		return readNetwork.subscribe(async () => {
 			loading = true;
@@ -181,20 +178,20 @@
 					![Available.IS_AVAILABLE, Available.CAN_SEIZE].includes(isAvailable) ||
 					!hasEnoughBalance}
 			>
-				mint ({formattedPrice} ETH)
+				Mint ({formattedPrice} ETH)
 			</button>
 		{:else}
-			<button on:click={() => web3Connect()}>connect wallet</button>
+			<button on:click={() => web3Connect()}>CONNECT WALLET</button>
 		{/if}
 		<br />
 		{#if !hasEnoughBalance}
-			<p>insufficient balance</p>
+			<p>Insufficient balance</p>
 		{/if}
 	{/if}
 </section>
 
 <button class="download" on:click={() => downloadFile(tile, `${address}.svg`, 'image/svg')}>
-	download svg
+	Download SVG
 </button>
 
 <Modal show={$modal} />
