@@ -1,5 +1,9 @@
 # Infinite Tiles (tiles.wtf website)
 
+<p align="center">
+  <img src="docs/imgs/website-tiles.gif" />
+</p>
+
 #### About
 
 Infinite Tiles v2 is an on-chain implementation of [@peripheralist](https://twitter.com/peripheralist)’s [TilesDAO](https://github.com/TileDAO) the [second (2nd) project on Juicebox](https://juicebox.money/#/p/tiles). The project is an homage to the venerable @peripheralist, the genius artist, developer, person.
