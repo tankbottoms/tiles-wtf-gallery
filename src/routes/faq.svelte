@@ -106,7 +106,7 @@
 			Tiles.wtf and its source code are under the <a
 				href="https://github.com/tankbottoms/tiles-wtf-gallery/blob/main/LICENSE.md"
 				target="_blank">WE-PARTY license</a
-			>. use of the source code is premitted for projects which route their proceeds through the
+			>. Use of the source code is premitted for projects which route their proceeds through the
 			Juicebox v2 Treasury protocol.
 		</p>
 		<br/>
