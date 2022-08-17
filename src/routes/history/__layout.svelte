@@ -10,11 +10,14 @@
 	import moment from 'moment';
 	import { getContext, onMount } from 'svelte';
 	import { page } from '$app/stores';
+	import EnsOrAddress from '$juicebox/components/EnsOrAddress.svelte';
+	import EtherscanLink from '$juicebox/components/EtherscanLink.svelte';
 
 	$: userAddress = $page.params.address;
 
 	let grid = true;
 	let tiles: {
+		caller: string;
 		address: string;
 		tile: string;
 		timestamp: number;
@@ -51,7 +54,13 @@
 
 <main>
 	<section>
-		<h3>Tiles mint history</h3>
+		<h3>
+			Tiles mint history
+			{#if userAddress}
+				for
+				<EnsOrAddress address={userAddress} />
+			{/if}
+		</h3>
 	</section>
 
 	<section class:grid>
@@ -71,10 +80,19 @@
 								{item.address}
 							{/if}
 						</span>
-						{#if item.timestamp}
-							{#await moment(item.timestamp * 1000) then date}
-								<div class="timestamp">{date.format('LLL')}</div>
-							{/await}
+						<div>
+							{#if item.timestamp}
+								{#await moment(item.timestamp * 1000) then date}
+									<div class="timestamp">{date.format('LLL')}</div>
+								{/await}
+							{/if}
+						</div>
+						{#if !userAddress}
+							<div>
+								by <EtherscanLink type="address" value={item.caller} showTooltip={false}>
+									<EnsOrAddress address={item.caller} />
+								</EtherscanLink>
+							</div>
 						{/if}
 					</div>
 				{/each}
