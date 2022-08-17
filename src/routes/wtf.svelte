@@ -139,7 +139,7 @@
 		<h1>Unincorporated Nonprofit</h1>
 		<p>
 			In the United States, Unincorporated Nonprofit Associations are governed by a hodgepodge of
-			common law principles and statutes governing some of their legal aspects. the Uniform
+			common law principles and statutes governing some of their legal aspects. The Uniform
 			Unincorporated Nonprofit Association Act (UUNAA) addresses the most significant legal problems
 			that arose under the common law's treatment of such associations.<sup
 				><a
@@ -150,15 +150,15 @@
 		</p>
 		<p>
 			Therefore Infinite Tiles v2 will operates as a DAO, on the Juicebox protocol wrapped as an
-			Unincorporated Nonprofit. This will enable the community a number of meatspace benefits
-			including banking services, ownership of property, and engagement of services. The <a
+			Unincorporated Nonprofit. This will enable the DAO a number of meatspace benefits
+			including banking services, ownership of property, and engagement of services with other entities. The <a
 				href="/gp">Guiding Principals</a
-			> sets forth the initial governance and membership structure, for the community to mold as they
+			> sets forth the initial governance and membership structure, for the Tile community to mold as they
 			see fit.
 		</p>
 		<p>
-			As there are enough unique tiles for each Ethereum address; it may be possible that the UNA
-			recieves funding perpetually. Conveniently this entity structure supports perpetual durations.
+			As there are enough unique Tiles for each Ethereum address; it may be possible that the UNA
+			recieves funding perpetually. Conveniently, the entity structure, UUNAA, supports perpetual durations.
 		</p>
 
 		<br />
@@ -173,7 +173,7 @@
 		</p>
 		<p>
 			The initial Gnosis signers, listed to the left with their corresponding Tile, will act as
-			stewards too the Tiles v2 Juicebox project token, and in turn its treasury. Additionally, the
+			stewards to the Tiles v2 Juicebox Project, through its NFT, and in turn its treasury. Additionally, the
 			Gnosis is able to mint new Tiles as well as add additional minters to the Tiles v2 contract.
 		</p>
 		<br />
