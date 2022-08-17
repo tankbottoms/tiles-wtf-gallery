@@ -13,10 +13,6 @@
 
 	let pngImageAddress = '';
 
-	// onMount(async () => {
-	// 	await new Promise((r) => setTimeout(r, 1000));
-
-	// });
 	function onLoad() {
 		canvasElement.width = imageElement.naturalWidth;
 		canvasElement.height = imageElement.naturalHeight;
