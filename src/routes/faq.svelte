@@ -44,14 +44,14 @@
 	</section>
 	<section>
 		<h1>Faq</h1>
-		<br />
+		<div class="space"></div>
 		<h1>What is the ongoing purpose of the DAO?</h1>
 		<p>
-			TBD, however, "to encourage and reward early Juicebox community members, projects, and builders",
-			sounds pretty cool.
+			TBD, however, "to encourage and reward early Juicebox community members, projects, and
+			builders", sounds pretty cool.
 		</p>
 
-		<br />
+		<div class="space"></div>
 		<h1>What is Tiles "grabbing"?</h1>
 		<p>
 			The original
@@ -60,21 +60,21 @@
 				target="_blank"
 				>Infinite Tiles
 			</a>
-			owners mint for free; the smart contract calls this operation 
+			owners mint for free; the smart contract calls this operation
 			<a
 				href="https://github.com/tankbottoms/tiles-on-chain/blob/main/contracts/TileNFT.sol#L124"
 				target="_blank">"grabbing".</a
 			>
 		</p>
 
-		<br />
+		<div class="space"></div>
 		<h1>How are Tiles priced?</h1>
 		<p>Initial mints start at 0.0001 ETH, and every 512 mints, the price doubles.</p>
 		<p>
 			The initial parameters were set in the <a
 				href="https://github.com/tankbottoms/tiles-on-chain/blob/main/scripts/mainnet.ts#L46"
 				target="_blank">deploy script</a
-			>, and pricing is governed by a pricing contract - the 
+			>, and pricing is governed by a pricing contract - the
 			<a
 				href="https://github.com/tankbottoms/tiles-on-chain/blob/main/contracts/LegacyOwnershipPriceResolver.sol"
 				>legacy ownership price resolver</a
@@ -82,13 +82,13 @@
 		</p>
 		<p>
 			If somebody preemptively minted your address' Tile, you can reclaim it by transfering the
-			current Tile rate. The smart contract calls this operation 
+			current Tile rate. The smart contract calls this operation
 			<a href="https://github.com/tankbottoms/tiles-on-chain/blob/main/contracts/TileNFT.sol#L171"
 				>"seizing"</a
 			>.
 		</p>
 
-		<br />
+		<div class="space"></div>
 		<h1>How will the treasury be managed?</h1>
 		<p>
 			All proceeds will be transparently managed on <a href="/dao">Juicebox.</a> The Gnosis
@@ -98,7 +98,7 @@
 			or the project ERC-20, the specifics of governance, if any, has not been decided.
 		</p>
 
-		<br />
+		<div class="space"></div>
 		<h1>What are the Terms of Use or Licensing?</h1>
 		<p>
 			Tiles.wtf and its source code are under the <a
@@ -108,7 +108,7 @@
 			Juicebox v2 Treasury protocol.
 		</p>
 
-		<br />
+		<div class="space"></div>
 		<h1>How can I use Tiles for token-gating?</h1>
 		<p>
 			An example of how to use Tiles to token-gate is available <a href="/token-gated">here</a> and
@@ -118,7 +118,7 @@
 			>.
 		</p>
 
-	<br />	
+		<div class="space"></div>
 	</section>
 </main>
 
@@ -126,21 +126,24 @@
 	main {
 		display: flex;
 		align-items: center;
-		justify-content: space-evenly;
+		justify-content: center;
+		/* max-width: 1000px; */
 	}
 	section {
 		max-width: 540px;
 		line-height: 1.3;
 		padding: 0px 20px;
+		padding-bottom: 100px;
 		margin-top: 10vh;
 	}
 
-	h1 {
-		font-size: 18px;
+	.space {
+		display: block;
+		height: 0.25em;
 	}
 
 	p {
-		font-size: 12px;
+		margin-bottom: 1em;
 	}
 
 	.tile {
