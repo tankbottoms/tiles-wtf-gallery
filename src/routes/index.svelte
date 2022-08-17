@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	import { generateTile, generateRandomAddresses } from '$tiles/tilesStandalone';
 	import { onMount } from 'svelte';
 	import { goto } from '$app/navigation';
@@ -10,7 +10,7 @@
 	let address = '';
 	let animate = false;
 	let mouseLastMoved = Date.now();
-	let tileComponent;
+	let tileComponent: HTMLElement;
 
 	let currentTile = 1;
 	let timer;
