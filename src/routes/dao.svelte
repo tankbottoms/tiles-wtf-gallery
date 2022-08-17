@@ -38,7 +38,7 @@
 	import { V2OperatorPermission } from '$juicebox/constants/v2/operatorPermission';
 	import { blocknativeNetworks } from '$constants/networks';
 
-	let projectId = BigNumber.from(Number(getDefaultProvider().id) === 4 ? 98 : 41);
+	let projectId = BigNumber.from(Number(getDefaultProvider().id) === 4 ? 98 : 174);
 
 	let project = new Store<V2ProjectContextType>({
 		projectId: projectId
