@@ -1,14 +1,15 @@
-<script>
+<script lang="ts">
 	import { goto } from '$app/navigation';
 
 	import { generateTile } from '$tiles/tilesStandalone';
+	import { getTileAnimationStyleString } from '$tiles/utils';
 	import { onMount } from 'svelte';
 
 	let tile = '';
 	let address = '';
 	let animate = false;
 	let mouseLastMoved = Date.now();
-	let tileComponent;
+	let tileComponent: HTMLElement;
 
 	let currentTile = 1;
 	let timer;
@@ -63,7 +64,7 @@
 			current++;
 		}, 1000);
 	});
-	
+
 	let innerWidth = 0;
 
 	$: {
@@ -73,7 +74,7 @@
 	}
 </script>
 
-<svelte:window bind:innerWidth on:mousemove={handleMove}/>
+<svelte:window bind:innerWidth on:mousemove={handleMove} />
 
 <div class="wrapper">
 	<section>
@@ -97,13 +98,13 @@
 			>
 				<div id="tiles">
 					{#if animate}
-				<div class="tile" bind:this={tileComponent}>
-					{@html tile}
-				</div>
+						<div class="tile" bind:this={tileComponent}>
+							{@html tile}
+						</div>
 					{:else}
-					<div class="tile">
-						{@html tile}
-					</div>
+						<div class="tile">
+							{@html tile}
+						</div>
 					{/if}
 					<div>
 						{address}
@@ -122,14 +123,16 @@
 			is created and served from the ethereum blockchain in solidity.
 		</p>
 		<p>
-			the minting and <a href="/dao">tiles juicebox treasury</a> experience here were implemented with svelte
-			in typescript.  the <a href="https://github.com/tankbottoms/tiles-on-chain">tiles-v2-nft</a> and
+			the minting and <a href="/dao">tiles juicebox treasury</a> experience here were implemented
+			with svelte in typescript. the
+			<a href="https://github.com/tankbottoms/tiles-on-chain">tiles-v2-nft</a>
+			and
 			<a href="https://github.com/tankbottoms/tiles-wtf-gallery">tiles-v2-gallery</a> github repos
 			together seek to further decentralize the
 			<a
 				href="https://snapshot.org/#/jbdao.eth/proposal/0x122ec83036d4ed2379c98ed6c566666256169aac1ee4316f60da24bd768c7ff6"
 				target="_blank">juicebox protocol</a
-			>. 
+			>.
 		</p>
 		<p>
 			this project is an homage to the venerable @peripheralist: the genius artist, designer,
@@ -140,27 +143,36 @@
 		<br />
 		<h1>unincorporated nonprofit</h1>
 		<p>
-			in the United States, unincorporated nonprofit
-			associations are governed by a hodgepodge of common law principles and statutes governing some
-			of their legal aspects. the Uniform Unincorporated Nonprofit Association Act (UUNAA)
-			addresses the most significant legal problems that arose under the common law's treatment of such
-			associations.<sup><a href="https://www.uniformlaws.org/HigherLogic/System/DownloadDocumentFile.ashx?DocumentFileKey=a963568e-df25-c741-8ebc-e5d671789fac&forceDialog=0" target="_blank">1</a></sup>
+			in the United States, unincorporated nonprofit associations are governed by a hodgepodge of
+			common law principles and statutes governing some of their legal aspects. the Uniform
+			Unincorporated Nonprofit Association Act (UUNAA) addresses the most significant legal problems
+			that arose under the common law's treatment of such associations.<sup
+				><a
+					href="https://www.uniformlaws.org/HigherLogic/System/DownloadDocumentFile.ashx?DocumentFileKey=a963568e-df25-c741-8ebc-e5d671789fac&forceDialog=0"
+					target="_blank">1</a
+				></sup
+			>
 		</p>
 		<p>
-			therefore infinite tiles v2 will operates as a dao, on the juicebox protocol wrapped as an unincorporated nonprofit. 
-			this will enable the community a number of meatspace benefits including banking services, ownership of property, and engagement of services. 
-			the <a href="/gp">guiding principals</a> sets forth the initial governance and membership structure, for the community to mold as they see fit.
-		</p>		
-		<p>						
-			as there are enough unique tiles for each ethereum address; it may be possible that the una recieves funding perpetually. conveniently this entity structure supports perpetual durations.
+			therefore infinite tiles v2 will operates as a dao, on the juicebox protocol wrapped as an
+			unincorporated nonprofit. this will enable the community a number of meatspace benefits
+			including banking services, ownership of property, and engagement of services. the <a
+				href="/gp">guiding principals</a
+			> sets forth the initial governance and membership structure, for the community to mold as they
+			see fit.
 		</p>
-		
+		<p>
+			as there are enough unique tiles for each ethereum address; it may be possible that the una
+			recieves funding perpetually. conveniently this entity structure supports perpetual durations.
+		</p>
+
 		<br />
 		<hr />
 		<br />
 		<h1>gnosis</h1>
-		<a href="https://etherscan.io/address/0x4493287882f75dFFcdB40FD41d38d6308Fb8c181" target="_blank"
-			>0x4493287882f75dFFcdB40FD41d38d6308Fb8c181</a
+		<a
+			href="https://etherscan.io/address/0x4493287882f75dFFcdB40FD41d38d6308Fb8c181"
+			target="_blank">0x4493287882f75dFFcdB40FD41d38d6308Fb8c181</a
 		>
 		<p>
 			following initial gnosis signers will steward the tiles v2 juicebox project, and in turn its
