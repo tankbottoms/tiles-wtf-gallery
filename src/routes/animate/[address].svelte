@@ -8,7 +8,6 @@
 	$: tileBase64 = `data:image/svg+xml;base64,${btoa(tile)}`;
 
 	function particles(node: HTMLElement) {
-		console.log(window['ParticleSlider']);
 		const isMobile =
 			navigator.userAgent && navigator.userAgent.toLowerCase().indexOf('mobile') >= 0;
 		const isSmall = window.innerWidth < 1000;
@@ -21,11 +20,6 @@
 		});
 	}
 </script>
-
-<svelte:head>
-	<title>Tile</title>
-	<link rel="icon" href={tileBase64} />
-</svelte:head>
 
 <main id="particle-slider">
 	<div class="slides">
