@@ -1,11 +1,18 @@
 <script>
 	import { goto } from '$app/navigation';
 
-	import { generateTile, generateRandomAddresses } from '$tiles/tilesStandalone';
+	import { generateTile } from '$tiles/tilesStandalone';
 	import { onMount } from 'svelte';
 
 	let tile = '';
 	let address = '';
+	let animate = false;
+	let mouseLastMoved = Date.now();
+	let tileComponent;
+
+	let currentTile = 1;
+	let timer;
+
 	const initialSigners = [
 		'0x5d95baEBB8412AD827287240A5c281E3bB30d27E',
 		'0x63a2368f4b509438ca90186cb1c15156713d5834',
@@ -15,20 +22,59 @@
 		'0x5566b7cb1cccb3e147084cf971d6dda770a3c90f'
 	];
 
+	function setAddressCarousel() {
+		timer = setInterval(() => {
+			address = initialSigners[currentTile % 6];
+			tile = generateTile(address);
+			currentTile++;
+		}, 1500);
+	}
+
+	function handleMove() {
+		if (animate) {
+			setAddressCarousel();
+		}
+		animate = false;
+		mouseLastMoved = Date.now();
+	}
+
+	function checkAnimationState() {
+		if (mouseLastMoved + 4000 < Date.now()) {
+			animate = true;
+			clearTimeout(timer);
+		}
+	}
+
+	function animateTile() {
+		const styles = getTileAnimationStyleString(tileComponent);
+		document.head.appendChild(document.createElement('style')).innerHTML = styles;
+	}
+
 	onMount(() => {
 		tile = generateTile(initialSigners[0]);
+		// setAddressCarousel();
+		// Check if it's been 4s since the last move
+		// setInterval(() => checkAnimationState(), 1000);
 
 		let current = 1;
 		setInterval(() => {
 			address = initialSigners[current % 6];
 			tile = generateTile(address);
 			current++;
-		}, 500);
+		}, 1000);
 	});
+	
 	let innerWidth = 0;
+
+	$: {
+		if (tileComponent) {
+			animateTile();
+		}
+	}
 </script>
 
-<svelte:window bind:innerWidth />
+<svelte:window bind:innerWidth on:mousemove={handleMove}/>
+
 <div class="wrapper">
 	<section>
 		<img
@@ -50,9 +96,15 @@
 				style="transform: scale({Math.min(1, (innerWidth - 50) / 560)});"
 			>
 				<div id="tiles">
+					{#if animate}
+				<div class="tile" bind:this={tileComponent}>
+					{@html tile}
+				</div>
+					{:else}
 					<div class="tile">
 						{@html tile}
 					</div>
+					{/if}
 					<div>
 						{address}
 					</div>
@@ -100,7 +152,7 @@
 			the <a href="/gp">guiding principals</a> sets forth the initial governance and membership structure, for the community to mold as they see fit.
 		</p>		
 		<p>						
-			there are enough unique tiles for every ethereum address; thus it is possible that the una recieves funding perpetually. this entity structure supports perpetual durations.
+			as there are enough unique tiles for each ethereum address; it may be possible that the una recieves funding perpetually. conveniently this entity structure supports perpetual durations.
 		</p>
 		
 		<br />
@@ -118,7 +170,7 @@
 		<main class:hide={innerWidth > 650}>
 			<div
 				class="tiles-container"
-				on:click={() => goto(`mint/${address}`)}
+				on:click={() => goto(`mint/${address}?animate`)}
 				style="transform: scale({Math.min(1, (innerWidth - 50) / 560)});"
 			>
 				<div id="tiles">
