@@ -18,7 +18,6 @@
 
 	// });
 	function onLoad() {
-		console.log(imageElement);
 		canvasElement.width = imageElement.naturalWidth;
 		canvasElement.height = imageElement.naturalHeight;
 		const context = canvasElement.getContext('2d');
