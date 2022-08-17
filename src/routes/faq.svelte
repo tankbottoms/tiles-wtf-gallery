@@ -44,7 +44,7 @@
 	</section>
 	<section>
 		<h1>faq</h1>
-<br>
+		<br />
 		<h1>What is the ongoing purpose of the dao?</h1>
 		<p>
 			TBD, however to encourage and reward early juicebox community members, projects, and builders,
@@ -60,7 +60,7 @@
 				target="_blank"
 				>Infinite Tiles
 			</a>
-			owners mint for free; contract calls this 
+			owners mint for free; contract calls this
 			<a
 				href="https://github.com/tankbottoms/tiles-on-chain/blob/main/contracts/TileNFT.sol#L124"
 				target="_blank">"grabbing".</a
@@ -69,26 +69,24 @@
 
 		<br />
 		<h1>How are Tiles priced?</h1>
-		<ol>
-			<li>Mints start at 0.0001 ETH. every 512 mints, the price doubles.</li>
-			<li>
-				Parameters were set in the <a
-					href="https://github.com/tankbottoms/tiles-on-chain/blob/main/scripts/mainnet.ts#L46"
-					target="_blank">deploy script</a
-				>, and pricing is governed by the contract:
-				<a
-					href="https://github.com/tankbottoms/tiles-on-chain/blob/main/contracts/LegacyOwnershipPriceResolver.sol"
-					>legacy ownership price resolver</a
-				>.
-			</li>
-			<li>
-				If somebody preemptively minted your address' Tile, you can reclaim it by transfering the
-				current Tile rate. this is called
-				<a href="https://github.com/tankbottoms/tiles-on-chain/blob/main/contracts/TileNFT.sol#L171"
-					>"seizing"</a
-				>.
-			</li>
-		</ol>
+		<p>Mints start at 0.0001 ETH. every 512 mints, the price doubles.</p>
+		<p>
+			Parameters were set in the <a
+				href="https://github.com/tankbottoms/tiles-on-chain/blob/main/scripts/mainnet.ts#L46"
+				target="_blank">deploy script</a
+			>, and pricing is governed by the contract:
+			<a
+				href="https://github.com/tankbottoms/tiles-on-chain/blob/main/contracts/LegacyOwnershipPriceResolver.sol"
+				>legacy ownership price resolver</a
+			>.
+		</p>
+		<p>
+			If somebody preemptively minted your address' Tile, you can reclaim it by transfering the
+			current Tile rate. this is called
+			<a href="https://github.com/tankbottoms/tiles-on-chain/blob/main/contracts/TileNFT.sol#L171"
+				>"seizing"</a
+			>.
+		</p>
 
 		<br />
 		<h1>How will the treasury be managed?</h1>
@@ -109,11 +107,15 @@
 			>. Use of the source code is premitted for projects which route their proceeds through the
 			Juicebox v2 Treasury protocol.
 		</p>
-		<br/>
-		
+
+		<br />
 		<h1>How to use Tiles for token-gating?</h1>
 		<p>
-			An example of how to use Tiles to token-gate is available <a href="/token-gated">here</a> and <a href="https://github.com/tankbottoms/tiles-wtf-gallery/blob/main/src/components/TokenGated.svelte">here</a>.
+			An example of how to use Tiles to token-gate is available <a href="/token-gated">here</a> and
+			<a
+				href="https://github.com/tankbottoms/tiles-wtf-gallery/blob/main/src/components/TokenGated.svelte"
+				>here</a
+			>.
 		</p>
 	</section>
 </main>

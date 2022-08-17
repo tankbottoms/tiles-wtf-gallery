@@ -31,14 +31,14 @@
 	let input = 0;
 	let unclaimedTokens: BigNumber = BigNumber.from('10000000000000000000');
 
-	onMount(async () => {		
+	onMount(async () => {
 		unclaimedTokens = await readContract(V2ContractName.JBTokenStore, 'unclaimedBalanceOf', [
 			$connectedAccount,
 			BigNumber.from($project.projectId).toHexString()
 		]);
 	});
 
-	async function claimTokens() {		
+	async function claimTokens() {
 		console.log('TODO: call contract to claim tokens for logged in user');
 		const claimAmount = BigNumber.from(parseWad(input));
 		if (claimAmount.lte(unclaimedTokens)) {
@@ -53,7 +53,7 @@
 					txnResponse
 				})
 			);
-			const txnResult = await txnResponse.wait();			
+			const txnResult = await txnResponse.wait();
 			console.log(`claim tokens:${txnResult}`);
 			startConfetti();
 		}

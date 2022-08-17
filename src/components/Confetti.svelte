@@ -1,8 +1,8 @@
 <script lang="ts">
 	import confetti from 'canvas-confetti';
-	import { onMount } from 'svelte';	
+	import { onMount } from 'svelte';
 	import { page } from '$app/stores';
-    		
+
 	let isMounted = false;
 
 	onMount(async () => {
@@ -28,7 +28,7 @@
 				startVelocity: 50,
 				angle: 60,
 				spread: 175,
-				origin: { x: 0 },
+				origin: { x: 0 }
 			});
 
 			confetti({
@@ -36,7 +36,7 @@
 				startVelocity: 50,
 				angle: 120,
 				spread: 175,
-				origin: { x: 1 },
+				origin: { x: 1 }
 			});
 
 			if (Date.now() < end) {
@@ -52,13 +52,11 @@
 			first = false;
 		});
 	}
-		
 </script>
-
 
 <style lang="scss">
 	.wrap {
-		padding: 0 0;		
+		padding: 0 0;
 		padding-bottom: 1.875rem;
 	}
 

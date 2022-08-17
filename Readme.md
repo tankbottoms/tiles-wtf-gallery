@@ -19,7 +19,7 @@ function _payTreasury() private {
 
 #### Tiles Algorithm
 
-The Original Tiles visual algorithm can be found [here](https://github.com/tankbottoms/tiles-wtf-gallery/blob/main/src/tiles/tilesStandalone.ts). 
+The Original Tiles visual algorithm can be found [here](https://github.com/tankbottoms/tiles-wtf-gallery/blob/main/src/tiles/tilesStandalone.ts).
 
 #### Minting
 

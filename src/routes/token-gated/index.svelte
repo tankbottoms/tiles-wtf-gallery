@@ -1,5 +1,5 @@
 <script lang="ts">
-	import TokenGated from '$components/TokenGated.svelte';	
+	import TokenGated from '$components/TokenGated.svelte';
 	function handleAccessDenied() {
 		console.log('token gated handle access denied');
 	}
