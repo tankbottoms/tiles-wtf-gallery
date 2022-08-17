@@ -124,7 +124,7 @@
 		h1,
 		.heading {
 			font-size: 20px;
-			border: 0;
+			// border: 0;
 		}
 
 		a {
