@@ -126,7 +126,7 @@
 			loading = true;
 
 			try {
-				price = await getTilePrice(TILE_BASE_PRICE, TILE_MULTIPLIER, TILE_TIER_SIZE);
+				price = await getTilePrice();
 				isAvailable = await checkAvailability(address);
 			} catch (error) {
 				console.warn(error.message);

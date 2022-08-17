@@ -43,9 +43,7 @@
 			console.error(`onMount readNetwork`);
 
 			try {
-				price = formatEther(
-					(await getTilePrice(TILE_BASE_PRICE, TILE_MULTIPLIER, TILE_TIER_SIZE))?.toString() || '0'
-				);
+				price = formatEther((await getTilePrice())?.toString() || '0');
 				console.log(`tile base price: ${TILE_BASE_PRICE}`);
 				console.log(`tile multiplier: ${TILE_MULTIPLIER}`);
 				console.log(`tile tier size: ${TILE_TIER_SIZE}`);

@@ -4,14 +4,8 @@ import { BigNumber } from '@ethersproject/bignumber';
 import { ethers } from 'ethers';
 import { getTransactionsByAddress, readContract } from './web3/contractReader';
 
-export async function getTilePrice(basePrice: BigNumber, multiplier: number, tierSize: number) {
-	const currentSupply = BigNumber.from(await readContract('Tiles', 'totalSupply'));
-	const expectedPrice = currentSupply.div(tierSize).mul(multiplier).mul(basePrice);
-	if (expectedPrice.eq(0)) {
-		return BigNumber.from(basePrice);
-	}
-
-	return expectedPrice;
+export async function getTilePrice() {
+	return BigNumber.from(await readContract('Tiles', 'getMintPrice'));
 }
 
 export async function getTilesHistory() {

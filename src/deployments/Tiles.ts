@@ -1,5 +1,5 @@
 const Tiles: ContractDeployment = {
-	rinkeby: '0x1E550272e60f98AF0e7d1f754719496163BBF30b',
+	rinkeby: '0xe9595c465Bf76F72279D67d09f7425969f11bC46',
 	mainnet: '',
 	abi: [
 		{
@@ -24,6 +24,7 @@ const Tiles: ContractDeployment = {
 		{ inputs: [], name: 'INCORRECT_PRICE', type: 'error' },
 		{ inputs: [], name: 'INVALID_ADDRESS', type: 'error' },
 		{ inputs: [], name: 'INVALID_AMOUNT', type: 'error' },
+		{ inputs: [], name: 'INVALID_RATE', type: 'error' },
 		{ inputs: [], name: 'INVALID_TOKEN', type: 'error' },
 		{ inputs: [], name: 'PRIVILEDGED_OPERATION', type: 'error' },
 		{ inputs: [], name: 'UNSUPPORTED_OPERATION', type: 'error' },
@@ -112,7 +113,14 @@ const Tiles: ContractDeployment = {
 			type: 'function'
 		},
 		{
-			inputs: [{ internalType: 'address', name: 'tile', type: 'address' }],
+			inputs: [],
+			name: 'getMintPrice',
+			outputs: [{ internalType: 'uint256', name: 'price', type: 'uint256' }],
+			stateMutability: 'view',
+			type: 'function'
+		},
+		{
+			inputs: [{ internalType: 'address', name: '_tile', type: 'address' }],
 			name: 'grab',
 			outputs: [{ internalType: 'uint256', name: 'mintedTokenId', type: 'uint256' }],
 			stateMutability: 'payable',
@@ -138,7 +146,7 @@ const Tiles: ContractDeployment = {
 		{
 			inputs: [
 				{ internalType: 'uint256', name: 'index', type: 'uint256' },
-				{ internalType: 'address', name: 'tile', type: 'address' },
+				{ internalType: 'address', name: '_tile', type: 'address' },
 				{ internalType: 'bytes', name: 'proof', type: 'bytes' }
 			],
 			name: 'merkleMint',
@@ -197,6 +205,33 @@ const Tiles: ContractDeployment = {
 		},
 		{
 			inputs: [
+				{ internalType: 'uint256', name: '_tokenId', type: 'uint256' },
+				{ internalType: 'uint256', name: '_salePrice', type: 'uint256' }
+			],
+			name: 'royaltyInfo',
+			outputs: [
+				{ internalType: 'address', name: 'receiver', type: 'address' },
+				{ internalType: 'uint256', name: 'royaltyAmount', type: 'uint256' }
+			],
+			stateMutability: 'view',
+			type: 'function'
+		},
+		{
+			inputs: [],
+			name: 'royaltyRate',
+			outputs: [{ internalType: 'uint16', name: '', type: 'uint16' }],
+			stateMutability: 'view',
+			type: 'function'
+		},
+		{
+			inputs: [],
+			name: 'royaltyReceiver',
+			outputs: [{ internalType: 'address payable', name: '', type: 'address' }],
+			stateMutability: 'view',
+			type: 'function'
+		},
+		{
+			inputs: [
 				{ internalType: 'address', name: '_from', type: 'address' },
 				{ internalType: 'address', name: '_to', type: 'address' },
 				{ internalType: 'uint256', name: '_tokenId', type: 'uint256' }
@@ -247,6 +282,16 @@ const Tiles: ContractDeployment = {
 				{ internalType: 'contract IPriceResolver', name: '_priceResolver', type: 'address' }
 			],
 			name: 'setPriceResolver',
+			outputs: [],
+			stateMutability: 'nonpayable',
+			type: 'function'
+		},
+		{
+			inputs: [
+				{ internalType: 'address', name: '_royaltyReceiver', type: 'address' },
+				{ internalType: 'uint16', name: '_royaltyRate', type: 'uint16' }
+			],
+			name: 'setRoyalties',
 			outputs: [],
 			stateMutability: 'nonpayable',
 			type: 'function'
@@ -357,7 +402,8 @@ const Tiles: ContractDeployment = {
 			outputs: [],
 			stateMutability: 'nonpayable',
 			type: 'function'
-		}
+		},
+		{ stateMutability: 'payable', type: 'receive' }
 	]
 };
 
