@@ -1,6 +1,6 @@
 const Tiles: ContractDeployment = {
 	rinkeby: '0xe9595c465Bf76F72279D67d09f7425969f11bC46',
-	mainnet: '',
+	mainnet: '0x894EaDA0D9eA2314CdB72C016d0FAA424Db0e4a0',
 	abi: [
 		{
 			inputs: [
