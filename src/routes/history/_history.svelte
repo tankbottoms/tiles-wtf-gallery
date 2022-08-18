@@ -54,7 +54,7 @@
 <main>
 	<section>
 		<h3>
-			Tiles mint history
+			Infinite Tiles mint history
 			{#if userAddress}
 				for
 				<EtherscanLink type="address" value={userAddress} showTooltip={false}>
@@ -98,11 +98,11 @@
 					</div>
 				{/each}
 			{:else}
-				<p>shockingly nothing has been minted, or something is wrong.</p>
+				<p>Shockingly nothing has been minted.</p>
 			{/if}
 		{:else}
 			<p>
-				connect to a wallet to see history <a href={null} on:click={web3Connect}>connect wallet</a>
+				<a href={null} on:click={web3Connect}>Connect to wallet</a> to see history.
 			</p>
 		{/if}
 	</section>
