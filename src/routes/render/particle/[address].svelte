@@ -103,9 +103,6 @@
 		&.dark {
 			color: white;
 		}
-		label {
-			font-size: 1.4rem;
-		}
 	}
 	.draw {
 		margin-top: -100px;
