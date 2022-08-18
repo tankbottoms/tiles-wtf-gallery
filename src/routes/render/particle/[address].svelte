@@ -56,15 +56,6 @@
 
 <main id="particle-slider" style="background: {background};">
 	<div class="controls" class:dark={background === '#000'}>
-		<div class="">
-			<label for="checkbox">Particle Size</label>
-			<span>
-				<input type="radio" name="resolution" value="low" bind:group={resolution} /> low
-			</span>
-			<span>
-				<input type="radio" name="resolution" value="high" bind:group={resolution} /> high
-			</span>
-		</div>
 		<div>
 			<label for="checkbox">Background</label>
 			<span>
@@ -74,6 +65,15 @@
 				<input type="radio" name="background" value="#fff" bind:group={background} /> light
 			</span>
 		</div>
+		<div class="">
+			<label for="checkbox">Particle size</label>
+			<span>
+				<input type="radio" name="resolution" value="low" bind:group={resolution} /> low
+			</span>
+			<span>
+				<input type="radio" name="resolution" value="high" bind:group={resolution} /> high
+			</span>
+		</div>		
 	</div>
 	<div class="slides">
 		<div id="first-slide" class="slide" data-src={tileBase64} />
@@ -98,7 +98,7 @@
 	}
 	.controls {
 		margin-top: 100px;
-		font-size: 1.2rem;
+		font-size: 1rem;
 		z-index: 10;
 		&.dark {
 			color: white;
