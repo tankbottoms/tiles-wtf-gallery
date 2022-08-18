@@ -214,7 +214,7 @@
 		flex-direction: column;
 		align-items: center;
 		justify-content: center;
-		height: calc(100vh - 100px);
+		height: calc(100vh - 85px);
 		line-height: 1.3;
 	}
 

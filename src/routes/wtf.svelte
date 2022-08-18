@@ -13,7 +13,7 @@
 	let tileComponent: HTMLElement;
 
 	let currentTile = 1;
-	let timer: number;
+	let timer: NodeJS.Timeout;
 
 	const initialSigners = [
 		'0x5d95baEBB8412AD827287240A5c281E3bB30d27E',

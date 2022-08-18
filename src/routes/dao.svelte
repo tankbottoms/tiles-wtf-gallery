@@ -39,7 +39,7 @@
 	import { blocknativeNetworks } from '$constants/networks';
 
 	function getProjectId() {
-		return BigNumber.from(Number(getDefaultProvider().id) === 4 ? 98 : 174);
+		return BigNumber.from(Number(getDefaultProvider().id) === 4 ? 4608 : 174);
 	}
 
 	let projectId = getProjectId();

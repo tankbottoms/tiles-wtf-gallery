@@ -142,6 +142,7 @@
 <style lang="scss">
 	main {
 		max-width: 100vw;
+		min-height: calc(100vh - 85px);
 		overflow-x: hidden;
 	}
 	section {

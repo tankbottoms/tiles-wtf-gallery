@@ -115,7 +115,7 @@
 		background: white;
 		display: grid;
 		grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
-		height: 100vh;
+		height: calc(100vh - 85px);
 		align-items: center;
 		justify-items: center;
 		max-width: 1000px;
