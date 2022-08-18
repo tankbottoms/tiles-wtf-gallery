@@ -51,7 +51,7 @@
 			<div><span class="address">{input}</span></div>
 		</div>
 	{:else if showInvalidAddress}
-		<p>Not a valid ethereum address</p>
+		<p>Not a valid Ethereum address</p>
 	{:else}
 		{#each randomTiles as item}
 			<div class="tileContainer" on:click={() => goto(`mint/${item.address}?animate`)}>

@@ -31,12 +31,10 @@
 			<slot />
 			<ErrorModal />
 		{/if}
-		{#if !path.match(/^\/render/)}
+		{#if !path.match(/^\/render/) && !path.match(/^\//)}
 			<footer>
 				<div class="footer">
-					<div class="link">
-						<a href="/tos?{$readNetwork ? `network=${$readNetwork?.alias}` : ''}">Terms of sale</a>
-					</div>
+					<div class="link"><a href="/tos?{$readNetwork ? `network=${$readNetwork?.alias}` : ''}">Terms of sale</a></div>
 				</div>
 			</footer>
 		{/if}
