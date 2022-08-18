@@ -1,6 +1,6 @@
 const Tiles: ContractDeployment = {
 	// Mainnet
-	mainnet: '0x8B578C09F054F2A8711Caa8B40C3574661F7A717',
+	mainnet: '0xa0dadfA9279C1379CfcAbd8e21Af78b9064cCeb0',
 	// Rinkeby Test Network
 	rinkeby: '0x54dFA08a284e94E21D1e548c3C9eA509FD1ef200',
 	abi: [
