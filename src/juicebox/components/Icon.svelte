@@ -21,7 +21,7 @@
 		| 'gnosis'
 		| 'uniswap'
 		| 'sushiswap'
-		| 'github' 
+		| 'github'
 		| 'caret';
 	export let direction = 'n';
 	export let spin = false;
