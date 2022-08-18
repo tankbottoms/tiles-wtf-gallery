@@ -13,6 +13,13 @@
 
 	let pngImageAddress = '';
 
+	onMount(async () => {
+		await new Promise((r) => setTimeout(r, 50));
+		onLoad();
+		await new Promise((r) => setTimeout(r, 50));
+		if (!pngImageAddress) onLoad();
+	});
+
 	function onLoad() {
 		canvasElement.width = imageElement.naturalWidth;
 		canvasElement.height = imageElement.naturalHeight;
@@ -20,6 +27,7 @@
 		context.drawImage(imageElement, 0, 0);
 		const imgData = canvasElement.toDataURL('image/png');
 		pngImageAddress = imgData;
+		console.log({ pngImageAddress });
 	}
 </script>
 
@@ -27,13 +35,7 @@
 	{#if pngImageAddress}
 		<img class="png-image" src={pngImageAddress} alt={address} in:fade />
 	{:else}
-		<img
-			class="svg-image"
-			src={tileBase64}
-			alt={address}
-			bind:this={imageElement}
-			on:load={onLoad}
-		/>
+		<img class="svg-image" src={tileBase64} alt={address} bind:this={imageElement} />
 		<canvas
 			class="canvas-convert-svg-to-png"
 			width="360px"

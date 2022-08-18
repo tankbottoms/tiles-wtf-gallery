@@ -11,15 +11,12 @@
 	import Loading from '$juicebox/components/Loading.svelte';
 	import { pageReady } from '$stores';
 	import { readNetwork } from '$stores/web3';
-	import { page } from '$app/stores';
 
 	onMount(logInfiteTilesAscii);
 	onMount(async () => {
 		await loadLocale();
 		notify.set(Notify({}));
 	});
-
-	$: path = $page.url.pathname;
 </script>
 
 <Intl config={{}}>
@@ -31,15 +28,13 @@
 			<slot />
 			<ErrorModal />
 		{/if}
-		{#if !path.match(/^\/render/)}
-			<footer>
-				<div class="footer">
-					<div class="link">
-						<a href="/tos?{$readNetwork ? `network=${$readNetwork?.alias}` : ''}">Terms of sale</a>
-					</div>
+		<footer>
+			<div class="footer">
+				<div class="link">
+					<a href="/tos?{$readNetwork ? `network=${$readNetwork?.alias}` : ''}">Terms of sale</a>
 				</div>
-			</footer>
-		{/if}
+			</div>
+		</footer>
 	</GrabHistoryProvider>
 </Intl>
 

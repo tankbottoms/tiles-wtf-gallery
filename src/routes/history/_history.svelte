@@ -2,13 +2,12 @@
 	import { getTruncatedAddress } from '$juicebox/components/Address.svelte';
 
 	import Loading from '$juicebox/components/Loading.svelte';
-	import { connectedAccount, readNetwork, web3Connect } from '$stores/web3';
+	import { connectedAccount, web3Connect } from '$stores/web3';
 	import { generateTile } from '$tiles/tilesStandalone';
 	import type Store from '$utils/Store';
-	import { getTilesHistory } from '$utils/tiles';
 	import type { ethers } from 'ethers';
 	import moment from 'moment';
-	import { getContext, onMount } from 'svelte';
+	import { getContext } from 'svelte';
 	import { page } from '$app/stores';
 	import EnsOrAddress from '$juicebox/components/EnsOrAddress.svelte';
 	import EtherscanLink from '$juicebox/components/EtherscanLink.svelte';

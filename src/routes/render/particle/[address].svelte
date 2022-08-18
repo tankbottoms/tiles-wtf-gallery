@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { browser } from '$app/env';
+
 	import { page } from '$app/stores';
 	import { generateTile } from '$tiles/tilesStandalone';
 	import { afterUpdate, beforeUpdate, onMount } from 'svelte';
@@ -9,26 +11,12 @@
 
 	let canvas: HTMLCanvasElement;
 
-	let resolution = 'low';
-	let background = '#fff';
-	let particleSlider: any;
-
-	let _resolutionValue = resolution;
+	$: search = browser ? new URLSearchParams(location.search) : new URLSearchParams('');
+	$: background = search.get('bg') === 'dark' ? '#000' : '#fff';
+	$: resolution = search.get('resolution') === 'high' ? 'high' : 'low';
 
 	onMount(() => {
 		particles();
-	});
-
-	afterUpdate(() => {
-		if (_resolutionValue !== resolution) {
-			_resolutionValue = resolution;
-			const isMobile =
-				navigator.userAgent && navigator.userAgent.toLowerCase().indexOf('mobile') >= 0;
-			const isSmall = window.innerWidth < 1000;
-
-			particleSlider.ptlGap = isMobile || isSmall ? 3 : resolution === 'low' ? 1 : 0;
-			particleSlider.ptlSize = isMobile || isSmall ? 3 : resolution === 'low' ? 2 : 3;
-		}
 	});
 
 	function particles() {
@@ -40,7 +28,7 @@
 		context.fillStyle = 'red';
 		context.fillRect(0, 0, window.innerWidth, window.innerHeight);
 
-		particleSlider = new window['ParticleSlider']({
+		new window['ParticleSlider']({
 			ptlGap: isMobile || isSmall ? 3 : resolution === 'low' ? 1 : 0,
 			ptlSize: isMobile || isSmall ? 3 : resolution === 'low' ? 2 : 1,
 			width: 1e9,
@@ -55,26 +43,6 @@
 </svelte:head>
 
 <main id="particle-slider" style="background: {background};">
-	<div class="controls" class:dark={background === '#000'}>
-		<div>
-			<label for="checkbox">Background</label>
-			<span>
-				<input type="radio" name="background" value="#000" bind:group={background} /> dark
-			</span>
-			<span>
-				<input type="radio" name="background" value="#fff" bind:group={background} /> light
-			</span>
-		</div>
-		<div class="">
-			<label for="checkbox">Particle size</label>
-			<span>
-				<input type="radio" name="resolution" value="low" bind:group={resolution} /> low
-			</span>
-			<span>
-				<input type="radio" name="resolution" value="high" bind:group={resolution} /> high
-			</span>
-		</div>		
-	</div>
 	<div class="slides">
 		<div id="first-slide" class="slide" data-src={tileBase64} />
 	</div>
@@ -95,16 +63,5 @@
 		display: flex;
 		flex-direction: column;
 		align-items: center;
-	}
-	.controls {
-		margin-top: 100px;
-		font-size: 1rem;
-		z-index: 10;
-		&.dark {
-			color: white;
-		}
-	}
-	.draw {
-		margin-top: -100px;
 	}
 </style>
