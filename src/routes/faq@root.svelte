@@ -50,7 +50,7 @@
 			IPFS: <a
 				href="https://cloudflare-ipfs.com/ipfs/QmYScBzncx9kqEFRrZtPjWWPpqvLFZP2cBS7iWdoCDaQzd"
 				target="'_blank">QmYScBzncx9kqEFRrZtPjWWPpqvLFZP2cBS7iWdoCDaQzd</a
-			>.
+			>
 		</p>				
 		<p>Ethereum:  <a href="" target="_blank">Rinkeby</a>, <a href="" target="_blank">Mainnet </a></p>
 		<div class="space" />		
@@ -62,9 +62,9 @@
 			builders", sounds pretty cool.			
 		</p>
 		<p>
-			All proceeds will be transparently managed on <a href="/dao">Juicebox.</a> <i>At an unspecified point in the future</i>, the Gnosis
+			All proceeds will be transparently managed on <a href="/dao">Juicebox</a>. <i>At an unspecified point in the future</i>, the Gnosis
 			<a href="https://etherscan.io/address/0x4493287882f75dFFcdB40FD41d38d6308Fb8c181" target="_blank">0x4493287882f75dFFcdB40FD41d38d6308Fb8c181</a> will recieve the <a href="https://juicebox.money/v2/p/175" target="_blank">Juicebox Project NFT</a>. The initial signers are listed in
-			<a href="/wtf">wtf,</a> while membership to the DAO is offerred to anyone who holds Tiles2 NFT or the project ERC-20, the specifics of governance, if any, has not been decided. There may be no meaningful purpose in a DAO or governance if the decision to route payments to Juicebox projects with some set of criteria or some use of proceeds which renders such decisions cumbersome. 
+			<a href="/wtf">wtf,</a> while membership to the DAO is offered to anyone who holds Tiles2 NFT or the project ERC-20, the specifics of governance, if any, has not been decided. There may be no meaningful purpose in a DAO or governance if the decision to route payments to Juicebox projects with some set of criteria or some use of proceeds which renders such decisions cumbersome. 
 		</p>
 		<div class="space" />		
 		<hr />
@@ -91,7 +91,7 @@
 				>legacy ownership price resolver</a
 			>.					
 			If somebody preemptively minted your address' Tile, you can reclaim it by transfering the
-			current Tile rate. The smart contract calls this operation
+			current Tile rate. The smart contract refers to this operation as
 			<a
 				href="https://github.com/tankbottoms/tiles-on-chain/blob/main/contracts/InfiniteTiles.sol#L219"
 				>"seizing"</a
@@ -104,7 +104,7 @@
 		<p>
 			Tiles.wtf and its source code are under the <a
 				href="https://github.com/tankbottoms/tiles-wtf-gallery/blob/main/LICENSE.md"
-				target="_blank">WE-PARTY license</a
+				target="_blank">we-party license</a
 			>. Use of the source code is premitted for projects which route their proceeds through the
 			Juicebox v2 Treasury protocol.
 		</p>
@@ -117,7 +117,7 @@
 			<a
 				href="https://github.com/tankbottoms/tiles-wtf-gallery/blob/main/src/components/TokenGated.svelte"
 				>here</a
-			>.
+			>.  You can use Tiles to token-gate IRL using <a href="https://gatekeep.it/" target="_blank">Gatekeeper</a>.
 		</p>				
 		<p>
 			Tiles can be used on your site for a profile picture or just decorative imagery for contracts,
@@ -126,10 +126,10 @@
 				target="_blank">ethereal</a
 			> <i>(/render/ethereal/:address)</i>, and
 			<a href="/render/particle/0x8a97426C1a720a45B8d69E974631f01f1168232B" target="_blank"
-				>particle <i>(/render/particle/:address)</i></a
-			>; or static images, 
-			<a href="/render/png/0x8a97426C1a720a45B8d69E974631f01f1168232B">png <i>(/render/png/:address)</i></a>, and
-			<a href="/render/svg/0x8a97426C1a720a45B8d69E974631f01f1168232B">svg <i>(/render/svg/:address)</i></a>.
+				>particle</a
+			> <i>(/render/particle/:address)</i>; or static images 
+			<a href="/render/png/0x8a97426C1a720a45B8d69E974631f01f1168232B">png</a> <i>(/render/png/:address)</i>, and
+			<a href="/render/svg/0x8a97426C1a720a45B8d69E974631f01f1168232B">svg</a> <i>(/render/svg/:address)</i>.
 		</p>
 		<p>
 			<a
