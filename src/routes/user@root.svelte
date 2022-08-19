@@ -23,8 +23,6 @@
 
 	$: balances = $store?.balances;
 	$: loading = $store?.loading;
-
-	$: console.log($store)
 </script>
 
 <main>
