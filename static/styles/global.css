@@ -189,3 +189,108 @@ p {
 .clickable-border:hover {
 	border: 1px solid var(--stroke-secondary);
 }
+
+/* Used parts of antd */
+
+[class*='ant-']::-ms-clear,
+[class^='ant-']::-ms-clear {
+	display: none;
+}
+body,
+html {
+	width: 100%;
+	height: 100%;
+}
+*,
+::after,
+::before {
+	box-sizing: border-box;
+}
+html {
+	font-family: sans-serif;
+	line-height: 1.15;
+	-webkit-text-size-adjust: 100%;
+	-ms-text-size-adjust: 100%;
+	-ms-overflow-style: scrollbar;
+	-webkit-tap-highlight-color: transparent;
+}
+body {
+	margin: 0;
+	color: var(--text-primary);
+	font-size: 14px;
+	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial,
+		'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
+		'Noto Color Emoji';
+	font-variant: tabular-nums;
+	line-height: 1.5715;
+	background-color: var(--background-l0);
+	font-feature-settings: 'tnum';
+}
+[tabindex='-1']:focus {
+	outline: 0 !important;
+}
+b {
+	font-weight: bolder;
+}
+a {
+	text-decoration: none;
+	background-color: transparent;
+	outline: 0;
+	cursor: pointer;
+	transition: color 0.3s;
+	-webkit-text-decoration-skip: objects;
+}
+a:active,
+a:hover {
+	text-decoration: none;
+	outline: 0;
+}
+a:focus {
+	text-decoration: none;
+	outline: 0;
+}
+a[disabled] {
+	color: rgba(0, 0, 0, 0.25);
+	cursor: not-allowed;
+}
+svg:not(:root) {
+	overflow: hidden;
+}
+[role='button'],
+a {
+	touch-action: manipulation;
+}
+[type='reset'],
+[type='submit'],
+html [type='button'] {
+	-webkit-appearance: button;
+}
+[type='button']::-moz-focus-inner,
+[type='reset']::-moz-focus-inner,
+[type='submit']::-moz-focus-inner {
+	padding: 0;
+	border-style: none;
+}
+[type='number']::-webkit-inner-spin-button,
+[type='number']::-webkit-outer-spin-button {
+	height: auto;
+}
+[type='search'] {
+	outline-offset: -2px;
+	-webkit-appearance: none;
+}
+[type='search']::-webkit-search-cancel-button,
+[type='search']::-webkit-search-decoration {
+	-webkit-appearance: none;
+}
+::-webkit-file-upload-button {
+	font: inherit;
+	-webkit-appearance: button;
+}
+[hidden] {
+	display: none !important;
+}
+::selection {
+	color: var(--background-l1);
+	background: #1890ff;
+}
