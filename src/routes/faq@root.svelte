@@ -105,27 +105,54 @@
 		<div class="space" />
 		<h1>How to include a Tile on my site?</h1>
 		<p>
-			Tiles can be used on your site for a profile picture or just decorative imagery for contracts, for example, the <a href="/render/ethereal/0x8a97426C1a720a45B8d69E974631f01f1168232B" target="_blank">ethereal animation</a>, 
-			<a href="/render/particle/0x8a97426C1a720a45B8d69E974631f01f1168232B" target="_blank">particle</a>,
-			<a href="/render/png/0x8a97426C1a720a45B8d69E974631f01f1168232B">png</a>, and <a href="/render/svg/0x8a97426C1a720a45B8d69E974631f01f1168232B">svg</a>.						
+			Tiles can be used on your site for a profile picture or just decorative imagery for contracts,
+			for example, the <a
+				href="/render/ethereal/0x8a97426C1a720a45B8d69E974631f01f1168232B"
+				target="_blank">ethereal animation</a
+			>,
+			<a href="/render/particle/0x8a97426C1a720a45B8d69E974631f01f1168232B" target="_blank"
+				>particle</a
+			>,
+			<a href="/render/png/0x8a97426C1a720a45B8d69E974631f01f1168232B">png</a>, and
+			<a href="/render/svg/0x8a97426C1a720a45B8d69E974631f01f1168232B">svg</a>.
 		</p>
 		<p>
-			<a href="https://tiles.wtf/render/ethereal/0x8a97426C1a720a45B8d69E974631f01f1168232B" target="_blank">https://tiles.wtf/render/ethereal/0x8a97426C1a720a45B8d69E974631f01f1168232B</a>
-			<a href="https://tiles.wtf/render/particle/0x8a97426C1a720a45B8d69E974631f01f1168232B" target="_blank">https://tiles.wtf/render/particle/0x8a97426C1a720a45B8d69E974631f01f1168232B</a>
-			<a href="https://tiles.wtf/render/png/0x8a97426C1a720a45B8d69E974631f01f1168232B" target="_blank">https://tiles.wtf/render/png/0x8a97426C1a720a45B8d69E974631f01f1168232B</a>
-			<a href="https://tiles.wtf/render/svg/0x8a97426C1a720a45B8d69E974631f01f1168232B" target="_blank">https://tiles.wtf/render/svg/0x8a97426C1a720a45B8d69E974631f01f1168232B</a>
+			<a
+				class="example"
+				href="https://tiles.wtf/render/ethereal/0x8a97426C1a720a45B8d69E974631f01f1168232B"
+				target="_blank"
+				>https://tiles.wtf/render/ethereal/0x8a97426C1a720a45B8d69E974631f01f1168232B</a
+			>
+			<a
+				class="example"
+				href="https://tiles.wtf/render/particle/0x8a97426C1a720a45B8d69E974631f01f1168232B"
+				target="_blank"
+				>https://tiles.wtf/render/particle/0x8a97426C1a720a45B8d69E974631f01f1168232B</a
+			>
+			<a
+				class="example"
+				href="https://tiles.wtf/render/png/0x8a97426C1a720a45B8d69E974631f01f1168232B"
+				target="_blank">https://tiles.wtf/render/png/0x8a97426C1a720a45B8d69E974631f01f1168232B</a
+			>
+			<a
+				class="example"
+				href="https://tiles.wtf/render/svg/0x8a97426C1a720a45B8d69E974631f01f1168232B"
+				target="_blank">https://tiles.wtf/render/svg/0x8a97426C1a720a45B8d69E974631f01f1168232B</a
+			>
 		</p>
 		<div class="space" />
 
 		<h1>Centralized tiles.wtf? No IPFS?</h1>
 		<p>
-			The site above routes are accessible via IPFS using <a href="https://cloudflare-ipfs.com/ipfs/QmYScBzncx9kqEFRrZtPjWWPpqvLFZP2cBS7iWdoCDaQzd" target="'_blank">QmYScBzncx9kqEFRrZtPjWWPpqvLFZP2cBS7iWdoCDaQzd</a>.
+			The site above routes are accessible via IPFS using <a
+				href="https://cloudflare-ipfs.com/ipfs/QmYScBzncx9kqEFRrZtPjWWPpqvLFZP2cBS7iWdoCDaQzd"
+				target="'_blank">QmYScBzncx9kqEFRrZtPjWWPpqvLFZP2cBS7iWdoCDaQzd</a
+			>.
 		</p>
-		
+
 		<div class="space" />
 		<h1>What are the contract addresses for the Tiles v2 contract?</h1>
-		<p>Etherscan <a href="" target="_blank">Rinkeby</a>, <a href="" target="_blank">Mainnet </a>
-		</p>
+		<p>Etherscan <a href="" target="_blank">Rinkeby</a>, <a href="" target="_blank">Mainnet </a></p>
 	</section>
 </SplitPane>
 
@@ -139,9 +166,12 @@
 		margin-bottom: 1em;
 	}
 
-	.tile {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
+	a {
+		word-break: break-all;
+		display: inline-block;
+	}
+
+	a.example {
+		margin-bottom: 0.5em;
 	}
 </style>
