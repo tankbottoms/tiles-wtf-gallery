@@ -15,6 +15,8 @@
 	import Modal from '$juicebox/components/Modal.svelte';
 	import { startConfetti } from '$utils/confetti';
 	import { getTileAnimationStyleString } from '$tiles/utils';
+	import { useUniswapPriceQuery } from '$juicebox/utils/ERC20UniswapPrice';
+	import { formattedNum } from '$juicebox/utils/formatNumber';
 
 	enum Available {
 		IS_AVAILABLE = 0,
@@ -34,6 +36,8 @@
 
 	let loading = false;
 	$: address = $page.params.address?.padEnd(24, '0');
+	$: token = $page.params.token?.padEnd(24, '0');
+	$: symbol = $page.params.symbol;
 
 	let balance = BigNumber.from(parseEther('10000'));
 	let hasEnoughBalance = true;
@@ -111,6 +115,8 @@
 		}
 	}
 
+	let tokenPrice = 0;
+
 	onMount(async () => {
 		loading = true;
 		await whenPageReady();
@@ -122,7 +128,14 @@
 			loading = true;
 
 			try {
+				const tokenPriceQueryResponse = await useUniswapPriceQuery({
+					tokenAddress: token,
+					tokenSymbol: symbol
+				});
+				tokenPrice = Number(tokenPriceQueryResponse?.WETHPrice?.toFixed(9));
+
 				price = await getTilePrice();
+
 				isAvailable = await checkAvailability(address);
 			} catch (error) {
 				console.warn(error.message);
@@ -177,10 +190,13 @@
 					![Available.IS_AVAILABLE, Available.CAN_SEIZE].includes(isAvailable) ||
 					!hasEnoughBalance}
 			>
-				Mint ({formattedPrice} ETH)
+				Mint ({tokenPrice && formattedPrice
+					? formattedNum(formattedPrice / tokenPrice, {
+							precision: 5
+					  })
+					: '0..'}
+				{symbol})
 			</button>
-			<br />
-			<a href="/mint/{address}/holdings" class="mint"> use other tokens to mint </a>
 		{:else}
 			<button on:click={() => web3Connect()}>CONNECT WALLET</button>
 		{/if}
