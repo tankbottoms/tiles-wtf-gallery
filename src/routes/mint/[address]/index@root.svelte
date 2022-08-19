@@ -8,7 +8,6 @@
 	import { readContract, writeContract } from '$utils/web3/contractReader';
 	import { getTilePrice } from '$utils/tiles';
 	import { downloadFile } from '$utils/file';
-	import { TILE_BASE_PRICE, TILE_MULTIPLIER, TILE_TIER_SIZE } from '$constants/tile';
 	import { pageReady, whenPageReady } from '$stores';
 	import { errorMessage } from '$components/ErrorModal.svelte';
 	import { parseEther } from 'ethers/lib/utils.js';
@@ -180,6 +179,8 @@
 			>
 				Mint ({formattedPrice} ETH)
 			</button>
+			<br />
+			<a href="/mint/{address}/holdings" class="mint"> use other tokens to mint </a>
 		{:else}
 			<button on:click={() => web3Connect()}>CONNECT WALLET</button>
 		{/if}

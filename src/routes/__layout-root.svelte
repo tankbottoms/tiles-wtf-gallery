@@ -11,6 +11,7 @@
 	import Loading from '$juicebox/components/Loading.svelte';
 	import { pageReady } from '$stores';
 	import { readNetwork } from '$stores/web3';
+	import UserTokenBalancesProvider from '$components/UserTokenBalancesProvider.svelte';
 
 	onMount(logInfiteTilesAscii);
 	onMount(async () => {
@@ -20,22 +21,24 @@
 </script>
 
 <Intl config={{}}>
-	<GrabHistoryProvider>
-		{#if !$pageReady.web3}
-			<Loading fullHeight />
-		{:else}
-			<Header />
-			<slot />
-			<ErrorModal />
-		{/if}
-		<footer>
-			<div class="footer">
-				<div class="link">
-					<a href="/tos?{$readNetwork ? `network=${$readNetwork?.alias}` : ''}">Terms of sale</a>
+	<UserTokenBalancesProvider>
+		<GrabHistoryProvider>
+			{#if !$pageReady.web3}
+				<Loading fullHeight />
+			{:else}
+				<Header />
+				<slot />
+				<ErrorModal />
+			{/if}
+			<footer>
+				<div class="footer">
+					<div class="link">
+						<a href="/tos?{$readNetwork ? `network=${$readNetwork?.alias}` : ''}">Terms of sale</a>
+					</div>
 				</div>
-			</div>
-		</footer>
-	</GrabHistoryProvider>
+			</footer>
+		</GrabHistoryProvider>
+	</UserTokenBalancesProvider>
 </Intl>
 
 <style>
