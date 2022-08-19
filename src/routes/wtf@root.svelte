@@ -181,11 +181,7 @@
 		</p>
 		<br />
 		<main class:hide={innerWidth > 650}>
-			<div
-				class="tiles-container"
-				on:click={() => goto(`mint/${address}?animate`)}
-				style="transform: scale({Math.min(1, (innerWidth - 50) / 560)});"
-			>
+			<div class="tiles-container" on:click={() => goto(`mint/${address}?animate`)}>
 				<div id="tiles">
 					<div class="tile">
 						{@html tile}
@@ -203,6 +199,7 @@
 <style lang="scss">
 	section {
 		.peri-profile {
+			max-width: 100%;
 			display: block;
 			margin: 0 auto;
 		}
