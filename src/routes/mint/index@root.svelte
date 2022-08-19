@@ -3,14 +3,14 @@
 	import { constants, utils } from 'ethers';
 	import { onMount } from 'svelte';
 	import { generateTile, generateRandomAddresses } from '$tiles/tilesStandalone';
-	import { goto } from '$app/navigation';
 	import Footer from '$components/Footer.svelte';
+	import Tile from '$components/Tile.svelte';
 	const { AddressZero } = constants;
 
 	let input: string | undefined;
 	let grid = true;
 	let randomTiles: any[] = [];
-	let tile = '';
+	let address = '';
 	let showInvalidAddress = false;
 
 	onMount(() => {
@@ -20,14 +20,13 @@
 
 	$: {
 		if (utils.isAddress(input || '')) {
-			console.log(input);
-			tile = generateTile(input || '');
+			address = input || '';
 			showInvalidAddress = false;
 		} else if (input !== '' && input !== undefined) {
-			tile = '';
+			address = '';
 			showInvalidAddress = true;
 		} else {
-			tile = '';
+			address = '';
 			showInvalidAddress = false;
 		}
 	}
@@ -36,73 +35,69 @@
 	*/
 </script>
 
-<section>
-	<h1>Mint a tile</h1>
-	<p>Enter an 0x address to find its matching tile, or browse the randomly generated list below.</p>
-	<input placeholder={AddressZero} bind:value={input} />
-</section>
+<main>
+	<section>
+		<h1>Mint a tile</h1>
+		<p>
+			Enter an 0x address to find its matching tile, or browse the randomly generated list below.
+		</p>
+		<input placeholder={AddressZero} bind:value={input} />
+	</section>
 
-<section class:grid>
-	{#if tile}
-		<div class="tileContainer" on:click={() => goto(`mint/${input}`)}>
-			<div>
-				{@html tile}
-			</div>
-			<div><span class="address">{input}</span></div>
+	<section class:grid>
+		{#if address}
+			<Tile {address} />
+		{:else if showInvalidAddress}
+			<p>Not a valid Ethereum address</p>
+		{:else}
+			{#each randomTiles as item}
+				<Tile address={item.address} />
+			{/each}
+		{/if}
+	</section>
+
+	<div class="menu">
+		<div
+			class="menuItem"
+			on:click={() => {
+				window.scrollTo(0, 0);
+			}}
+			style={'margin-bottom: 10px'}
+		>
+			^
 		</div>
-	{:else if showInvalidAddress}
-		<p>Not a valid Ethereum address</p>
-	{:else}
-		{#each randomTiles as item}
-			<div class="tileContainer" on:click={() => goto(`mint/${item.address}?animate`)}>
-				{@html item.tile}
-				<span class="address">{item.address}</span>
-			</div>
-		{/each}
-	{/if}
-</section>
+		<div
+			class="menuItem"
+			class:menuActive={grid}
+			on:click={() => {
+				grid = true;
+			}}
+		>
+			+
+		</div>
+		<div
+			class="menuItem"
+			class:menuActive={!grid}
+			on:click={() => {
+				grid = false;
+			}}
+		>
+			-
+		</div>
+	</div>
 
-<div class="menu">
-	<div
-		class="menuItem"
-		on:click={() => {
-			window.scrollTo(0, 0);
-		}}
-		style={'margin-bottom: 10px'}
-	>
-		^
+	<div class="socialIcons" target="_blank">
+		<a href="https://twitter.com/Tile_DAO">
+			<Icon name="twitter" />
+		</a>
+		<a href="https://discord.gg/U3fMydKj4J" target="_blank">
+			<Icon name="discord" />
+		</a>
+		<a href="https://github.com/tankbottoms/tiles-on-chain" target="_blank">
+			<Icon name="github" style="margin-right: -1rem;font-size: 2em;" />
+		</a>
 	</div>
-	<div
-		class="menuItem"
-		class:menuActive={grid}
-		on:click={() => {
-			grid = true;
-		}}
-	>
-		+
-	</div>
-	<div
-		class="menuItem"
-		class:menuActive={!grid}
-		on:click={() => {
-			grid = false;
-		}}
-	>
-		-
-	</div>
-</div>
-
-<div class="socialIcons" target="_blank">
-	<a href="https://twitter.com/Tile_DAO">
-		<Icon name="twitter" />
-	</a>
-	<a href="https://discord.gg/U3fMydKj4J" target="_blank">
-		<Icon name="discord" />
-	</a>
-	<a href="https://github.com/tankbottoms/tiles-on-chain" target="_blank">
-		<Icon name="github" style="margin-right: -1rem;font-size: 2em;" />
-	</a>
-</div>
+</main>
 <Footer />
 
 <style>
@@ -119,6 +114,7 @@
 		margin-top: 3.5rem;
 		max-width: 1200px;
 		display: grid;
+		row-gap: 20px;
 		grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
 	}
 
@@ -174,14 +170,5 @@
 		background: rgb(34, 34, 34);
 		color: white;
 		padding: 5px;
-	}
-
-	.tileContainer {
-		color: #222;
-		margin-bottom: 80px;
-		text-align: center;
-	}
-	.address {
-		color: var(--text-primary);
 	}
 </style>

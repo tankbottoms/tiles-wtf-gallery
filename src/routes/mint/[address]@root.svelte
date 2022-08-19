@@ -15,6 +15,7 @@
 	import Modal from '$juicebox/components/Modal.svelte';
 	import { startConfetti } from '$utils/confetti';
 	import { getTileAnimationStyleString } from '$tiles/utils';
+	import Tile from '$components/Tile.svelte';
 	import Footer from '$components/Footer.svelte';
 
 	enum Available {
@@ -152,15 +153,7 @@
 	{#if showInvalidAddress}
 		<h1>Not a valid address</h1>
 	{:else if tile}
-		{#if animate}
-			<span bind:this={tileComponent}>
-				{@html tile}
-			</span>
-		{:else}
-			<span>
-				{@html tile}
-			</span>
-		{/if}
+		<Tile {address} {animate} showAddress={false} />
 		<br />
 		<p>{$page.params.address}</p>
 		<p>

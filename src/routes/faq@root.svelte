@@ -1,8 +1,8 @@
 <script>
 	import { generateTile, generateRandomAddresses } from '$tiles/tilesStandalone';
 	import { onMount } from 'svelte';
-	import { getTileAnimationStyleString } from '$tiles/utils';
 	import SplitPane from '$components/SplitPane.svelte';
+	import Tile from '$components/Tile.svelte';
 
 	const randomAddresses = generateRandomAddresses(10);
 
@@ -10,38 +10,20 @@
 
 	let currentTile = 0;
 	let address = randomAddresses[currentTile];
-	let tile = generateTile(address);
 
 	function setAddressCarousel() {
 		setInterval(() => {
 			address = randomAddresses[currentTile % 10];
-			tile = generateTile(address);
 			currentTile++;
 		}, 30000);
 	}
 
-	function animateTile() {
-		const styles = getTileAnimationStyleString(tileComponent);
-		document.head.appendChild(document.createElement('style')).innerHTML = styles;
-	}
-
 	onMount(setAddressCarousel);
-
-	$: {
-		if (tileComponent) {
-			animateTile();
-		}
-	}
 </script>
 
 <SplitPane>
 	<section slot="left">
-		{#if tile}
-			<div class="tile" bind:this={tileComponent}>
-				{@html tile}
-				{address}
-			</div>
-		{/if}
+		<Tile {address} animate={true} />
 	</section>
 	<section slot="right">
 		<h1>Faq</h1>
