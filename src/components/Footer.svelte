@@ -4,21 +4,23 @@
 
 <footer>
 	<div class="footer">
-		<div class="link">
-			<a href="/tos?{$readNetwork ? `network=${$readNetwork?.alias}` : ''}">Terms of sale</a>
-		</div>
+		<a href="/tos?{$readNetwork ? `network=${$readNetwork?.alias}` : ''}">Terms of sale</a>
 	</div>
 </footer>
 
 <style>
 	.footer {
-		font-size: 14px;
-		color: black;
-		text-decoration: none;
 		align-items: center;
 		justify-items: center;
 		text-align: center;
-		margin: 20px 5px 5px;
+		margin: 20px 5px 10px;
 		margin-top: 20px;
+	}
+
+	.footer a {
+		font-size: 14px;
+		color: black;
+		text-decoration: none;
+		border-bottom: 3px solid gold;
 	}
 </style>
