@@ -12,13 +12,13 @@
 
 <style>
 	.footer {
-		margin: auto;
 		font-size: 14px;
 		color: black;
 		text-decoration: none;
 		align-items: center;
 		justify-items: center;
 		text-align: center;
-		margin: 0px 5px;
+		margin: 20px 5px 5px;
+		margin-top: 20px;
 	}
 </style>

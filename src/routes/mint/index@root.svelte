@@ -106,6 +106,9 @@
 <Footer />
 
 <style>
+	main {
+		position: relative;
+	}
 	section {
 		margin: 0 auto;
 		max-width: 360px;
