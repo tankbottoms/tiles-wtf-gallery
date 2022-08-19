@@ -214,7 +214,7 @@
 
 	.download {
 		position: fixed;
-		bottom: 20px;
-		right: 20px;
+		bottom: 1px;
+		right: 10px;
 	}
 </style>
