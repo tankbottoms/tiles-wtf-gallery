@@ -7,6 +7,7 @@
 	export let address: string;
 	export let animate: boolean = false;
 	export let showAddress: boolean = true;
+	export let goToMint: boolean = true;
 
 	let innerWidth = browser ? window.innerWidth : 0;
 	let tile = '';
@@ -27,7 +28,7 @@
 
 <div
 	class="tiles-container"
-	on:click={() => goto(`mint/${address}`)}
+	on:click={goToMint ? () => goto(`mint/${address}`) : undefined}
 	style="transform: scale({Math.min(1, (innerWidth - 50) / 360)});"
 >
 	<div id="tiles">

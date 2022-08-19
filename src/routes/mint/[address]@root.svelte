@@ -153,7 +153,7 @@
 	{#if showInvalidAddress}
 		<h1>Not a valid address</h1>
 	{:else if tile}
-		<Tile {address} {animate} showAddress={false} />
+		<Tile {address} {animate} showAddress={false} goToMint={false} />
 		<br />
 		<p>{$page.params.address}</p>
 		<p>
