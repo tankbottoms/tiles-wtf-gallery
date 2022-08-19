@@ -46,14 +46,20 @@
 	<section slot="right">
 		<h1>Faq</h1>
 		<div class="space" />
-		<h1>What is the ongoing purpose of the DAO?</h1>
-		<p>
+		<h1>Governance.</h1>
+		<p>			
 			TBD, however, "to encourage and reward early Juicebox community members, projects, and
-			builders", sounds pretty cool.
+			builders", sounds pretty cool.			
+		</p>
+		<p>
+			All proceeds will be transparently managed on <a href="/dao">Juicebox.</a> <i>At an unspecified point in the future</i>, the Gnosis
+			<a href="https://etherscan.io/address/0x4493287882f75dFFcdB40FD41d38d6308Fb8c181" target="_blank">0x4493287882f75dFFcdB40FD41d38d6308Fb8c181</a> will recieve the <a href="https://juicebox.money/v2/p/175" target="_blank">Juicebox Project NFT</a>. The initial signers are listed in
+			<a href="/wtf">wtf,</a> while membership to the DAO is offerred to anyone who holds Tiles2 NFT or the project ERC-20, the specifics of governance, if any, has not been decided. There may be no meaningful purpose in a DAO or governance if the decision to route payments to Juicebox projects with some set of criteria or some use of proceeds which renders such decisions cumbersome. 
 		</p>
 
 		<div class="space" />
-		<h1>What is Tiles "grabbing"?</h1>
+		<h1>Pricing function.</h1>
+		<p>Initial mints start at 0.0001 ETH, and every 512 mints, the price doubles.</p>
 		<p>
 			The original
 			<a
@@ -65,45 +71,25 @@
 			<a
 				href="https://github.com/tankbottoms/tiles-on-chain/blob/main/contracts/InfiniteTiles.sol#L181"
 				target="_blank">"grabbing".</a
-			>
-		</p>
-
-		<div class="space" />
-		<h1>How are Tiles priced?</h1>
-		<p>Initial mints start at 0.0001 ETH, and every 512 mints, the price doubles.</p>
-		<p>
-			The initial parameters were set in the <a
+			>  The initial parameters were set in the <a
 				href="https://github.com/tankbottoms/tiles-on-chain/blob/main/scripts/mainnet.ts#L46"
 				target="_blank">deploy script</a
 			>, and pricing is governed by a pricing contract - the
 			<a
 				href="https://github.com/tankbottoms/tiles-on-chain/blob/main/contracts/LegacyOwnershipPriceResolver.sol"
 				>legacy ownership price resolver</a
-			>.
-		</p>
-		<p>
+			>.					
 			If somebody preemptively minted your address' Tile, you can reclaim it by transfering the
 			current Tile rate. The smart contract calls this operation
 			<a
 				href="https://github.com/tankbottoms/tiles-on-chain/blob/main/contracts/InfiniteTiles.sol#L219"
 				>"seizing"</a
-			>.
-		</p>
-		<br />
-		<hr />
-		<br />
+			>.				
+		</p>		
 		<div class="space" />
-		<h1>How will the treasury be managed?</h1>
-		<p>
-			All proceeds will be transparently managed on <a href="/dao">Juicebox.</a> The Gnosis
-			<b>0x4493287882f75dFFcdB40FD41d38d6308Fb8c181</b>
-			will recieve the Juicebox Project NFT. The initial signers are listed in
-			<a href="/wtf">wtf</a>, while membership to the DAO is offerred to anyone who holds Tiles2 NFT
-			or the project ERC-20, the specifics of governance, if any, has not been decided.
-		</p>
-
+		<hr />		
 		<div class="space" />
-		<h1>What are the Terms of Use or Licensing?</h1>
+		<h1>Terms of Use?</h1>
 		<p>
 			Tiles.wtf and its source code are under the <a
 				href="https://github.com/tankbottoms/tiles-wtf-gallery/blob/main/LICENSE.md"
@@ -111,7 +97,8 @@
 			>. Use of the source code is premitted for projects which route their proceeds through the
 			Juicebox v2 Treasury protocol.
 		</p>
-
+		<div class="space" />		
+		<hr />
 		<div class="space" />
 		<h1>How can I use Tiles for token-gating?</h1>
 		<p>
@@ -121,21 +108,18 @@
 				>here</a
 			>.
 		</p>
-
-		<div class="space" />
+		
 		<br />
-		<hr />
-		<br />
-		<h1>How to include a Tile on my site?</h1>
+		<h1>Use Tiles.</h1>
 		<p>
 			Tiles can be used on your site for a profile picture or just decorative imagery for contracts,
-			for example, the <a
+			for example, the animations <a
 				href="/render/ethereal/0x8a97426C1a720a45B8d69E974631f01f1168232B"
-				target="_blank">ethereal animation</a
-			>,
+				target="_blank">ethereal</a
+			>, and
 			<a href="/render/particle/0x8a97426C1a720a45B8d69E974631f01f1168232B" target="_blank"
 				>particle</a
-			>,
+			>; or static images, 
 			<a href="/render/png/0x8a97426C1a720a45B8d69E974631f01f1168232B">png</a>, and
 			<a href="/render/svg/0x8a97426C1a720a45B8d69E974631f01f1168232B">svg</a>.
 		</p>
@@ -144,23 +128,23 @@
 				class="example"
 				href="https://tiles.wtf/render/ethereal/0x8a97426C1a720a45B8d69E974631f01f1168232B"
 				target="_blank"
-				>https://tiles.wtf/render/ethereal/0x8a97426C1a720a45B8d69E974631f01f1168232B</a
+				>tiles.wtf/render/ethereal/0x8a97426C1a720a45B8d69E974631f01f1168232B</a
 			>
 			<a
 				class="example"
 				href="https://tiles.wtf/render/particle/0x8a97426C1a720a45B8d69E974631f01f1168232B"
 				target="_blank"
-				>https://tiles.wtf/render/particle/0x8a97426C1a720a45B8d69E974631f01f1168232B</a
+				>tiles.wtf/render/particle/0x8a97426C1a720a45B8d69E974631f01f1168232B</a
 			>
 			<a
 				class="example"
 				href="https://tiles.wtf/render/png/0x8a97426C1a720a45B8d69E974631f01f1168232B"
-				target="_blank">https://tiles.wtf/render/png/0x8a97426C1a720a45B8d69E974631f01f1168232B</a
+				target="_blank">tiles.wtf/render/png/0x8a97426C1a720a45B8d69E974631f01f1168232B</a
 			>
 			<a
 				class="example"
 				href="https://tiles.wtf/render/svg/0x8a97426C1a720a45B8d69E974631f01f1168232B"
-				target="_blank">https://tiles.wtf/render/svg/0x8a97426C1a720a45B8d69E974631f01f1168232B</a
+				target="_blank">tiles.wtf/render/svg/0x8a97426C1a720a45B8d69E974631f01f1168232B</a
 			>
 		</p>
 		<div class="space" />
