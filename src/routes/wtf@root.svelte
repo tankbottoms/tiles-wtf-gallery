@@ -146,7 +146,9 @@
 			Tiles v2 contract.
 		</p>
 		<br />
-		<Tile {address} {animate} />
+		<main class:hide={innerWidth > 650}>
+			<Tile {address} {animate} />
+		</main>
 	</section>
 </SplitPane>
 
