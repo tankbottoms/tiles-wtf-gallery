@@ -4,7 +4,7 @@
 	"license": "LICENSE",
 	"scripts": {
 		"dev": "vite dev --port 8080",
-		"build": "vite build && node scripts/ipfs-fallback.js",
+		"build": "vite build && node scripts/ipfs-fallback.js && sh scripts/commit-hash.sh",
 		"package": "svelte-kit package",
 		"preview": "vite preview",
 		"test": "playwright test",

@@ -69,7 +69,7 @@
 		</p>
 		<p>
 			All proceeds will be transparently managed on <a href="/dao">Juicebox</a>. <i>At an unspecified point in the future</i>, the Gnosis
-			<a href="https://etherscan.io/address/0x4493287882f75dFFcdB40FD41d38d6308Fb8c181" target="_blank">{getTruncatedAddress('0x4493287882f75dFFcdB40FD41d38d6308Fb8c181')}</a> will recieve the <a href="https://juicebox.money/v2/p/175" target="_blank">Juicebox Project NFT</a>. The initial signers are listed in
+			<a href="https://etherscan.io/address/0x3A31414dFbA8B20D3bDa767092984db9d98a2da1" target="_blank">{getTruncatedAddress('0x3A31414dFbA8B20D3bDa767092984db9d98a2da1')}</a> will recieve the <a href="https://juicebox.money/v2/p/175" target="_blank">Juicebox Project NFT</a>. The initial signers are listed in
 			<a href="/wtf">wtf,</a> while membership to the DAO is offered to anyone who holds Tiles2 NFT or the project ERC-20, the specifics of governance, if any, has not been decided. There may be no meaningful purpose in a DAO or governance if the decision to route payments to Juicebox projects with some set of criteria or some use of proceeds which renders such decisions cumbersome. 
 		</p>
 		<div class="space" />		
