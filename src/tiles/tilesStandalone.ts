@@ -27,8 +27,8 @@ xmlns:xlink="http://www.w3.org/1999/xlink"
 xmlns:svgjs="http://svgjs.dev/svgjs"
 version="1.1"
 viewBox="${viewBox}"
-width=${size}
-height=${size}
+width="${size}"
+height="${size}"
 id="SvgjsSvg1000"
 >
 <rect width="360" height="360" fill="${canvasColor}" />
