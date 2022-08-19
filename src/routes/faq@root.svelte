@@ -71,7 +71,9 @@
 				>"seizing"</a
 			>.
 		</p>
-
+		<br />
+		<hr />
+		<br />
 		<div class="space" />
 		<h1>How will the treasury be managed?</h1>
 		<p>
@@ -103,6 +105,9 @@
 		</p>
 
 		<div class="space" />
+		<br />
+		<hr />
+		<br />
 		<h1>How to include a Tile on my site?</h1>
 		<p>
 			Tiles can be used on your site for a profile picture or just decorative imagery for contracts,
