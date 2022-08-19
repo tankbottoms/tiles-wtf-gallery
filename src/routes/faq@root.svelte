@@ -1,21 +1,30 @@
 <script>
-	import { generateTile, generateRandomAddresses } from '$tiles/tilesStandalone';
+	import { generateRandomAddresses } from '$tiles/tilesStandalone';
 	import { onMount } from 'svelte';
 	import SplitPane from '$components/SplitPane.svelte';
 	import Tile from '$components/Tile.svelte';
 
-	const randomAddresses = generateRandomAddresses(10);
+	const randomAddresses = generateRandomAddresses(12);
 
-	let tileComponent;
-
-	let currentTile = 0;
-	let address = randomAddresses[currentTile];
+	let currentTile = 3;
+	let currentAnimatedTile = 0;
+	const tileAddresses = {
+		address1: randomAddresses[0],
+		address2: randomAddresses[1],
+		address3: randomAddresses[2]
+	};
 
 	function setAddressCarousel() {
 		setInterval(() => {
-			address = randomAddresses[currentTile % 10];
-			currentTile++;
-		}, 30000);
+			[currentTile, currentTile + 1, currentTile + 2].forEach((i) => {
+				tileAddresses[`address${i + 1}`] = randomAddresses[i];
+			});
+			currentTile += (currentTile + 3) % 12;
+		}, 45000);
+
+		setInterval(() => {
+			currentAnimatedTile = (currentAnimatedTile + 1) % 3;
+		}, 15000);
 	}
 
 	onMount(setAddressCarousel);
@@ -23,7 +32,16 @@
 
 <SplitPane>
 	<section slot="left">
-		<Tile {address} animate={true} />
+		<!-- {#each Object.keys(tileAddresses) as address, index}
+			<Tile {address} animate={currentAnimatedTile === index} />
+		{/each} -->
+		<Tile address={tileAddresses.address1} animate={currentAnimatedTile === 0} />
+		<br />
+		<br />
+		<Tile address={tileAddresses.address2} animate={currentAnimatedTile === 1} />
+		<br />
+		<br />
+		<Tile address={tileAddresses.address3} animate={currentAnimatedTile === 2} />
 	</section>
 	<section slot="right">
 		<h1>Faq</h1>
