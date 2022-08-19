@@ -23,8 +23,14 @@
 			flex-direction: column;
 		}
 
+		:global(#split [slot='left']) {
+			margin: 0;
+			padding: 0;
+		}
+
 		:global(#split [slot='right']) {
-			margin-top: 0px;
+			margin: 0;
+			padding-top: 0px;
 		}
 	}
 </style>
