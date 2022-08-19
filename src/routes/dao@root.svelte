@@ -11,6 +11,7 @@
 		V2ProjectContextType
 	} from '$juicebox/models/project-type';
 	import type { V2CurrencyOption } from '$juicebox/models/v2/currencyOption';
+	import { APP_CONFIG } from '$constants/app';
 	import { BigNumber, constants, ethers } from 'ethers';
 	import { modal, pageReady } from '$stores';
 	import { setContext } from 'svelte';
@@ -39,7 +40,7 @@
 	import { blocknativeNetworks } from '$constants/networks';
 
 	function getProjectId() {
-		return BigNumber.from(Number(getDefaultProvider().id) === 4 ? 98 : 175);
+		return BigNumber.from(Number(getDefaultProvider().id) === 4 ? APP_CONFIG.project_rinkeby : APP_CONFIG.project_mainnet);
 	}
 
 	let projectId = getProjectId();
