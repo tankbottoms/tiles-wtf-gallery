@@ -1,47 +1,47 @@
 <script>
-	import { generateTile, generateRandomAddresses } from '$tiles/tilesStandalone';
+	import { generateRandomAddresses } from '$tiles/tilesStandalone';
 	import { onMount } from 'svelte';
-	import { getTileAnimationStyleString } from '$tiles/utils';
 	import SplitPane from '$components/SplitPane.svelte';
+	import Tile from '$components/Tile.svelte';
 
-	const randomAddresses = generateRandomAddresses(10);
+	const randomAddresses = generateRandomAddresses(12);
 
-	let tileComponent;
-
-	let currentTile = 0;
-	let address = randomAddresses[currentTile];
-	let tile = generateTile(address);
+	let currentTile = 3;
+	let currentAnimatedTile = 0;
+	const tileAddresses = {
+		address1: randomAddresses[0],
+		address2: randomAddresses[1],
+		address3: randomAddresses[2]
+	};
 
 	function setAddressCarousel() {
 		setInterval(() => {
-			address = randomAddresses[currentTile % 10];
-			tile = generateTile(address);
-			currentTile++;
-		}, 30000);
-	}
+			[currentTile, currentTile + 1, currentTile + 2].forEach((i) => {
+				tileAddresses[`address${i + 1}`] = randomAddresses[i];
+			});
+			currentTile += (currentTile + 3) % 12;
+		}, 45000);
 
-	function animateTile() {
-		const styles = getTileAnimationStyleString(tileComponent);
-		document.head.appendChild(document.createElement('style')).innerHTML = styles;
+		setInterval(() => {
+			currentAnimatedTile = (currentAnimatedTile + 1) % 3;
+		}, 15000);
 	}
 
 	onMount(setAddressCarousel);
-
-	$: {
-		if (tileComponent) {
-			animateTile();
-		}
-	}
 </script>
 
 <SplitPane>
 	<section slot="left">
-		{#if tile}
-			<div class="tile" bind:this={tileComponent}>
-				{@html tile}
-				{address}
-			</div>
-		{/if}
+		<!-- {#each Object.keys(tileAddresses) as address, index}
+			<Tile {address} animate={currentAnimatedTile === index} />
+		{/each} -->
+		<Tile address={tileAddresses.address1} animate={currentAnimatedTile === 0} />
+		<br />
+		<br />
+		<Tile address={tileAddresses.address2} animate={currentAnimatedTile === 1} />
+		<br />
+		<br />
+		<Tile address={tileAddresses.address3} animate={currentAnimatedTile === 2} />
 	</section>
 	<section slot="right">
 		<h1>Faq</h1>
@@ -89,7 +89,9 @@
 				>"seizing"</a
 			>.
 		</p>
-
+		<br />
+		<hr />
+		<br />
 		<div class="space" />
 		<h1>How will the treasury be managed?</h1>
 		<p>
@@ -121,6 +123,59 @@
 		</p>
 
 		<div class="space" />
+		<br />
+		<hr />
+		<br />
+		<h1>How to include a Tile on my site?</h1>
+		<p>
+			Tiles can be used on your site for a profile picture or just decorative imagery for contracts,
+			for example, the <a
+				href="/render/ethereal/0x8a97426C1a720a45B8d69E974631f01f1168232B"
+				target="_blank">ethereal animation</a
+			>,
+			<a href="/render/particle/0x8a97426C1a720a45B8d69E974631f01f1168232B" target="_blank"
+				>particle</a
+			>,
+			<a href="/render/png/0x8a97426C1a720a45B8d69E974631f01f1168232B">png</a>, and
+			<a href="/render/svg/0x8a97426C1a720a45B8d69E974631f01f1168232B">svg</a>.
+		</p>
+		<p>
+			<a
+				class="example"
+				href="https://tiles.wtf/render/ethereal/0x8a97426C1a720a45B8d69E974631f01f1168232B"
+				target="_blank"
+				>https://tiles.wtf/render/ethereal/0x8a97426C1a720a45B8d69E974631f01f1168232B</a
+			>
+			<a
+				class="example"
+				href="https://tiles.wtf/render/particle/0x8a97426C1a720a45B8d69E974631f01f1168232B"
+				target="_blank"
+				>https://tiles.wtf/render/particle/0x8a97426C1a720a45B8d69E974631f01f1168232B</a
+			>
+			<a
+				class="example"
+				href="https://tiles.wtf/render/png/0x8a97426C1a720a45B8d69E974631f01f1168232B"
+				target="_blank">https://tiles.wtf/render/png/0x8a97426C1a720a45B8d69E974631f01f1168232B</a
+			>
+			<a
+				class="example"
+				href="https://tiles.wtf/render/svg/0x8a97426C1a720a45B8d69E974631f01f1168232B"
+				target="_blank">https://tiles.wtf/render/svg/0x8a97426C1a720a45B8d69E974631f01f1168232B</a
+			>
+		</p>
+		<div class="space" />
+
+		<h1>Centralized tiles.wtf? No IPFS?</h1>
+		<p>
+			The site above routes are accessible via IPFS using <a
+				href="https://cloudflare-ipfs.com/ipfs/QmYScBzncx9kqEFRrZtPjWWPpqvLFZP2cBS7iWdoCDaQzd"
+				target="'_blank">QmYScBzncx9kqEFRrZtPjWWPpqvLFZP2cBS7iWdoCDaQzd</a
+			>.
+		</p>
+
+		<div class="space" />
+		<h1>What are the contract addresses for the Tiles v2 contract?</h1>
+		<p>Etherscan <a href="" target="_blank">Rinkeby</a>, <a href="" target="_blank">Mainnet </a></p>
 	</section>
 </SplitPane>
 
@@ -134,9 +189,12 @@
 		margin-bottom: 1em;
 	}
 
-	.tile {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
+	a {
+		word-break: break-all;
+		display: inline-block;
+	}
+
+	a.example {
+		margin-bottom: 0.5em;
 	}
 </style>

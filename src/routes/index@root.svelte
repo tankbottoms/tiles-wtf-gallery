@@ -1,25 +1,22 @@
 <script lang="ts">
-	import { generateTile, generateRandomAddresses } from '$tiles/tilesStandalone';
+	import { generateRandomAddresses } from '$tiles/tilesStandalone';
 	import { onMount } from 'svelte';
-	import { goto } from '$app/navigation';
 	import { readNetwork } from '$stores/web3';
 	import { browser } from '$app/env';
-	import { getTileAnimationStyleString } from '$tiles/utils';
+	import Tile from '$components/Tile.svelte';
 
-	let tile = '';
-	let address = '';
+	const randomAddresses = generateRandomAddresses(25);
+
+	let address = randomAddresses[0];
 	let animate = false;
 	let mouseLastMoved = Date.now();
-	let tileComponent: HTMLElement;
 
 	let currentTile = 1;
 	let timer;
-	const randomAddresses = generateRandomAddresses(25);
 
 	function setAddressCarousel() {
 		timer = setInterval(() => {
 			address = randomAddresses[currentTile % 10];
-			tile = generateTile(address);
 			currentTile++;
 		}, 1500);
 	}
@@ -39,52 +36,18 @@
 		}
 	}
 
-	function animateTile() {
-		const styles = getTileAnimationStyleString(tileComponent);
-		document.head.appendChild(document.createElement('style')).innerHTML = styles;
-	}
-
 	onMount(() => {
-		address = randomAddresses[0];
-		tile = generateTile(address);
 		setAddressCarousel();
-		// Check if it's been 4s since the last move
 		setInterval(() => checkAnimationState(), 1000);
 	});
 
 	let innerWidth = browser ? window.innerWidth : 0;
-
-	$: {
-		if (tileComponent) {
-			animateTile();
-		}
-	}
 </script>
 
 <svelte:window bind:innerWidth on:mousemove={handleMove} />
 
 <main class:mobile={innerWidth < 650}>
-	<div
-		class="tiles-container"
-		on:click={() => goto(`mint/${address}`)}
-		style="transform: scale({Math.min(1, (innerWidth - 50) / 360)});"
-	>
-		<div id="tiles">
-			{#if animate}
-				<div class="tile" bind:this={tileComponent}>
-					{@html tile}
-				</div>
-			{:else}
-				<div class="title">
-					{@html tile}
-				</div>
-			{/if}
-			<div>
-				{address}
-			</div>
-		</div>
-		<p id="address" />
-	</div>
+	<Tile {address} {animate} />
 	<section>
 		<h1>
 			<a class="heading" href="/history?{$readNetwork ? `network=${$readNetwork?.alias}` : ''}">
@@ -143,11 +106,6 @@
 		p {
 			font-size: 16px;
 			margin: 30px 0;
-		}
-
-		.tile {
-			display: block;
-			min-width: 100px;
 		}
 
 		.group {

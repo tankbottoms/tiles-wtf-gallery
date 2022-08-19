@@ -33,6 +33,7 @@ The repository uses the native SVG tiles however there are other rendering route
 - `/render/png/:address` - renders the tile and returns PNG.
 - `/render/svg/:address` - renders the tile and returns SVG.
 - `/render/particle/:address` - renders the tile and returns a particle animation, resolution high or low, and dark mode are optional parameters. By default light and low resolution modes are used.
+- `/render/ethereal/:address` - renders the tile and returns an ethereal animation, animating each tile piece individually and returns svg.
 
 #### Minting
 

@@ -21,15 +21,14 @@ const svgs = [
 
 const canvasColor = `#faf3e8`;
 
-// TODO - how do I make the size dynamic?!
-const head = `<svg
+const head = (viewBox = '0 0 360 360', size = 360) => `<svg
 xmlns="http://www.w3.org/2000/svg"
 xmlns:xlink="http://www.w3.org/1999/xlink"
 xmlns:svgjs="http://svgjs.dev/svgjs"
 version="1.1"
-viewBox="0 0 360 360"
-width="360"
-height="360"
+viewBox="${viewBox}"
+width=${size}
+height=${size}
 id="SvgjsSvg1000"
 >
 <rect width="360" height="360" fill="${canvasColor}" />
@@ -54,9 +53,9 @@ function ringVariantsFrom(r) {
 		i = r.sizes,
 		o = r.layers,
 		t = r.solid;
-	return e.flatMap(function (r) {
-		return i.flatMap(function (e) {
-			return o.map(function (i) {
+	return e.flatMap(function(r) {
+		return i.flatMap(function(e) {
+			return o.map(function(i) {
 				return {
 					positionIndex: r,
 					positionKind: s,
@@ -131,7 +130,7 @@ const ringVariants = __spreadArray(
 	})
 );
 
-const getAddressSegments = (r) => {
+const getAddressSegments = r => {
 	/* Return this: [
   [ '0', 'x', '4', '5' ],
   [ '8', 'e', '5', 'e' ],
@@ -147,7 +146,7 @@ const getAddressSegments = (r) => {
   From this input: 
 "0x5d95baEBB8412AD827287240A5c281E3bB30d27E" */
 	let e = [];
-	return r.split('').reduce(function (r, s) {
+	return r.split('').reduce(function(r, s) {
 		if ((e.push(s), 4 === e.length)) {
 			let i = e;
 			return (e = []), __spreadArray(__spreadArray([], r), [i]);
@@ -156,7 +155,7 @@ const getAddressSegments = (r) => {
 	}, []);
 };
 
-const toNum = (r) => {
+const toNum = r => {
 	return Number(`0x${r.join('')}`);
 };
 
@@ -191,13 +190,13 @@ const sectorColorVariants = {
 	15: [yellow, black, red]
 };
 
-const sectorColorsFromInt16 = (r) => {
+const sectorColorsFromInt16 = r => {
 	const e = sectorColorVariants[r];
 	return { layer0: e[0], layer1: e[1], layer2: e[2] };
 };
 
-const generateTileSectors = (r) => {
-	return r.map(function (r) {
+const generateTileSectors = r => {
+	return r.map(function(r) {
 		const e = sectorColorsFromInt16(Number(`0x${r[0]}`));
 		return [
 			{ svg: svgs[Number(`0x${r[1]}`)], color: e.layer0 },
@@ -219,8 +218,11 @@ export function generateRandomAddresses(count = 10) {
 	return addresses;
 }
 
-export function generateTile(address: string) {
-	let str = head;
+export function generateTile(
+	address: string,
+	{ viewBox, size } = { viewBox: '0 0 360 360', size: 360 }
+) {
+	let str = head(viewBox, size);
 
 	const addr = address.slice(2);
 	const addressSegments = getAddressSegments(addr);
@@ -261,7 +263,7 @@ export function generateTile(address: string) {
 			}
 			str += tile;
 		}
-		for (const ring of rings.filter((ring) => ring.layer === r)) {
+		for (const ring of rings.filter(ring => ring.layer === r)) {
 			let i,
 				diameter = 0,
 				posX = 0,

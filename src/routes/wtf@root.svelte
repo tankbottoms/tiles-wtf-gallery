@@ -2,18 +2,10 @@
 	import { browser } from '$app/env';
 	import { goto } from '$app/navigation';
 	import SplitPane from '$components/SplitPane.svelte';
+	import Tile from '$components/Tile.svelte';
 	import { generateTile } from '$tiles/tilesStandalone';
 	import { getTileAnimationStyleString } from '$tiles/utils';
 	import { onMount } from 'svelte';
-
-	let tile = '';
-	let address = '';
-	let animate = false;
-	let mouseLastMoved = Date.now();
-	let tileComponent: HTMLElement;
-
-	let currentTile = 1;
-	let timer: NodeJS.Timeout;
 
 	const initialSigners = [
 		'0x5d95baEBB8412AD827287240A5c281E3bB30d27E',
@@ -24,10 +16,16 @@
 		'0x5566b7cb1cccb3e147084cf971d6dda770a3c90f'
 	];
 
+	let address = initialSigners[0];
+	let animate = false;
+	let mouseLastMoved = Date.now();
+
+	let currentTile = 1;
+	let timer: NodeJS.Timeout;
+
 	function setAddressCarousel() {
 		timer = setInterval(() => {
 			address = initialSigners[currentTile % initialSigners.length];
-			tile = generateTile(address);
 			currentTile++;
 		}, 1500);
 	}
@@ -47,26 +45,13 @@
 		}
 	}
 
-	function animateTile() {
-		const styles = getTileAnimationStyleString(tileComponent);
-		document.head.appendChild(document.createElement('style')).innerHTML = styles;
-	}
-
 	onMount(() => {
-		address = initialSigners[0];
-		tile = generateTile(address);
 		setAddressCarousel();
 		// Check if it's been 4s since the last move
 		setInterval(() => checkAnimationState(), 1000);
 	});
 
 	let innerWidth = browser ? window.innerWidth : 0;
-
-	$: {
-		if (tileComponent) {
-			animateTile();
-		}
-	}
 </script>
 
 <svelte:window bind:innerWidth on:mousemove={handleMove} />
@@ -76,8 +61,9 @@
 		<img
 			class="peri-profile"
 			width="360"
-			src="https://cloudflare-ipfs.com/ipfs/QmaM1m53J2qwEa5Gu3XNW8xryPbkNpMp42Wc984WtZj9iU"
-			alt="@peri profile with Tile background with nipple"
+			style="transform: scale({Math.min(1, (innerWidth - 50) / 360)});"
+			src="images/QmaM1m53J2qwEa5Gu3XNW8xryPbkNpMp42Wc984WtZj9iU.png"
+			alt="@peri profile with Tile background with nipple, preserved for all time https://cloudflare-ipfs.com/ipfs/QmaM1m53J2qwEa5Gu3XNW8xryPbkNpMp42Wc984WtZj9iU"
 		/>
 		<caption
 			><a href="https://twitter.com/peripheralist">@peripheralist</a>, Presumably on a warm relaxing
@@ -86,27 +72,7 @@
 		<br />
 		<br />
 		<main class:hide={innerWidth < 650}>
-			<div
-				class="tiles-container"
-				on:click={() => goto(`mint/${address}`)}
-				style="transform: scale({Math.min(1, (innerWidth - 50) / 560)});"
-			>
-				<div id="tiles">
-					{#if animate}
-						<div class="tile" bind:this={tileComponent}>
-							{@html tile}
-						</div>
-					{:else}
-						<div class="tile">
-							{@html tile}
-						</div>
-					{/if}
-					<div>
-						{address}
-					</div>
-				</div>
-				<p id="address" />
-			</div>
+			<Tile {address} {animate} />
 		</main>
 	</section>
 	<section slot="right">
@@ -181,17 +147,7 @@
 		</p>
 		<br />
 		<main class:hide={innerWidth > 650}>
-			<div class="tiles-container" on:click={() => goto(`mint/${address}?animate`)}>
-				<div id="tiles">
-					<div class="tile">
-						{@html tile}
-					</div>
-					<div>
-						{address}
-					</div>
-				</div>
-				<p id="address" />
-			</div>
+			<Tile {address} {animate} />
 		</main>
 	</section>
 </SplitPane>

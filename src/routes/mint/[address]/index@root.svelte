@@ -15,6 +15,8 @@
 	import Modal from '$juicebox/components/Modal.svelte';
 	import { startConfetti } from '$utils/confetti';
 	import { getTileAnimationStyleString } from '$tiles/utils';
+	import Tile from '$components/Tile.svelte';
+	import Footer from '$components/Footer.svelte';
 
 	enum Available {
 		IS_AVAILABLE = 0,
@@ -151,15 +153,7 @@
 	{#if showInvalidAddress}
 		<h1>Not a valid address</h1>
 	{:else if tile}
-		{#if animate}
-			<span bind:this={tileComponent}>
-				{@html tile}
-			</span>
-		{:else}
-			<span>
-				{@html tile}
-			</span>
-		{/if}
+		<Tile {address} {animate} showAddress={false} goToMint={false} />
 		<br />
 		<p>{$page.params.address}</p>
 		<p>
@@ -194,6 +188,7 @@
 <button class="download" on:click={() => downloadFile(tile, `${address}.svg`, 'image/svg')}>
 	Download SVG
 </button>
+<Footer />
 
 <Modal show={$modal} />
 
@@ -215,13 +210,13 @@
 		flex-direction: column;
 		align-items: center;
 		justify-content: center;
-		height: calc(100vh - 85px);
+		height: calc(100vh - 86px);
 		line-height: 1.3;
 	}
 
 	.download {
 		position: fixed;
-		bottom: 20px;
-		right: 20px;
+		bottom: 1px;
+		right: 10px;
 	}
 </style>
