@@ -76,8 +76,8 @@
 		<img
 			class="peri-profile"
 			width="360"
-			src="https://cloudflare-ipfs.com/ipfs/QmaM1m53J2qwEa5Gu3XNW8xryPbkNpMp42Wc984WtZj9iU"
-			alt="@peri profile with Tile background with nipple"
+			src="images/QmaM1m53J2qwEa5Gu3XNW8xryPbkNpMp42Wc984WtZj9iU.png"
+			alt="@peri profile with Tile background with nipple, preserved for all time https://cloudflare-ipfs.com/ipfs/QmaM1m53J2qwEa5Gu3XNW8xryPbkNpMp42Wc984WtZj9iU"
 		/>
 		<caption
 			><a href="https://twitter.com/peripheralist">@peripheralist</a>, Presumably on a warm relaxing
