@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	import { generateRandomAddresses } from '$tiles/tilesStandalone';
 	import { onMount } from 'svelte';
 	import SplitPane from '$components/SplitPane.svelte';
@@ -13,6 +13,12 @@
 		address2: randomAddresses[1],
 		address3: randomAddresses[2]
 	};
+
+	function getTruncatedAddress(address: string, a = 6, b = 6) {
+		return address && address.startsWith('0x')
+			? `${address.slice(0, a)}...${address.slice(-b)}`
+			: address;
+	}
 
 	function setAddressCarousel() {
 		setInterval(() => {
@@ -122,37 +128,37 @@
 		<p>
 			Tiles can be used on your site for a profile picture or just decorative imagery for contracts,
 			for example, the animations <a
-				href="/render/ethereal/0x8a97426C1a720a45B8d69E974631f01f1168232B"
+				href="/render/ethereal/{randomAddresses[0]}"
 				target="_blank">ethereal</a
 			> <i>(/render/ethereal/:address)</i>, and
-			<a href="/render/particle/0x8a97426C1a720a45B8d69E974631f01f1168232B" target="_blank"
+			<a href="/render/particle/{randomAddresses[0]}" target="_blank"
 				>particle</a
 			> <i>(/render/particle/:address)</i>; or static images 
-			<a href="/render/png/0x8a97426C1a720a45B8d69E974631f01f1168232B">png</a> <i>(/render/png/:address)</i>, and
-			<a href="/render/svg/0x8a97426C1a720a45B8d69E974631f01f1168232B">svg</a> <i>(/render/svg/:address)</i>.
+			<a href="/render/png/{randomAddresses[0]}">png</a> <i>(/render/png/:address)</i>, and
+			<a href="/render/svg/{randomAddresses[0]}">svg</a> <i>(/render/svg/:address)</i>.
 		</p>
 		<p>
 			<a
 				class="example"
-				href="https://tiles.wtf/render/ethereal/0x8a97426C1a720a45B8d69E974631f01f1168232B"
+				href="https://tiles.wtf/render/ethereal/{randomAddresses[0]}"
 				target="_blank"
-				>tiles.wtf/render/ethereal/0x8a974...232B</a
+				>tiles.wtf/render/ethereal/{getTruncatedAddress(randomAddresses[0])}</a
 			>
 			<a
 				class="example"
-				href="https://tiles.wtf/render/particle/0x8a97426C1a720a45B8d69E974631f01f1168232B"
+				href="https://tiles.wtf/render/particle/{randomAddresses[0]}"
 				target="_blank"
-				>tiles.wtf/render/particle/0x8a974...232B</a
+				>tiles.wtf/render/particle/{getTruncatedAddress(randomAddresses[0])}</a
 			>
 			<a
 				class="example"
-				href="https://tiles.wtf/render/png/0x8a97426C1a720a45B8d69E974631f01f1168232B"
-				target="_blank">tiles.wtf/render/png/0x8a974...232B</a
+				href="https://tiles.wtf/render/png/{randomAddresses[0]}"
+				target="_blank">tiles.wtf/render/png/{getTruncatedAddress(randomAddresses[0])}</a
 			>
 			<a
 				class="example"
-				href="https://tiles.wtf/render/svg/0x8a97426C1a720a45B8d69E974631f01f1168232B"
-				target="_blank">tiles.wtf/render/svg/0x8a974...232B</a
+				href="https://tiles.wtf/render/svg/{randomAddresses[0]}"
+				target="_blank">tiles.wtf/render/svg/{getTruncatedAddress(randomAddresses[0])}</a
 			>
 		</p>		
 	</section>

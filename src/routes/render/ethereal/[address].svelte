@@ -2,7 +2,7 @@
 	import { onMount } from 'svelte';
 
 	import { page } from '$app/stores';
-	import { generateTile } from '$tiles/tilesStandalone';
+	import { generateTile } from '$tiles/tilesStandalone';	
 	import { getTileAnimationStyleString } from '$tiles/utils';
 
 	let tileComponent: HTMLElement;
