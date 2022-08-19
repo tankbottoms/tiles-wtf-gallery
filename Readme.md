@@ -29,6 +29,10 @@ The Original Tiles visual algorithm can be found [here](https://github.com/tankb
 
 The repository uses the native SVG tiles however there are other rendering routes available.
 
+<p align="center">
+  <img src="https://tiles.wtf/render/png/0x5d95baEBB8412AD827287240A5c281E3bB30d27E">
+<p>
+
 - `/render/:address` - renders the tile and returns Base64 encoded SVG.
 - `/render/png/:address` - renders the tile and returns PNG.
 - `/render/svg/:address` - renders the tile and returns SVG.
@@ -63,3 +67,7 @@ yarn dev
 ### License
 
 For projects which route payments to the juicebox protocol. See the [fine print.](./LICENSE)
+
+### Deployments
+
+- [QmY1bTK99UBB2bLfCmFAHcwxTv6zhf8Mq9czpnjFABeZ2s] 20220819, build for baseUri
