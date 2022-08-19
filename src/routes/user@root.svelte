@@ -13,7 +13,6 @@
 	import { formattedNum } from '$juicebox/utils/formatNumber';
 	import type { tokens } from '@uniswap/default-token-list';
 	import type Store from '$utils/Store';
-	import { page } from '$app/stores';
 
 	type Token = typeof tokens[0] & { balance: string; error: any };
 
@@ -82,6 +81,8 @@
 		display: flex;
 		flex-direction: column;
 		align-items: center;
+		padding-bottom: 3rem;
+		box-sizing: border-box;
 	}
 	.not-connected {
 		display: flex;
