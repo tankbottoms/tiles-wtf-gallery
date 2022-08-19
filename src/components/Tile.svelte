@@ -6,7 +6,7 @@
 
 	export let address: string;
 	export let animate: boolean = false;
-    export let showAddress: boolean = true;
+	export let showAddress: boolean = true;
 
 	let innerWidth = browser ? window.innerWidth : 0;
 	let tile = '';
@@ -18,11 +18,11 @@
 	}
 
 	$: {
-        tile = generateTile(address);
-        if (tileComponent) {
-            animateTile();
-        }
-    }
+		tile = generateTile(address);
+		if (tileComponent) {
+			animateTile();
+		}
+	}
 </script>
 
 <div
@@ -40,18 +40,22 @@
 				{@html tile}
 			</div>
 		{/if}
-        {#if showAddress}
-		<div>
-			{address}
-		</div>
-        {/if}
+		{#if showAddress}
+			<div class="address">
+				{address}
+			</div>
+		{/if}
 	</div>
 </div>
 
 <style>
-    .tiles-container {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
+	.address {
+		font-size: small;
+		text-align: center;
+	}
+	.tiles-container {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
 </style>
