@@ -10,7 +10,6 @@
 	import GrabHistoryProvider from '$components/GrabHistoryProvider.svelte';
 	import Loading from '$juicebox/components/Loading.svelte';
 	import { pageReady } from '$stores';
-	import { readNetwork } from '$stores/web3';
 
 	onMount(logInfiteTilesAscii);
 	onMount(async () => {
@@ -28,27 +27,10 @@
 			<slot />
 			<ErrorModal />
 		{/if}
-		<footer>
-			<div class="footer">
-				<div class="link">
-					<a href="/tos?{$readNetwork ? `network=${$readNetwork?.alias}` : ''}">Terms of sale</a>
-				</div>
-			</div>
-		</footer>
 	</GrabHistoryProvider>
 </Intl>
 
 <style>
-	.footer {
-		margin: auto;
-		font-size: 14px;
-		color: black;
-		text-decoration: none;
-		align-items: center;
-		justify-items: center;
-		text-align: center;
-		margin: 0px 5px;
-	}
 	:global(body) {
 		cursor: crosshair;
 		max-width: 100vw;

@@ -8,7 +8,6 @@
 	import { readContract, writeContract } from '$utils/web3/contractReader';
 	import { getTilePrice } from '$utils/tiles';
 	import { downloadFile } from '$utils/file';
-	import { TILE_BASE_PRICE, TILE_MULTIPLIER, TILE_TIER_SIZE } from '$constants/tile';
 	import { pageReady, whenPageReady } from '$stores';
 	import { errorMessage } from '$components/ErrorModal.svelte';
 	import { parseEther } from 'ethers/lib/utils.js';
@@ -16,6 +15,7 @@
 	import Modal from '$juicebox/components/Modal.svelte';
 	import { startConfetti } from '$utils/confetti';
 	import { getTileAnimationStyleString } from '$tiles/utils';
+	import Footer from '$components/Footer.svelte';
 
 	enum Available {
 		IS_AVAILABLE = 0,
@@ -193,6 +193,7 @@
 <button class="download" on:click={() => downloadFile(tile, `${address}.svg`, 'image/svg')}>
 	Download SVG
 </button>
+<Footer />
 
 <Modal show={$modal} />
 

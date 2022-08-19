@@ -4,7 +4,7 @@
 	import { onMount } from 'svelte';
 	import { generateTile, generateRandomAddresses } from '$tiles/tilesStandalone';
 	import { goto } from '$app/navigation';
-
+	import Footer from '$components/Footer.svelte';
 	const { AddressZero } = constants;
 
 	let input: string | undefined;
@@ -61,6 +61,7 @@
 		{/each}
 	{/if}
 </section>
+
 <div class="menu">
 	<div
 		class="menuItem"
@@ -91,7 +92,6 @@
 	</div>
 </div>
 
-<!-- TODO the social links -->
 <div class="socialIcons" target="_blank">
 	<a href="https://twitter.com/Tile_DAO">
 		<Icon name="twitter" />
@@ -103,6 +103,7 @@
 		<Icon name="github" style="margin-right: -1rem;font-size: 2em;" />
 	</a>
 </div>
+<Footer />
 
 <style>
 	section {
