@@ -4224,7 +4224,7 @@
   dependencies:
     "@walletconnect/window-getters" "^1.0.0"
 
-"@web3-onboard/common@^2.1.8":
+"@web3-onboard/common@2.1.8", "@web3-onboard/common@^2.1.8":
   version "2.1.8"
   resolved "https://registry.yarnpkg.com/@web3-onboard/common/-/common-2.1.8.tgz#e20e027eaa597846b4ff178423de13d5ca597a5b"
   integrity sha512-3kmJi0FKUw0rPXrbVe/BL+K13JSEzZ2QndnzpmHtKt4xFyRN+JgboAaAvJqfuk9t4hAZe45PqEWraSnYUCgDaA==
@@ -4235,7 +4235,7 @@
     joi "^17.4.2"
     rxjs "^7.5.2"
 
-"@web3-onboard/core@^2.7.0":
+"@web3-onboard/core@2.7.0":
   version "2.7.0"
   resolved "https://registry.yarnpkg.com/@web3-onboard/core/-/core-2.7.0.tgz#20acb5ae430cc5d0b2a7513e4e83f3182cff19eb"
   integrity sha512-wxlUheuqgW8C5W2W4bpQdfjV9fXwmWxQx82IKem5kEnDhU8NPjVYEO/Xg4+kUwPlzYg0Uj/SPuGGjk+tNIrn9g==
@@ -4254,7 +4254,7 @@
     svelte "^3.49.0"
     svelte-i18n "^3.3.13"
 
-"@web3-onboard/gnosis@^2.0.9":
+"@web3-onboard/gnosis@2.0.9":
   version "2.0.9"
   resolved "https://registry.yarnpkg.com/@web3-onboard/gnosis/-/gnosis-2.0.9.tgz#19eb884de3f77fa1b6a5158a2b7bb67bdf5bf691"
   integrity sha512-yCdqCjq7Jio62kIUYqpP2WksO4llg0K5YjRYHBnXUIUt8ghYSTbaXaQAO1RsTmG5dzxXqt38ixudVLewmeiVcA==
@@ -4263,7 +4263,7 @@
     "@gnosis.pm/safe-apps-sdk" "^6.1.1"
     "@web3-onboard/common" "^2.1.8"
 
-"@web3-onboard/injected-wallets@^2.0.16":
+"@web3-onboard/injected-wallets@2.0.16":
   version "2.0.16"
   resolved "https://registry.yarnpkg.com/@web3-onboard/injected-wallets/-/injected-wallets-2.0.16.tgz#b76f6a4906ea43aa7fdc4c1ba60ec47d5afb0146"
   integrity sha512-llV+RGTRZtFq9n0uQ5FDyOfwSV+ITThubNhmaOUcFHpwwLD9U9Gyw15bdnGzUikaZTsKTyyuCEqtS8B3gH5paw==
@@ -4272,7 +4272,7 @@
     joi "^17.4.2"
     lodash.uniqby "^4.7.0"
 
-"@web3-onboard/ledger@^2.1.8":
+"@web3-onboard/ledger@2.1.8":
   version "2.1.8"
   resolved "https://registry.yarnpkg.com/@web3-onboard/ledger/-/ledger-2.1.8.tgz#b2bf02a907e065c204d7e9336b145fa8f821f9d3"
   integrity sha512-n9uS/1oHHDdTiFWMArV5lI8Tel/UBS4o6liHCHR8LcvCUF8qh5bliI2DtHgQ0FIJIrMDiBcRPyBzdtDL9tbwVw==
@@ -4287,7 +4287,7 @@
     buffer "^6.0.3"
     ethereumjs-util "^7.1.3"
 
-"@web3-onboard/trezor@^2.1.8":
+"@web3-onboard/trezor@2.1.8":
   version "2.1.8"
   resolved "https://registry.yarnpkg.com/@web3-onboard/trezor/-/trezor-2.1.8.tgz#0eaa21216c9af99ebfdd78d9d664f27dfd8abdf2"
   integrity sha512-WuGCPSs5Aibvm6avnYzzL1RZfyd1wnPB8IiNUBQ962c0mOcy+OtqQIFENCK4RrwSByblLxKk6kXbqhJZN88rfA==
@@ -4301,7 +4301,7 @@
     hdkey "^2.0.1"
     trezor-connect "^8.2.6"
 
-"@web3-onboard/walletconnect@^2.0.9":
+"@web3-onboard/walletconnect@2.0.9":
   version "2.0.9"
   resolved "https://registry.yarnpkg.com/@web3-onboard/walletconnect/-/walletconnect-2.0.9.tgz#ad3427832ea2268da5154c8b77e05d964c65d282"
   integrity sha512-ORir31Dmcq9guUp7LJN/iw5BB1E5xgjALX7aR0CG0H5iRPOkjmVjaha1CkK5wfD3Qj75egMnYjYmMo+W4imIIg==
