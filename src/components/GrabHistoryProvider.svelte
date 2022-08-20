@@ -35,6 +35,13 @@
 							timestamp: tx.timestamp || 0,
 							blockNumber: tx.blockNumber || 0
 						});
+					} else if (decodedData.name === 'mint') {
+						history.push({
+							caller: tx.from,
+							address: tx.from,
+							timestamp: tx.timestamp || 0,
+							blockNumber: tx.blockNumber || 0
+						});
 					}
 				} catch {}
 			});
