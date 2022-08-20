@@ -77,12 +77,6 @@
 			<RichImgPreview src={mediaLink} height="100px" {style} />
 		</div>
 	{/each}
-
-	<!-- <div class="frames">
-		{#each tileLinks as tileLink}
-			<iframe src={tileLink} title="" width="360" height="360" />
-		{/each}
-	</div> -->
 </div>
 
 <style>
@@ -100,13 +94,5 @@
 	.image :global(img) {
 		max-width: 100%;
 		max-height: 100%;
-	}
-	iframe {
-		transform: translate(-120px, -120px) scale(0.3);
-		border: none;
-	}
-	.frames {
-		max-width: 120px;
-		max-height: 120px;
 	}
 </style>
