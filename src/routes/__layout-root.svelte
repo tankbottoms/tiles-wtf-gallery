@@ -1,4 +1,5 @@
 <script lang="ts">
+	import '$utils/log';
 	import { onMount } from 'svelte';
 	import Notify from 'bnc-notify';
 	import ErrorModal from '$components/ErrorModal.svelte';
@@ -6,13 +7,11 @@
 	import Intl from '$juicebox/provider/Intl.svelte';
 	import { notify } from '$utils/notification';
 	import { loadLocale } from '$utils/LanguageProvider';
-	import { logInfiteTilesAscii } from '$utils/log';
 	import GrabHistoryProvider from '$components/GrabHistoryProvider.svelte';
 	import Loading from '$juicebox/components/Loading.svelte';
 	import { pageReady } from '$stores';
 	import UserTokenBalancesProvider from '$components/UserTokenBalancesProvider.svelte';
 
-	onMount(logInfiteTilesAscii);
 	onMount(async () => {
 		await loadLocale();
 		notify.set(Notify({}));

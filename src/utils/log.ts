@@ -1,5 +1,8 @@
-export function logInfiteTilesAscii() {
-	console.log(`%c\
+import { browser } from '$app/env';
+
+browser &&
+	console.log(
+		`%c\
 ...........................................................................        
 :++++++++++++++++++++++=::++++++++++++++++++++++=::++++++++++++++++++++++=:        
 :++++++++++++++++++++=.  :++++++++++++++++++++=.  :++++++++++++++++++++=:          
@@ -42,5 +45,6 @@ export function logInfiteTilesAscii() {
 
 Infinite Tiles v2
 Brought to you by tankbottoms.eth, sveltedev.eth, dsintermediatd.eth, cookieslayer.eth
-    `, 'color: #505050;');
-}
+    `,
+		'color: #505050;'
+	);
