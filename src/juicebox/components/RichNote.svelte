@@ -1,45 +1,30 @@
 <script lang="ts">
-	import axios from 'axios';
 	import Autolinker from 'autolinker';
+	import type * as CSS from 'csstype';
 	import { onMount } from 'svelte';
+	import RichImgPreview, { supportedContentTypes, getContentType } from './RichImgPreview.svelte';
 
 	export let note: string;
-	export let style: { [key: string]: string } = undefined;
-
-	export const supportedContentTypes = [
-		'image/jpeg',
-		'image/jpg',
-		'image/gif',
-		'image/png',
-		'image/svg'
-	];
-	export async function getContentType(url: string): Promise<string> {
-		return axios
-			.get(url)
-			.then((res) => {
-				return res.headers['content-type'];
-			})
-			.catch(() => {
-				return undefined;
-			});
-	}
+	export let style: CSS.Properties | undefined = undefined;
 
 	let mediaLinks: string[] = [];
 	let sanitizedNote: string | undefined;
+
+	$: note = updateLinks(note);
 
 	async function getMediaLinks() {
 		if (!note) return [];
 
 		let links: string[] = [];
 
-		note.replace(/https:\/\/[\w./&?,=#-;]+/gi, (link) => {
+		note.replace(/(https|http):\/\/[\w./&?,=#-;]+/gi, (link) => {
 			links.push(link);
 			return '';
 		});
 
 		const filteredLinks: string[] = [];
 		for (const link of links) {
-			const contentType = await getContentType(link);
+			const contentType = (await getContentType(link))?.split(';')?.[0] || '';
 			if (supportedContentTypes.includes(contentType)) {
 				filteredLinks.push(link);
 			}
@@ -48,11 +33,22 @@
 	}
 
 	onMount(async () => {
+		note = updateLinks(note);
 		mediaLinks = await getMediaLinks();
-		const promises = mediaLinks.map((mediaLink) => {
-			return getContentType(mediaLink);
-		});
 	});
+
+	function updateLinks(note: string) {
+		note = note
+			.replace(
+				/https[:]\/\/us-central1-juicebox-svelte.cloudfunctions.net\/app\/render\/simple\//g,
+				() => `https://juicebox.wtf/tiles/render/svg/`
+			)
+			.replace(
+				/https[:]\/\/tiles.wtf\/render\/png\//g,
+				() => `https://juicebox.wtf/tiles/render/svg/`
+			);
+		return note;
+	}
 
 	$: {
 		let _note = note;
@@ -78,7 +74,7 @@
 <div class="images">
 	{#each mediaLinks as mediaLink}
 		<div class="image">
-			<img src={mediaLink} {style} alt="_image" />
+			<RichImgPreview src={mediaLink} height="100px" {style} />
 		</div>
 	{/each}
 </div>
