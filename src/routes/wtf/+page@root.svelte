@@ -89,6 +89,7 @@
 				target="_blank">Tile's artwork algorithm</a
 			> is computed entirely in Solidity.
 		</p>
+		<p>The Infinite Tiles v2 contract is <a href="https://etherscan.io/address/0xa0dadfa9279c1379cfcabd8e21af78b9064cceb0#code" target="_blank">0xa0dadfA9279C1379CfcAbd8e21Af78b9064cCeb0</a>.</p>
 		<p>
 			The Tile minting and <a href="/dao">Juicebox Treasury</a> applications are implemented with
 			<a href="https://kit.svelte.dev/" target="_blank">Svelte</a>

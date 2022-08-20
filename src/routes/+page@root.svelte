@@ -53,8 +53,9 @@
 			<a class="heading" href="/history?{$readNetwork ? `network=${$readNetwork?.alias}` : ''}">
 				Infinite (∞) Tiles v2
 			</a>
-		</h1>
+		</h1>		
 		<p>Generated from any Ethereum address</p>
+		<p><a href="https://etherscan.io/address/0xa0dadfa9279c1379cfcabd8e21af78b9064cceb0#code">0xa0dadfA9279C1379CfcAbd8e21Af78b9064cCeb0</a></p>
 		<p>
 			<a
 				href="https://github.com/tankbottoms/tiles-on-chain/blob/main/contracts/components/TileContentProvider.sol"
