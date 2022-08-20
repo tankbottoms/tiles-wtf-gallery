@@ -10,3 +10,4 @@ node_modules
 .output
 *.log
 package-lock.json
+static/commit-hash.txt
