@@ -8,7 +8,7 @@
 	let tileComponent: HTMLElement;
 
 	$: address = $page.params.address;
-	$: tile = generateTile(address, { viewBox: "-120 -120 600 600", size: 600});
+	$: tile = generateTile(address);
 
 	function animateTile() {
 		const styles = getTileAnimationStyleString(tileComponent);
@@ -32,7 +32,7 @@
 	main {
 		margin: 0;
 		padding: 0;
-		background: #FEFDFB;; 
+		background: #FEFDFB;
 		width: 100vw;
 		height: 100vh;
 		display: flex;
