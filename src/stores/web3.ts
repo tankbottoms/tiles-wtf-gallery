@@ -74,7 +74,7 @@ if (browser) {
 	setTimeout(async () => {
 		readNetwork.subscribe((net) => {
 			const returnValue = connectedAccount.get() ? net : getDefaultProvider();
-			console.log(`%c[stores/web3.ts]['read network'] ` + returnValue.alias, 'color: orange;');
+			console.log(`[stores/web3.ts]['read network'] ` + returnValue.alias);
 			if (chainId.get() !== Number(returnValue.id)) chainId.set(Number(net.id));
 		});
 		pendingInitialization = initialize();

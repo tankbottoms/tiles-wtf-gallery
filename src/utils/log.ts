@@ -42,5 +42,5 @@ export function logInfiteTilesAscii() {
 
 Infinite Tiles v2
 Brought to you by tankbottoms.eth, sveltedev.eth, dsintermediatd.eth, cookieslayer.eth
-    `, 'color: yellow;');
+    `, 'color: #505050;');
 }

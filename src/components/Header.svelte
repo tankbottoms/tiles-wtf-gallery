@@ -31,7 +31,7 @@
 				count = grabHistory
 					.filter((item) => item.caller?.toLowerCase() === $connectedAccount?.toLowerCase())
 					?.length?.toString();
-				console.log(`%ctotalSupply count: ${count}`, 'color: yellow;');
+				console.log(`totalSupply count: ${count}`);
 			} catch (e: any) {
 				console.error(`subscription error: ${e}`);
 				console.error(e.message);
