@@ -150,7 +150,7 @@
 			<div>
 				<p class="label"><Trans>Project token</Trans>:</p>
 				<span class="project-token">
-					<Skeleton loading={true} width="5rem" height="1rem">
+					<Skeleton loading={!tokenSymbol || !tokenAddress} width="5rem" height="1rem">
 						{tokenSymbol}
 						(<EnsOrAddress
 							address={tokenAddress}
