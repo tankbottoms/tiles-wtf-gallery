@@ -94,7 +94,7 @@
 			<Icon name="discord" />
 		</a>
 		<a href="https://github.com/tankbottoms/tiles-on-chain" target="_blank">
-			<Icon name="github" style="margin-right: -1rem;font-size: 2em;" />
+			<Icon name="github" style="width: 1rem" />
 		</a>
 	</div>
 </main>
