@@ -63,7 +63,7 @@
 			width="360"
 			style="transform: scale({Math.min(1, (innerWidth - 50) / 360)});"
 			src="images/QmaM1m53J2qwEa5Gu3XNW8xryPbkNpMp42Wc984WtZj9iU.png"
-			alt="@peri profile with Tile background with nipple, preserved for all time https://cloudflare-ipfs.com/ipfs/QmaM1m53J2qwEa5Gu3XNW8xryPbkNpMp42Wc984WtZj9iU"
+			alt="@peripheralist (@peri) - profile with a Tile background accented with nipple, preserved for all time https://cloudflare-ipfs.com/ipfs/QmaM1m53J2qwEa5Gu3XNW8xryPbkNpMp42Wc984WtZj9iU"
 		/>
 		<caption
 			><a href="https://twitter.com/peripheralist">@peripheralist</a>, Presumably on a warm relaxing
@@ -79,18 +79,24 @@
 		<h1>Wtf?</h1>
 		<p>
 			<a href="https://github.com/tankbottoms/tiles-on-chain">Infinite Tiles v2</a> is a
-			reversed-engineered implementation of @peripheralist’s
-			<a href="https://github.com/TileDAO">Tiles</a>, without any api-service support. The SVG tile,
-			metadata including attributes, are generated and served from the Ethereum blockchain from
-			Solidity.
+			reversed-engineered implementation of
+			<a href="https://twitter.com/peripheralist">@peripheralist</a>'s
+			<a href="https://github.com/TileDAO">Tiles</a>, without any api-service support. The
+			<a href="https://en.wikipedia.org/wiki/Scalable_Vector_Graphics" target="_blank">SVG</a> Tile,
+			attributes metadata is completely generated and served from the Ethereum blockchain. The
+			<a
+				href="https://github.com/tankbottoms/tiles-on-chain/blob/main/contracts/components/TileContentProvider.sol#L61"
+				target="_blank">Tile's artwork algorithm</a
+			> is computed entirely in Solidity.
 		</p>
 		<p>
-			The minting and <a href="/dao">Tiles Juicebox Treasury</a> experience here were implemented
-			with Svelte in Typescript. The
+			The Tile minting and <a href="/dao">Juicebox Treasury</a> applications are implemented with
+			<a href="https://kit.svelte.dev/" target="_blank">Svelte</a>
+			in <a href="https://www.typescriptlang.org/">Typescript</a>. Github repos
 			<a href="https://github.com/tankbottoms/tiles-on-chain">tiles-v2-nft</a>
 			and
-			<a href="https://github.com/tankbottoms/tiles-wtf-gallery">tiles-v2-gallery</a> Github repos
-			together seek to further decentralize the
+			<a href="https://github.com/tankbottoms/tiles-wtf-gallery">tiles-v2-gallery</a> combined seek
+			to further decentralization the
 			<a
 				href="https://snapshot.org/#/jbdao.eth/proposal/0x122ec83036d4ed2379c98ed6c566666256169aac1ee4316f60da24bd768c7ff6"
 				target="_blank">Juicebox v2 protocol</a
@@ -98,7 +104,7 @@
 		</p>
 		<p>
 			This project is an homage to the venerable @peripheralist: the genius artist, designer,
-			developer, grapher, person. <i>"all hail @peripheralist,"</i> <br />
+			developer, grapher, person. <i>"all hail @peripheralist"</i> <br />
 		</p>
 		<br />
 		<hr />
@@ -116,17 +122,13 @@
 			>
 		</p>
 		<p>
-			Therefore Infinite Tiles v2 will operates as a DAO, on the Juicebox protocol wrapped as an
-			Unincorporated Nonprofit. This will enable the DAO a number of meatspace benefits including
-			banking services, ownership of property, and engagement of services with other entities. The <a
-				href="/gp">Guiding Principals</a
-			> sets forth the initial governance and membership structure, for the Tile community to mold as
-			they see fit.
-		</p>
-		<p>
-			As there are enough unique Tiles for each Ethereum address; it may be possible that the UNA
-			recieves funding perpetually. Conveniently, the entity structure, UUNAA, supports perpetual
-			durations.
+			The Infinite Tiles v2 DAO (TilesDAO2), coupled with the Juicebox v2 Treasury, wrapped by the
+			Unincorporated Nonprofit Association entity structure provide the legal foundation for this
+			project. As there are enough unique Tiles for each Ethereum address; it may be possible that
+			the UUNAA recieves funding perpetually; therefore meatspace communities would benefit from
+			banking services, ownership of property, and/or engagement of services with other entities. To
+			this end, Infinite Tiles v2 DAO has set forth the <a href="/gp">Guiding Principals</a> establishing
+			an initial governance and membership structure, for the Tile's community to mold as they see fit.
 		</p>
 
 		<br />
@@ -140,10 +142,10 @@
 			>
 		</p>
 		<p>
-			The initial Gnosis signers, listed to the left with their corresponding Tile, will act as
-			stewards to the Tiles v2 Juicebox Project, through its NFT, and in turn its treasury.
-			Additionally, the Gnosis is able to mint new Tiles as well as add additional minters to the
-			Tiles v2 contract.
+			The proposed initial Gnosis signers, (listed to the left with their corresponding Tile), are
+			intended to serve as stewards to the Tiles v2 Juicebox community, through the NFT, and in turn
+			its treasury. Through the Gnosis, the signers may appoint minters who are able to generate new
+			Tiles, in hopes of spreading goodwill and interests exapanding the community.
 		</p>
 		<br />
 		<main class:hide={innerWidth > 650}>

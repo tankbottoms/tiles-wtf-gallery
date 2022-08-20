@@ -60,15 +60,18 @@
 			if (isAvailable === Available.IS_AVAILABLE) {
 				if ($page.params.address === $connectedAccount) {
 					const txnResponse = await writeContract('Tiles', 'mint', [], { value: price });
+					console.log(`mint: ${JSON.stringify(txnResponse)}`, `Tiles, mint, ${price}`);
 					await txnResponse?.wait();
 				} else {
 					const txnResponse = await writeContract('Tiles', 'grab', [address], {
 						value: price
 					});
+					console.log(`grab: ${JSON.stringify(txnResponse)}`, `Tiles, grab, ${address}, ${price}`);
 					await txnResponse?.wait();
 				}
 			} else if (isAvailable === Available.CAN_SEIZE) {
 				const txnResponse = await writeContract('Tiles', 'seize', [], { value: price });
+				console.log(`seize: ${JSON.stringify(txnResponse)}`, `Tiles, seize, ${price}`);
 				await txnResponse?.wait();
 			}
 			isAvailable = Available.NOT_AVAILABLE;
