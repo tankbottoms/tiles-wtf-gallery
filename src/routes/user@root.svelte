@@ -60,14 +60,14 @@
 				<a href={null} alt={''} on:click={web3Connect}>connect wallet</a>
 			</section>
 		{/if}
-		<p slot="denied" let:account>
+		<p slot="Denied" let:account>
 			{#if account}
 				Sorry, you do not have access to this page
 			{:else}
 				Please connect to a wallet
 			{/if}
 		</p>
-		<p slot="checking">loading...</p>
+		<p slot="Checking">loading...</p>
 	</TokenGated>
 </main>
 
