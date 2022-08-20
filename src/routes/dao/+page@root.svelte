@@ -1,10 +1,3 @@
-<script lang="ts" context="module">
-	import { browser } from '$app/env';
-	export const hydrate = true;
-	export const router = browser;
-	export const prerender = true;
-</script>
-
 <script lang="ts">
 	import type {
 		UserTokenBalanceContext,
@@ -38,9 +31,14 @@
 	import { chainId, connectedAccount, getDefaultProvider, readNetwork } from '$stores/web3';
 	import { V2OperatorPermission } from '$juicebox/constants/v2/operatorPermission';
 	import { blocknativeNetworks } from '$constants/networks';
+	import { browser } from '$app/env';
 
 	function getProjectId() {
-		return BigNumber.from(Number(getDefaultProvider().id) === 4 ? APP_CONFIG.project_rinkeby : APP_CONFIG.project_mainnet);
+		return BigNumber.from(
+			Number(getDefaultProvider().id) === 4
+				? APP_CONFIG.project_rinkeby
+				: APP_CONFIG.project_mainnet
+		);
 	}
 
 	let projectId = getProjectId();
