@@ -32,7 +32,7 @@
 	main {
 		margin: 0;
 		padding: 0;
-		background: #FAF3E8;
+		background: #FEFDFB;; 
 		width: 100vw;
 		height: 100vh;
 		display: flex;
