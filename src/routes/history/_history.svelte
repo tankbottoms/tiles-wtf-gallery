@@ -65,50 +65,44 @@
 	</section>
 
 	<section class:grid>
-		{#if $connectedAccount}
-			{#if $grabHistory.loading}
-				<Loading />
-			{:else if tiles?.length}
-				{#each tiles as item}
-					<div class="tileContainer">
-						<div class="image">
-							{@html item.tile}
-						</div>
-						<span class="address">
-							{#if innerWidth < 370}
-								{getTruncatedAddress(item.address)}
-							{:else}
-								{item.address}
-							{/if}
-						</span>
-						<div>
-							{#if item.timestamp}
-								{#await moment(item.timestamp * 1000) then date}
-									<div class="timestamp">{date.format('LLL')}</div>
-								{/await}
-							{/if}
-						</div>
-						{#if !userAddress}
-							<div>
-								<EtherscanLink
-									type="address"
-									value={item.caller}
-									showTooltip={false}
-									truncated={true}
-								>
-									<EnsOrAddress address={item.caller} />
-								</EtherscanLink>
-							</div>
+		{#if $grabHistory.loading}
+			<Loading />
+		{:else if tiles?.length}
+			{#each tiles as item}
+				<div class="tileContainer">
+					<div class="image">
+						{@html item.tile}
+					</div>
+					<span class="address">
+						{#if innerWidth < 370}
+							{getTruncatedAddress(item.address)}
+						{:else}
+							{item.address}
+						{/if}
+					</span>
+					<div>
+						{#if item.timestamp}
+							{#await moment(item.timestamp * 1000) then date}
+								<div class="timestamp">{date.format('LLL')}</div>
+							{/await}
 						{/if}
 					</div>
-				{/each}
-			{:else}
-				<p>Shockingly nothing has been minted.</p>
-			{/if}
+					{#if !userAddress}
+						<div>
+							<EtherscanLink
+								type="address"
+								value={item.caller}
+								showTooltip={false}
+								truncated={true}
+							>
+								<EnsOrAddress address={item.caller} />
+							</EtherscanLink>
+						</div>
+					{/if}
+				</div>
+			{/each}
 		{:else}
-			<p>
-				<a href={null} on:click={web3Connect}>Connect to wallet</a> to see history.
-			</p>
+			<p>Shockingly nothing has been minted.</p>
 		{/if}
 	</section>
 </main>
