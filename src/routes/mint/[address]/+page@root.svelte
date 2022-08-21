@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import { APP_CONFIG } from '$constants/app';
-	import { BigNumber, utils } from 'ethers';
+	import { BigNumber, constants, utils } from 'ethers';
 	import { page } from '$app/stores';
 	import { modal } from '$stores';
 	import { generateTile } from '$tiles/tilesStandalone';
@@ -10,7 +10,7 @@
 	import { getTilePrice } from '$utils/tiles';
 	import { downloadFile } from '$utils/file';
 	import { pageReady, whenPageReady } from '$stores';
-	import { errorMessage } from '$components/ErrorModal.svelte';
+	import ErrorModal, { errorMessage } from '$components/ErrorModal.svelte';
 	import { parseEther } from 'ethers/lib/utils.js';
 	import { createCustomNotification } from '$utils/notification';
 	import Modal from '$juicebox/components/Modal.svelte';
@@ -19,6 +19,7 @@
 	import Tile from '$components/Tile.svelte';
 	import Footer from '$components/Footer.svelte';
 	import { sleep } from '$utils/time';
+	import EtherscanLink from '$juicebox/components/EtherscanLink.svelte';
 
 	type Available = {
 		availability: boolean;
@@ -39,6 +40,7 @@
 
 	let balance = BigNumber.from(parseEther('10000'));
 	let hasEnoughBalance = true;
+	let seizeFrom = '';
 
 	$: connectedUser = $connectedAccount;
 
@@ -54,24 +56,46 @@
 	}
 
 	async function checkAvailability(address: string): Promise<Available> {
-		const tokenId: BigNumber = await readContract('Tiles', 'idForAddress', [address]);
-		let owner: string = '';
+		seizeFrom = '';
+		let ownsOnOriginalContract = false;
+		if ($readNetwork.alias === 'mainnet') {
+			try {
+				ownsOnOriginalContract = await ownsOnV1Contract(address);
+			} catch (er) {
+				console.log('error checking if user owns on v1 tiles contract', er);
+			}
+		}
+
+		let tokenId: BigNumber = BigNumber.from(0);
+		let v2Owner: string = '';
 		try {
-			owner = await readContract('Tiles', 'ownerOf', [tokenId]);
+			tokenId = await readContract('Tiles', 'idForAddress', [address]);
+			if (tokenId?.gt(0)) {
+				v2Owner = await readContract('Tiles', 'ownerOf', [tokenId]);
+			}
+			price = ownsOnOriginalContract ? BigNumber.from(0) : await getTilePrice();
 		} catch (e) {}
 
-		if (owner?.toLowerCase() === connectedUser?.toLowerCase()) {
-			return { availability: true, reason: 'OWNER' };
-		} else if (connectedUser?.toLowerCase() === address?.toLowerCase()) {
-			if (tokenId.eq(0)) return { availability: true, reason: 'CAN_MINT' };
-			else return { availability: true, reason: 'CAN_SEIZE' };
-		} else if (tokenId.eq(0)) {
-			return { availability: true, reason: 'CAN_GRAB' };
+		if (address?.toLowerCase() === $connectedAccount?.toLowerCase()) {
+			if (tokenId?.gt(0)) {
+				if (v2Owner?.toLowerCase() === $connectedAccount?.toLowerCase()) {
+					return { availability: true, reason: 'OWNER' };
+				}
+				seizeFrom = v2Owner;
+				return { availability: true, reason: 'CAN_SEIZE' };
+			} else {
+				return { availability: true, reason: 'CAN_MINT' };
+			}
+		} else {
+			if (tokenId?.gt(0)) {
+				if (v2Owner?.toLowerCase() === $connectedAccount?.toLowerCase()) {
+					return { availability: true, reason: 'OWNER' };
+				}
+				return { availability: false, reason: 'TAKEN' };
+			} else {
+				return { availability: true, reason: 'CAN_GRAB' };
+			}
 		}
-		return {
-			availability: false,
-			reason: 'TAKEN'
-		};
 	}
 
 	async function ownsOnV1Contract(address: string) {
@@ -92,16 +116,15 @@
 		return Boolean(id?.gt(0));
 	}
 
+	let minting = false;
 	async function mint() {
+		minting = true;
 		if (!connectedUser) {
 			console.log('mint: account not connected, try connecting');
 			return await web3Connect();
 		}
 		try {
 			isAvailable = await checkAvailability(address);
-			/*
-			remove free pricing because in most sitatutions you have to pay, except when you own the tile already, then you can grab the same token for free
-			*/
 			let ownsOnOriginalContract = false;
 			if ($readNetwork.alias === 'mainnet') {
 				try {
@@ -110,30 +133,48 @@
 					console.log('error checking if user owns on v1 tiles contract', er);
 				}
 			}
-			if (isAvailable.availability) {
-				console.log(`mint: minting ${address}, availability:${isAvailable.availability}`);
-				price = ownsOnOriginalContract ? BigNumber.from(0) : price;
-				if (isAvailable.reason === 'CAN_MINT') {
+
+			const price = ownsOnOriginalContract ? BigNumber.from(0) : await getTilePrice();
+
+			let tokenId: BigNumber = BigNumber.from(0);
+			let v2Owner: string = '';
+			try {
+				tokenId = await readContract('Tiles', 'idForAddress', [address]);
+				if (tokenId?.gt(0)) {
+					v2Owner = await readContract('Tiles', 'ownerOf', [tokenId]);
+				}
+			} catch (e) {}
+
+			if (address?.toLowerCase() === $connectedAccount?.toLowerCase()) {
+				if (tokenId?.gt(0)) {
+					if (v2Owner?.toLowerCase() === $connectedAccount?.toLowerCase()) {
+						throw Error('you already own this tile');
+					}
+					const txnResponse = await writeContract('Tiles', 'seize', [], {
+						value: price
+					});
+					console.log(`seize: ${JSON.stringify(txnResponse)}`, `Tiles, seize, ${price}`);
+					await txnResponse?.wait();
+				} else {
 					const txnResponse = await writeContract('Tiles', 'mint', [], {
 						value: price
 					});
 					console.log(`mint: ${JSON.stringify(txnResponse)}`, `Tiles, mint, ${price}`);
 					await txnResponse?.wait();
-				} else if (isAvailable.reason === 'CAN_GRAB') {
+				}
+			} else {
+				if (tokenId?.gt(0)) {
+					if (v2Owner?.toLowerCase() === $connectedAccount?.toLowerCase()) {
+						throw Error('you already own this tile');
+					}
+					throw Error('this tile has already been minted by another user');
+				} else {
 					console.log(`mint, can grab, minting ${address}, ${price}`);
 					const txnResponse = await writeContract('Tiles', 'grab', [address], {
 						value: price
 					});
 					console.log(`grab: ${JSON.stringify(txnResponse)}`, `Tiles, grab, ${address}, ${price}`);
 					await txnResponse?.wait();
-				} else if (isAvailable.reason === 'CAN_SEIZE') {
-					const txnResponse = await writeContract('Tiles', 'seize', [], {
-						value: price
-					});
-					console.log(`seize: ${JSON.stringify(txnResponse)}`, `Tiles, seize, ${price}`);
-					await txnResponse?.wait();
-				} else if (isAvailable.reason === 'OWNER') {
-					throw Error('already own this token');
 				}
 			}
 			isAvailable = { availability: false, reason: '' };
@@ -148,6 +189,7 @@
 				autoDismiss: 3000
 			});
 		}
+		minting = false;
 	}
 
 	function animateTile() {
@@ -231,20 +273,34 @@
 				: 'not available'}
 			{#if (!isAvailable.availability || isAvailable.reason === 'OWNER') && isAvailable.reason !== ''}
 				- <a href="/mint?{$readNetwork ? `network=${$readNetwork?.alias}` : ''}">generate tiles</a>
+			{:else if !loading && seizeFrom}
+				(seize from <EtherscanLink
+					truncated={true}
+					type="address"
+					showTooltip={false}
+					value={seizeFrom || constants.AddressZero}
+				/>)
 			{/if}
 		</p>
 		{#if connectedUser}
-			<button
-				class="mint"
-				on:click={mint}
-				disabled={!$pageReady.web3 ||
-					loading ||
-					!isAvailable.availability ||
-					!hasEnoughBalance ||
-					isAvailable.reason === 'OWNER'}
-			>
-				Mint ({formattedPrice} ETH)
-			</button>
+			{#if minting}
+				<button class="mint" on:click|preventDefault disabled={true}>
+					Minting ({formattedPrice} ETH)
+				</button>
+			{:else}
+				<button
+					class="mint"
+					on:click={mint}
+					disabled={minting ||
+						!$pageReady.web3 ||
+						loading ||
+						!isAvailable.availability ||
+						!hasEnoughBalance ||
+						isAvailable.reason === 'OWNER'}
+				>
+					Mint ({formattedPrice} ETH)
+				</button>
+			{/if}
 			<!--
 			<br />			
 			<a href="/mint/{address}/holdings" class="mint"> use other tokens to mint </a>
@@ -253,6 +309,7 @@
 			<button on:click={() => web3Connect()}>CONNECT WALLET</button>
 		{/if}
 		<br />
+
 		{#if !hasEnoughBalance}
 			<p>Insufficient balance</p>
 		{/if}
