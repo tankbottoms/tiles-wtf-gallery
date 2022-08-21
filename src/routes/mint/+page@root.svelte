@@ -45,7 +45,7 @@
 	</section>
 
 	<section class:grid>
-		{#if address}
+		{#if address}			
 			<Tile {address} />
 		{:else if showInvalidAddress}
 			<p>Not a valid Ethereum address</p>
@@ -53,6 +53,11 @@
 			{#each randomTiles as item}
 				<Tile address={item.address} />
 			{/each}
+		{/if}
+	</section>
+	<section>
+		{#if address}
+			<p>Click on the tile you with to mint.</p>
 		{/if}
 	</section>
 
