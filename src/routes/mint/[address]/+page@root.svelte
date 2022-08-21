@@ -124,18 +124,20 @@
 		console.log('mint, init subscribing...');
 		setInterval(checkAnimationState, 1000);
 		// Returning so it gets unsubscribed when component is destroyed
-		return readNetwork.subscribe(async () => {
-			loading = true;
+		return readNetwork.subscribe(() => {
+			connectedAccount.subscribe(async () => {
+				loading = true;
 
-			try {
-				price = await getTilePrice();
-				isAvailable = await checkAvailability(address);
-			} catch (error) {
-				console.warn(error.message);
-				$errorMessage;
-			}
+				try {
+					price = await getTilePrice();
+					isAvailable = await checkAvailability(address);
+				} catch (error) {
+					console.warn(error.message);
+					$errorMessage;
+				}
 
-			loading = false;
+				loading = false;
+			});
 		});
 	});
 
