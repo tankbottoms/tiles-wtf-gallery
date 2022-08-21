@@ -68,8 +68,9 @@
 			>
 		</p>
 		<p>Each is unique & objectively rare</p>
+		<a href="/seizures?{$readNetwork ? `network=${$readNetwork?.alias}` : ''}">Seizures</a>
 		<a href="/wtf?{$readNetwork ? `network=${$readNetwork?.alias}` : ''}">Wtf</a>
-		<a href="/dao?{$readNetwork ? `network=${$readNetwork?.alias}` : ''}">Treasury</a>
+		<a href="/dao?{$readNetwork ? `network=${$readNetwork?.alias}` : ''}">Juicebox</a>
 		<a href="/faq?{$readNetwork ? `network=${$readNetwork?.alias}` : ''}">Faq</a>
 		<div class="group">
 			<div>

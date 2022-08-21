@@ -30,16 +30,14 @@
 			showInvalidAddress = false;
 		}
 	}
-	/*
-	TODO: firebase function to tweet the last tile which was minted
-	*/
 </script>
 
 <main>
 	<section>
 		<h1>Mint a tile</h1>
 		<p>
-			Enter an 0x address to find its matching tile, or browse the randomly generated list below.
+			Enter any '0x' address to find its matching tile, or browse the randomly generated tiles
+			below. Experiment with generating 'order' tiles by entering patterns in the address parts.
 		</p>
 		<input placeholder={AddressZero} bind:value={input} />
 	</section>
@@ -48,7 +46,7 @@
 		{#if address}
 			<Tile {address} />
 		{:else if showInvalidAddress}
-			<p>Not a valid Ethereum address</p>
+			<p>Not a valid Ethereum address. Input length is {input.length - 2}/40.</p>
 		{:else}
 			{#each randomTiles as item}
 				<Tile address={item.address} />
@@ -57,7 +55,7 @@
 	</section>
 	<section>
 		{#if address}
-			<p>Click on the tile you with to mint.</p>
+			<p>Select the generated tile to continue.</p>
 		{/if}
 	</section>
 
@@ -111,7 +109,7 @@
 	}
 	section {
 		margin: 0 auto;
-		max-width: 360px;
+		max-width: 560px;
 		margin-top: 2.5rem;
 	}
 

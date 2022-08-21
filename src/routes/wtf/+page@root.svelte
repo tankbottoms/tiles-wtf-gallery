@@ -117,7 +117,7 @@
 		<br />
 		<hr />
 		<br />
-		<h1>Unincorporated Nonprofit</h1>
+		<h1>Unincorporated Nonprofit.</h1>
 		<p>
 			In the United States, Unincorporated Nonprofit Associations are governed by a hodgepodge of
 			common law principles and statutes governing some of their legal aspects. The Uniform
@@ -142,7 +142,7 @@
 		<br />
 		<hr />
 		<br />
-		<h1>Gnosis</h1>
+		<h1>Gnosis.</h1>
 		<p>
 			<a href="https://etherscan.io/address/{APP_CONFIG.gnosis_mainnet}" target="_blank"
 				>{getTruncatedAddress(APP_CONFIG.gnosis_mainnet)}</a
