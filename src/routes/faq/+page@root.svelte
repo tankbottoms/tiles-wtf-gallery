@@ -121,7 +121,7 @@
 		<hr />
 		<div class="space" />
 		<h1>Pricing function.</h1>
-		<p>Initial mints start at 0.0001 ETH, and every 512 mints, the price doubles.</p>
+		<p>Initial mints start at 0.001 ETH, and every 512 mints, the price doubles.</p>
 		<p>
 			The original
 			<a
