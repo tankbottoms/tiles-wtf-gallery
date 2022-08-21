@@ -67,14 +67,14 @@
 			else return { availability: true, reason: 'CAN_SEIZE' };
 		} else if (tokenId.eq(0)) {
 			return { availability: true, reason: 'CAN_GRAB' };
-		}		
+		}
 		return {
 			availability: false,
 			reason: 'TAKEN'
 		};
 	}
 
-	async function ownsOnV1Contract(address: string) {		
+	async function ownsOnV1Contract(address: string) {
 		const id: BigNumber = await readContractByAddress(
 			APP_CONFIG.contract_mainnet_v1,
 			[
@@ -105,23 +105,24 @@
 			let ownsOnOriginalContract = false;
 			if ($readNetwork.alias === 'mainnet') {
 				try {
-					ownsOnOriginalContract = await ownsOnV1Contract(connectedUser);
+					ownsOnOriginalContract = await ownsOnV1Contract(address);
 				} catch (er) {
 					console.log('error checking if user owns on v1 tiles contract', er);
 				}
 			}
 			if (isAvailable.availability) {
 				console.log(`mint: minting ${address}, availability:${isAvailable.availability}`);
+				price = ownsOnOriginalContract ? BigNumber.from(0) : price;
 				if (isAvailable.reason === 'CAN_MINT') {
 					const txnResponse = await writeContract('Tiles', 'mint', [], {
-						value: price 
+						value: price
 					});
 					console.log(`mint: ${JSON.stringify(txnResponse)}`, `Tiles, mint, ${price}`);
 					await txnResponse?.wait();
 				} else if (isAvailable.reason === 'CAN_GRAB') {
 					console.log(`mint, can grab, minting ${address}, ${price}`);
 					const txnResponse = await writeContract('Tiles', 'grab', [address], {
-						value: price 
+						value: price
 					});
 					console.log(`grab: ${JSON.stringify(txnResponse)}`, `Tiles, grab, ${address}, ${price}`);
 					await txnResponse?.wait();
@@ -165,6 +166,8 @@
 		}
 	}
 
+	let ownsOnOriginalContract = false;
+
 	onMount(async () => {
 		loading = true;
 		await whenPageReady();
@@ -176,17 +179,17 @@
 			connectedAccount.subscribe(async () => {
 				loading = true;
 				try {
-					let ownsOnOriginalContract = false;
 					if ($readNetwork.alias === 'mainnet') {
 						try {
-							ownsOnOriginalContract = await ownsOnV1Contract(connectedUser);
-							console.log(`ownsofv1:${ownsOnOriginalContract}, if so check which tile they are minting`);
+							ownsOnOriginalContract = await ownsOnV1Contract(address);
+							console.log(
+								`ownsofv1:${ownsOnOriginalContract}, if so check which tile they are minting`
+							);
 						} catch (er) {
 							console.log('error checking if user owns on v1 tiles contract', er);
 						}
-					}					
-					// price = ownsOnOriginalContract ? BigNumber.from(0) : await getTilePrice();										
-					price = await getTilePrice();
+					}
+					price = ownsOnOriginalContract ? BigNumber.from(0) : await getTilePrice();
 					isAvailable = await checkAvailability(address);
 					console.log(`is available:${JSON.stringify(isAvailable)}, price:${price}`);
 				} catch (error) {
@@ -223,8 +226,8 @@
 				? 'Checking availablity...'
 				: isAvailable.availability
 				? isAvailable.reason === 'OWNER'
-					? 'already owner' 
-						: 'available'
+					? 'already owner'
+					: 'available'
 				: 'not available'}
 			{#if (!isAvailable.availability || isAvailable.reason === 'OWNER') && isAvailable.reason !== ''}
 				- <a href="/mint?{$readNetwork ? `network=${$readNetwork?.alias}` : ''}">generate tiles</a>
