@@ -99,6 +99,9 @@
 		}
 		try {
 			isAvailable = await checkAvailability(address);
+			/*
+			remove free pricing because in most sitatutions you have to pay, except when you own the tile already, then you can grab the same token for free
+			*/
 			let ownsOnOriginalContract = false;
 			if ($readNetwork.alias === 'mainnet') {
 				try {
@@ -111,14 +114,14 @@
 				console.log(`mint: minting ${address}, availability:${isAvailable.availability}`);
 				if (isAvailable.reason === 'CAN_MINT') {
 					const txnResponse = await writeContract('Tiles', 'mint', [], {
-						value: ownsOnOriginalContract ? 0 : price
+						value: price 
 					});
 					console.log(`mint: ${JSON.stringify(txnResponse)}`, `Tiles, mint, ${price}`);
 					await txnResponse?.wait();
 				} else if (isAvailable.reason === 'CAN_GRAB') {
 					console.log(`mint, can grab, minting ${address}, ${price}`);
 					const txnResponse = await writeContract('Tiles', 'grab', [address], {
-						value: ownsOnOriginalContract ? 0 : price
+						value: price 
 					});
 					console.log(`grab: ${JSON.stringify(txnResponse)}`, `Tiles, grab, ${address}, ${price}`);
 					await txnResponse?.wait();
@@ -182,7 +185,8 @@
 							console.log('error checking if user owns on v1 tiles contract', er);
 						}
 					}					
-					price = ownsOnOriginalContract ? BigNumber.from(0) : await getTilePrice();										
+					// price = ownsOnOriginalContract ? BigNumber.from(0) : await getTilePrice();										
+					price = await getTilePrice();
 					isAvailable = await checkAvailability(address);
 					console.log(`is available:${JSON.stringify(isAvailable)}, price:${price}`);
 				} catch (error) {
@@ -214,12 +218,13 @@
 		<br />
 		<p>{$page.params.address}</p>
 		<p>
+			<!--unconnected shows already owned -->
 			{loading
 				? 'Checking availablity...'
 				: isAvailable.availability
 				? isAvailable.reason === 'OWNER'
-					? 'already owner'
-					: 'available'
+					? 'already owner' 
+						: 'available'
 				: 'not available'}
 			{#if (!isAvailable.availability || isAvailable.reason === 'OWNER') && isAvailable.reason !== ''}
 				- <a href="/mint?{$readNetwork ? `network=${$readNetwork?.alias}` : ''}">generate tiles</a>
