@@ -13,7 +13,7 @@
 	export let showTooltip = true;
 
 	let subdomain = '';
-	
+
 	if (get(readNetwork).alias !== NetworkName.mainnet) {
 		subdomain = get(readNetwork).alias + '.';
 	}
@@ -51,7 +51,7 @@
 
 <style>
 	.link {
-		color: var(--text-primary); 
+		color: var(--text-primary);
 	}
 
 	.link:hover {

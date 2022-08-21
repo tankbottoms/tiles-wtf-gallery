@@ -91,7 +91,12 @@
 				target="_blank">Tile's artwork algorithm</a
 			> is computed entirely in Solidity.
 		</p>
-		<p>The Infinite Tiles v2 contracts are verified on Etherscan at <a href="https://etherscan.io/address/{APP_CONFIG.contract_mainnet}#code" target="_blank">{getTruncatedAddress(APP_CONFIG.contract_mainnet)}</a>.</p>
+		<p>
+			The Infinite Tiles v2 contracts are verified on Etherscan at <a
+				href="https://etherscan.io/address/{APP_CONFIG.contract_mainnet}#code"
+				target="_blank">{getTruncatedAddress(APP_CONFIG.contract_mainnet)}</a
+			>.
+		</p>
 		<p>
 			The Tile minting and <a href="/dao">Juicebox Treasury</a> applications are implemented with
 			<a href="https://kit.svelte.dev/" target="_blank">Svelte</a>
@@ -139,9 +144,8 @@
 		<br />
 		<h1>Gnosis</h1>
 		<p>
-			<a
-				href="https://etherscan.io/address/{APP_CONFIG.gnosis_mainnet}"
-				target="_blank">{getTruncatedAddress(APP_CONFIG.gnosis_mainnet)}</a
+			<a href="https://etherscan.io/address/{APP_CONFIG.gnosis_mainnet}" target="_blank"
+				>{getTruncatedAddress(APP_CONFIG.gnosis_mainnet)}</a
 			>
 		</p>
 		<p>

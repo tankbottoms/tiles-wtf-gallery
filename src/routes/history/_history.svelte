@@ -76,9 +76,9 @@
 						</div>
 						<span class="address">
 							{#if innerWidth < 370}
-								{getTruncatedAddress(item.address)}								
+								{getTruncatedAddress(item.address)}
 							{:else}
-								{item.address}								
+								{item.address}
 							{/if}
 						</span>
 						<div>
@@ -90,7 +90,12 @@
 						</div>
 						{#if !userAddress}
 							<div>
-								<EtherscanLink type="address" value={item.caller} showTooltip={false} truncated={true}>
+								<EtherscanLink
+									type="address"
+									value={item.caller}
+									showTooltip={false}
+									truncated={true}
+								>
 									<EnsOrAddress address={item.caller} />
 								</EtherscanLink>
 							</div>

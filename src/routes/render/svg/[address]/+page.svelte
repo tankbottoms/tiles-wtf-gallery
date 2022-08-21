@@ -5,11 +5,10 @@
 	$: address = $page.params.address;
 	$: tile = generateTile(address);
 	$: tileBase64 = `data:image/svg+xml;base64,${btoa(tile)}`;
-	
 </script>
 
 <main>
-	<img src="{tileBase64}" alt="{address}"/>
+	<img src={tileBase64} alt={address} />
 </main>
 
 <style>

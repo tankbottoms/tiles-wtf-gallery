@@ -45,7 +45,7 @@
 	</section>
 
 	<section class:grid>
-		{#if address}			
+		{#if address}
 			<Tile {address} />
 		{:else if showInvalidAddress}
 			<p>Not a valid Ethereum address</p>
