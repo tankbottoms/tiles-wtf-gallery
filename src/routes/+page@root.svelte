@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { APP_CONFIG } from '$constants/app';
 	import { generateRandomAddresses } from '$tiles/tilesStandalone';
 	import { onMount } from 'svelte';
 	import { readNetwork } from '$stores/web3';
@@ -55,7 +56,7 @@
 			</a>
 		</h1>		
 		<p>Generated from any Ethereum address</p>
-		<p><a href="https://etherscan.io/address/0xa0dadfa9279c1379cfcabd8e21af78b9064cceb0#code">0xa0dadfA9279C1379CfcAbd8e21Af78b9064cCeb0</a></p>
+		<p><a href="https://etherscan.io/address/{APP_CONFIG.contract_mainnet}#code">{APP_CONFIG.contract_mainnet}</a></p>
 		<p>
 			<a
 				href="https://github.com/tankbottoms/tiles-on-chain/blob/main/contracts/components/TileContentProvider.sol"
