@@ -90,7 +90,7 @@
 						</div>
 						{#if !userAddress}
 							<div>
-								by: <EtherscanLink type="address" value={item.caller} showTooltip={false}>
+								by: <EtherscanLink type="address" value={item.caller} showTooltip={false} truncated={true}>
 									<EnsOrAddress address={item.caller} />
 								</EtherscanLink>
 							</div>
