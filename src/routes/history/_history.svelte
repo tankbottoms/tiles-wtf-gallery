@@ -2,7 +2,6 @@
 	import { getTruncatedAddress } from '$juicebox/components/Address.svelte';
 
 	import Loading from '$juicebox/components/Loading.svelte';
-	import { connectedAccount, web3Connect } from '$stores/web3';
 	import { generateTile } from '$tiles/tilesStandalone';
 	import type Store from '$utils/Store';
 	import type { ethers } from 'ethers';
@@ -65,50 +64,44 @@
 	</section>
 
 	<section class:grid>
-		{#if $connectedAccount}
-			{#if $grabHistory.loading}
-				<Loading />
-			{:else if tiles?.length}
-				{#each tiles as item}
-					<div class="tileContainer">
-						<div class="image">
-							{@html item.tile}
-						</div>
-						<span class="address">
-							{#if innerWidth < 370}
-								{getTruncatedAddress(item.address)}
-							{:else}
-								{item.address}
-							{/if}
-						</span>
-						<div>
-							{#if item.timestamp}
-								{#await moment(item.timestamp * 1000) then date}
-									<div class="timestamp">{date.format('LLL')}</div>
-								{/await}
-							{/if}
-						</div>
-						{#if !userAddress}
-							<div>
-								<EtherscanLink
-									type="address"
-									value={item.caller}
-									showTooltip={false}
-									truncated={true}
-								>
-									<EnsOrAddress address={item.caller} />
-								</EtherscanLink>
-							</div>
+		{#if $grabHistory.loading}
+			<Loading />
+		{:else if tiles?.length}
+			{#each tiles as item}
+				<div class="tileContainer">
+					<div class="image">
+						{@html item.tile}
+					</div>
+					<span class="address">
+						{#if innerWidth < 370}
+							{getTruncatedAddress(item.address)}
+						{:else}
+							{item.address}
+						{/if}
+					</span>
+					<div>
+						{#if item.timestamp}
+							{#await moment(item.timestamp * 1000) then date}
+								<div class="timestamp">{date.format('LLL')}</div>
+							{/await}
 						{/if}
 					</div>
-				{/each}
-			{:else}
-				<p>Shockingly nothing has been minted.</p>
-			{/if}
+					{#if !userAddress}
+						<div>
+							<EtherscanLink
+								type="address"
+								value={item.caller}
+								showTooltip={false}
+								truncated={true}
+							>
+								<EnsOrAddress address={item.caller} />
+							</EtherscanLink>
+						</div>
+					{/if}
+				</div>
+			{/each}
 		{:else}
-			<p>
-				<a href={null} on:click={web3Connect}>Connect to wallet</a> to see history.
-			</p>
+			<p>Shockingly nothing has been minted.</p>
 		{/if}
 	</section>
 </main>

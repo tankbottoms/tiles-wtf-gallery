@@ -10,10 +10,12 @@
 		loading: boolean;
 		transactions: ethers.providers.TransactionResponse[];
 		grabHistory: GrabHistoryItem[];
+		refreshHistory: Function;
 	}>({
 		loading: false,
 		transactions: [],
-		grabHistory: []
+		grabHistory: [],
+		refreshHistory: fetchHistory
 	});
 
 	setContext('GRAB_HISTORY_STORE', grabHistoryStore);
@@ -52,12 +54,13 @@
 				grabHistory: history.reduce((acc, item) => {
 					if (!acc.find((_item) => _item.address === item.address)) acc.push(item);
 					return acc;
-				}, [])
+				}, []),
+				refreshHistory: $grabHistoryStore.refreshHistory
 			};
 		} catch (error) {
 			console.log('Error: could not fetch history transactions');
 		}
-		return history;
+		return $grabHistoryStore.grabHistory;
 	}
 
 	onMount(() => {
