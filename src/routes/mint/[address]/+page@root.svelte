@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
+	import { APP_CONFIG } from '$constants/app';
 	import { BigNumber, utils } from 'ethers';
 	import { page } from '$app/stores';
 	import { modal } from '$stores';
@@ -66,17 +67,16 @@
 			else return { availability: true, reason: 'CAN_SEIZE' };
 		} else if (tokenId.eq(0)) {
 			return { availability: true, reason: 'CAN_GRAB' };
-		}
+		}		
 		return {
 			availability: false,
 			reason: 'TAKEN'
 		};
 	}
 
-	async function ownsOnV1Contract(address: string) {
-		const TILES_DOT_ART_MAINNET_ADDRESS = '0x64931F06d3266049Bf0195346973762E6996D764';
+	async function ownsOnV1Contract(address: string) {		
 		const id: BigNumber = await readContractByAddress(
-			TILES_DOT_ART_MAINNET_ADDRESS,
+			APP_CONFIG.contract_mainnet_v1,
 			[
 				{
 					inputs: [{ internalType: 'address', name: '', type: 'address' }],
@@ -94,7 +94,7 @@
 
 	async function mint() {
 		if (!connectedUser) {
-			console.log('mint: account not connected');
+			console.log('mint: account not connected, try connecting');
 			return await web3Connect();
 		}
 		try {
@@ -108,21 +108,23 @@
 				}
 			}
 			if (isAvailable.availability) {
+				console.log(`mint: minting ${address}, availability:${isAvailable.availability}`);
 				if (isAvailable.reason === 'CAN_MINT') {
 					const txnResponse = await writeContract('Tiles', 'mint', [], {
-						value: ownsOnOriginalContract ? 0 : price
+						value: price
 					});
 					console.log(`mint: ${JSON.stringify(txnResponse)}`, `Tiles, mint, ${price}`);
 					await txnResponse?.wait();
 				} else if (isAvailable.reason === 'CAN_GRAB') {
+					console.log(`mint, can grab, minting ${address}, ${price}`);
 					const txnResponse = await writeContract('Tiles', 'grab', [address], {
-						value: ownsOnOriginalContract ? 0 : price
+						value: price /* ownsOnOriginalContract ? 0 : price */
 					});
 					console.log(`grab: ${JSON.stringify(txnResponse)}`, `Tiles, grab, ${address}, ${price}`);
 					await txnResponse?.wait();
 				} else if (isAvailable.reason === 'CAN_SEIZE') {
 					const txnResponse = await writeContract('Tiles', 'seize', [], {
-						value: ownsOnOriginalContract ? 0 : price
+						value: price
 					});
 					console.log(`seize: ${JSON.stringify(txnResponse)}`, `Tiles, seize, ${price}`);
 					await txnResponse?.wait();
@@ -170,18 +172,21 @@
 		return readNetwork.subscribe(() => {
 			connectedAccount.subscribe(async () => {
 				loading = true;
-
 				try {
 					let ownsOnOriginalContract = false;
 					if ($readNetwork.alias === 'mainnet') {
 						try {
 							ownsOnOriginalContract = await ownsOnV1Contract(connectedUser);
+							console.log(`ownsofv1:${ownsOnOriginalContract}, if so check which tile they are minting`);
 						} catch (er) {
 							console.log('error checking if user owns on v1 tiles contract', er);
 						}
 					}
-					price = ownsOnOriginalContract ? BigNumber.from(0) : await getTilePrice();
+					// check if user owns the token they are minting, then its free
+					// price = ownsOnOriginalContract ? BigNumber.from(0) : await getTilePrice();					
+					price = await getTilePrice();					
 					isAvailable = await checkAvailability(address);
+					console.log(`is available:${JSON.stringify(isAvailable)}, price:${price}`);
 				} catch (error) {
 					console.warn(error.message);
 					$errorMessage;
@@ -212,7 +217,7 @@
 		<p>{$page.params.address}</p>
 		<p>
 			{loading
-				? 'checking availablity...'
+				? 'Checking availablity...'
 				: isAvailable.availability
 				? isAvailable.reason === 'OWNER'
 					? 'already owner'
