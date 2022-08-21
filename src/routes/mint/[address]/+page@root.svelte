@@ -17,22 +17,19 @@
 	import { getTileAnimationStyleString } from '$tiles/utils';
 	import Tile from '$components/Tile.svelte';
 	import Footer from '$components/Footer.svelte';
-	import { getContext } from 'svelte';
-	import type Store from '$utils/Store';
 	import { sleep } from '$utils/time';
 
-	enum Available {
-		IS_AVAILABLE = 0,
-		CAN_SEIZE = 1,
-		NOT_AVAILABLE = 2
-	}
+	type Available = {
+		availability: boolean;
+		reason: '' | 'CAN_MINT' | 'CAN_SEIZE' | 'CAN_GRAB' | 'OWNER' | 'TAKEN';
+	};
 
 	let mouseLastMoved = Date.now();
 
 	let price = BigNumber.from(0);
 	let tile: string;
 	let tileComponent: any;
-	let isAvailable: Available = 0;
+	let isAvailable: Available = { availability: false, reason: '' };
 	let availability: 'available' | 'not available' = 'available';
 	let showInvalidAddress = false;
 	let animate = false;
@@ -54,7 +51,24 @@
 		})();
 	}
 
-	const historyStore = getContext('GRAB_HISTORY_STORE') as Store<{ refreshHistory: Function }>;
+	async function checkAvailability(address: string): Promise<Available> {
+		const tokenId: BigNumber = await readContract('Tiles', 'idForAddress', [address]);
+		const owner: string = await readContract('Tiles', 'ownerOf', [tokenId]);
+
+		if (owner?.toLowerCase() === $connectedAccount?.toLowerCase()) {
+			return { availability: true, reason: 'OWNER' };
+		} else if ($connectedAccount?.toLowerCase() === address?.toLowerCase()) {
+			console.log({ tokenId: tokenId?.toNumber(), owner });
+			if (tokenId.eq(0)) return { availability: true, reason: 'CAN_MINT' };
+			else return { availability: true, reason: 'CAN_SEIZE' };
+		} else if (tokenId.eq(0)) {
+			return { availability: true, reason: 'CAN_GRAB' };
+		}
+		return {
+			availability: false,
+			reason: 'TAKEN'
+		};
+	}
 
 	async function ownsOnV1Contract(address: string) {
 		const TILES_DOT_ART_MAINNET_ADDRESS = '0x64931F06d3266049Bf0195346973762E6996D764';
@@ -90,28 +104,30 @@
 					console.log('error checking if user owns on v1 tiles contract', er);
 				}
 			}
-			if (isAvailable === Available.IS_AVAILABLE) {
-				if ($page.params.address === $connectedAccount) {
+			if (isAvailable.availability) {
+				if (isAvailable.reason === 'CAN_MINT') {
 					const txnResponse = await writeContract('Tiles', 'mint', [], {
 						value: ownsOnOriginalContract ? 0 : price
 					});
 					console.log(`mint: ${JSON.stringify(txnResponse)}`, `Tiles, mint, ${price}`);
 					await txnResponse?.wait();
-				} else {
+				} else if (isAvailable.reason === 'CAN_GRAB') {
 					const txnResponse = await writeContract('Tiles', 'grab', [address], {
 						value: ownsOnOriginalContract ? 0 : price
 					});
 					console.log(`grab: ${JSON.stringify(txnResponse)}`, `Tiles, grab, ${address}, ${price}`);
 					await txnResponse?.wait();
+				} else if (isAvailable.reason === 'CAN_SEIZE') {
+					const txnResponse = await writeContract('Tiles', 'seize', [], {
+						value: ownsOnOriginalContract ? 0 : price
+					});
+					console.log(`seize: ${JSON.stringify(txnResponse)}`, `Tiles, seize, ${price}`);
+					await txnResponse?.wait();
+				} else if (isAvailable.reason === 'OWNER') {
+					throw Error('already own this token');
 				}
-			} else if (isAvailable === Available.CAN_SEIZE) {
-				const txnResponse = await writeContract('Tiles', 'seize', [], {
-					value: ownsOnOriginalContract ? 0 : price
-				});
-				console.log(`seize: ${JSON.stringify(txnResponse)}`, `Tiles, seize, ${price}`);
-				await txnResponse?.wait();
 			}
-			isAvailable = Available.NOT_AVAILABLE;
+			isAvailable = { availability: false, reason: '' };
 			isAvailable = await checkAvailability(address);
 			startConfetti();
 			await sleep(4000);
@@ -123,20 +139,6 @@
 				autoDismiss: 3000
 			});
 		}
-	}
-
-	async function checkAvailability(address: string) {
-		const tokenId = await readContract('Tiles', 'idForAddress', [address]);
-
-		if (tokenId.eq(0)) {
-			return 0;
-		}
-
-		if ($connectedAccount?.toLowerCase() === address?.toLowerCase()) {
-			return 1;
-		}
-
-		return 2;
 	}
 
 	function animateTile() {
@@ -187,9 +189,6 @@
 		});
 	});
 
-	$: availability = [Available.IS_AVAILABLE, Available.CAN_SEIZE].includes(isAvailable)
-		? 'available'
-		: 'not available';
 	$: formattedPrice = Number(utils.formatEther(price));
 
 	$: {
@@ -209,7 +208,13 @@
 		<br />
 		<p>{$page.params.address}</p>
 		<p>
-			{loading ? 'checking availablity...' : availability}
+			{loading
+				? 'checking availablity...'
+				: isAvailable.availability
+				? isAvailable.reason === 'OWNER'
+					? 'owner'
+					: 'available'
+				: 'not available'}
 			{#if availability == 'not available'}
 				- <a href="/mint?{$readNetwork ? `network=${$readNetwork?.alias}` : ''}">generate tiles</a>
 			{/if}
@@ -220,8 +225,9 @@
 				on:click={mint}
 				disabled={!$pageReady.web3 ||
 					loading ||
-					![Available.IS_AVAILABLE, Available.CAN_SEIZE].includes(isAvailable) ||
-					!hasEnoughBalance}
+					!isAvailable.availability ||
+					!hasEnoughBalance ||
+					isAvailable.reason === 'OWNER'}
 			>
 				Mint ({formattedPrice} ETH)
 			</button>
