@@ -165,7 +165,7 @@
 				- <a href="/mint?{$readNetwork ? `network=${$readNetwork?.alias}` : ''}">generate tiles</a>
 			{/if}
 		</p>
-		{#if $connectedAccount}
+		{#if $connectedAccount}			
 			<button
 				class="mint"
 				on:click={mint}
