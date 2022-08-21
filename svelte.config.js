@@ -8,9 +8,15 @@ const config = {
 	preprocess: preprocess(),
 
 	kit: {
-		adapter: adapter(),
+		adapter: adapter({
+			fallback: '200.html'
+		}),
 		prerender: {
-			default: true
+			enabled: true
+		},
+		browser: {
+			hydrate: true,
+			router: true
 		},
 
 		// Override http methods in the Todo forms
