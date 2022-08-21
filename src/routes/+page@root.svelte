@@ -55,26 +55,21 @@
 				Infinite (∞) Tiles v2
 			</a>
 		</h1>
-		<p>Generated from any Ethereum address</p>
-		<p>
-			<a href="https://etherscan.io/address/{APP_CONFIG.contract_mainnet}#code"
-				>{APP_CONFIG.contract_mainnet}</a
-			>
-		</p>
+		<p>Generated from any Ethereum address</p>		
 		<p>
 			<a
 				href="https://github.com/tankbottoms/tiles-on-chain/blob/main/contracts/components/TileContentProvider.sol"
 				target="_blank">Fully on-chain Solidity generated artwork</a
 			>
 		</p>
-		<p>Each is unique & objectively rare</p>
-		<a href="/seizures?{$readNetwork ? `network=${$readNetwork?.alias}` : ''}">Seizures</a>
+		<p>Each is unique & objectively rare</p>		
 		<a href="/wtf?{$readNetwork ? `network=${$readNetwork?.alias}` : ''}">Wtf</a>
 		<a href="/dao?{$readNetwork ? `network=${$readNetwork?.alias}` : ''}">Juicebox</a>
 		<a href="/faq?{$readNetwork ? `network=${$readNetwork?.alias}` : ''}">Faq</a>
+		<a href="/seizures?{$readNetwork ? `network=${$readNetwork?.alias}` : ''}">Seizures</a>
 		<div class="group">
 			<div>
-				<a href="/mint?{$readNetwork ? `network=${$readNetwork?.alias}` : ''}">Mint a Tile(s)</a>
+				<a href="/mint?{$readNetwork ? `network=${$readNetwork?.alias}` : ''}">Mint a Tile</a>
 			</div>
 		</div>
 	</section>

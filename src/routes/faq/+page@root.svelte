@@ -53,8 +53,8 @@
 		<h1>Addresses.</h1>
 		<p>
 			IPFS: <a
-				href="https://cloudflare-ipfs.com/ipfs/QmYScBzncx9kqEFRrZtPjWWPpqvLFZP2cBS7iWdoCDaQzd"
-				target="'_blank">QmYScBzncx9kqEFRrZtPjWWPpqvLFZP2cBS7iWdoCDaQzd</a
+				href="https://ipfs.fleek.co/ipfs/Qmcw5mXkwEkxuu282qWU9zcbMaczpx8cjdQJKFAUbNTxti/"
+				target="'_blank">Qmcw5mXkwEkxuu282qWU9zcbMaczpx8cjdQJKFAUbNTxti</a
 			>
 		</p>
 		<p>
