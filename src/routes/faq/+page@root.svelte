@@ -61,7 +61,7 @@ import { getTransactionsByAddress } from '$utils/web3/contractReader';
 			>
 		</p>				
 		<p>Ethereum: <a href="https://rinkeby.etherscan.io/address/0xb8AD6515C5635b754259584b90959b3b1F47b7CC#code" target="_blank">Rinkeby:{getTruncatedAddress('0xb8AD6515C5635b754259584b90959b3b1F47b7CC')}</a>, <a href="https://etherscan.io/address/0x4ddeF8Fc8EEE89848b4A802CEF9FC9E72B8674A4#readContract" target="_blank"> Mainnet:{getTruncatedAddress('0x4ddeF8Fc8EEE89848b4A802CEF9FC9E72B8674A4')} </a></p>
-		<p>Etherscan: <a href="https://etherscan.io/address/{APP_CONFIG.contract_mainnet}#code">{APP_CONFIG.contract_mainnet}</a></p>
+		<p>Etherscan: InfiniteTiles.sol <a href="https://etherscan.io/address/{APP_CONFIG.contract_mainnet}#code">{APP_CONFIG.contract_mainnet}</a>, TilesContentProvider: <a href="https://etherscan.io/address/0x4F0Fba0652E61cD1Ec62E65e58c053F93b2D079F#code" target="_blank">{APP_CONFIG.contract_tiles_content_provider}</a></p>
 		<p>Opensea: <a href="https://opensea.io/collection/infinite-tiles-v2" target="_blank">Inifinite Tiles v2</a></p>
 		<p>Looksrare: <a href="https://looksrare.org/collections/{APP_CONFIG.contract_mainnet}" target="_blank">{APP_CONFIG.contract_mainnet}</a></p>
 		<!--							
