@@ -2,7 +2,6 @@
 	import { getTruncatedAddress } from '$juicebox/components/Address.svelte';
 
 	import Loading from '$juicebox/components/Loading.svelte';
-	import { connectedAccount, web3Connect } from '$stores/web3';
 	import { generateTile } from '$tiles/tilesStandalone';
 	import type Store from '$utils/Store';
 	import type { ethers } from 'ethers';
