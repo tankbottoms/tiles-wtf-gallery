@@ -4,6 +4,9 @@
 	import { onMount } from 'svelte';
 
 	onMount(() => {
-		goto(window.location.href.replace(window.location.origin, ''), { replaceState: true });
+		console.clear();
+		const path = window.location.href.replace(window.location.origin, '');
+		console.log('goto', path);
+		goto(path, { replaceState: true });
 	});
 </script>
