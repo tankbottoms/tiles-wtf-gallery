@@ -176,8 +176,10 @@
 			>
 				Mint ({formattedPrice} ETH)
 			</button>
-			<br />
+			<!--
+			<br />			
 			<a href="/mint/{address}/holdings" class="mint"> use other tokens to mint </a>
+			-->
 		{:else}
 			<button on:click={() => web3Connect()}>CONNECT WALLET</button>
 		{/if}
