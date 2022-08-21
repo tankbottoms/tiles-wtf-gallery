@@ -6,6 +6,15 @@ import path from 'path';
 const config = ({ mode }) => {
 	const development = mode === 'development';
 	return {
+		kit: {
+			prerender: {
+				default: false
+			},
+			browser: {
+				hydrate: true,
+				router: true
+			}
+		},
 		plugins: [
 			sveltekit(),
 			development &&
