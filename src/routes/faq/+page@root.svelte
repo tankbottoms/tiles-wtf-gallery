@@ -72,6 +72,9 @@
 				>{getTruncatedAddress(APP_CONFIG.contract_mainnet)}</a
 			>
 		</p>
+		<p><a href="/faq/etherscan" target="_blank">Instructions on how to mint, grab, seize</a> directly with the InfiniteTiles.sol <a href="https://etherscan.io/address/{APP_CONFIG.contract_mainnet}#code" target="_blank"
+				>{getTruncatedAddress(APP_CONFIG.contract_mainnet)} on Etherscan.</a
+			></p>
 		<p>
 			Opensea <a href="https://opensea.io/collection/infinite-tiles-v2-0" target="_blank"
 				>Inifinite Tiles v2</a
