@@ -2,7 +2,7 @@
 	import { onMount } from 'svelte';
 
 	import { page } from '$app/stores';
-	import { generateTile } from '$tiles/tilesStandalone';	
+	import { generateTile } from '$tiles/tilesStandalone';
 	import { getTileAnimationStyleString } from '$tiles/utils';
 
 	let tileComponent: HTMLElement;
@@ -32,7 +32,7 @@
 	main {
 		margin: 0;
 		padding: 0;
-		background: #FEFDFB;
+		background: #fefdfb;
 		width: 100vw;
 		height: 100vh;
 		display: flex;
