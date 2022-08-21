@@ -39,9 +39,11 @@
 	let balance = BigNumber.from(parseEther('10000'));
 	let hasEnoughBalance = true;
 
+	$: connectedUser = $connectedAccount;
+
 	$: if (price.gt(0) && $provider) {
 		(async () => {
-			balance = BigNumber.from(await $provider?.getBalance($connectedAccount));
+			balance = BigNumber.from(await $provider?.getBalance(connectedUser));
 			if (balance.lt(price)) {
 				hasEnoughBalance = false;
 			} else {
@@ -57,10 +59,9 @@
 			owner = await readContract('Tiles', 'ownerOf', [tokenId]);
 		} catch (e) {}
 
-		if (owner?.toLowerCase() === $connectedAccount?.toLowerCase()) {
+		if (owner?.toLowerCase() === connectedUser?.toLowerCase()) {
 			return { availability: true, reason: 'OWNER' };
-		} else if ($connectedAccount?.toLowerCase() === address?.toLowerCase()) {
-			console.log({ tokenId: tokenId?.toNumber(), owner });
+		} else if (connectedUser?.toLowerCase() === address?.toLowerCase()) {
 			if (tokenId.eq(0)) return { availability: true, reason: 'CAN_MINT' };
 			else return { availability: true, reason: 'CAN_SEIZE' };
 		} else if (tokenId.eq(0)) {
@@ -80,7 +81,7 @@
 				{
 					inputs: [{ internalType: 'address', name: '', type: 'address' }],
 					name: 'idOfAddress',
-					outputs: [{ internalType: 'address', name: '', type: 'address' }],
+					outputs: [{ internalType: 'address', name: '', type: 'uint256' }],
 					stateMutability: 'view',
 					type: 'function'
 				}
@@ -92,7 +93,7 @@
 	}
 
 	async function mint() {
-		if (!$connectedAccount) {
+		if (!connectedUser) {
 			console.log('mint: account not connected');
 			return await web3Connect();
 		}
@@ -101,7 +102,7 @@
 			let ownsOnOriginalContract = false;
 			if ($readNetwork.alias === 'mainnet') {
 				try {
-					ownsOnOriginalContract = await ownsOnV1Contract($connectedAccount);
+					ownsOnOriginalContract = await ownsOnV1Contract(connectedUser);
 				} catch (er) {
 					console.log('error checking if user owns on v1 tiles contract', er);
 				}
@@ -174,7 +175,7 @@
 					let ownsOnOriginalContract = false;
 					if ($readNetwork.alias === 'mainnet') {
 						try {
-							ownsOnOriginalContract = await ownsOnV1Contract($connectedAccount);
+							ownsOnOriginalContract = await ownsOnV1Contract(connectedUser);
 						} catch (er) {
 							console.log('error checking if user owns on v1 tiles contract', er);
 						}
@@ -221,7 +222,7 @@
 				- <a href="/mint?{$readNetwork ? `network=${$readNetwork?.alias}` : ''}">generate tiles</a>
 			{/if}
 		</p>
-		{#if $connectedAccount}
+		{#if connectedUser}
 			<button
 				class="mint"
 				on:click={mint}
