@@ -57,6 +57,7 @@
 			return await web3Connect();
 		}
 		try {
+			isAvailable = await checkAvailability(address);
 			if (isAvailable === Available.IS_AVAILABLE) {
 				if ($page.params.address === $connectedAccount) {
 					const txnResponse = await writeContract('Tiles', 'mint', [], { value: price });
@@ -86,14 +87,14 @@
 		}
 	}
 
-	async function checkAvailability(address) {
+	async function checkAvailability(address: string) {
 		const tokenId = await readContract('Tiles', 'idForAddress', [address]);
 
 		if (tokenId.eq(0)) {
 			return 0;
 		}
 
-		if ($connectedAccount === address) {
+		if ($connectedAccount?.toLowerCase() === address?.toLowerCase()) {
 			return 1;
 		}
 
@@ -165,7 +166,7 @@
 				- <a href="/mint?{$readNetwork ? `network=${$readNetwork?.alias}` : ''}">generate tiles</a>
 			{/if}
 		</p>
-		{#if $connectedAccount}			
+		{#if $connectedAccount}
 			<button
 				class="mint"
 				on:click={mint}
