@@ -111,14 +111,14 @@
 				console.log(`mint: minting ${address}, availability:${isAvailable.availability}`);
 				if (isAvailable.reason === 'CAN_MINT') {
 					const txnResponse = await writeContract('Tiles', 'mint', [], {
-						value: price
+						value: ownsOnOriginalContract ? 0 : price
 					});
 					console.log(`mint: ${JSON.stringify(txnResponse)}`, `Tiles, mint, ${price}`);
 					await txnResponse?.wait();
 				} else if (isAvailable.reason === 'CAN_GRAB') {
 					console.log(`mint, can grab, minting ${address}, ${price}`);
 					const txnResponse = await writeContract('Tiles', 'grab', [address], {
-						value: price /* ownsOnOriginalContract ? 0 : price */
+						value: ownsOnOriginalContract ? 0 : price
 					});
 					console.log(`grab: ${JSON.stringify(txnResponse)}`, `Tiles, grab, ${address}, ${price}`);
 					await txnResponse?.wait();
@@ -181,10 +181,8 @@
 						} catch (er) {
 							console.log('error checking if user owns on v1 tiles contract', er);
 						}
-					}
-					// check if user owns the token they are minting, then its free
-					// price = ownsOnOriginalContract ? BigNumber.from(0) : await getTilePrice();					
-					price = await getTilePrice();					
+					}					
+					price = ownsOnOriginalContract ? BigNumber.from(0) : await getTilePrice();										
 					isAvailable = await checkAvailability(address);
 					console.log(`is available:${JSON.stringify(isAvailable)}, price:${price}`);
 				} catch (error) {
