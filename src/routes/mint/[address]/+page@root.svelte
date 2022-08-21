@@ -214,7 +214,7 @@
 				? 'checking availablity...'
 				: isAvailable.availability
 				? isAvailable.reason === 'OWNER'
-					? 'owner'
+					? 'already owner'
 					: 'available'
 				: 'not available'}
 			{#if (!isAvailable.availability || isAvailable.reason === 'OWNER') && isAvailable.reason !== ''}
