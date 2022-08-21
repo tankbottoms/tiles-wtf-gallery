@@ -52,7 +52,10 @@
 
 	async function checkAvailability(address: string): Promise<Available> {
 		const tokenId: BigNumber = await readContract('Tiles', 'idForAddress', [address]);
-		const owner: string = await readContract('Tiles', 'ownerOf', [tokenId]);
+		let owner: string = '';
+		try {
+			owner = await readContract('Tiles', 'ownerOf', [tokenId]);
+		} catch (e) {}
 
 		if (owner?.toLowerCase() === $connectedAccount?.toLowerCase()) {
 			return { availability: true, reason: 'OWNER' };
