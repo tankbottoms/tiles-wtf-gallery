@@ -3,6 +3,7 @@
 	import { getContext } from 'svelte';
 	import { utils } from 'ethers';
 	import ProjectLogo from '$juicebox/components/ProjectLogo.svelte';
+	import EnsOrAddress from '$juicebox/components/EnsOrAddress.svelte';
 	import Loading from '$juicebox/components/Loading.svelte';
 	import { formattedNum } from '$juicebox/utils/formatNumber';
 	import type { tokens } from '@uniswap/default-token-list';
@@ -27,7 +28,7 @@
 			{#if loading}
 				<Loading height={200} />
 			{:else}
-				<h2>Token Holdings</h2>
+				<h2><EnsOrAddress address={$connectedAccount} />'s' token holdings</h2>
 				{#each balances as balance}
 					<a href="./{balance.symbol}-{balance.address}" class="balance">
 						<ProjectLogo
