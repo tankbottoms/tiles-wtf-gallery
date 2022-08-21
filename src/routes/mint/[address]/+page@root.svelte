@@ -5,7 +5,7 @@
 	import { modal } from '$stores';
 	import { generateTile } from '$tiles/tilesStandalone';
 	import { connectedAccount, provider, readNetwork, web3Connect } from '$stores/web3';
-	import { readContract, writeContract } from '$utils/web3/contractReader';
+	import { readContract, readContractByAddress, writeContract } from '$utils/web3/contractReader';
 	import { getTilePrice } from '$utils/tiles';
 	import { downloadFile } from '$utils/file';
 	import { pageReady, whenPageReady } from '$stores';
@@ -17,6 +17,9 @@
 	import { getTileAnimationStyleString } from '$tiles/utils';
 	import Tile from '$components/Tile.svelte';
 	import Footer from '$components/Footer.svelte';
+	import { getContext } from 'svelte';
+	import type Store from '$utils/Store';
+	import { sleep } from '$utils/time';
 
 	enum Available {
 		IS_AVAILABLE = 0,
@@ -51,6 +54,27 @@
 		})();
 	}
 
+	const historyStore = getContext('GRAB_HISTORY_STORE') as Store<{ refreshHistory: Function }>;
+
+	async function ownsOnV1Contract(address: string) {
+		const TILES_DOT_ART_MAINNET_ADDRESS = '0x64931F06d3266049Bf0195346973762E6996D764';
+		const id: BigNumber = await readContractByAddress(
+			TILES_DOT_ART_MAINNET_ADDRESS,
+			[
+				{
+					inputs: [{ internalType: 'address', name: '', type: 'address' }],
+					name: 'idOfAddress',
+					outputs: [{ internalType: 'address', name: '', type: 'address' }],
+					stateMutability: 'view',
+					type: 'function'
+				}
+			],
+			'idOfAddress',
+			[address]
+		);
+		return Boolean(id?.gt(0));
+	}
+
 	async function mint() {
 		if (!$connectedAccount) {
 			console.log('mint: account not connected');
@@ -58,26 +82,40 @@
 		}
 		try {
 			isAvailable = await checkAvailability(address);
+			let ownsOnOriginalContract = false;
+			if ($readNetwork.alias === 'mainnet') {
+				try {
+					ownsOnOriginalContract = await ownsOnV1Contract($connectedAccount);
+				} catch (er) {
+					console.log('error checking if user owns on v1 tiles contract', er);
+				}
+			}
 			if (isAvailable === Available.IS_AVAILABLE) {
 				if ($page.params.address === $connectedAccount) {
-					const txnResponse = await writeContract('Tiles', 'mint', [], { value: price });
+					const txnResponse = await writeContract('Tiles', 'mint', [], {
+						value: ownsOnOriginalContract ? 0 : price
+					});
 					console.log(`mint: ${JSON.stringify(txnResponse)}`, `Tiles, mint, ${price}`);
 					await txnResponse?.wait();
 				} else {
 					const txnResponse = await writeContract('Tiles', 'grab', [address], {
-						value: price
+						value: ownsOnOriginalContract ? 0 : price
 					});
 					console.log(`grab: ${JSON.stringify(txnResponse)}`, `Tiles, grab, ${address}, ${price}`);
 					await txnResponse?.wait();
 				}
 			} else if (isAvailable === Available.CAN_SEIZE) {
-				const txnResponse = await writeContract('Tiles', 'seize', [], { value: price });
+				const txnResponse = await writeContract('Tiles', 'seize', [], {
+					value: ownsOnOriginalContract ? 0 : price
+				});
 				console.log(`seize: ${JSON.stringify(txnResponse)}`, `Tiles, seize, ${price}`);
 				await txnResponse?.wait();
 			}
 			isAvailable = Available.NOT_AVAILABLE;
 			isAvailable = await checkAvailability(address);
 			startConfetti();
+			await sleep(4000);
+			location.reload();
 		} catch (error) {
 			createCustomNotification({
 				type: 'error',
@@ -129,7 +167,15 @@
 				loading = true;
 
 				try {
-					price = await getTilePrice();
+					let ownsOnOriginalContract = false;
+					if ($readNetwork.alias === 'mainnet') {
+						try {
+							ownsOnOriginalContract = await ownsOnV1Contract($connectedAccount);
+						} catch (er) {
+							console.log('error checking if user owns on v1 tiles contract', er);
+						}
+					}
+					price = ownsOnOriginalContract ? BigNumber.from(0) : await getTilePrice();
 					isAvailable = await checkAvailability(address);
 				} catch (error) {
 					console.warn(error.message);
