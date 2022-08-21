@@ -6,6 +6,7 @@
 	import Tile from '$components/Tile.svelte';
 	import { generateTile } from '$tiles/tilesStandalone';
 	import { getTileAnimationStyleString } from '$tiles/utils';
+	import { getTruncatedAddress } from '$juicebox/components/Address.svelte';
 	import { onMount } from 'svelte';
 
 	const initialSigners = [
@@ -90,7 +91,7 @@
 				target="_blank">Tile's artwork algorithm</a
 			> is computed entirely in Solidity.
 		</p>
-		<p>The Infinite Tiles v2 contract is <a href="https://etherscan.io/address/{APP_CONFIG.contract_mainnet}#code" target="_blank">{APP_CONFIG.contract_mainnet}</a>.</p>
+		<p>The Infinite Tiles v2 contracts are verified on Etherscan at <a href="https://etherscan.io/address/{APP_CONFIG.contract_mainnet}#code" target="_blank">{getTruncatedAddress(APP_CONFIG.contract_mainnet)}</a>.</p>
 		<p>
 			The Tile minting and <a href="/dao">Juicebox Treasury</a> applications are implemented with
 			<a href="https://kit.svelte.dev/" target="_blank">Svelte</a>
@@ -139,8 +140,8 @@
 		<h1>Gnosis</h1>
 		<p>
 			<a
-				href="https://etherscan.io/address/0x4493287882f75dFFcdB40FD41d38d6308Fb8c181"
-				target="_blank">0x4493287882f75dFFcdB40FD41d38d6308Fb8c181</a
+				href="https://etherscan.io/address/{APP_CONFIG.gnosis_mainnet}"
+				target="_blank">{getTruncatedAddress(APP_CONFIG.gnosis_mainnet)}</a
 			>
 		</p>
 		<p>
