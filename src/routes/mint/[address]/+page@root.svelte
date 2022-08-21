@@ -30,7 +30,6 @@
 	let tile: string;
 	let tileComponent: any;
 	let isAvailable: Available = { availability: false, reason: '' };
-	let availability: 'available' | 'not available' = 'available';
 	let showInvalidAddress = false;
 	let animate = false;
 
@@ -215,7 +214,7 @@
 					? 'owner'
 					: 'available'
 				: 'not available'}
-			{#if availability == 'not available'}
+			{#if (!isAvailable.availability || isAvailable.reason === 'OWNER') && isAvailable.reason !== ''}
 				- <a href="/mint?{$readNetwork ? `network=${$readNetwork?.alias}` : ''}">generate tiles</a>
 			{/if}
 		</p>
