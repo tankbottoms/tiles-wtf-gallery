@@ -65,7 +65,7 @@
 				console.log('error checking if user owns on v1 tiles contract', er);
 			}
 		}
-
+		price = ownsOnOriginalContract ? BigNumber.from(0) : await getTilePrice();
 		let tokenId: BigNumber = BigNumber.from(0);
 		let v2Owner: string = '';
 		try {
@@ -73,7 +73,6 @@
 			if (tokenId?.gt(0)) {
 				v2Owner = await readContract('Tiles', 'ownerOf', [tokenId]);
 			}
-			price = ownsOnOriginalContract ? BigNumber.from(0) : await getTilePrice();
 		} catch (e) {}
 
 		if (address?.toLowerCase() === $connectedAccount?.toLowerCase()) {
@@ -99,21 +98,41 @@
 	}
 
 	async function ownsOnV1Contract(address: string) {
-		const id: BigNumber = await readContractByAddress(
-			APP_CONFIG.contract_mainnet_v1,
-			[
-				{
-					inputs: [{ internalType: 'address', name: '', type: 'address' }],
-					name: 'idOfAddress',
-					outputs: [{ internalType: 'address', name: '', type: 'uint256' }],
-					stateMutability: 'view',
-					type: 'function'
-				}
-			],
-			'idOfAddress',
-			[address]
-		);
-		return Boolean(id?.gt(0));
+		const abi = [
+			{
+				inputs: [{ internalType: 'address', name: '', type: 'address' }],
+				name: 'idOfAddress',
+				outputs: [{ internalType: 'address', name: '', type: 'uint256' }],
+				stateMutability: 'view',
+				type: 'function'
+			},
+			{
+				inputs: [{ internalType: 'uint256', name: 'tokenId', type: 'uint256' }],
+				name: 'ownerOf',
+				outputs: [{ internalType: 'address', name: '', type: 'address' }],
+				stateMutability: 'view',
+				type: 'function'
+			}
+		];
+		try {
+			const id: BigNumber = await readContractByAddress(
+				APP_CONFIG.contract_mainnet_v1,
+				abi,
+				'idOfAddress',
+				[address]
+			);
+			if (Boolean(id?.gt(0))) {
+				const owner: string = await readContractByAddress(
+					APP_CONFIG.contract_mainnet_v1,
+					abi,
+					'ownerOf',
+					[id?.toString()]
+				);
+				return owner?.toLowerCase() === $connectedAccount?.toLowerCase();
+			}
+		} catch (error) {
+			return false;
+		}
 	}
 
 	let minting = false;
@@ -150,12 +169,14 @@
 					if (v2Owner?.toLowerCase() === $connectedAccount?.toLowerCase()) {
 						throw Error('you already own this tile');
 					}
+					console.log(`[mint] seize() for ${price}`);
 					const txnResponse = await writeContract('Tiles', 'seize', [], {
 						value: price
 					});
 					console.log(`seize: ${JSON.stringify(txnResponse)}`, `Tiles, seize, ${price}`);
 					await txnResponse?.wait();
 				} else {
+					console.log(`[mint] mint() for ${price}`);
 					const txnResponse = await writeContract('Tiles', 'mint', [], {
 						value: price
 					});
@@ -169,7 +190,7 @@
 					}
 					throw Error('this tile has already been minted by another user');
 				} else {
-					console.log(`mint, can grab, minting ${address}, ${price}`);
+					console.log(`[mint] grab() ${address} for ${price}`);
 					const txnResponse = await writeContract('Tiles', 'grab', [address], {
 						value: price
 					});
