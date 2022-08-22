@@ -89,7 +89,7 @@
 		</div>
 		{#if commitHash}
 			<div class="small">
-				commit:{commitHash.split(/\s+/)[0].slice(0, 15)}
+				commit hash:{commitHash.split(/\s+/)[0].slice(0, 15)}
 			</div>
 		{/if}
 	</section>
