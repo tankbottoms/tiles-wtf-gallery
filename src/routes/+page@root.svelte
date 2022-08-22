@@ -19,7 +19,12 @@
 
 	async function getCommitHash() {
 		const response = await fetch('/commit-hash.txt');
-		commitHash = await response.text();
+		if (response.ok) {
+			const text = await response.text();
+			commitHash = text;
+		} else {
+			commitHash = '';
+		}
 	}
 
 	function setAddressCarousel() {
@@ -81,15 +86,9 @@
 			</div>
 		</div>
 		{#if commitHash}
-			{#each (() => {
-				const hash = commitHash.split(/\s+/);
-				return [hash[0]];
-			})() as part}
-				<div class="small">
-					<!--{commitHash}-->
-					commit:{commitHash.split(/\s+/)[0].slice(0, 15)}
-				</div>
-			{/each}
+			<div class="small">
+				commit:{commitHash.split(/\s+/)[0].slice(0, 15)}
+			</div>
 		{/if}
 	</section>
 </main>
