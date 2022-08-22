@@ -43,7 +43,7 @@
 	</section>
 	<section class:grid>
 		{#if address}
-			<Tile {address} />			
+			<Tile {address} />
 		{:else if showInvalidAddress}
 			<p>Not a valid Ethereum address. Input length is {input.length - 2}/40.</p>
 		{:else}
@@ -54,7 +54,7 @@
 	</section>
 	<section>
 		{#if address}
-			<p>Select the generated tile to continue.</p>			
+			<p>Select the generated tile to continue.</p>
 		{/if}
 	</section>
 	<div class="menu">

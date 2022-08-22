@@ -3,7 +3,7 @@
 	import { browser } from '$app/env';
 	import { goto } from '$app/navigation';
 	import SplitPane from '$components/SplitPane.svelte';
-	import Tile from '$components/Tile.svelte';
+	import Tile from '$components/Tile.svelte';	
 	import { generateTile } from '$tiles/tilesStandalone';
 	import { getTileAnimationStyleString } from '$tiles/utils';
 	import { getTruncatedAddress } from '$juicebox/components/Address.svelte';
@@ -83,21 +83,22 @@
 			<a href="https://github.com/tankbottoms/tiles-on-chain">Infinite Tiles v2</a> is a
 			reversed-engineered implementation of
 			<a href="https://twitter.com/peripheralist">@peripheralist</a>'s
-			<a href="https://github.com/TileDAO">Tiles</a>, without any api-service support. The
+			<a href="https://github.com/TileDAO">Tiles</a>. The
 			<a href="https://en.wikipedia.org/wiki/Scalable_Vector_Graphics" target="_blank">SVG</a> Tile,
-			attributes metadata is completely generated and served from the Ethereum blockchain. The
+			its attributes, and metadata are completely generated and served from the Ethereum blockchain, as the algorithm is in
 			<a
 				href="https://github.com/tankbottoms/tiles-on-chain/blob/main/contracts/components/TileContentProvider.sol#L61"
-				target="_blank">Tile's artwork algorithm</a
-			> is computed entirely in Solidity.
+				target="_blank">Solidity</a
+			>.
 		</p>
 		<p>
 			The Infinite Tiles v2 contracts are verified on Etherscan at <a
 				href="https://etherscan.io/address/{APP_CONFIG.contract_mainnet}#code"
 				target="_blank">{getTruncatedAddress(APP_CONFIG.contract_mainnet)}</a
 			>.
-		</p>
-		<p>
+		</p>				
+		<h3>Github</h3>
+		<p>			
 			The Tile minting and <a href="/dao">Juicebox Treasury</a> applications are implemented with
 			<a href="https://kit.svelte.dev/" target="_blank">Svelte</a>
 			in <a href="https://www.typescriptlang.org/">Typescript</a>. Github repos
@@ -110,6 +111,7 @@
 				target="_blank">Juicebox v2 protocol</a
 			>.
 		</p>
+		<h3>Created by</h3>
 		<p>
 			This project is an homage to the venerable @peripheralist: the genius artist, designer,
 			developer, grapher, person. <i>"all hail @peripheralist"</i> <br />
@@ -129,6 +131,7 @@
 				></sup
 			>
 		</p>
+		<h3>Perpetual Treasuries with Juicebox</h3>
 		<p>
 			The Infinite Tiles v2 DAO (TilesDAO2), coupled with the Juicebox v2 Treasury, wrapped by the
 			Unincorporated Nonprofit Association entity structure provide the legal foundation for this

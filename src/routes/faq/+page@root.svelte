@@ -72,9 +72,13 @@
 				>{getTruncatedAddress(APP_CONFIG.contract_mainnet)}</a
 			>
 		</p>
-		<p><a href="/faq/etherscan" target="_blank">Instructions on how to mint, grab, seize</a> directly with the InfiniteTiles.sol <a href="https://etherscan.io/address/{APP_CONFIG.contract_mainnet}#code" target="_blank"
+		<p>
+			<a href="/faq/etherscan" target="_blank">Instructions on how to mint, grab, seize</a> directly
+			with the InfiniteTiles.sol
+			<a href="https://etherscan.io/address/{APP_CONFIG.contract_mainnet}#code" target="_blank"
 				>{getTruncatedAddress(APP_CONFIG.contract_mainnet)} on Etherscan.</a
-			></p>
+			>
+		</p>
 		<p>
 			Opensea <a href="https://opensea.io/collection/infinite-tiles-v2-0" target="_blank"
 				>Inifinite Tiles v2</a
@@ -205,25 +209,7 @@
 			<i>(/render/particle/:address)</i>; and static images formats are
 			<a href="/render/png/{randomAddresses[0]}">png</a> <i>(/render/png/:address)</i>, and
 			<a href="/render/svg/{randomAddresses[0]}">svg</a> <i>(/render/svg/:address)</i>.
-		</p>
-		<!--<p>
-			<a
-				class="example"
-				href="https://tiles.wtf/render/ethereal/{randomAddresses[0]}"
-				target="_blank">tiles.wtf/render/ethereal/{getTruncatedAddress(randomAddresses[0])}</a
-			>
-			<a
-				class="example"
-				href="https://tiles.wtf/render/particle/{randomAddresses[0]}"
-				target="_blank">tiles.wtf/render/particle/{getTruncatedAddress(randomAddresses[0])}</a
-			>
-			<a class="example" href="https://tiles.wtf/render/png/{randomAddresses[0]}" target="_blank"
-				>tiles.wtf/render/png/{getTruncatedAddress(randomAddresses[0])}</a
-			>
-			<a class="example" href="https://tiles.wtf/render/svg/{randomAddresses[0]}" target="_blank"
-				>tiles.wtf/render/svg/{getTruncatedAddress(randomAddresses[0])}</a
-			>
-		</p>-->
+		</p>		
 	</section>
 </SplitPane>
 

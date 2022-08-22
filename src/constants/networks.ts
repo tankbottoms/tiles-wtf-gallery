@@ -12,15 +12,19 @@ export type NetworkInfo = {
 };
 
 export enum NetworkName {
-	// localhost = 'localhost',
-	// ropsten = 'ropsten',
+	/*
+	localhost = 'localhost',
+	ropsten = 'ropsten',
+	*/
 	mainnet = 'mainnet',
 	rinkeby = 'rinkeby'
-	// kovan = 'kovan',
-	// goerli = 'goerli',
-	// xdai = 'xdai',
-	// matic = 'matic',
-	// mumbai = 'mumbai'
+	/* k
+	ovan = 'kovan',
+	 goerli = 'goerli',
+	 xdai = 'xdai',
+	 matic = 'matic',
+	 mumbai = 'mumbai'
+	 */
 }
 
 export const blocknativeNetworks = [
