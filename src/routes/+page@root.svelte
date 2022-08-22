@@ -5,6 +5,8 @@
 	import { readNetwork } from '$stores/web3';
 	import { browser } from '$app/env';
 	import Tile from '$components/Tile.svelte';
+	import Icon from '$juicebox/components/Icon.svelte';
+import { splitPercentFrom } from '$juicebox/utils/v2/math';
 
 	const randomAddresses = generateRandomAddresses(25);
 
@@ -19,7 +21,12 @@
 
 	async function getCommitHash() {
 		const response = await fetch('/commit-hash.txt');
-		commitHash = await response.text();
+		if (response.ok) {
+			const text = await response.text();
+			commitHash = text;
+		} else {
+			commitHash = '';
+		}
 	}
 
 	function setAddressCarousel() {
@@ -71,6 +78,7 @@
 			>
 		</p>
 		<p>Each is unique & objectively rare</p>
+
 		<a href="/wtf?{$readNetwork ? `network=${$readNetwork?.alias}` : ''}">Wtf</a>
 		<a href="/dao?{$readNetwork ? `network=${$readNetwork?.alias}` : ''}">Juicebox</a>
 		<a href="/faq?{$readNetwork ? `network=${$readNetwork?.alias}` : ''}">Faq</a>
@@ -81,16 +89,22 @@
 			</div>
 		</div>
 		{#if commitHash}
-			{#each (() => {
-				const hash = commitHash.split(/\s+/);
-				return [hash[0]];
-			})() as part}
-				<div class="small">
-					{part}
-				</div>
-			{/each}
+			<div class="small">
+				<a href="https://github.com/tankbottoms/tiles-wtf-gallery/commit/{commitHash.split(/\s+/)[0]}">commit:{commitHash.split(/\s+/)[0].slice(0, 15)}</a>
+			</div>
 		{/if}
 	</section>
+	<div class="socialIcons" target="_blank">
+		<a href="https://twitter.com/Tile_DAO">
+			<Icon name="twitter" />
+		</a>
+		<a href="https://discord.gg/U3fMydKj4J" target="_blank">
+			<Icon name="discord" />
+		</a>
+		<a href="https://github.com/tankbottoms/tiles-on-chain" target="_blank">
+			<Icon name="github" style="width: 1rem" />
+		</a>
+	</div>
 </main>
 
 <style lang="scss">
@@ -128,6 +142,24 @@
 			margin: 30px 0;
 		}
 
+		.socialIcons {
+			position: fixed;
+			bottom: 0px;
+			left: 0px;
+			padding: 10px;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			gap: 10px;
+		}
+		.menu {
+			position: fixed;
+			bottom: 0px;
+			right: 0px;
+			padding: 10px;
+			font-weight: bold;
+			font-size: 1rem;
+		}
 		.group {
 			margin-top: 30px;
 			height: 60px;

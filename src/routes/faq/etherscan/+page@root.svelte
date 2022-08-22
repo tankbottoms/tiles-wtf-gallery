@@ -52,11 +52,11 @@
 	</section>
 	<section slot="right" class="right">
 		<h1>Etherscan</h1>
-		<h3>Intract with etherscan directly</h3>
+		<h3>Intract with etherscan directly.</h3>
 		<p>
-			For individuals comfortable with executing transactions directlly with Ethereum smart
-			contracts on Etherscan. In case some existential crisis requires you to acquire an Infinite
-			Tile v2 and the front-end is deficient. Apologies in advance.
+			For individuals comfortable with executing transactions directly with Ethereum smart contracts
+			on Etherscan, provided in case an existential crisis requires you to acquire an Infinite Tile
+			v2 and the front-end shit-itself. Apologies in advance.
 		</p>
 
 		<table width="100%">
@@ -94,15 +94,16 @@
 		</table>
 		<br />
 
-		<h4>How to interact with the contract?</h4>
+		<h4>How to interact with the InfiniteTiles.sol contract?</h4>
 
 		<ul>
-			<li>Click on etherscan link for contract page.</li>
-			<li>You will see multiple tabs on that page, you need to open "Contract" tab.</li>
-			<li>From three buttons under that tab, click on "Write Contract"</li>
-			<li>Click on "Connect to Web3" button, it will ask you to connect to a wallet.</li>
+			<li>Visting the Etherscan contract page.</li>
+			<li>From the multiple tabs on that page, "Contract" tab.</li>
+			<li>From three buttons under that tab, "Write Contract"</li>
+			<li>Connect your wallet via the "Connect to Web3" button.</li>
 			<li>
-				Here are different things you can do with contract on this page, mint, grab, seize, etc.
+				Here are different things you can do with contract on this page: getMintPrice, mint, grab,
+				and seize.
 			</li>
 		</ul>
 
@@ -110,11 +111,11 @@
 		<div class="space" />
 		<h1>GetMintPrice.</h1>
 		<p>
-			You can check price of tile under "Read Contract" tab by clicking on "getMintPrice". Note this
-			value if in wei you can divide this value by 10e18 to get price of a tile in ether.
+			Check the price of a Tile under the "Read Contract" tab by clicking on "getMintPrice". Note
+			this value if in wei, you can divide this value by 10e18 to get price of a Tile in Ethereum.
 		</p>
-		<h3>Note:</h3>
-		<p>If you already own a tile on on Tiles V1 you can mint tiles on Infinite Tile V2 for free.</p>
+		<h4>Note:</h4>
+		<p>By owning a v1 Tile, you not only are an OG but you can mint Infinite Tile v2 for free.</p>
 
 		<hr />
 		<div class="space" />
@@ -122,18 +123,18 @@
 		<p>
 			If you own a particular wallet address and want to mint a unique Tile againt that, you can
 			click on 4th command "mint" from the list. it will show an input fields where you can enter
-			the amount of ETH that you have to send to mint this tile. Click on "Write" button to send the
-			transaction.
+			the amount of Ethereum that you have to send to mint this Tile. Click on "Write" button to
+			send the transaction.
 		</p>
 		<hr />
 		<div class="space" />
 		<h1>Grab.</h1>
 		<p>
-			If you do not own a particular wallet address but you want to mint a unique Tile againt that
+			If you do not own a particular wallet address but you want to mint a unique Tile against that
 			particular address, you can click on 2nd command "grab" from the list. it will show two input
-			fields, first where you can enter the amount of ETH that you have to send to mint this tile
-			and second the address you want to mint this tile for. Click on "Write" button to send the
-			transaction.
+			fields, first where you can enter the amount of Ethereum that you have to send to mint this
+			tile and second the address you want to mint this Tile for. Click on "Write" button to send
+			the transaction.
 		</p>
 		<hr />
 		<div class="space" />
@@ -142,8 +143,8 @@
 			If you own a particular wallet address and you want to mint a unique Tile againt that
 			particular address but someone has already minted tile againt your wallet address, you can
 			click on 10th command "seize" from the list. it will show an input fields where you can enter
-			the amount of ETH that you have to send to seize this tile. Click on "Write" button to send
-			the transaction.
+			the amount of Ethereum that you have to send to seize this tile. Click on "Write" button to
+			send the transaction.
 		</p>
 		<hr />
 	</section>
