@@ -81,7 +81,10 @@
 			</div>
 		</div>
 		{#if commitHash}
-			{#each commitHash.split(/\s+/) as part}
+			{#each (() => {
+				const hash = commitHash.split(/\s+/);
+				return [hash[0]];
+			})() as part}
 				<div class="small">
 					{part}
 				</div>
