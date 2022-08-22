@@ -10,11 +10,13 @@
 		loading: boolean;
 		transactions: ethers.providers.TransactionResponse[];
 		grabHistory: GrabHistoryItem[];
+		seizureHistory: GrabHistoryItem[];
 		refreshHistory: Function;
 	}>({
 		loading: false,
 		transactions: [],
 		grabHistory: [],
+		seizureHistory: [],
 		refreshHistory: fetchHistory
 	});
 
@@ -27,6 +29,7 @@
 			const sorted = transactions.sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0));
 			const iface = new ethers.utils.Interface(Tiles.abi);
 			const history: GrabHistoryItem[] = [];
+			const seizureHistory: GrabHistoryItem[] = [];
 			sorted.forEach((tx) => {
 				try {
 					const decodedData = iface.parseTransaction({ data: tx.data });
@@ -44,6 +47,13 @@
 							timestamp: tx.timestamp || 0,
 							blockNumber: tx.blockNumber || 0
 						});
+					} else if (decodedData.name === 'seize') {
+						seizureHistory.push({
+							caller: tx.from,
+							address: tx.from,
+							timestamp: tx.timestamp || 0,
+							blockNumber: tx.blockNumber || 0
+						});
 					}
 				} catch {}
 			});
@@ -55,6 +65,7 @@
 					if (!acc.find((_item) => _item.address === item.address)) acc.push(item);
 					return acc;
 				}, []),
+				seizureHistory,
 				refreshHistory: $grabHistoryStore.refreshHistory
 			};
 		} catch (error) {

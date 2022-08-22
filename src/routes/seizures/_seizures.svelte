@@ -9,6 +9,7 @@
 	import { page } from '$app/stores';
 	import EnsOrAddress from '$juicebox/components/EnsOrAddress.svelte';
 	import EtherscanLink from '$juicebox/components/EtherscanLink.svelte';
+	import moment from 'moment';
 
 	$: userAddress = $page.params.address;
 
@@ -25,11 +26,13 @@
 		loading: boolean;
 		transactions: ethers.providers.TransactionResponse[];
 		grabHistory: GrabHistoryItem[];
+		seizureHistory: GrabHistoryItem[];
 	}>;
 
 	function update(userAddress: string) {
-		grabHistory.subscribe(({ grabHistory }) => {
-			let _tiles = grabHistory.map(({ address, ...rest }) => ({
+		grabHistory.subscribe(({ seizureHistory }) => {
+			console.log(seizureHistory);
+			let _tiles = seizureHistory.map(({ address, ...rest }) => ({
 				address,
 				tile: generateTile(address),
 				...rest
@@ -52,7 +55,7 @@
 <main>
 	<section>
 		<h3>
-			Infinite Tiles seizure history (coming soon)
+			Infinite Tiles seizure history
 			{#if userAddress}
 				for
 				<EtherscanLink type="address" value={userAddress} showTooltip={false}>
@@ -62,7 +65,6 @@
 		</h3>
 	</section>
 
-	<!--
 	<section class:grid>
 		{#if $connectedAccount}
 			{#if $grabHistory.loading}
@@ -110,7 +112,6 @@
 			</p>
 		{/if}
 	</section>
-    -->
 </main>
 
 <div class="menu">
