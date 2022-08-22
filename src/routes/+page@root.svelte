@@ -6,6 +6,7 @@
 	import { browser } from '$app/env';
 	import Tile from '$components/Tile.svelte';
 	import Icon from '$juicebox/components/Icon.svelte';
+import { splitPercentFrom } from '$juicebox/utils/v2/math';
 
 	const randomAddresses = generateRandomAddresses(25);
 
@@ -89,7 +90,7 @@
 		</div>
 		{#if commitHash}
 			<div class="small">
-				commit hash:{commitHash.split(/\s+/)[0].slice(0, 15)}
+				<a href="https://github.com/tankbottoms/tiles-wtf-gallery/commit/{commitHash.split(/\s+/)[0]}">commit:{commitHash.split(/\s+/)[0].slice(0, 15)}</a>
 			</div>
 		{/if}
 	</section>
