@@ -179,4 +179,13 @@
 		border-left: 1px solid gray;
 		padding: 0.25rem 0 0.25rem 1rem;
 	}
+
+	tr > th:first-child,
+	tr > td:first-child {
+		max-width: 100px;
+	}
+	tr > th:not(:first-child),
+	tr > td:not(:first-child) {
+		text-align: center;
+	}
 </style>
