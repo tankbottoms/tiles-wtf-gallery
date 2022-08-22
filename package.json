@@ -1,7 +1,8 @@
 {
 	"name": "tiles-wtf-gallery",
 	"version": "0.2.0",
-	"license": "LICENSE",
+	"license": "WE-PARTY",
+	"private": true,
 	"scripts": {
 		"dev": "vite dev --port 8080",
 		"build": "sh scripts/commit-hash.sh && vite build && node scripts/ipfs-fallback.js",

@@ -105,7 +105,7 @@ Contributions, with Modifications, as part of a Larger Work; provided you:**
 > - juicebox.wtf,
 > - affiliates of the above,
 >   or any development activities affiliated with
-> - movedao.eth; and
+> - daolabs.wtf; and
 >
 > **(ii) do not make any modifications and/or enhancements unless it is for a public good, a non-profit purpose, or a for-profit purpose for an individual artist, (for any special configuration which is not explicitly stated, you may contact m@tankbottoms.xyz, who, notwithstanding any provision in the License to the contrary, which are hereby pro tanto superseded and modified or replaced mutatis mutandis to the extent of any inconsistency, may grant written exemptions to section 2.1.ii of the License); however, this license does not extend to parties seeking to commercially exploit; generally,**
 >
@@ -113,7 +113,7 @@ Contributions, with Modifications, as part of a Larger Work; provided you:**
 >
 > **(iv) use of this codebase requires that any cryptocurrency proceeds must be routed to a https://juicebox.money or https://juicebox.wtf treasury; and**
 >
-> **(iv) you agree to the terms of service currently available at https://gov.move.xyz/tos in their entirety, including Sections titled "Security Law Matters", "OFAC Compliance"; and**
+> **(iv) you agree to the terms of service currently available at https://docs.daolabs.wtf/dao/legal/tos.md in their entirety, including Sections titled "Security Law Matters", "OFAC Compliance"; and**
 >
 > **(v) you affirm you are not mean.**
 
