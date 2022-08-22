@@ -15,6 +15,13 @@
 	let currentTile = 1;
 	let timer;
 
+	let commitHash = '';
+
+	async function getCommitHash() {
+		const response = await fetch('/commit-hash.txt');
+		commitHash = await response.text();
+	}
+
 	function setAddressCarousel() {
 		timer = setInterval(() => {
 			address = randomAddresses[currentTile % 10];
@@ -40,6 +47,7 @@
 	onMount(() => {
 		setAddressCarousel();
 		setInterval(() => checkAnimationState(), 1000);
+		getCommitHash();
 	});
 
 	let innerWidth = browser ? window.innerWidth : 0;
@@ -55,14 +63,14 @@
 				Infinite (∞) Tiles v2
 			</a>
 		</h1>
-		<p>Generated from any Ethereum address</p>		
+		<p>Generated from any Ethereum address</p>
 		<p>
 			<a
 				href="https://github.com/tankbottoms/tiles-on-chain/blob/main/contracts/components/TileContentProvider.sol"
 				target="_blank">Fully on-chain Solidity generated artwork</a
 			>
 		</p>
-		<p>Each is unique & objectively rare</p>		
+		<p>Each is unique & objectively rare</p>
 		<a href="/wtf?{$readNetwork ? `network=${$readNetwork?.alias}` : ''}">Wtf</a>
 		<a href="/dao?{$readNetwork ? `network=${$readNetwork?.alias}` : ''}">Juicebox</a>
 		<a href="/faq?{$readNetwork ? `network=${$readNetwork?.alias}` : ''}">Faq</a>
@@ -72,6 +80,13 @@
 				<a href="/mint?{$readNetwork ? `network=${$readNetwork?.alias}` : ''}">Mint a Tile</a>
 			</div>
 		</div>
+		{#if commitHash}
+			{#each commitHash.split(/\s+/) as part}
+				<div class="small">
+					{part}
+				</div>
+			{/each}
+		{/if}
 	</section>
 </main>
 
@@ -135,5 +150,8 @@
 				font-size: 10px;
 			}
 		}
+	}
+	.small {
+		font-size: 0.6rem;
 	}
 </style>
