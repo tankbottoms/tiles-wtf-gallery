@@ -23,11 +23,13 @@
 	}>;
 
 	let count = '0';
+	let totalCount = '0';
 	let price = '0.0000';
 
 	onMount(async () => {
 		grabHistory.subscribe(async ({ grabHistory }) => {
 			try {
+				totalCount = grabHistory?.length?.toString();
 				count = grabHistory
 					.filter((item) => item.caller?.toLowerCase() === $connectedAccount?.toLowerCase())
 					?.length?.toString();
@@ -79,16 +81,18 @@
 				: ''}"
 		>
 			{#if innerWidth < 650}
-				{count}
+				{count}/{totalCount}
 			{:else}
-				{count} Minted
+				{count}/{totalCount} Minted
 			{/if}
 		</a>
-		{#if innerWidth < 650}
-			// {price}
-		{:else}
-			// Current price: {price} ETH
-		{/if}
+		<div class="price">
+			{#if innerWidth < 650}
+				//&nbsp;{price}
+			{:else}
+				//&nbsp;Current price: {price} ETH
+			{/if}
+		</div>
 	</div>
 
 	<div class="right">
@@ -165,10 +169,12 @@
 		align-items: center;
 		gap: 10px;
 	}
+	.left {
+		gap: 0;
+	}
 
 	.left a {
 		/* color: inherit; */
-		font-size: 14px;
 		color: black;
 		text-decoration: none;
 		position: relative;
