@@ -1,13 +1,13 @@
 {
 	"name": "tiles-wtf-gallery",
-	"version": "0.2.0",
+	"version": "1.0.0",
 	"license": "WE-PARTY",
 	"private": true,
 	"scripts": {
 		"dev": "vite dev --port 8080",
 		"build": "sh scripts/commit-hash.sh && vite build && node scripts/copy.js",
 		"package": "svelte-kit package",
-		"preview": "vite preview",	
+		"preview": "vite preview",
 		"test": "playwright test",
 		"check": "svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-check --tsconfig ./tsconfig.json --watch",
