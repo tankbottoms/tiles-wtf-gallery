@@ -79,7 +79,7 @@ This Svelte [Juicebox v2 front-end](https://github.com/tankbottoms/tiles-wtf-gal
 
 #### Extra Token Gating Example
 
-See [TokenGate](https://github.com/tankbottoms/tiles-wtf-gallery/blob/main/src/components/TokenGated.svelte), if you are into this then you may be interested in [GateKeeper](https://gatekeep.it/), for using Infinite Tiles v2 to Token Gate IRL.
+Tiles can be used to [TokenGate](https://github.com/tankbottoms/tiles-wtf-gallery/blob/main/src/components/TokenGated.svelte) community pages or using [GateKeeper](https://gatekeep.it/) IRL. I've started to require a Tile for even causal outings with friends.
 
 ### Build
 
@@ -102,8 +102,8 @@ Use of the source-code is permitted for projects which route their Ethereum paym
 
 ### Animation URL rendering deployments
 
-- [QmY1bTK99UBB2bLfCmFAHcwxTv6zhf8Mq9czpnjFABeZ2s] 20220819
+- [QmY1bTK99UBB2bLfCmFAHcwxTv6zhf8Mq9czpnjFABeZ2s](https://ipfs.io/ipfs/QmY1bTK99UBB2bLfCmFAHcwxTv6zhf8Mq9czpnjFABeZ2s/0x5d95baEBB8412AD827287240A5c281E3bB30d27E) 20220819
 
 ---
 
-<p align="center"><a href="https://docs.daolabs.wtf/dao/legal/tos.md">DAOLABS Terms of Service</a></p>
+<p align="center"><a href="src/markdown/tos.ts">DAOLABS Terms of Service</a></p>

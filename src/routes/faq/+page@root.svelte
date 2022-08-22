@@ -209,7 +209,7 @@
 			<i>(/render/particle/:address)</i>; and static images formats are
 			<a href="/render/png/{randomAddresses[0]}">png</a> <i>(/render/png/:address)</i>, and
 			<a href="/render/svg/{randomAddresses[0]}">svg</a> <i>(/render/svg/:address)</i>.
-		</p>		
+		</p>
 	</section>
 </SplitPane>
 

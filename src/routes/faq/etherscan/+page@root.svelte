@@ -54,9 +54,9 @@
 		<h1>Etherscan</h1>
 		<h3>Intract with etherscan directly.</h3>
 		<p>
-			For individuals comfortable with executing transactions directly with Ethereum smart
-			contracts on Etherscan, provided in case an existential crisis requires you to acquire an Infinite
-			Tile v2 and the front-end shit-itself. Apologies in advance.
+			For individuals comfortable with executing transactions directly with Ethereum smart contracts
+			on Etherscan, provided in case an existential crisis requires you to acquire an Infinite Tile
+			v2 and the front-end shit-itself. Apologies in advance.
 		</p>
 
 		<table width="100%">
@@ -102,7 +102,8 @@
 			<li>From three buttons under that tab, "Write Contract"</li>
 			<li>Connect your wallet via the "Connect to Web3" button.</li>
 			<li>
-				Here are different things you can do with contract on this page: getMintPrice, mint, grab, and seize.
+				Here are different things you can do with contract on this page: getMintPrice, mint, grab,
+				and seize.
 			</li>
 		</ul>
 
@@ -110,8 +111,8 @@
 		<div class="space" />
 		<h1>GetMintPrice.</h1>
 		<p>
-			Check the price of a Tile under the "Read Contract" tab by clicking on "getMintPrice". Note this
-			value if in wei, you can divide this value by 10e18 to get price of a Tile in Ethereum.
+			Check the price of a Tile under the "Read Contract" tab by clicking on "getMintPrice". Note
+			this value if in wei, you can divide this value by 10e18 to get price of a Tile in Ethereum.
 		</p>
 		<h4>Note:</h4>
 		<p>By owning a v1 Tile, you not only are an OG but you can mint Infinite Tile v2 for free.</p>
@@ -122,8 +123,8 @@
 		<p>
 			If you own a particular wallet address and want to mint a unique Tile againt that, you can
 			click on 4th command "mint" from the list. it will show an input fields where you can enter
-			the amount of Ethereum that you have to send to mint this Tile. Click on "Write" button to send the
-			transaction.
+			the amount of Ethereum that you have to send to mint this Tile. Click on "Write" button to
+			send the transaction.
 		</p>
 		<hr />
 		<div class="space" />
@@ -131,9 +132,9 @@
 		<p>
 			If you do not own a particular wallet address but you want to mint a unique Tile against that
 			particular address, you can click on 2nd command "grab" from the list. it will show two input
-			fields, first where you can enter the amount of Ethereum that you have to send to mint this tile
-			and second the address you want to mint this Tile for. Click on "Write" button to send the
-			transaction.
+			fields, first where you can enter the amount of Ethereum that you have to send to mint this
+			tile and second the address you want to mint this Tile for. Click on "Write" button to send
+			the transaction.
 		</p>
 		<hr />
 		<div class="space" />
@@ -142,8 +143,8 @@
 			If you own a particular wallet address and you want to mint a unique Tile againt that
 			particular address but someone has already minted tile againt your wallet address, you can
 			click on 10th command "seize" from the list. it will show an input fields where you can enter
-			the amount of Ethereum that you have to send to seize this tile. Click on "Write" button to send
-			the transaction.
+			the amount of Ethereum that you have to send to seize this tile. Click on "Write" button to
+			send the transaction.
 		</p>
 		<hr />
 	</section>

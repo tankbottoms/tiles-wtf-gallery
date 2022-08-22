@@ -3,7 +3,7 @@
 	import { browser } from '$app/env';
 	import { goto } from '$app/navigation';
 	import SplitPane from '$components/SplitPane.svelte';
-	import Tile from '$components/Tile.svelte';	
+	import Tile from '$components/Tile.svelte';
 	import { generateTile } from '$tiles/tilesStandalone';
 	import { getTileAnimationStyleString } from '$tiles/utils';
 	import { getTruncatedAddress } from '$juicebox/components/Address.svelte';
@@ -85,7 +85,8 @@
 			<a href="https://twitter.com/peripheralist">@peripheralist</a>'s
 			<a href="https://github.com/TileDAO">Tiles</a>. The
 			<a href="https://en.wikipedia.org/wiki/Scalable_Vector_Graphics" target="_blank">SVG</a> Tile,
-			its attributes, and metadata are completely generated and served from the Ethereum blockchain, as the algorithm is in
+			its attributes, and metadata are completely generated and served from the Ethereum blockchain,
+			as the algorithm is in
 			<a
 				href="https://github.com/tankbottoms/tiles-on-chain/blob/main/contracts/components/TileContentProvider.sol#L61"
 				target="_blank">Solidity</a
@@ -96,9 +97,9 @@
 				href="https://etherscan.io/address/{APP_CONFIG.contract_mainnet}#code"
 				target="_blank">{getTruncatedAddress(APP_CONFIG.contract_mainnet)}</a
 			>.
-		</p>				
+		</p>
 		<h3>Github</h3>
-		<p>			
+		<p>
 			The Tile minting and <a href="/dao">Juicebox Treasury</a> applications are implemented with
 			<a href="https://kit.svelte.dev/" target="_blank">Svelte</a>
 			in <a href="https://www.typescriptlang.org/">Typescript</a>. Github repos

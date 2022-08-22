@@ -63,12 +63,12 @@
 
 <main class:mobile={innerWidth < 650}>
 	<Tile {address} {animate} bigger />
-	<section>		
+	<section>
 		<h1>
 			<a class="heading" href="/history?{$readNetwork ? `network=${$readNetwork?.alias}` : ''}">
 				Infinite (∞) Tiles v2
 			</a>
-		</h1>		
+		</h1>
 		<p>Generated from any Ethereum address</p>
 		<p>
 			<a
@@ -77,7 +77,7 @@
 			>
 		</p>
 		<p>Each is unique & objectively rare</p>
-		
+
 		<a href="/wtf?{$readNetwork ? `network=${$readNetwork?.alias}` : ''}">Wtf</a>
 		<a href="/dao?{$readNetwork ? `network=${$readNetwork?.alias}` : ''}">Juicebox</a>
 		<a href="/faq?{$readNetwork ? `network=${$readNetwork?.alias}` : ''}">Faq</a>
@@ -148,7 +148,7 @@
 			padding: 10px;
 			display: flex;
 			flex-direction: column;
-			align-items: center;			
+			align-items: center;
 			gap: 10px;
 		}
 		.menu {
@@ -158,7 +158,7 @@
 			padding: 10px;
 			font-weight: bold;
 			font-size: 1rem;
-		}	
+		}
 		.group {
 			margin-top: 30px;
 			height: 60px;
