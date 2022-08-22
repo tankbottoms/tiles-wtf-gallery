@@ -5,6 +5,10 @@
   <caption>@peripheralist's timeless, beautiful and dynamic Tiles project is reborn</caption>
 </p>
 
+#### Contracts
+
+Infinite Tiles v2 Solidity contracts are available on [https://github.com/tankbottoms/tiles-on-chain](https://github.com/tankbottoms/tiles-on-chain).
+
 #### About
 
 Infinite Tiles v2 is an on-chain implementation of [@peripheralist](https://twitter.com/peripheralist)’s [TilesDAO](https://github.com/TileDAO) the [second (2nd) project on Juicebox](https://juicebox.money/#/p/tiles). The project is an homage to the venerable @peripheralist, the genius artist, developer, graph-wizard, sexy-man, person. Please send [@peripheralist](https://twitter.com/peripheralist) a Tweet telling him how awesome he is.
@@ -107,7 +111,7 @@ Use of the source-code is permitted for projects which route their Ethereum paym
 ---
 
 <p align="center">
-<a href="https://juicebox.wtf/disclaimers?network=mainnet">Disclaimers</a> | 
-<a href="http://tiles.wtf/tos?network=mainnet">Terms of Sale</a> |
+<a href="https://juicebox.wtf/disclaimers?network=mainnet">Disclaimers</a> -
+<a href="http://tiles.wtf/tos?network=mainnet">Terms of Sale</a> -
 <a href="https://juicebox.wtf/terms-of-service?network=mainnet">Terms of Service</a>
 </p>
