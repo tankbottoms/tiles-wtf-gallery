@@ -59,6 +59,10 @@
 				<EtherscanLink type="address" value={userAddress} showTooltip={false}>
 					<EnsOrAddress address={userAddress} />
 				</EtherscanLink>
+			{:else}
+				<div>
+					({$grabHistory?.grabHistory?.length || 0} TILES)
+				</div>
 			{/if}
 		</h3>
 	</section>
