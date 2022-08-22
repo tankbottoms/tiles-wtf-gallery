@@ -8,6 +8,7 @@
 	export let animate: boolean = false;
 	export let showAddress: boolean = true;
 	export let goToMint: boolean = true;
+	export let bigger = false;
 
 	let innerWidth = browser ? window.innerWidth : 0;
 	let tile = '';
@@ -26,10 +27,12 @@
 	}
 </script>
 
+<svelte:window bind:innerWidth />
+
 <div
 	class="tiles-container"
 	on:click={goToMint ? () => goto(`mint/${address}`) : undefined}
-	style="transform: scale({Math.min(1, (innerWidth - 50) / 360)});"
+	class:bigger={bigger && innerWidth >= 760}
 >
 	<div id="tiles">
 		{#if animate}
@@ -58,5 +61,17 @@
 		display: flex;
 		align-items: center;
 		justify-content: center;
+	}
+	.bigger {
+		width: 100vmin;
+		height: 100vmin;
+		max-width: min(500px, 100vmin);
+		max-height: min(500px, 100vmin);
+	}
+	.bigger :global(svg) {
+		width: 50vmin;
+		height: 50vmin;
+		max-width: min(500px, 50vmin);
+		max-height: min(500px, 50vmin);
 	}
 </style>

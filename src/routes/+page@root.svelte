@@ -48,7 +48,7 @@
 <svelte:window bind:innerWidth on:mousemove={handleMove} />
 
 <main class:mobile={innerWidth < 650}>
-	<Tile {address} {animate} />
+	<Tile {address} {animate} bigger />
 	<section>
 		<h1>
 			<a class="heading" href="/history?{$readNetwork ? `network=${$readNetwork?.alias}` : ''}">
