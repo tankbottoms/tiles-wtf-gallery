@@ -9,7 +9,7 @@
 
 Infinite Tiles v2 is an on-chain implementation of [@peripheralist](https://twitter.com/peripheralist)’s [TilesDAO](https://github.com/TileDAO) the [second (2nd) project on Juicebox](https://juicebox.money/#/p/tiles). The project is an homage to the venerable @peripheralist, the genius artist, developer, graph-wizard, sexy-man, person. Please send [@peripheralist](https://twitter.com/peripheralist) a Tweet telling him how awesome he is.
 
-[Infinite Tiles v2](https://github.com/tankbottoms/tiles-on-chain) contains the Solidity contracts. The repository structure employed a composable pattern which will be familiar with anyone involved in the Juicebox NFT minting toolkit. The InfiniteTiles contract uses Juicebox v2 terminal to forward any proceeds.
+[Infinite Tiles v2](https://github.com/tankbottoms/tiles-on-chain) contains the Solidity contracts. The repository structure employed a composable pattern which will be familiar with anyone involved in the Juicebox NFT minting toolkit. The InfiniteTiles contract uses [Juicebox v2](https://juicebox.wtf/projects/175) terminal to forward any proceeds.
 
 ```typescript
 function _payTreasury(address _tile) private {
@@ -67,7 +67,7 @@ Most everything about the minting mechanics can be found at the [https://tiles.w
 
 #### Juicebox v2 Treasury
 
-In addition to minting and viewing Tiles, the full Juicebox.money front-end is included and fixed to the Tiles Project Id of 175. This is easily changed. This is intended to demonstrate how a DAO would possibly present a minting experience, and possibly a open or token-gated Treasury management experience. A modification to the Activity component was made in to allow for the parsing of the SVG data provided by the smart contract during the pay-event.
+In addition to minting and viewing Tiles, the full [Juicebox.money front-end](https://juicebox.wtf/projects/175) is included and fixed to the [Tiles Project Id of 175](https://juicebox.wtf/projects/175). This is easily changed. This is intended to demonstrate how a DAO would possibly present a minting experience, and possibly a open or token-gated Treasury management experience. A modification to the Activity component was made in to allow for the parsing of the SVG data provided by the smart contract during the pay-event.
 
 <br />
 <p align="center">
@@ -106,4 +106,4 @@ Use of the source-code is permitted for projects which route their Ethereum paym
 
 ---
 
-<p align="center"><a href="src/markdown/tos.ts">DAOLABS Terms of Service</a></p>
+<p align="center"><a href="http://tiles.wtf/tos?network=mainnet">Terms of Sale</a></p>
