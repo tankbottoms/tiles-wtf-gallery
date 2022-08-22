@@ -86,7 +86,8 @@
 				return [hash[0]];
 			})() as part}
 				<div class="small">
-					{part}
+					<!--{commitHash}-->
+					commit:{commitHash.split(/\s+/)[0].slice(0, 15)}
 				</div>
 			{/each}
 		{/if}
