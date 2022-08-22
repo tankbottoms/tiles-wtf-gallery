@@ -31,7 +31,7 @@
 
 <div
 	class="tiles-container"
-	on:click={goToMint ? () => goto(`mint/${address}`) : undefined}
+	on:click={goToMint ? () => goto(`/mint/${address}`) : undefined}
 	class:bigger={bigger && innerWidth >= 760}
 >
 	<div id="tiles">
