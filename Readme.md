@@ -106,4 +106,8 @@ Use of the source-code is permitted for projects which route their Ethereum paym
 
 ---
 
-<p align="center"><a href="http://tiles.wtf/tos?network=mainnet">Terms of Sale</a></p>
+<p align="center">
+<a href="https://juicebox.wtf/disclaimers?network=mainnet">Disclaimers</a> | 
+<a href="http://tiles.wtf/tos?network=mainnet">Terms of Sale</a> |
+<a href="https://juicebox.wtf/terms-of-service?network=mainnet">Terms of Service</a>
+</p>
