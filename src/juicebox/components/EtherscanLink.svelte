@@ -11,8 +11,9 @@
 	export let type: 'tx' | 'address';
 	export let truncated: boolean = false;
 	export let showTooltip = true;
+	export let network = 'mainnet';
 
-	let subdomain = '';
+	let subdomain = network === 'mainnet' ? '' : `${network}.`;
 
 	if (get(readNetwork).alias !== NetworkName.mainnet) {
 		subdomain = get(readNetwork).alias + '.';
