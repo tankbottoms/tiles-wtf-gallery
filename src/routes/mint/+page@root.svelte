@@ -19,6 +19,7 @@
 	});
 
 	$: {
+		input = (input || '').slice(0, 42).replace(/[^0-9a-fA-Fx]/g, '');
 		if (utils.isAddress(input || '')) {
 			address = input || '';
 			showInvalidAddress = false;
@@ -45,7 +46,7 @@
 		{#if address}
 			<Tile {address} />
 		{:else if showInvalidAddress}
-			<p>Not a valid Ethereum address. Input length is {input.length - 2}/40.</p>
+			<p>Not a valid Ethereum address. Input length is {input.length}/42.</p>
 		{:else}
 			{#each randomTiles as item}
 				<Tile address={item.address} />
