@@ -95,30 +95,12 @@ export async function getProjects(opts: ProjectsOptions) {
 	});
 }
 
-// NOTE: V2 Contracts do not have handle
-// export function getProjectsByHandle(handle: string | undefined) {
-// 	return querySubgraph(
-// 		handle
-// 			? {
-// 					text: `${handle}:*`,
-// 					entity: 'projectSearch',
-// 					keys
-// 			  }
-// 			: null
-// 	);
-// }
-
 export async function getProjectMetadata(metadataUri: string | undefined) {
 	if (!metadataUri) {
 		console.error('No metadataUri provided');
 		return;
 	}
-	// const url = ipfsCidToFirebaseUrl(metadataUri);
-	// const response = await axios.get(url, {
-	// 	headers: {
-	// 		apikey: import.meta.env.VITE_API_KEY
-	// 	}
-	// });
+
 	const url = ipfsCidUrl(metadataUri);
 	const response = await axios.get(url);
 	return consolidateMetadata(response.data);

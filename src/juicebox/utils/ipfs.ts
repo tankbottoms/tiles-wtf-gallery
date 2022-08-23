@@ -24,7 +24,6 @@ export const IPFS_TAGS = {
 	}`,
 
 	METADATA: dev ? 'DEV_juicebox_project_metadata' : 'juicebox_project_metadata',
-
 	LOGO: dev ? 'DEV_juicebox_project_logo' : 'juicebox_project_logo'
 };
 
