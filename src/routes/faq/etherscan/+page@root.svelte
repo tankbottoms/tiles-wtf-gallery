@@ -52,11 +52,11 @@
 	</section>
 	<section slot="right" class="right">
 		<h1>Etherscan</h1>
-		<h3>Intract with etherscan directly.</h3>
+		<h3>Interact with Etherscan directly.</h3>
 		<p>
 			For individuals comfortable with executing transactions directly with Ethereum smart contracts
-			on Etherscan, provided in case an existential crisis requires you to acquire an Infinite Tile
-			v2 and the front-end shit-itself. Apologies in advance.
+			on Etherscan, (provided in case an existential crisis requires you to acquire an Infinite Tile
+			v2 and the front-end shits-itself). Apologies in advance.
 		</p>
 
 		<table width="100%">
