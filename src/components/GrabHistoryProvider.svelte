@@ -55,7 +55,9 @@
 							blockNumber: tx.blockNumber || 0
 						});
 					}
-				} catch {}
+				} catch (e) {
+					console.log(e);
+				}
 			});
 
 			$grabHistoryStore = {
