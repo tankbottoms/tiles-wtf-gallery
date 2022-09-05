@@ -8,7 +8,6 @@ const Tiles: ContractDeployment = {
 			inputs: [
 				{ internalType: 'string', name: '_name', type: 'string' },
 				{ internalType: 'string', name: '_symbol', type: 'string' },
-				{ internalType: 'string', name: '_baseUri', type: 'string' },
 				{ internalType: 'contract IPriceResolver', name: '_priceResolver', type: 'address' },
 				{
 					internalType: 'contract ITileContentProvider',
@@ -28,6 +27,7 @@ const Tiles: ContractDeployment = {
 		{ inputs: [], name: 'INVALID_AMOUNT', type: 'error' },
 		{ inputs: [], name: 'INVALID_RATE', type: 'error' },
 		{ inputs: [], name: 'INVALID_TOKEN', type: 'error' },
+		{ inputs: [], name: 'MINT_PAUSED', type: 'error' },
 		{ inputs: [], name: 'PRIVILEDGED_OPERATION', type: 'error' },
 		{ inputs: [], name: 'UNSUPPORTED_OPERATION', type: 'error' },
 		{
@@ -90,13 +90,6 @@ const Tiles: ContractDeployment = {
 			inputs: [{ internalType: 'address', name: 'owner', type: 'address' }],
 			name: 'balanceOf',
 			outputs: [{ internalType: 'uint256', name: '', type: 'uint256' }],
-			stateMutability: 'view',
-			type: 'function'
-		},
-		{
-			inputs: [],
-			name: 'baseUri',
-			outputs: [{ internalType: 'string', name: '', type: 'string' }],
 			stateMutability: 'view',
 			type: 'function'
 		},
@@ -275,6 +268,23 @@ const Tiles: ContractDeployment = {
 		{
 			inputs: [{ internalType: 'string', name: 'contractUri', type: 'string' }],
 			name: 'setContractUri',
+			outputs: [],
+			stateMutability: 'nonpayable',
+			type: 'function'
+		},
+		{
+			inputs: [
+				{ internalType: 'contract IJBDirectory', name: '_jbxDirectory', type: 'address' },
+				{ internalType: 'uint256', name: '_jbxProjectId', type: 'uint256' }
+			],
+			name: 'setJuiceboxParams',
+			outputs: [],
+			stateMutability: 'nonpayable',
+			type: 'function'
+		},
+		{
+			inputs: [{ internalType: 'bool', name: '_pause', type: 'bool' }],
+			name: 'setPause',
 			outputs: [],
 			stateMutability: 'nonpayable',
 			type: 'function'
