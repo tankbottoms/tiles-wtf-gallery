@@ -112,8 +112,8 @@
 			All proceeds are transparently managed on <a href="/dao">Juicebox</a>.
 			<i>At an unspecified point in the future</i>, the Gnosis
 			<a
-				href="https://etherscan.io/address/0x3A31414dFbA8B20D3bDa767092984db9d98a2da1"
-				target="_blank">{getTruncatedAddress('0x3A31414dFbA8B20D3bDa767092984db9d98a2da1')}</a
+				href="https://etherscan.io/address/0x08214180E91b03340e759f98f8AC8dc92C0bf2de"
+				target="_blank">{getTruncatedAddress('0x08214180E91b03340e759f98f8AC8dc92C0bf2de')}</a
 			>
 			will recieve the
 			<a href="https://juicebox.money/v2/p/175" target="_blank">Tiles Juicebox Project NFT</a>. The

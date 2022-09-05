@@ -6,7 +6,7 @@ export const APP_CONFIG = {
 	contract_base_price: BigNumber.from(utils.parseEther('0.0001')),
 	contract_tile_multiplier: 2,
 	contract_tile_tier_size: 16,
-	contract_rinkeby: '0x3A31414dFbA8B20D3bDa767092984db9d98a2da1',
+	contract_rinkeby: '0x08214180E91b03340e759f98f8AC8dc92C0bf2de',
 	project_mainnet: 175,
 	project_rinkeby: 98,
 	gnosis_mainnet: '0x4493287882f75dFFcdB40FD41d38d6308Fb8c181',
