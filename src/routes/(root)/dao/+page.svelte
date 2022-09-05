@@ -31,7 +31,7 @@
 	import { chainId, connectedAccount, getDefaultProvider, readNetwork } from '$stores/web3';
 	import { V2OperatorPermission } from '$juicebox/constants/v2/operatorPermission';
 	import { blocknativeNetworks } from '$constants/networks';
-	import { browser } from '$app/env';
+	import { browser } from '$app/environment';
 
 	function getProjectId() {
 		return BigNumber.from(

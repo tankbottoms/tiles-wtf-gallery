@@ -16,7 +16,7 @@ import {
 } from 'firebase/auth';
 import type { User } from 'firebase/auth';
 import { connectedAccount } from './web3';
-import { browser } from '$app/env';
+import { browser } from '$app/environment';
 import Store from '$juicebox/utils/Store';
 import { derived } from 'svelte/store';
 import { FIREBASE_CONFIG } from '../../environment';

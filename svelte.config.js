@@ -11,13 +11,13 @@ const config = {
 		adapter: adapter({
 			fallback: '200.html'
 		}),
-		prerender: {
-			enabled: true
-		},
-		browser: {
-			hydrate: true,
-			router: true
-		},
+		// prerender: {
+		// 	enabled: true
+		// },
+		// browser: {
+		// 	hydrate: true,
+		// 	router: true
+		// },
 
 		// Override http methods in the Todo forms
 		methodOverride: {

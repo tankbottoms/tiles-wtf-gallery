@@ -3,7 +3,7 @@
 	import { generateRandomAddresses } from '$tiles/tilesStandalone';
 	import { onMount } from 'svelte';
 	import { readNetwork } from '$stores/web3';
-	import { browser } from '$app/env';
+	import { browser } from '$app/environment';
 	import Tile from '$components/Tile.svelte';
 	import Icon from '$juicebox/components/Icon.svelte';
 import { splitPercentFrom } from '$juicebox/utils/v2/math';

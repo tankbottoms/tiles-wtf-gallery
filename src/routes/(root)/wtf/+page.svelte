@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { APP_CONFIG } from '$constants/app';
-	import { browser } from '$app/env';
+	import { browser } from '$app/environment';
 	import { goto } from '$app/navigation';
 	import SplitPane from '$components/SplitPane.svelte';
 	import Tile from '$components/Tile.svelte';

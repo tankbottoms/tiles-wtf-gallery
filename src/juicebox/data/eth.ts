@@ -1,7 +1,7 @@
 import { getProvider, readNetwork } from '$stores/web3';
 import EACAggregatorProxyAbi from '$juicebox/constants/EACAggregatorProxyAbi';
 import { readContractByAddress } from '$utils/web3/contractReader';
-import { browser } from '$app/env';
+import { browser } from '$app/environment';
 
 const chainlinkEthPrice = {
 	mainnet: '0x5f4eC3Df9cbd43714FE2740f5E3616155c5b8419',

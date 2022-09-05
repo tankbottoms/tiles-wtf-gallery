@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { browser } from '$app/env';
+	import { browser } from '$app/environment';
 	import { copyToClipboard } from '$juicebox/utils/clipboard';
 	import Icon from './Icon.svelte';
 	import Popover from './Popover.svelte';

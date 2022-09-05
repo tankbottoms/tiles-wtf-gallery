@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { browser } from '$app/env';
+	import { browser } from '$app/environment';
 	import { axisBottom, axisRight, scaleLinear, scalePoint, select } from 'd3';
 	import * as d3 from 'd3';
 	import { daysToMillis } from './utils';

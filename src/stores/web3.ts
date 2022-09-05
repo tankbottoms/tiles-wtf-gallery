@@ -6,7 +6,7 @@ import walletConnectModule from '@web3-onboard/walletconnect';
 import { coinbaseWallet, gnosis as gnosisModule } from '$utils/onboard';
 import ledgerModule from '@web3-onboard/ledger';
 import trezorModule from '@web3-onboard/trezor';
-import { browser } from '$app/env';
+import { browser } from '$app/environment';
 import { blocknativeNetworks } from '$constants/networks';
 import { getNetworkAliasByChainId, setNetworkAliasInQueryParams } from '$utils/web3/networkName';
 import { pageReady } from '$stores';

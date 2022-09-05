@@ -5,7 +5,7 @@ import { IpfsCacheName } from '$juicebox/models/ipfs-cache/cache-name';
 import { consolidateMetadata, type ProjectMetadataV4 } from '$juicebox/models/project-metadata';
 import { readNetwork } from '$stores/web3';
 import { IPFS_GATEWAY_HOSTNAME } from '$juicebox/constants/ipfs';
-import { dev } from '$app/env';
+import { dev } from '$app/environment';
 import { get } from 'svelte/store';
 
 const pinata_api_key = import.meta.env.VITE_PINATA_PINNER_KEY as string;

@@ -10,7 +10,7 @@
 	import ToolsDrawer from './ToolsDrawer.svelte';
 	import ProjectLogo from '../ProjectLogo.svelte';
 	import Skeleton from '../Skeleton.svelte';
-	import { browser } from '$app/env';
+	import { browser } from '$app/environment';
 
 	export let loadingMetadata = false;
 	export let loading = false;
